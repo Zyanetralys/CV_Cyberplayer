@@ -1,10 +1,12 @@
 :root {
+  /* Verdadero esquema verde hacker */
   --bg: #000;
   --surface: #050a05;
-  --text: #0af0a0;
-  --text-muted: #00cc80;
-  --accent: #00ff41;
+  --text: #0af0a0;         /* Verde brillante clásico */
+  --text-muted: #00cc80;   /* Verde ligeramente más apagado */
+  --accent: #00ff41;       /* Verde neón puro */
   --red: #ff0000;
+  --blue: #00aaff;
   --panel-border: rgba(0, 255, 65, 0.25);
   --glow: rgba(0, 255, 65, 0.3);
 }
@@ -18,13 +20,16 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Courier New', monospace;
+  font-family: 'Courier New', monospace; /* ¡Pura terminal! */
   line-height: 1.65;
-  padding: 1.5rem;
+  padding: 1.8rem;
   min-height: 100vh;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 30%, rgba(0, 40, 10, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(0, 60, 20, 0.2) 0%, transparent 60%);
+    radial-gradient(circle at 80% 70%, rgba(0, 60, 20, 0.2) 0%, transparent 60%),
+    /* Patrón sutil de líneas finas (inspirado en circuitos/ukiyo-e digital) */
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23003311' fill-opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 200px;
 }
 
 .terminal-container {
@@ -53,18 +58,32 @@ body {
   pointer-events: none;
 }
 
-/* ASCII */
-pre {
+/* HEADER */
+.ascii-header {
   font-family: 'Courier New', monospace;
   font-size: 12px;
   color: var(--accent);
   text-shadow: 0 0 8px var(--glow);
   margin: 0 0 2rem 0;
-  white-space: pre-wrap;
+  white-space: pre;
+  line-height: 1.4;
+  text-align: center;
 }
 
-.ascii-header, .ascii-footer {
-  text-align: center;
+.ascii-header strong {
+  color: var(--accent);
+  font-weight: bold;
+  text-shadow: 0 0 10px var(--glow);
+}
+
+pre.ascii-footer {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-shadow: 0 0 6px var(--glow);
+  margin-top: 2rem;
+  white-space: pre;
+  text-align: left;
 }
 
 /* TERMINAL LOGS */
@@ -99,6 +118,7 @@ pre {
   text-decoration: none;
   color: var(--accent);
   font-weight: bold;
+  font-family: 'Courier New', monospace;
   transition: all 0.2s ease;
 }
 
@@ -124,6 +144,7 @@ pre {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
+  font-family: 'Courier New', monospace;
 }
 
 /* LISTS */
@@ -133,6 +154,8 @@ pre {
   position: relative;
   color: var(--text);
   text-align: justify;
+  font-family: 'Courier New', monospace;
+  font-size: 0.98em;
 }
 
 .deployment-list li::before, .ops-section ul li::before {
@@ -150,6 +173,7 @@ blockquote {
   color: var(--text-muted);
   border-left: 2px solid var(--accent);
   padding-left: 1rem;
+  font-family: 'Courier New', monospace;
 }
 
 /* GRIDS */
@@ -168,6 +192,7 @@ blockquote {
   font-size: 0.85rem;
   border: 1px solid var(--panel-border);
   transition: all 0.2s ease;
+  font-family: 'Courier New', monospace;
 }
 
 .cert-grid span:hover, .labs-grid span:hover {
@@ -188,37 +213,23 @@ blockquote {
   border: 1px solid var(--panel-border);
   border-radius: 6px;
   font-size: 0.95rem;
+  font-family: 'Courier New', monospace;
 }
 
-/* FOOTER */
-.ops-footer, .footer-panel {
-  margin-top: 2.5rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  padding-top: 1.8rem;
-  border-top: 1px solid var(--panel-border);
+/* JAPANESE STAMP */
+.japanese-stamp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 2.8rem;
+  color: rgba(0, 255, 65, 0.05);
+  font-family: serif;
+  z-index: -1;
+  transform: rotate(12deg);
+  pointer-events: none;
 }
 
-.ops-footer a, .footer-panel a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.ops-footer a:hover, .footer-panel a:hover {
-  text-decoration: underline;
-}
-
-/* AVATAR */
-.avatar img {
-  width: 120px;
-  height: 120px;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 15px var(--glow);
-}
-
-/* TABLET & MOBILE */
+/* MOBILE */
 @media (max-width: 768px) {
   .terminal-container {
     padding: 1.5rem;
@@ -229,7 +240,12 @@ blockquote {
   .arsenal-grid {
     grid-template-columns: 1fr;
   }
-  pre {
+  .ascii-header, pre.ascii-footer {
     font-size: 10px;
+  }
+  .japanese-stamp {
+    font-size: 1.8rem;
+    bottom: 12px;
+    right: 12px;
   }
 }
