@@ -1,5 +1,5 @@
 :root {
-  /* Verdadero esquema verde hacker */
+  /*  Esquema verde */
   --bg: #000;
   --surface: #050a05;
   --text: #0af0a0;         /* Verde brillante clásico */
@@ -58,6 +58,33 @@ body {
   pointer-events: none;
 }
 
+/* CV HEADER — NOMBRE REAL + AVATAR */
+.cv-header {
+  text-align: center;
+  margin-bottom: 2.6rem;
+  padding-top: 1rem;
+}
+
+.cv-header .avatar-gif {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--glow);
+  margin-bottom: 1.4rem;
+  image-rendering: pixelated; /* mantiene estilo retro si es pixel art */
+}
+
+.cv-header h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 2.4rem;
+  color: var(--accent);
+  text-shadow: 0 0 12px var(--glow);
+  letter-spacing: 2px;
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.2;
+}
 /* HEADER */
 .ascii-header {
   font-family: 'Courier New', monospace;
