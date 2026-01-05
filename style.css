@@ -1,5 +1,4 @@
 :root {
-  /* Verdadero esquema verde hacker */
   --bg: #000;
   --surface: #050a05;
   --text: #0af0a0;
@@ -27,22 +26,22 @@ body {
 /* ——— CV HEADER ——— */
 .cv-header {
   text-align: center;
-  padding: 2.6rem 1.5rem 1.8rem;
+  padding: 2.2rem 1.5rem 1.6rem;
   max-width: 920px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .avatar-gif {
-  width: 80px;
-  height: 80px;
-  border: 2px solid var(--accent);
+  width: 64px;
+  height: 64px;
+  border: 1.5px solid var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 12px var(--glow);
-  margin-bottom: 1.2rem;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.25);
+  margin-bottom: 1rem;
   image-rendering: pixelated;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cv-header h1 {
@@ -227,7 +226,7 @@ blockquote {
   font-size: 0.95rem;
 }
 
-/* ——— SELLO JAPONÉS ——— */
+/* ——— SELLO ——— */
 .japanese-stamp {
   position: fixed;
   bottom: 20px;
@@ -243,12 +242,12 @@ blockquote {
 /* ——— MOBILE ——— */
 @media (max-width: 768px) {
   .cv-header {
-    padding: 2rem 1.2rem 1.4rem;
+    padding: 1.8rem 1.2rem 1.2rem;
   }
   .avatar-gif {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 1rem;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 0.9rem;
   }
   .cv-header h1 {
     font-size: 1.7rem;
