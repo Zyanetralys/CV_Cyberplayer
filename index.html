@@ -1,157 +1,967 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MARIA JESUS MARTINEZ LEO — Cyber & Systems Specialist</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="terminal-bg">
-
-  <!-- CV HEADER: AVATAR + NOMBRE -->
-  <header class="cv-header">
-    <img src="https://raw.githubusercontent.com/Zyanetralys/profile/refs/heads/main/n1.gif" alt="Zyanetralys" class="avatar-gif">
-    <h1>MARIA JESUS MARTINEZ LEO</h1>
-  </header>
-
-  <!-- CONTENEDOR PRINCIPAL -->
-  <div class="terminal-container">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARÍA JESÚS MARTÍNEZ LEO | CIBERSEGURIDAD & SISTEMAS</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --bg-alt: #050505;
+      --surface: #0a0a0a;
+      --surface-alt: #0f0f0f;
+      --border: #1a1a1a;
+      --border-light: #2a2a2a;
+      --primary: #00ff41;
+      --primary-dim: #00cc33;
+      --primary-dark: #008f11;
+      --primary-glow: rgba(0, 255, 65, 0.5);
+      --text: #ffffff;
+      --text-muted: #a0a0a0;
+      --text-dim: #5a5a5a;
+    }
     
-    <!-- HEADER ASCII -->
-    <pre class="ascii-header">
-╔═══════════════════════════════════════════════════════════════════════════════╗
-║  ██████████████████ RESTRICTED ACCESS ███████████████████████████████████████ ║
-║                                                                               ║
-║  CODE NAME: ZYANETRALYS                    OPERATOR: MARIA JESUS MARTINEZ LEO ║
-║  UNIT: CYBER DIVISION                      STATUS: ACTIVE DEPLOYMENT          ║
-║  SPECIALIZATION: SYSTEMS & CYBERSECURITY   THREAT LEVEL: UNKNOWN              ║
-║  LOCATION: MADRID / CÁDIZ                  LAST PING: $(date +%Y-%m-%d_%H:%M) ║
-║                                                                               ║
-╚═══════════════════════════════════════════════════════════════════════════════╝
-    </pre>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-size: 11px;
+      position: relative;
+    }
+    
+    /* Matrix background effect */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(ellipse at 50% 0%, rgba(0,40,0,0.4) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, rgba(0,20,0,0.03) 0px, rgba(0,20,0,0.03) 1px, transparent 1px, transparent 3px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Scanline effect */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.3) 0px,
+        rgba(0, 0, 0, 0.3) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.7;
+    }
+    
+    @keyframes cursor {
+      0%, 50% { border-right-color: var(--primary); }
+      51%, 100% { border-right-color: transparent; }
+    }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    
+    @keyframes textGlow {
+      0%, 100% { text-shadow: 0 0 8px var(--primary-glow), 0 0 15px var(--primary-glow); }
+      50% { text-shadow: 0 0 15px var(--primary-glow), 0 0 30px var(--primary-glow), 0 0 45px var(--primary-glow); }
+    }
+    
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0.3; }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--primary-glow); }
+      50% { opacity: 0.6; box-shadow: 0 0 15px var(--primary-glow); }
+    }
+    
+    @keyframes borderFlow {
+      0% { border-color: var(--primary-dark); }
+      50% { border-color: var(--primary); }
+      100% { border-color: var(--primary-dark); }
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    header {
+      border: 1px solid var(--primary);
+      border-bottom: 3px solid var(--primary);
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      background: linear-gradient(180deg, rgba(0,40,0,0.2) 0%, rgba(0,20,0,0.05) 100%);
+      box-shadow: 0 0 30px rgba(0,255,65,0.15), inset 0 0 30px rgba(0,255,65,0.05);
+      animation: borderFlow 4s ease-in-out infinite;
+    }
+    
+    header::before {
+      content: "root@zyanetralys:~/cv# ";
+      position: absolute;
+      top: -9px;
+      left: 15px;
+      font-size: 0.75rem;
+      color: var(--primary);
+      background: var(--bg);
+      padding: 0 6px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    header::after {
+      content: "● [ONLINE]";
+      position: absolute;
+      right: 15px;
+      top: -9px;
+      font-size: 0.75rem;
+      color: var(--primary);
+      animation: blink 1.2s infinite;
+      background: var(--bg);
+      padding: 0 6px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    h1 {
+      color: var(--text);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
+      animation: textGlow 3s ease-in-out infinite;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: "█";
+      animation: cursor 0.9s step-end infinite;
+      color: var(--primary);
+      margin-left: 4px;
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--primary-dark);
+      padding-top: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    
+    .contact a {
+      color: var(--primary-dim);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--primary);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    
+    .contact a::before {
+      content: "[";
+      color: var(--primary);
+      margin-right: 2px;
+      opacity: 0.7;
+    }
+    
+    .contact a::after {
+      content: "]";
+      color: var(--primary);
+      margin-left: 2px;
+      opacity: 0.7;
+    }
+    
+    .contact a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+      padding-left: 3px;
+    }
+    
+    section {
+      margin-bottom: 2rem;
+      position: relative;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    section::before {
+      content: "";
+      position: absolute;
+      left: -1.8rem;
+      top: 0.5rem;
+      width: 3px;
+      height: calc(100% + 1.5rem);
+      background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 50%, transparent 100%);
+      opacity: 0.4;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    h2 {
+      color: var(--text);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(90deg, rgba(0,40,0,0.5) 0%, rgba(0,20,0,0.1) 60%, transparent 100%);
+      padding: 0.5rem 1rem;
+      position: relative;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,255,65,0.2);
+    }
+    
+    h2::before {
+      content: "$ ";
+      color: var(--primary);
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    h2:hover {
+      animation: glitch 0.3s ease;
+      color: var(--primary);
+    }
+    
+    .exp-item {
+      margin-bottom: 1.4rem;
+      padding-left: 1.3rem;
+      border-left: 1px dotted var(--border-light);
+      position: relative;
+      transition: all 0.3s ease;
+      background: linear-gradient(90deg, rgba(0,30,0,0.1) 0%, transparent 100%);
+    }
+    
+    .exp-item:hover {
+      border-left-color: var(--primary);
+      border-left-style: solid;
+      background: linear-gradient(90deg, rgba(0,40,0,0.25) 0%, transparent 100%);
+      padding-left: 1.5rem;
+    }
+    
+    .exp-item::before {
+      content: ">";
+      position: absolute;
+      left: -5px;
+      top: 3px;
+      color: var(--primary);
+      font-size: 0.7rem;
+      animation: pulse 2s infinite;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .exp-title {
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    }
+    
+    .exp-company {
+      color: var(--primary-dim);
+      font-size: 0.84rem;
+    }
+    
+    .exp-company a {
+      color: var(--primary-dim);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--primary);
+      transition: all 0.25s ease;
+    }
+    
+    .exp-company a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .exp-date {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+    
+    .exp-date::before { content: "[ "; color: var(--primary-dark); }
+    .exp-date::after { content: " ]"; color: var(--primary-dark); }
+    
+    .exp-details {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    
+    .exp-details li {
+      padding-left: 1.2rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .exp-details li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .exp-details li:hover {
+      color: var(--text);
+      padding-left: 1.4rem;
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+    }
+    
+    .skill-cat {
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      padding: 0.85rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .skill-cat::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.08), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .skill-cat:hover::before {
+      left: 100%;
+    }
+    
+    .skill-cat:hover {
+      border-color: var(--primary);
+      border-left-color: var(--primary);
+      box-shadow: 0 0 20px rgba(0,255,65,0.25), inset 0 0 20px rgba(0,255,65,0.05);
+      transform: translateX(4px);
+    }
+    
+    .skill-cat h3 {
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px dashed var(--border-light);
+      padding-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .skill-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    .skill-list li {
+      margin-bottom: 0.2rem;
+      padding-left: 1rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .skill-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .skill-list li:hover {
+      color: var(--primary);
+      padding-left: 1.3rem;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .edu-item {
+      margin-bottom: 0.65rem;
+      font-size: 0.84rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+      transition: all 0.25s ease;
+      background: linear-gradient(90deg, rgba(0,20,0,0.08) 0%, transparent 100%);
+    }
+    
+    .edu-item:hover {
+      border-left-color: var(--primary);
+      background: linear-gradient(90deg, rgba(0,40,0,0.2) 0%, transparent 100%);
+      padding-left: 1.2rem;
+    }
+    
+    .edu-title {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .edu-school {
+      color: var(--primary-dim);
+      font-size: 0.82rem;
+    }
+    
+    .edu-school a {
+      color: var(--primary-dim);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--primary);
+      transition: all 0.25s ease;
+    }
+    
+    .edu-school a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .edu-date {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+    }
+    
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    .cert-item {
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.4rem 0.6rem;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cert-item::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.12), transparent);
+      transition: left 0.4s ease;
+    }
+    
+    .cert-item:hover {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, rgba(0,40,0,0.5) 0%, rgba(0,20,0,0.3) 100%);
+      transform: translateX(4px);
+      box-shadow: 0 0 15px rgba(0,255,65,0.2);
+    }
+    
+    .cert-item:hover::before {
+      left: 100%;
+    }
+    
+    .cert-item strong {
+      color: var(--primary);
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .cert-item:hover strong {
+      color: var(--text);
+    }
+    
+    .projects-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    
+    .projects-list li {
+      margin-bottom: 0.35rem;
+      padding-left: 1.5rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .projects-list li::before {
+      content: "├─";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .projects-list li:last-child::before {
+      content: "└─";
+    }
+    
+    .projects-list li:hover {
+      color: var(--text);
+      padding-left: 1.7rem;
+    }
+    
+    .availability {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      padding: 0.9rem;
+      box-shadow: 0 0 20px rgba(0,255,65,0.1);
+    }
+    
+    .availability span {
+      color: var(--primary);
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .tag {
+      display: inline-block;
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.1rem 0.45rem;
+      font-size: 0.7rem;
+      margin-right: 0.3rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-align: center;
+      position: relative;
+    }
+    
+    footer::before {
+      content: "════════════════════════════════════════════════";
+      display: block;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    footer::after {
+      content: "[ FIN DE CV ]";
+      display: block;
+      color: var(--primary);
+      margin-top: 0.4rem;
+      animation: blink 2s infinite;
+      text-shadow: 0 0 10px var(--primary-glow);
+      letter-spacing: 2px;
+    }
+    
+    .divider {
+      color: var(--primary);
+      font-size: 0.7rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      letter-spacing: 4px;
+      opacity: 0.7;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    /* Corner decorations */
+    .corner {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      border: 2px solid var(--primary);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 9997;
+    }
+    
+    .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+    .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+    
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        padding: 1rem;
+        font-size: 10px;
+        font-family: 'Consolas', 'Courier New', monospace;
+      }
+      body::before, body::after { display: none; }
+      .corner { display: none; }
+      header::before, header::after { display: none; }
+      h1 { color: #000; text-shadow: none; animation: none; }
+      h1::after { display: none; }
+      h2 { color: #000; border-left-color: #000; background: none; box-shadow: none; }
+      h2::before { content: ""; }
+      .exp-title { color: #000; }
+      .exp-company, .exp-company a, .edu-school, .edu-school a { color: #333; }
+      .exp-details li, .skill-list li, .cert-item, .projects-list li { color: #444; }
+      .exp-details li::before, .skill-list li::before, .projects-list li::before { color: #000; }
+      .skill-cat, .cert-item, .availability { background: #f5f5f5; border-color: #ccc; box-shadow: none; }
+      .cert-item strong, .tag { color: #000; border-color: #000; text-shadow: none; }
+      a { color: #000; text-decoration: none; border: none; }
+      footer::before, footer::after { content: ""; }
+      .divider { display: none; }
+      section::before { display: none; }
+      .exp-item:hover, .edu-item:hover, .skill-cat:hover, .cert-item:hover {
+        transform: none; box-shadow: none; background: #f5f5f5; padding-left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
 
-    <!-- TERMINAL LOGS (ESTÁTICOS) -->
-    <div class="terminal-logs">
-      <div class="log-line">$ sudo connect zya.blacknet --clearance=--stealth</div>
-      <div class="log-line">$ trace_cleaner -wipe [OK]</div>
-      <div class="log-line">$ channel established [PROTECTED_LINK]</div>
-      <div class="log-line highlight">$ loading profile [ZYANETRALYS]...</div>
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+
+<header>
+  <h1>MARÍA JESÚS MARTÍNEZ LEO</h1>
+  <div class="contact">
+    <span>Madrid / Cádiz, España</span>
+    <span>•</span>
+    <a href="https://www.linkedin.com/in/mjmal/" target="_blank">linkedin.com/in/mjmal</a>
+    <span>•</span>
+    <a href="https://github.com/Zyanetralys" target="_blank">github.com/Zyanetralys</a>
+    <span>•</span>
+    <span>Inglés: Nivel C1 (Avanzado)</span>
+    <span>•</span>
+    <span>Carnet de conducir: B y A2</span>
+  </div>
+</header>
+
+<section>
+  <h2>EXPERIENCIA</h2>
+  
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Consultora Especialista IT</div>
+        <div class="exp-company"><a href="https://alvatross.com/" target="_blank">Alvatross</a> | Telecomunicaciones</div>
+      </div>
+      <div class="exp-date">2026–ACT</div>
     </div>
-
-    <!-- BADGES -->
-    <div class="badges">
-      <a href="https://github.com/Zyanetralys" target="_blank" class="badge-link">[GITHUB]</a>
-      <a href="https://www.linkedin.com/in/mjmal/" target="_blank" class="badge-link">[LINKEDIN]</a>
-      <span class="badge-status">[COMBAT-READY]</span>
-    </div>
-
-    <!-- PROFILE -->
-    <section class="ops-section">
-      <h2 class="section-title">[ PROFILE ] — OPERATIVE SUMMARY</h2>
-      <p>IT Specialist and Cybersecurity Analyst with experience in public sector, fintech, and cyber consulting. Trained in behavioral analysis, technical profiling (Windows/Linux, Active Directory, Python, networks), SOC operations, and ethical pentesting. Active in HTB, TryHackMe, CTFs, and open-source labs. Multidisciplinary profile bridging human and technical security.</p>
-      <blockquote>
-        "At the intersection of psychology, technology, and security, I see opportunities to understand human behavior and anticipate digital threats."
-      </blockquote>
-    </section>
-
-    <!-- FIELD DEPLOYMENTS -->
-    <section class="ops-section">
-      <h2 class="section-title">[ FIELD DEPLOYMENTS ] — OPERATIONAL HISTORY</h2>
-      <ul class="deployment-list">
-        <li><strong>IT Selection Specialist</strong> — ATM Maggioli (2023–Present)<br>• Technical profiling, validation of IT competencies (Windows/Linux, AD, Python, networks), ISO 27001/ENS support</li>
-        <li><strong>Backend Support</strong> — ATM Maggioli (Jan–Jun 2025)<br>• Python scripting, SQL, automation, level-2 support</li>
-        <li><strong>Cybersecurity Analyst</strong> — Fintech Project (Sep–Dec 2025)<br>• OWASP ZAP scans, SAST, encryption guidelines, Python automation</li>
-        <li><strong>Systems Technician</strong> — Sermicro (Nov–Dec 2023)<br>• Windows support, Active Directory, 24/7 ticketing</li>
-        <li><strong>Systems Technician</strong> — Guadalinfo (2021)<br>• Windows/Linux user management, DNS/DHCP, LAN/WiFi support</li>
-      </ul>
-    </section>
-
-    <!-- TRAINING PROTOCOL -->
-    <section class="ops-section">
-      <h2 class="section-title">[ TRAINING PROTOCOL ] — ACADEMIC & TACTICAL FORMATION</h2>
-      <ul>
-        <li><strong>Master’s Degree in Cybersecurity</strong> — UCAM | 2025</li>
-        <li><strong>Advanced Technician in Network Systems Administration (ASIR)</strong> — Ilerna | 2025</li>
-        <li><strong>Master’s Degree in Big Data & Business Intelligence</strong> — Universidad Isabel I | 2025</li>
-        <li><strong>Master’s Degree in Project Management</strong> — Universidad Isabel I | 2025</li>
-        <li><strong>Cybersecurity Technician</strong> — INCIBE | 2024</li>
-        <li><strong>Associate Degree in Microcomputer Systems</strong> — Ilerna | 2021</li>
-        <li><strong>Business English Certificate (C1)</strong> — Universidad Isabel I | 2017</li>
-      </ul>
-    </section>
-
-    <!-- CERTIFICATION VAULT -->
-    <section class="ops-section">
-      <h2 class="section-title">[ CERTIFICATION VAULT ] — TACTICAL CREDENTIALS</h2>
-      <div class="cert-grid">
-        <span>ISO/IEC 27001 Lead Auditor</span>
-        <span>CSCSO — SME Cyber Security Officer</span>
-        <span>CRPO — Ransomware Protection Officer</span>
-        <span>Certified Ethical Hacker (Cisco)</span>
-        <span>LPIC-1</span>
-        <span>Kali Linux 101</span>
-        <span>CyberSOC Analyst — Resility</span>
-        <span>Threat Hunting — Resility</span>
-        <span>OSForensics Triage</span>
-        <span>CISSP Fundamentals</span>
-        <span>Fortinet NSE I</span>
-        <span>Palo Alto Cloud & Network Security</span>
-        <span>C1b3rWall Congress — CNP</span>
-        <span>CCNP Security — Ministerio del Interior</span>
-        <span>Network Defense Essentials — EC-Council</span>
-        <span>Blue Team vs Red Team — Seguridad SI</span>
-        <span>Drone Pilot A1/A3 — AESA</span>
-        <span>Azure AZ-204</span>
-        <span>Oracle Cloud Infrastructure</span>
-        <span>Docker — Código Facilito</span>
-        <span>Python — IBM / Santander / Código Facilito</span>
-        <span>Django / Flask</span>
-      </div>
-    </section>
-
-    <!-- TECHNICAL ARSENAL -->
-    <section class="ops-section">
-      <h2 class="section-title">[ TECHNICAL ARSENAL ]</h2>
-      <div class="arsenal-grid">
-        <div><strong>OS:</strong> Windows, Linux (Ubuntu, Kali, Arch), Active Directory, GPO</div>
-        <div><strong>Languages:</strong> Python, Bash, PowerShell, SQL, HTML/CSS</div>
-        <div><strong>Networking:</strong> TCP/IP, DNS, DHCP, VPN, Firewalls, pfSense</div>
-        <div><strong>Security Tools:</strong> Nmap, Burp, ZAP, Metasploit, Hashcat, Hydra, Wireshark, Ghidra</div>
-        <div><strong>DevOps:</strong> Azure, Docker, Git, Ansible, VMware, VirtualBox</div>
-        <div><strong>Standards:</strong> ISO 27001, ENS, RGPD, ITIL</div>
-      </div>
-    </section>
-
-    <!-- PROVING GROUNDS -->
-    <section class="ops-section">
-      <h2 class="section-title">[ PROVING GROUNDS ] — LABS</h2>
-      <div class="labs-grid">
-        <span>HackTheBox</span> <span>TryHackMe</span> <span>VulnHub</span>
-        <span>OverTheWire</span> <span>PicoCTF</span> <span>Root-Me</span>
-        <span>Blue Team Labs</span> <span>Let’sDefend</span> <span>CyberDefenders</span>
-        <span>CTFtime</span> <span>Hacker101</span> <span>TCMSec</span>
-        <span>ImmersionLabs</span> <span>PentesterLab</span> <span>HackThisSite</span>
-      </div>
-    </section>
-
-    <!-- OPERATIONAL STATUS -->
-    <section class="ops-section">
-      <h2 class="section-title">[ OPERATIONAL STATUS ]</h2>
-      <p>📍 Madrid / Cádiz / Remote | 🌍 Full international mobility<br>
-      🗣️ English C1 | 🚗 Driving License B + A2 | ✅ EU Citizen</p>
-    </section>
-
-    <!-- FOOTER ASCII -->
-    <pre class="ascii-footer">
->>> SYSTEM READY — PHOENIX SHIELD ACTIVE <<<
-$ sudo logout --force [SESSION TERMINATED]
-$ rm -rf /tmp/memory_traces --secure-wipe
-$ killall -9 connections --silent
-$ echo [OK] CHANNEL CLOSED — NO TRACE LEFT.
-    </pre>
+    <ul class="exp-details">
+      <li>Colaboración con equipos DevOps, desarrollo y sistemas en entornos OSS/BSS.</li>
+      <li>Validación técnica de stacks, arquitecturas y competencias.</li>
+      <li>Definición de requisitos técnicos y documentación en Confluence.</li>
+      <li>Soporte a proyectos IT y coordinación con áreas de sistemas.</li>
+    </ul>
   </div>
 
-  <!-- Classified stamp -->
-  <div class="japanese-stamp">密</div>
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Consultora Especialista IT</div>
+        <div class="exp-company"><a href="https://www.atmmaggioli.es/" target="_blank">ATM Grupo Maggioli</a> | Admin. Pública</div>
+      </div>
+      <div class="exp-date">2023–2026</div>
+    </div>
+    <ul class="exp-details">
+      <li>Análisis funcional y técnico de perfiles IT en entornos regulados.</li>
+      <li>Participación en implementación ISO 27001 y ENS.</li>
+      <li>Coordinación con equipos de ciberseguridad, datos e implantaciones.</li>
+      <li>Onboarding técnico y validación de competencias.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Soporte Backend (Prácticas)</div>
+        <div class="exp-company"><a href="https://www.atmmaggioli.es/" target="_blank">ATM Grupo Maggioli</a></div>
+      </div>
+      <div class="exp-date">ENE–JUN 2025</div>
+    </div>
+    <ul class="exp-details">
+      <li>Scripts Python para automatización y mantenimiento.</li>
+      <li>Consultas SQL (PostgreSQL/MySQL) para extracción y validación de datos.</li>
+      <li>Soporte nivel 2, resolución de incidencias y documentación técnica.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Analista de Ciberseguridad</div>
+        <div class="exp-company"><a href="https://nocountry.com/" target="_blank">NoCountry</a> | Proyecto Fintech</div>
+      </div>
+      <div class="exp-date">SEP–DIC 2025</div>
+    </div>
+    <ul class="exp-details">
+      <li>Escaneo de vulnerabilidades web (OWASP ZAP) y análisis SAST.</li>
+      <li>Guías de cifrado, autenticación y protección de datos.</li>
+      <li>Automatización de tareas de seguridad con Python.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Técnico de Sistemas</div>
+        <div class="exp-company"><a href="https://www.sermicro.es/" target="_blank">Sermicro</a></div>
+      </div>
+      <div class="exp-date">NOV–DIC 2023</div>
+    </div>
+    <ul class="exp-details">
+      <li>Soporte N1/N2 Windows, ticketing y resolución de incidencias 24/7.</li>
+      <li>Administración de Active Directory, GPO, DNS, DHCP.</li>
+      <li>Instalación y configuración de sistemas y software.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Técnico de Sistemas</div>
+        <div class="exp-company"><a href="https://www.juntadeandalucia.es/" target="_blank">Red Guadalinfo</a> | Junta de Andalucía</div>
+      </div>
+      <div class="exp-date">ENE–MAY 2021</div>
+    </div>
+    <ul class="exp-details">
+      <li>Gestión de usuarios Windows/Linux (Guadalinex).</li>
+      <li>Configuración de servicios de red: DNS, DHCP, GPO.</li>
+      <li>Mantenimiento de redes LAN/WiFi y soporte a usuarios.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>FORMACIÓN</h2>
+  <div class="edu-item">
+    <div class="edu-title">Máster en Ciberseguridad</div>
+    <div class="edu-school"><a href="https://www.ucam.edu/" target="_blank">Universidad Católica San Antonio de Murcia</a></div>
+    <div class="edu-date">2025 | 1.500h • 60 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Máster en Big Data & Business Intelligence</div>
+    <div class="edu-school"><a href="https://www.universidadisabel1.com/" target="_blank">Universidad Isabel I</a></div>
+    <div class="edu-date">2025 | 1.800h • 72 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Máster en Dirección de Proyectos</div>
+    <div class="edu-school"><a href="https://www.universidadisabel1.com/" target="_blank">Universidad Isabel I</a></div>
+    <div class="edu-date">2025 | 1.500h • 60 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado Superior en ASIR</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+    <div class="edu-date">2025 | 2.000h • 120 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado Superior en DAM (Cursando)</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Técnico en Ciberseguridad</div>
+    <div class="edu-school"><a href="https://www.incibe.es/" target="_blank">INCIBE</a></div>
+    <div class="edu-date">2024 | 250h</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado en Sistemas Microinformáticos y Redes</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+    <div class="edu-date">2021 | 2.000h</div>
+  </div>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>STACK TÉCNICO</h2>
+  <div class="skills-grid">
+    <div class="skill-cat">
+      <h3>⚡ SISTEMAS</h3>
+      <ul class="skill-list">
+        <li>Windows Server, AD, GPO, IIS</li>
+        <li>Linux: Kali, Ubuntu, Arch</li>
+        <li>VMware, VirtualBox</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>🌐 REDES</h3>
+      <ul class="skill-list">
+        <li>TCP/IP, DNS, DHCP, VLANs</li>
+        <li>VPN, pfSense, OPNsense, IPFire</li>
+        <li>Firewalls, DMZ</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>💻 DESARROLLO</h3>
+      <ul class="skill-list">
+        <li>Python, Bash, PowerShell</li>
+        <li>SQL: PostgreSQL, MySQL</li>
+        <li>Git, HTML/CSS, JS/TS, PHP</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>🔐 SEGURIDAD</h3>
+      <ul class="skill-list">
+        <li>Nmap, OWASP ZAP, Burp Suite</li>
+        <li>OSINT, Forensics, Hardening</li>
+        <li>ISO 27001, ENS, RGPD</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>🛠️ HERRAMIENTAS</h3>
+      <ul class="skill-list">
+        <li>Jira, Confluence, NinjaOne RMM</li>
+        <li>HTB, TryHackMe, VulnHub</li>
+        <li>Docker, Azure (AZ-204)</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:0.7rem;font-size:0.75rem;color:var(--text-dim);">
+    <span class="tag">+100 CERTS</span> disponibles bajo demanda
+  </p>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>CERTIFICACIONES — CIBERSEGURIDAD</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>ISO 27001:2022</strong> Lead Auditor</div>
+    <div class="cert-item"><strong>ISO 27001:2022</strong> Security Associate</div>
+    <div class="cert-item"><strong>CTIGA</strong> Threat Intelligence</div>
+    <div class="cert-item"><strong>C-OSIA</strong> OSINT Analyst</div>
+    <div class="cert-item"><strong>CRPO</strong> Ransomware Protection</div>
+    <div class="cert-item"><strong>CSCSO</strong> SME Cyber Security Officer</div>
+    <div class="cert-item"><strong>CCSC</strong> Cybersecurity Career Starter</div>
+    <div class="cert-item"><strong>OSForensics</strong> Triage</div>
+    <div class="cert-item"><strong>CyberSOC N1</strong> Resility</div>
+    <div class="cert-item"><strong>Threat Hunting</strong> Resility</div>
+    <div class="cert-item"><strong>SOC 101</strong> Operaciones Seguridad</div>
+    <div class="cert-item"><strong>ICS300</strong> Industrial Control Systems</div>
+    <div class="cert-item"><strong>PMJ</strong> Ethical Hacking</div>
+    <div class="cert-item"><strong>Pentesting Pro</strong> HackerMentor</div>
+    <div class="cert-item"><strong>Pentesting 101</strong> 8dot8</div>
+    <div class="cert-item"><strong>Bug Bounty</strong> LionxSecurity</div>
+    <div class="cert-item"><strong>Ethical Hacker</strong> Cisco</div>
+    <div class="cert-item"><strong>NDE</strong> EC-Council</div>
+    <div class="cert-item"><strong>SQL Injection</strong> EC-Council</div>
+    <div class="cert-item"><strong>XSS Defenses</strong> Linux Foundation</div>
+    <div class="cert-item"><strong>Cybersecurity Essentials</strong> Linux Foundation</div>
+    <div class="cert-item"><strong>Auditoría Ciberseguridad</strong> 8dot8</div>
+    <div class="cert-item"><strong>Fundamentos CISO</strong> 8dot8</div>
+    <div class="cert-item"><strong>Linux 101</strong> 8dot8</div>
+    <div class="cert-item"><strong>Kali Linux 101</strong> Academia Ciberseguridad</div>
+    <div class="cert-item"><strong>Linux Unhatched</strong> Cisco</div>
+    <div class="cert-item"><strong>Bash Pentesting</strong> LinkedIn Learning</div>
+    <div class="cert-item"><strong>Bash Scripting</strong> DevOps Bootcamp</div>
+    <div class="cert-item"><strong>Deep Web & Darknet</strong> Enhacke/ExorciseThat</div>
+    <div class="cert-item"><strong>C1b3rwall CNP</strong> 2023, 2025</div>
+    <div class="cert-item"><strong>Cisco Switching CCNP</strong> Min. Interior</div>
+    <div class="cert-item"><strong>Protección Dispositivos Red</strong> Adams</div>
+    <div class="cert-item"><strong>Soporte IT Profesional</strong> Fundae</div>
+    <div class="cert-item"><strong>Protección de Datos</strong> Resility/IBM/Hermes</div>
+  </div>
+</section>
+
+<section>
+  <h2>CERTIFICACIONES — DESARROLLO & CLOUD</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>AZ-204</strong> Azure Bootcamp</div>
+    <div class="cert-item"><strong>Python Backend</strong> IBM (Flask, Django)</div>
+    <div class="cert-item"><strong>Python Profesional</strong> Código Facilito/IBM</div>
+    <div class="cert-item"><strong>Django Masterclass</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Flask</strong> IBM</div>
+    <div class="cert-item"><strong>PHP & MySQL</strong> Euroformac</div>
+    <div class="cert-item"><strong>Docker</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Git</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Front-End Web</strong> Smartmind</div>
+    <div class="cert-item"><strong>Apps Móviles</strong> UCM</div>
+    <div class="cert-item"><strong>Full Stack Data Science</strong> TPoint</div>
+    <div class="cert-item"><strong>Ciencia de Datos</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Administración Sistemas IT</strong> Fundae</div>
+  </div>
+</section>
+
+<section>
+  <h2>CERTIFICACIONES — GESTIÓN & OTROS</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>PMI</strong> Gestión Proyectos/Programas</div>
+    <div class="cert-item"><strong>Six Sigma</strong> Green Belt</div>
+    <div class="cert-item"><strong>SLA IT</strong> LinkedIn Learning</div>
+    <div class="cert-item"><strong>IT Recruitment TOP Scorer 2025</strong> Editx</div>
+    <div class="cert-item"><strong>Piloto Dron UAS A1/A3</strong> AESA</div>
+    <div class="cert-item"><strong>Técnico Protección Civil</strong> UCJC (425h)</div>
+    <div class="cert-item"><strong>Psicología del Deporte</strong> COI</div>
+    <div class="cert-item"><strong>Psicólogo Crisis y Emergencias</strong> UCJC</div>
+    <div class="cert-item"><strong>Coaching Ejecutivo</strong> Udemy/EBS</div>
+    <div class="cert-item"><strong>PNL Master Practitioner</strong> iGNLP</div>
+  </div>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>LABORATORIOS & COMUNIDADES</h2>
+  <ul class="projects-list">
+    <li><strong>GitHub:</strong> Zyanetralys — Python, automatización, pentesting, Java/SQL</li>
+    <li><strong>Blue Team:</strong> Let'sDefend, CyberDefenders, SOC 101</li>
+    <li><strong>CTF/Pentesting:</strong> HackTheBox, TryHackMe, VulnHub, PicoCTF, OverTheWire, Root-Me</li>
+    <li><strong>Comunidades:</strong> XSec, C1b3rwall, DragonJAR, UnderC0de, Women IT, CyberRangers</li>
+  </ul>
+</section>
+
+<section>
+  <h2>DISPONIBILIDAD</h2>
+  <div class="availability">
+    <span>[+]</span> REMOTO / HÍBRIDO / PRESENCIAL &nbsp;&nbsp;
+    <span>[+]</span> MADRID / CÁDIZ / MOVILIDAD NACIONAL &nbsp;&nbsp;
+    <span>[+]</span> INCORPORACIÓN INMEDIATA
+  </div>
+</section>
+
+<footer>
+</footer>
+
 </body>
 </html>
