@@ -17,8 +17,8 @@
         height: 45px;
         pointer-events: none;
         z-index: 99999;
-        transform: translate(-10%, -90%) rotate(-45deg);
-        transform-origin: bottom center;
+        transform: translate(-30%, -10%) rotate(-45deg);
+        transform-origin: 70% 90%;
         transition: transform 0.1s ease-out;
         filter: drop-shadow(0 0 10px var(--primary-glow)) drop-shadow(0 0 20px var(--primary-glow));
       }
@@ -1208,18 +1208,19 @@
   
   if (lightsaber && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.addEventListener('mousemove', (e) => {
+      // La punta del sable sigue exactamente el cursor
       lightsaber.style.left = e.clientX + 'px';
       lightsaber.style.top = e.clientY + 'px';
     });
 
     document.addEventListener('mousedown', () => {
       lightsaber.style.filter = 'drop-shadow(0 0 20px var(--primary-glow)) drop-shadow(0 0 40px var(--primary-glow)) drop-shadow(0 0 60px rgba(0,255,65,0.6))';
-      lightsaber.style.transform = 'translate(-10%, -90%) rotate(-55deg)';
+      lightsaber.style.transform = 'translate(-30%, -10%) rotate(-55deg)';
     });
 
     document.addEventListener('mouseup', () => {
       lightsaber.style.filter = 'drop-shadow(0 0 10px var(--primary-glow)) drop-shadow(0 0 20px var(--primary-glow))';
-      lightsaber.style.transform = 'translate(-10%, -90%) rotate(-45deg)';
+      lightsaber.style.transform = 'translate(-30%, -10%) rotate(-45deg)';
     });
   }
 </script>
