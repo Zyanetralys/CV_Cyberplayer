@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MARÍA JESÚS MARTÍNEZ LEO | CIBERSEGURIDAD & SISTEMAS</title>
   <style>
-    /* Audio Player Toggle - Cyberpunk Style */
-    .audio-toggle {
+    /* Audio Player Hidden - Cyberpunk Style */
+    .audio-indicator {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
@@ -20,38 +20,47 @@
       text-shadow: 0 0 5px var(--primary-glow);
       margin-top: 0.5rem;
     }
-    .audio-toggle:hover {
+    .audio-indicator:hover {
       background: linear-gradient(180deg, rgba(0,40,0,0.6) 0%, rgba(0,20,0,0.3) 100%);
       box-shadow: 0 0 15px rgba(0,255,65,0.3);
       color: var(--text);
+      animation: pulse 1.5s infinite;
     }
-    .audio-toggle::before {
-      content: "▶";
-      font-size: 0.65rem;
-      animation: pulse 2s infinite;
+    .audio-indicator::before {
+      content: "🔇";
+      font-size: 0.7rem;
     }
-    .audio-container {
+    .audio-indicator.unmuted::before {
+      content: "🔊";
+    }
+    .audio-container-hidden {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .audio-container-hidden iframe {
+      width: 1px;
+      height: 1px;
+      border: none;
+    }
+    .audio-hint {
       display: none;
-      margin-top: 1rem;
-      padding: 0.8rem;
-      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--primary);
-      border-radius: 2px;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+      padding: 0.3rem 0.6rem;
+      background: rgba(0,40,0,0.3);
+      border-left: 2px solid var(--primary-dark);
     }
-    .audio-container.active {
+    .audio-hint.show {
       display: block;
       animation: slideIn 0.3s ease-out;
     }
-    .audio-container iframe {
-      width: 100%;
-      max-width: 420px;
-      height: 240px;
-      border: 1px solid var(--border-light);
-      border-radius: 2px;
-    }
     @media print {
-      .audio-toggle, .audio-container { display: none !important; }
+      .audio-indicator, .audio-container-hidden, .audio-hint { display: none !important; }
     }
 
     :root {
@@ -1012,38 +1021,59 @@
 <footer>
 </footer>
 
-<!-- Audio Profile Easter Egg -->
-<div style="text-align:center; margin-top:1.5rem;">
-  <button class="audio-toggle" onclick="toggleAudio()">AUDIO PROFILE</button>
-  <div class="audio-container" id="audioContainer">
-    <iframe 
-      src="https://www.youtube.com/embed/WgbSv-0t7bE?rel=0&modestbranding=1" 
-      title="Audio Profile" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-    <p style="font-size:0.7rem; color:var(--text-dim); margin-top:0.5rem;">
-      [ Click para reproducir • Estética sonora del perfil ]
-    </p>
+<!-- Audio Only Player - Hidden Video, Auto-play Muted -->
+<div style="text-align:center; margin-top:1rem;">
+  <button class="audio-indicator" id="audioBtn" onclick="toggleUnmuteHint()">[🔇 AUDIO: ON]</button>
+  <div class="audio-hint" id="audioHint">
+    💡 Los navegadores requieren interacción para activar el sonido.<br>
+    <strong>Click aquí</strong> para habilitar audio.
   </div>
 </div>
 
+<!-- Hidden YouTube iframe - Audio only, auto-play, loop -->
+<div class="audio-container-hidden">
+  <iframe 
+    id="ytAudio"
+    src="https://www.youtube.com/embed/WgbSv-0t7bE?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=WgbSv-0t7bE&enablejsapi=1" 
+    title="Background Audio"
+    allow="autoplay; encrypted-media">
+  </iframe>
+</div>
+
 <script>
-  function toggleAudio() {
-    const container = document.getElementById('audioContainer');
-    const btn = document.querySelector('.audio-toggle');
-    container.classList.toggle('active');
-    if (container.classList.contains('active')) {
-      btn.innerHTML = '▼ OCULTAR AUDIO';
-    } else {
-      btn.innerHTML = '▶ AUDIO PROFILE';
-      // Reiniciar iframe para pausar al ocultar
-      const iframe = container.querySelector('iframe');
-      const src = iframe.src;
+  let audioUnmuted = false;
+  
+  function toggleUnmuteHint() {
+    const hint = document.getElementById('audioHint');
+    const btn = document.getElementById('audioBtn');
+    
+    if (!audioUnmuted) {
+
+      hint.classList.add('show');
+      btn.classList.add('unmuted');
+      btn.innerHTML = '[🔊 ACTIVAR SONIDO]';
+      
+      const iframe = document.getElementById('ytAudio');
+      const src = iframe.src.replace('mute=1', 'mute=0');
       iframe.src = src;
+      
+      audioUnmuted = true;
+      
+      setTimeout(() => {
+        hint.classList.remove('show');
+        btn.innerHTML = '[🔊 AUDIO: UNMUTED]';
+      }, 4000);
+    } else {
+
+      hint.classList.toggle('show');
     }
   }
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('audioHint').classList.remove('show');
+    }, 3000);
+  });
 </script>
 
 </body>
