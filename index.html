@@ -8,7 +8,7 @@
     /* --- LIGHTSABER CURSOR --- */
     @media (hover: hover) and (pointer: fine) {
       body { cursor: none !important; }
-      a, button, .contact a, .exp-company a, .edu-school a, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item { cursor: none !important; }
+      a, button, .contact a, .exp-company a, .edu-school a, .audio-btn { cursor: none !important; }
       
       /* Contenedor principal del sable */
       .lightsaber-cursor {
@@ -158,7 +158,7 @@
         animation: trailFlicker 0.25s ease-in-out infinite;
       }
       
-      /* === SABRE AZUL (LINKS) === */
+      /* === SABRE AZUL (LINKS REALES) === */
       .lightsaber-cursor.blue {
         width: 6px;
         height: 55px;
@@ -1373,11 +1373,11 @@
   }
   
   if (lightsaber && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    // Detectar todos los elementos cliqueables
-    const clickableElements = document.querySelectorAll('a, button, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item');
+    // SOLO enlaces reales con href y botones (NO .cert-item, .skill-cat, etc.)
+    const realLinks = document.querySelectorAll('a[href], button');
     
-    // Añadir eventos a todos los elementos cliqueables
-    clickableElements.forEach(el => {
+    // Añadir eventos solo a enlaces reales
+    realLinks.forEach(el => {
       el.addEventListener('mouseenter', () => setLightsaberMode('blue'));
       el.addEventListener('mouseleave', () => setLightsaberMode('green'));
     });
