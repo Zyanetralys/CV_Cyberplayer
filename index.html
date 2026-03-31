@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MARÍA JESÚS MARTÍNEZ LEO | CIBERSEGURIDAD & SISTEMAS</title>
   <style>
-    /* Audio Player Hidden - Cyberpunk Style */
-    .audio-indicator {
+    .audio-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
@@ -20,47 +19,23 @@
       text-shadow: 0 0 5px var(--primary-glow);
       margin-top: 0.5rem;
     }
-    .audio-indicator:hover {
+    .audio-btn:hover {
       background: linear-gradient(180deg, rgba(0,40,0,0.6) 0%, rgba(0,20,0,0.3) 100%);
       box-shadow: 0 0 15px rgba(0,255,65,0.3);
       color: var(--text);
       animation: pulse 1.5s infinite;
     }
-    .audio-indicator::before {
-      content: "🔇";
-      font-size: 0.7rem;
-    }
-    .audio-indicator.unmuted::before {
-      content: "🔊";
-    }
-    .audio-container-hidden {
-      position: absolute;
-      left: -9999px;
+    .audio-hidden {
+      position: fixed;
       top: -9999px;
+      left: -9999px;
       width: 1px;
       height: 1px;
-      overflow: hidden;
-    }
-    .audio-container-hidden iframe {
-      width: 1px;
-      height: 1px;
-      border: none;
-    }
-    .audio-hint {
-      display: none;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      margin-top: 0.4rem;
-      padding: 0.3rem 0.6rem;
-      background: rgba(0,40,0,0.3);
-      border-left: 2px solid var(--primary-dark);
-    }
-    .audio-hint.show {
-      display: block;
-      animation: slideIn 0.3s ease-out;
+      opacity: 0;
+      pointer-events: none;
     }
     @media print {
-      .audio-indicator, .audio-container-hidden, .audio-hint { display: none !important; }
+      .audio-btn, .audio-hidden { display: none !important; }
     }
 
     :root {
@@ -93,7 +68,6 @@
       position: relative;
     }
     
-    /* Matrix background effect */
     body::before {
       content: "";
       position: fixed;
@@ -106,7 +80,6 @@
       z-index: -1;
     }
     
-    /* Scanline effect */
     body::after {
       content: "";
       position: fixed;
@@ -664,7 +637,6 @@
       text-shadow: 0 0 8px var(--primary-glow);
     }
     
-    /* Corner decorations */
     .corner {
       position: fixed;
       width: 100px;
@@ -1021,17 +993,13 @@
 <footer>
 </footer>
 
-<!-- Audio Only Player - Hidden Video, Auto-play Muted -->
+<!-- BOTÓN DE AUDIO (Estilo Cyberpunk) -->
 <div style="text-align:center; margin-top:1rem;">
-  <button class="audio-indicator" id="audioBtn" onclick="toggleUnmuteHint()">[🔇 AUDIO: ON]</button>
-  <div class="audio-hint" id="audioHint">
-    💡 Los navegadores requieren interacción para activar el sonido.<br>
-    <strong>Click aquí</strong> para habilitar audio.
-  </div>
+  <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">[ 🔇 AMBIENT SOUND ]</button>
 </div>
 
-<!-- Hidden YouTube iframe - Audio only, auto-play, loop -->
-<div class="audio-container-hidden">
+<!-- VIDEO OCULTO (Solo Audio) -->
+<div class="audio-hidden">
   <iframe 
     id="ytAudio"
     src="https://www.youtube.com/embed/WgbSv-0t7bE?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=WgbSv-0t7bE&enablejsapi=1" 
@@ -1041,39 +1009,26 @@
 </div>
 
 <script>
-  let audioUnmuted = false;
+  let isMuted = true;
   
-  function toggleUnmuteHint() {
-    const hint = document.getElementById('audioHint');
+  function toggleAudio() {
     const btn = document.getElementById('audioBtn');
+    const iframe = document.getElementById('ytAudio');
     
-    if (!audioUnmuted) {
-
-      hint.classList.add('show');
-      btn.classList.add('unmuted');
-      btn.innerHTML = '[🔊 ACTIVAR SONIDO]';
-      
-      const iframe = document.getElementById('ytAudio');
-      const src = iframe.src.replace('mute=1', 'mute=0');
-      iframe.src = src;
-      
-      audioUnmuted = true;
-      
-      setTimeout(() => {
-        hint.classList.remove('show');
-        btn.innerHTML = '[🔊 AUDIO: UNMUTED]';
-      }, 4000);
+    if (isMuted) {
+      // Activar sonido
+      iframe.src = iframe.src.replace('mute=1', 'mute=0');
+      btn.innerHTML = '[ 🔊 SOUND: ON ]';
+      btn.style.animation = 'pulse 1s infinite';
+      isMuted = false;
     } else {
-
-      hint.classList.toggle('show');
+      // Silenciar
+      iframe.src = iframe.src.replace('mute=0', 'mute=1');
+      btn.innerHTML = '[ 🔇 AMBIENT SOUND ]';
+      btn.style.animation = 'none';
+      isMuted = true;
     }
   }
-  
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('audioHint').classList.remove('show');
-    }, 3000);
-  });
 </script>
 
 </body>
