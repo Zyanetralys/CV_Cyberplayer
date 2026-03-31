@@ -17,14 +17,14 @@
         left: 0;
         pointer-events: none;
         z-index: 99999;
-        transition: all 0.1s ease-out;
+        transition: all 0.08s ease-out;
       }
       
       /* === SABRE VERDE (NORMAL) === */
       .lightsaber-cursor.green {
         width: 6px;
         height: 55px;
-        transform: translate(-50%, -95%) rotate(-45deg);
+        transform: translate(-3px, -5px) rotate(-45deg);
         transform-origin: 50% 95%;
         filter: drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4));
       }
@@ -162,7 +162,7 @@
       .lightsaber-cursor.blue {
         width: 6px;
         height: 55px;
-        transform: translate(-50%, -95%) rotate(-45deg);
+        transform: translate(-3px, -5px) rotate(-45deg);
         transform-origin: 50% 95%;
         filter: drop-shadow(0 0 10px rgba(0,150,255,0.9)) drop-shadow(0 0 20px rgba(0,150,255,0.7)) drop-shadow(0 0 30px rgba(0,150,255,0.5));
       }
@@ -1382,30 +1382,31 @@
       el.addEventListener('mouseleave', () => setLightsaberMode('green'));
     });
 
-    // Movimiento del cursor - LA PUNTA sigue exactamente el ratón
+    // Movimiento del cursor - PUNTA CALIBRADA
     document.addEventListener('mousemove', (e) => {
-      lightsaber.style.left = e.clientX + 'px';
-      lightsaber.style.top = e.clientY + 'px';
+      // Offset calculado para que la punta coincida con el cursor
+      // Con rotate(-45deg), la punta está en la esquina superior-izquierda
+      const offsetX = 3;  // mitad del ancho (6px / 2)
+      const offsetY = 5;  // altura de la punta redondeada
+      
+      lightsaber.style.left = (e.clientX - offsetX) + 'px';
+      lightsaber.style.top = (e.clientY - offsetY) + 'px';
     });
 
     // Efecto al hacer click (la punta se intensifica)
     document.addEventListener('mousedown', () => {
       if (currentMode === 'green') {
         lightsaber.style.filter = 'drop-shadow(0 0 18px rgba(0,255,65,1)) drop-shadow(0 0 36px rgba(0,255,65,0.8)) drop-shadow(0 0 54px rgba(0,255,65,0.6))';
-        lightsaber.style.transform = 'translate(-50%, -95%) rotate(-52deg)';
       } else {
         lightsaber.style.filter = 'drop-shadow(0 0 20px rgba(0,150,255,1)) drop-shadow(0 0 40px rgba(0,150,255,0.8)) drop-shadow(0 0 60px rgba(0,150,255,0.6))';
-        lightsaber.style.transform = 'translate(-50%, -95%) rotate(-52deg)';
       }
     });
 
     document.addEventListener('mouseup', () => {
       if (currentMode === 'green') {
         lightsaber.style.filter = 'drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4))';
-        lightsaber.style.transform = 'translate(-50%, -95%) rotate(-45deg)';
       } else {
         lightsaber.style.filter = 'drop-shadow(0 0 10px rgba(0,150,255,0.9)) drop-shadow(0 0 20px rgba(0,150,255,0.7)) drop-shadow(0 0 30px rgba(0,150,255,0.5))';
-        lightsaber.style.transform = 'translate(-50%, -95%) rotate(-45deg)';
       }
     });
   }
