@@ -13,27 +13,27 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 4px;
-        height: 28px;
+        width: 6px;
+        height: 35px;
         pointer-events: none;
         z-index: 99999;
-        transform: translate(-50%, -100%) rotate(0deg);
+        transform: translate(-20%, -80%) rotate(35deg);
         transform-origin: bottom center;
-        transition: transform 0.05s ease-out;
+        transition: transform 0.08s ease-out;
         filter: drop-shadow(0 0 8px var(--primary-glow)) drop-shadow(0 0 16px var(--primary-glow));
       }
       
       .lightsaber-blade {
         width: 100%;
-        height: 100%;
+        height: 85%;
         background: linear-gradient(
           to bottom,
           transparent 0%,
-          var(--primary) 20%,
-          var(--primary) 80%,
+          var(--primary) 15%,
+          var(--primary) 75%,
           var(--primary-dark) 100%
         );
-        border-radius: 2px 2px 4px 4px;
+        border-radius: 50% 50% 2px 2px / 100% 100% 2px 2px;
         position: relative;
         box-shadow: 
           0 0 10px var(--primary),
@@ -44,37 +44,50 @@
       .lightsaber-blade::before {
         content: "";
         position: absolute;
-        top: 0;
+        top: -3px;
         left: 50%;
         transform: translateX(-50%);
-        width: 8px;
-        height: 8px;
-        background: radial-gradient(circle, #fff 0%, var(--primary) 60%, transparent 100%);
-        border-radius: 50%;
+        width: 4px;
+        height: 6px;
+        background: linear-gradient(to top, var(--primary) 0%, #fff 100%);
+        border-radius: 50% 50% 0 0;
         box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary-glow);
       }
       
       .lightsaber-handle {
         position: absolute;
-        bottom: -12px;
+        bottom: -15px;
         left: 50%;
         transform: translateX(-50%);
-        width: 6px;
-        height: 14px;
-        background: linear-gradient(180deg, #333 0%, #111 50%, #000 100%);
+        width: 8px;
+        height: 18px;
+        background: linear-gradient(180deg, #444 0%, #222 50%, #000 100%);
         border: 1px solid var(--primary-dark);
         border-radius: 2px;
         box-shadow: 0 0 5px rgba(0,0,0,0.5);
       }
       
-      .lightsaber-glow {
+      .lightsaber-handle::before {
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 20px;
-        height: 20px;
-        background: radial-gradient(circle, rgba(0,255,65,0.3) 0%, transparent 70%);
+        width: 10px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, var(--primary-dark), transparent);
+        border-radius: 1px;
+        opacity: 0.6;
+      }
+      
+      .lightsaber-glow {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 15px;
+        height: 15px;
+        background: radial-gradient(circle, rgba(0,255,65,0.4) 0%, transparent 70%);
         border-radius: 50%;
         animation: lightsaberPulse 1.5s ease-in-out infinite;
       }
@@ -1107,13 +1120,11 @@
     const iframe = document.getElementById('ytAudio');
     
     if (isMuted) {
-      // Activar sonido
       iframe.src = iframe.src.replace('mute=1', 'mute=0');
       btn.innerHTML = '[ 🔊 SOUND: ON ]';
       btn.style.animation = 'pulse 1s infinite';
       isMuted = false;
     } else {
-      // Silenciar
       iframe.src = iframe.src.replace('mute=0', 'mute=1');
       btn.innerHTML = '[ 🔇 AMBIENT SOUND ]';
       btn.style.animation = 'none';
@@ -1128,19 +1139,16 @@
     document.addEventListener('mousemove', (e) => {
       lightsaber.style.left = e.clientX + 'px';
       lightsaber.style.top = e.clientY + 'px';
-      
-      // Slight tilt effect based on movement
-      const tilt = Math.sin(Date.now() / 200) * 5;
-      lightsaber.style.transform = `translate(-50%, -100%) rotate(${tilt}deg)`;
     });
 
-    // Click effect - brief glow intensification
     document.addEventListener('mousedown', () => {
       lightsaber.style.filter = 'drop-shadow(0 0 15px var(--primary-glow)) drop-shadow(0 0 30px var(--primary-glow))';
+      lightsaber.style.transform = 'translate(-20%, -80%) rotate(45deg)';
     });
 
     document.addEventListener('mouseup', () => {
       lightsaber.style.filter = 'drop-shadow(0 0 8px var(--primary-glow)) drop-shadow(0 0 16px var(--primary-glow))';
+      lightsaber.style.transform = 'translate(-20%, -80%) rotate(35deg)';
     });
   }
 </script>
