@@ -8,7 +8,7 @@
     /* --- LIGHTSABER CURSOR --- */
     @media (hover: hover) and (pointer: fine) {
       body { cursor: none !important; }
-      a, button, .contact a, .exp-company a, .edu-school a, .audio-btn { cursor: none !important; }
+      a, button, .contact a, .exp-company a, .edu-school a, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item { cursor: none !important; }
       
       /* Contenedor principal del sable */
       .lightsaber-cursor {
@@ -17,15 +17,15 @@
         left: 0;
         pointer-events: none;
         z-index: 99999;
-        transition: all 0.08s ease-out;
+        transition: all 0.12s ease-out;
       }
       
       /* === SABRE VERDE (NORMAL) === */
       .lightsaber-cursor.green {
         width: 6px;
         height: 55px;
-        transform: translate(-3px, -5px) rotate(-45deg);
-        transform-origin: 50% 95%;
+        transform: translate(-40%, -8%) rotate(-45deg);
+        transform-origin: 70% 90%;
         filter: drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4));
       }
       
@@ -158,12 +158,12 @@
         animation: trailFlicker 0.25s ease-in-out infinite;
       }
       
-      /* === SABRE AZUL (LINKS REALES) === */
+      /* === SABRE AZUL (LINKS) === */
       .lightsaber-cursor.blue {
         width: 6px;
         height: 55px;
-        transform: translate(-3px, -5px) rotate(-45deg);
-        transform-origin: 50% 95%;
+        transform: translate(-40%, -8%) rotate(-45deg);
+        transform-origin: 70% 90%;
         filter: drop-shadow(0 0 10px rgba(0,150,255,0.9)) drop-shadow(0 0 20px rgba(0,150,255,0.7)) drop-shadow(0 0 30px rgba(0,150,255,0.5));
       }
       
@@ -1373,40 +1373,39 @@
   }
   
   if (lightsaber && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    // SOLO enlaces reales con href y botones
-    const realLinks = document.querySelectorAll('a[href], button');
+    // Detectar todos los elementos cliqueables
+    const clickableElements = document.querySelectorAll('a, button, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item');
     
-    // Añadir eventos solo a enlaces reales
-    realLinks.forEach(el => {
+    // Añadir eventos a todos los elementos cliqueables
+    clickableElements.forEach(el => {
       el.addEventListener('mouseenter', () => setLightsaberMode('blue'));
       el.addEventListener('mouseleave', () => setLightsaberMode('green'));
     });
 
-    // Movimiento del cursor - PUNTA CALIBRADA
+    // Movimiento del cursor - la punta sigue exactamente el ratón
     document.addEventListener('mousemove', (e) => {
-      // Offset calculado para que la punta coincida con el cursor
-      // Con rotate(-45deg), la punta está en la esquina superior-izquierda
-      const offsetX = 3;  // mitad del ancho (6px / 2)
-      const offsetY = 5;  // altura de la punta redondeada
-      
-      lightsaber.style.left = (e.clientX - offsetX) + 'px';
-      lightsaber.style.top = (e.clientY - offsetY) + 'px';
+      lightsaber.style.left = e.clientX + 'px';
+      lightsaber.style.top = e.clientY + 'px';
     });
 
     // Efecto al hacer click (la punta se intensifica)
     document.addEventListener('mousedown', () => {
       if (currentMode === 'green') {
         lightsaber.style.filter = 'drop-shadow(0 0 18px rgba(0,255,65,1)) drop-shadow(0 0 36px rgba(0,255,65,0.8)) drop-shadow(0 0 54px rgba(0,255,65,0.6))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-52deg)';
       } else {
         lightsaber.style.filter = 'drop-shadow(0 0 20px rgba(0,150,255,1)) drop-shadow(0 0 40px rgba(0,150,255,0.8)) drop-shadow(0 0 60px rgba(0,150,255,0.6))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-52deg)';
       }
     });
 
     document.addEventListener('mouseup', () => {
       if (currentMode === 'green') {
         lightsaber.style.filter = 'drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-45deg)';
       } else {
         lightsaber.style.filter = 'drop-shadow(0 0 10px rgba(0,150,255,0.9)) drop-shadow(0 0 20px rgba(0,150,255,0.7)) drop-shadow(0 0 30px rgba(0,150,255,0.5))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-45deg)';
       }
     });
   }
