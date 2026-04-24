@@ -1412,117 +1412,116 @@
   }
 </script>
 
-<div id="zya-wolf-core">
-  <!-- HUD superior con recursos -->
+<div id="zya-wolf-elite">
+  <!-- HUD superior con métricas en tiempo real -->
   <div class="wolf-hud">
     <div class="hud-left">
       <span class="hud-dot"></span>
       <span id="hud-state" class="hud-text">STANDBY</span>
     </div>
     <div class="hud-metrics">
-      <div class="metric"><span class="m-lbl">CPU</span><span id="m-cpu" class="m-val">03%</span></div>
-      <div class="metric"><span class="m-lbl">RAM</span><span id="m-ram" class="m-val">1.2GB</span></div>
-      <div class="metric"><span class="m-lbl">NET</span><span id="m-net" class="m-val">443▲</span></div>
+      <div class="metric"><span class="m-lbl">CPU</span><span id="m-cpu" class="m-val">--%</span><div class="m-bar"><div id="bar-cpu" class="m-fill"></div></div></div>
+      <div class="metric"><span class="m-lbl">RAM</span><span id="m-ram" class="m-val">--GB</span><div class="m-bar"><div id="bar-ram" class="m-fill"></div></div></div>
+      <div class="metric"><span class="m-lbl">NET</span><span id="m-net" class="m-val">--</span></div>
       <div class="metric"><span class="m-lbl">IOC</span><span id="m-ioc" class="m-val">0</span></div>
     </div>
   </div>
 
-  <!-- SVG del lobo premium -->
-  <svg id="wolf-svg" viewBox="0 0 240 240" width="150" height="150">
+  <!-- SVG del lobo pixel art realista -->
+  <svg id="wolf-svg" viewBox="0 0 280 280" width="160" height="160">
     <defs>
-      <linearGradient id="furMain" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#0f172a"/><stop offset="35%" stop-color="#1e293b"/><stop offset="70%" stop-color="#334155"/><stop offset="100%" stop-color="#020617"/>
+      <linearGradient id="wolfFur" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0f172a"/><stop offset="30%" stop-color="#1e293b"/><stop offset="60%" stop-color="#334155"/><stop offset="100%" stop-color="#020617"/>
       </linearGradient>
-      <linearGradient id="furLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient id="wolfFurLight" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stop-color="#475569"/><stop offset="100%" stop-color="#1e293b"/>
       </linearGradient>
       <radialGradient id="eyeGlow" cx="50%" cy="50%" r="75%">
-        <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/><stop offset="60%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706" stop-opacity="0.4"/>
+        <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/><stop offset="50%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706" stop-opacity="0.3"/>
       </radialGradient>
-      <filter id="glowSoft"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <filter id="glowStrong"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <filter id="shadowDeep"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.8"/></filter>
-      <clipPath id="eyeClip"><ellipse rx="11" ry="7"/></clipPath>
-      <pattern id="scanPattern" width="4" height="4" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="0.8" fill="#00f0ff" opacity="0.3"/>
-      </pattern>
+      <filter id="glow"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="glowStrong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="shadow"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.8"/></filter>
+      <clipPath id="eyeClip"><ellipse rx="10" ry="6.5"/></clipPath>
     </defs>
 
-    <!-- Fondo de escaneo rotativo -->
-    <circle cx="120" cy="120" r="110" fill="none" stroke="#00f0ff" stroke-width="0.6" stroke-dasharray="3 9" opacity="0.25">
-      <animateTransform attributeName="transform" type="rotate" from="0 120 120" to="360 120 120" dur="25s" repeatCount="indefinite"/>
+    <!-- Anillos de escaneo -->
+    <circle cx="140" cy="140" r="130" fill="none" stroke="#00f0ff" stroke-width="0.7" stroke-dasharray="4 10" opacity="0.25">
+      <animateTransform attributeName="transform" type="rotate" from="0 140 140" to="360 140 140" dur="28s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="120" cy="120" r="105" fill="url(#scanPattern)" opacity="0.08">
-      <animateTransform attributeName="transform" type="rotate" from="360 120 120" to="0 120 120" dur="18s" repeatCount="indefinite"/>
-    </circle>
-
-    <!-- Orejas anatómicas detalladas -->
-    <path d="M58,74 C50,54 42,26 52,20 C62,22 72,46 78,70 Z" fill="url(#furMain)" filter="url(#shadowDeep)"/>
-    <path d="M182,74 C190,54 198,26 188,20 C178,22 168,46 162,70 Z" fill="url(#furMain)" filter="url(#shadowDeep)"/>
-    <path d="M60,48 C64,40 68,42 70,52" stroke="url(#furLight)" fill="none" stroke-width="1" opacity="0.6"/>
-    <path d="M180,48 C176,40 172,42 170,52" stroke="url(#furLight)" fill="none" stroke-width="1" opacity="0.6"/>
-    <ellipse cx="68" cy="42" rx="6" ry="10" fill="#0b1220" opacity="0.4"/>
-    <ellipse cx="172" cy="42" rx="6" ry="10" fill="#0b1220" opacity="0.4"/>
-
-    <!-- Cráneo principal con sombreado volumétrico -->
-    <path d="M68,64 C86,46 154,46 172,64 C192,84 186,124 156,148 C126,172 114,172 84,148 C54,124 48,84 68,64 Z" fill="url(#furMain)" filter="url(#shadowDeep)"/>
-    <path d="M74,70 C90,56 150,56 166,70 C182,88 176,120 152,140 C128,160 112,160 88,140 C64,120 58,88 74,70 Z" fill="url(#furMain)" opacity="0.6"/>
-
-    <!-- Hocico realista con perfil inferior y sombreado -->
-    <path d="M84,92 C104,80 136,80 156,92 C170,110 154,142 120,154 C86,142 70,110 84,92 Z" fill="url(#furLight)"/>
-    <path d="M90,98 C106,88 134,88 150,98 C160,112 148,136 120,146 C92,136 80,112 90,98 Z" fill="url(#furMain)" opacity="0.7"/>
-
-    <!-- Ojos con iris, pupila, reflejo y animación de parpadeo -->
-    <g id="eyeL" style="transform-origin:96px 100px">
-      <ellipse cx="96" cy="100" rx="12" ry="7.5" fill="url(#eyeGlow)" filter="url(#glowSoft)"/>
-      <circle id="pupilL" cx="96" cy="100" r="4" fill="#020617" clip-path="url(#eyeClip)"/>
-      <circle cx="98.5" cy="97.5" r="1.5" fill="#fff" opacity="0.9"/>
-      <circle cx="94" cy="102" r="0.8" fill="#fff" opacity="0.4"/>
-    </g>
-    <g id="eyeR" style="transform-origin:144px 100px">
-      <ellipse cx="144" cy="100" rx="12" ry="7.5" fill="url(#eyeGlow)" filter="url(#glowSoft)"/>
-      <circle id="pupilR" cx="144" cy="100" r="4" fill="#020617" clip-path="url(#eyeClip)"/>
-      <circle cx="146.5" cy="97.5" r="1.5" fill="#fff" opacity="0.9"/>
-      <circle cx="142" cy="102" r="0.8" fill="#fff" opacity="0.4"/>
-    </g>
-
-    <!-- Nariz triangular con brillo húmedo -->
-    <path d="M110,128 C115,125 125,125 130,128 C130,133 110,133 110,128 Z" fill="#020617"/>
-    <ellipse cx="120" cy="129.5" rx="3" ry="1.5" fill="#fff" opacity="0.3"/>
-
-    <!-- Detalles de pelaje y textura -->
-    <path d="M78,110 Q88,118 82,128" stroke="#475569" fill="none" stroke-width="0.8" opacity="0.4"/>
-    <path d="M162,110 Q152,118 158,128" stroke="#475569" fill="none" stroke-width="0.8" opacity="0.4"/>
-    <path d="M100,140 Q120,148 140,140" stroke="#334155" fill="none" stroke-width="1" opacity="0.3"/>
-
-    <!-- Acentos cyber: líneas de circuito dinámicas -->
-    <g stroke="#00f0ff" stroke-width="0.9" fill="none" opacity="0.5" stroke-dasharray="2 4">
-      <path d="M120,58 L120,28"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite"/></path>
-      <path d="M104,78 L74,54"/>
-      <path d="M136,78 L166,54"/>
-      <path d="M88,116 L62,132" opacity="0.3"/>
-      <path d="M152,116 L178,132" opacity="0.3"/>
-    </g>
-    <circle cx="120" cy="26" r="3" fill="#00f0ff" filter="url(#glowStrong)">
-      <animate attributeName="r" values="3;4.5;3" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+    <circle cx="140" cy="140" r="125" fill="none" stroke="#00b4d8" stroke-width="0.5" stroke-dasharray="3 8" opacity="0.15">
+      <animateTransform attributeName="transform" type="rotate" from="360 140 140" to="0 140 140" dur="22s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Efecto de respiración en el cuerpo -->
-    <ellipse cx="120" cy="108" rx="42" ry="46" fill="url(#furMain)" opacity="0.06">
-      <animate attributeName="rx" values="42;44;42" dur="4s" repeatCount="indefinite"/>
-      <animate attributeName="ry" values="46;48;46" dur="4s" repeatCount="indefinite"/>
+    <!-- Orejas puntiagudas anatómicas -->
+    <path d="M68,82 C58,58 48,28 60,22 C72,24 82,52 88,78 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
+    <path d="M212,82 C222,58 232,28 220,22 C208,24 198,52 192,78 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
+    <path d="M70,52 C74,44 78,46 80,56" stroke="url(#wolfFurLight)" fill="none" stroke-width="1" opacity="0.6"/>
+    <path d="M210,52 C206,44 202,46 200,56" stroke="url(#wolfFurLight)" fill="none" stroke-width="1" opacity="0.6"/>
+    <ellipse cx="78" cy="46" rx="5" ry="9" fill="#0b1220" opacity="0.5"/>
+    <ellipse cx="202" cy="46" rx="5" ry="9" fill="#0b1220" opacity="0.5"/>
+
+    <!-- Cabeza con forma realista de lobo -->
+    <path d="M78,72 C98,52 182,52 202,72 C224,94 218,138 184,164 C150,190 130,190 96,164 C62,138 56,94 78,72 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
+    
+    <!-- Hocico alargado característico -->
+    <path d="M92,102 C114,88 166,88 188,102 C204,122 186,158 140,172 C94,158 76,122 92,102 Z" fill="url(#wolfFurLight)"/>
+    <path d="M98,108 C116,96 164,96 182,108 C194,124 180,152 140,164 C100,152 86,124 98,108 Z" fill="url(#wolfFur)" opacity="0.7"/>
+
+    <!-- Ojos almendrados con mirada intensa -->
+    <g id="eyeL" style="transform-origin:108px 112px">
+      <ellipse cx="108" cy="112" rx="11" ry="7" fill="url(#eyeGlow)" filter="url(#glow)"/>
+      <circle id="pupilL" cx="108" cy="112" r="3.8" fill="#020617" clip-path="url(#eyeClip)"/>
+      <circle cx="110.5" cy="109.5" r="1.4" fill="#fff" opacity="0.9"/>
+      <circle cx="106" cy="114" r="0.7" fill="#fff" opacity="0.4"/>
+    </g>
+    <g id="eyeR" style="transform-origin:172px 112px">
+      <ellipse cx="172" cy="112" rx="11" ry="7" fill="url(#eyeGlow)" filter="url(#glow)"/>
+      <circle id="pupilR" cx="172" cy="112" r="3.8" fill="#020617" clip-path="url(#eyeClip)"/>
+      <circle cx="174.5" cy="109.5" r="1.4" fill="#fff" opacity="0.9"/>
+      <circle cx="170" cy="114" r="0.7" fill="#fff" opacity="0.4"/>
+    </g>
+
+    <!-- Nariz triangular -->
+    <path d="M128,142 C134,138 146,138 152,142 C152,147 128,147 128,142 Z" fill="#020617"/>
+    <ellipse cx="140" cy="143.5" rx="2.5" ry="1.2" fill="#fff" opacity="0.35"/>
+
+    <!-- Detalles de pelaje en cuello -->
+    <path d="M88,132 Q98,142 92,154" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.45"/>
+    <path d="M192,132 Q182,142 188,154" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.45"/>
+    <path d="M110,162 Q140,172 170,162" stroke="#334155" fill="none" stroke-width="1.2" opacity="0.35"/>
+
+    <!-- Líneas de circuito cyber -->
+    <g stroke="#00f0ff" stroke-width="1" fill="none" opacity="0.5" stroke-dasharray="2 4">
+      <path d="M140,68 L140,34"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite"/></path>
+      <path d="M122,88 L88,62"/>
+      <path d="M158,88 L192,62"/>
+      <path d="M98,128 L68,146" opacity="0.3"/>
+      <path d="M182,128 L212,146" opacity="0.3"/>
+    </g>
+    <circle cx="140" cy="32" r="3.5" fill="#00f0ff" filter="url(#glowStrong)">
+      <animate attributeName="r" values="3.5;5;3.5" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0.6;1" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Efecto de respiración -->
+    <ellipse cx="140" cy="120" rx="46" ry="50" fill="url(#wolfFur)" opacity="0.05">
+      <animate attributeName="rx" values="46;48;46" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="ry" values="50;52;50" dur="4.5s" repeatCount="indefinite"/>
     </ellipse>
 
-    <!-- Cola sutil animada -->
-    <path d="M156,148 Q178,156 182,138 Q176,148 156,148" fill="url(#furMain)" opacity="0.8">
-      <animate attributeName="d" values="M156,148 Q178,156 182,138 Q176,148 156,148;M156,148 Q180,152 186,134 Q178,146 156,148;M156,148 Q178,156 182,138 Q176,148 156,148" dur="3s" repeatCount="indefinite"/>
+    <!-- Cola animada -->
+    <path d="M184,164 Q212,174 218,152 Q212,166 184,164" fill="url(#wolfFur)" opacity="0.85">
+      <animate attributeName="d" values="M184,164 Q212,174 218,152 Q212,166 184,164;M184,164 Q214,170 222,150 Q214,164 184,164;M184,164 Q212,174 218,152 Q212,166 184,164" dur="3.5s" repeatCount="indefinite"/>
     </path>
   </svg>
 
-  <!-- Terminal SOC con efectos visuales -->
+  <!-- Terminal SOC mejorada -->
   <div id="wolf-term">
-    <div class="term-hd">[ZNETRALYS_SOC] // OFFENSIVE_ENGINE v5.0</div>
+    <div class="term-hd">
+      <span>[ZNETRALYS_SOC] // OFFENSIVE_ENGINE v6.0</span>
+      <span id="term-fps" style="color:#475569">-- FPS</span>
+    </div>
     <div id="term-body"></div>
     <div class="term-ft">
       <span id="op-badge">IDLE</span>
@@ -1534,114 +1533,185 @@
   <!-- Toast notifications -->
   <div id="wolf-toast"></div>
 
-  <!-- Partículas de fondo -->
+  <!-- Canvas de partículas -->
   <canvas id="wolf-particles" style="position:fixed;inset:0;pointer-events:none;z-index:-1"></canvas>
 </div>
 
 <style>
-:root{--cyber:#00f0ff;--cyber2:#00b4d8;--warn:#ff003c;--ok:#bfff00;--bg:rgba(2,6,23,.96);--border:#222536;--text:#e8eaf0;--text2:#8a90a8;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-#zya-wolf-core{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:9px;cursor:pointer;user-select:none;font-family:var(--mono);transition:opacity .3s}
-/* HUD */
-.wolf-hud{display:flex;align-items:center;justify-content:space-between;width:150px;padding:5px 8px;background:rgba(15,23,42,.9);border:1px solid var(--border);border-radius:7px;backdrop-filter:blur(10px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.hud-left{display:flex;align-items:center;gap:5px}
+:root{--cyber:#00f0ff;--cyber2:#00b4d8;--warn:#ff003c;--ok:#bfff00;--bg:rgba(2,6,23,.97);--border:#222536;--text:#e8eaf0;--text2:#8a90a8;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+#zya-wolf-elite{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;cursor:pointer;user-select:none;font-family:var(--mono);opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+/* HUD mejorado */
+.wolf-hud{display:flex;align-items:center;justify-content:space-between;width:160px;padding:6px 9px;background:rgba(15,23,42,.92);border:1px solid var(--border);border-radius:8px;backdrop-filter:blur(12px);box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.hud-left{display:flex;align-items:center;gap:6px}
 .hud-dot{width:5px;height:5px;background:var(--cyber);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 5px var(--cyber)}50%{opacity:.25;box-shadow:none}}
-.hud-text{font-size:8px;color:var(--text2);font-weight:600}
-.hud-metrics{display:grid;grid-template-columns:1fr 1fr;gap:3px 6px;font-size:7px}
-.metric{display:flex;flex-direction:column;align-items:center}
-.m-lbl{color:var(--text2);opacity:.7;font-size:6px}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 6px var(--cyber)}50%{opacity:.25;box-shadow:none}}
+.hud-text{font-size:8px;color:var(--text2);font-weight:700;letter-spacing:.3px}
+.hud-metrics{display:grid;grid-template-columns:1fr 1fr;gap:4px 7px}
+.metric{display:flex;flex-direction:column;gap:2px}
+.m-lbl{color:var(--text2);opacity:.7;font-size:6px;text-transform:uppercase;letter-spacing:.3px}
 .m-val{color:var(--cyber);font-weight:700;font-size:8px}
+.m-bar{height:2px;background:#1e293b;border-radius:1px;overflow:hidden}
+.m-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyber),var(--ok));transition:width .3s ease}
 /* SVG */
 #wolf-svg{transition:filter .3s,transform .3s}
-#zya-wolf-core:hover #wolf-svg{transform:scale(1.04)}
-#zya-wolf-core.scanning #wolf-svg{filter:drop-shadow(0 0 12px var(--cyber))}
-#zya-wolf-core.alert #wolf-svg{filter:drop-shadow(0 0 10px var(--warn))}
-#eyeL,#eyeR{transition:transform .1s}
+#zya-wolf-elite:hover #wolf-svg{transform:scale(1.05)}
+#zya-wolf-elite.scanning #wolf-svg{filter:drop-shadow(0 0 14px var(--cyber))}
+#zya-wolf-elite.alert #wolf-svg{filter:drop-shadow(0 0 12px var(--warn));animation:alertPulse 1.5s infinite}
+@keyframes alertPulse{0%,100%{filter:drop-shadow(0 0 12px var(--warn))}50%{filter:drop-shadow(0 0 18px var(--warn))}}
+#eyeL,#eyeR{transition:transform .08s}
 /* Terminal */
-#wolf-term{width:320px;background:var(--bg);border:1px solid var(--border);border-radius:9px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.65);backdrop-filter:blur(14px);position:relative}
-.term-hd{padding:7px 11px;font-size:8px;color:#475569;letter-spacing:1.2px;border-bottom:1px solid var(--border);text-transform:uppercase;display:flex;justify-content:space-between}
-.term-hd::after{content:"●";color:var(--cyber);animation:blink 1.5s infinite}
+#wolf-term{width:330px;background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 10px 32px rgba(0,0,0,.7);backdrop-filter:blur(16px);position:relative}
+.term-hd{padding:8px 12px;font-size:8px;color:#475569;letter-spacing:1.3px;border-bottom:1px solid var(--border);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.term-hd::after{content:"●";color:var(--cyber);animation:blink 1.5s infinite;font-size:10px}
 @keyframes blink{50%{opacity:.3}}
-#term-body{height:74px;padding:7px 11px;color:var(--text);font-size:10px;line-height:1.5;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-#term-body div{opacity:0;transform:translateY(4px);transition:all .18s ease}
+#term-body{height:80px;padding:8px 12px;color:var(--text);font-size:10px;line-height:1.5;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+#term-body div{opacity:0;transform:translateY(4px);transition:all .2s ease}
 #term-body div.show{opacity:1;transform:translateY(0)}
-#term-body .cmd{color:var(--cyber2)}
-#term-body .out{color:var(--text2);font-size:9px}
-#term-body .alert{color:var(--warn);font-weight:600}
-.term-ft{display:flex;align-items:center;gap:6px;padding:7px 11px 9px;background:rgba(10,12,20,.75);border-top:1px solid var(--border)}
-#op-badge{padding:2px 6px;border-radius:4px;font-size:7px;font-weight:700;letter-spacing:.6px;background:#334155;color:#94a3b8;transition:all .3s}
+#term-body .cmd{color:var(--cyber2);font-weight:600}
+#term-body .out{color:var(--text2);font-size:9.5px}
+#term-body .alert{color:var(--warn);font-weight:700;text-shadow:0 0 4px rgba(255,0,60,.3)}
+#term-body .success{color:var(--ok);font-weight:600}
+.term-ft{display:flex;align-items:center;gap:7px;padding:8px 12px 10px;background:rgba(10,12,20,.78);border-top:1px solid var(--border)}
+#op-badge{padding:3px 7px;border-radius:4px;font-size:7px;font-weight:700;letter-spacing:.6px;background:#334155;color:#94a3b8;transition:all .3s;text-transform:uppercase}
 #op-badge.RECON{background:#0ea5e9;color:#fff}#op-badge.ENUM{background:#3b82f6;color:#fff}#op-badge.EXPLOIT{background:#ef4444;color:#fff}#op-badge.POST{background:#f59e0b;color:#fff}#op-badge.REPORT{background:#10b981;color:#fff}#op-badge.ALERT{background:#ff003c;color:#fff}
-#op-pct{font-size:9px;color:#64748b;min-width:28px;text-align:right;font-weight:600}
+#op-pct{font-size:9px;color:#64748b;min-width:30px;text-align:right;font-weight:700}
 .op-track{flex:1;height:3px;background:#1e293b;border-radius:2px;overflow:hidden}
-#op-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyber),var(--cyber2));border-radius:2px;transition:width .1s linear}
-/* Scanlines + glitch overlay */
+#op-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyber),var(--cyber2),var(--ok));border-radius:2px;transition:width .08s linear}
+/* Efectos visuales */
 #wolf-term::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);pointer-events:none;mix-blend-mode:overlay;opacity:.7}
-#wolf-term::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 95%,rgba(0,240,255,.03) 100%);pointer-events:none;animation:scanline 4s linear infinite}
+#wolf-term::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 95%,rgba(0,240,255,.04) 100%);pointer-events:none;animation:scanline 4.5s linear infinite}
 @keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
 /* Toast */
-#wolf-toast{position:fixed;bottom:95px;right:24px;z-index:10000;display:flex;flex-direction:column;gap:5px;pointer-events:none}
-.toast{background:var(--bg);border-left:3px solid var(--cyber);color:var(--text);padding:7px 11px;border-radius:5px;box-shadow:0 6px 18px rgba(0,0,0,.45);transform:translateX(150%);transition:transform .28s cubic-bezier(.4,0,.2,1);font-size:9px;max-width:270px;line-height:1.4}
+#wolf-toast{position:fixed;bottom:100px;right:24px;z-index:10000;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.toast{background:var(--bg);border-left:3px solid var(--cyber);color:var(--text);padding:8px 12px;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.5);transform:translateX(160%);transition:transform .3s cubic-bezier(.4,0,.2,1);font-size:9px;max-width:280px;line-height:1.45;border:1px solid var(--border)}
 .toast.show{transform:translateX(0)}
-.toast.ok{border-color:var(--ok)}
-.toast.warn{border-color:var(--warn)}
-/* Particles canvas */
-#wolf-particles{opacity:.15}
+.toast.ok{border-color:var(--ok);border-left-width:3px}
+.toast.warn{border-color:var(--warn);border-left-width:3px}
+/* Canvas */
+#wolf-particles{opacity:.18}
 /* Responsive */
-@media(max-width:640px){#zya-wolf-core{bottom:12px;right:12px}#wolf-svg{width:110px;height:110px}.wolf-hud{width:115px;padding:4px 7px}#wolf-term{width:245px}#term-body{height:62px;font-size:9px}#wolf-toast{right:12px;bottom:85px}}
+@media(max-width:640px){#zya-wolf-elite{bottom:12px;right:12px}#wolf-svg{width:115px;height:115px}.wolf-hud{width:120px;padding:5px 8px}#wolf-term{width:250px}#term-body{height:66px;font-size:9px}#wolf-toast{right:12px;bottom:90px;max-width:240px}}
 </style>
 
 <script>
 (()=>{
-  const core=document.getElementById('zya-wolf-core'),svg=document.getElementById('wolf-svg'),
+  const core=document.getElementById('zya-wolf-elite'),svg=document.getElementById('wolf-svg'),
         pL=document.getElementById('pupilL'),pR=document.getElementById('pupilR'),
         body=document.getElementById('term-body'),badge=document.getElementById('op-badge'),
         pct=document.getElementById('op-pct'),fill=document.getElementById('op-fill'),
         hudSt=document.getElementById('hud-state'),mCpu=document.getElementById('m-cpu'),
         mRam=document.getElementById('m-ram'),mNet=document.getElementById('m-net'),
-        mIoc=document.getElementById('m-ioc'),toastC=document.getElementById('wolf-toast'),
-        canvas=document.getElementById('wolf-particles'),ctx=canvas.getContext('2d');
+        mIoc=document.getElementById('m-ioc'),barCpu=document.getElementById('bar-cpu'),
+        barRam=document.getElementById('bar-ram'),toastC=document.getElementById('wolf-toast'),
+        canvas=document.getElementById('wolf-particles'),ctx=canvas.getContext('2d'),
+        termFps=document.getElementById('term-fps');
 
   // Resize canvas
   function resizeCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;}
-  resizeCanvas(); window.addEventListener('resize',resizeCanvas);
+  resizeCanvas();window.addEventListener('resize',resizeCanvas);
 
-  // Partículas cyber flotantes
+  // Partículas mejoradas
   const particles=[];
-  for(let i=0;i<35;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+0.5,sx:(Math.random()-.5)*0.4,sy:(Math.random()-.5)*0.4,a:Math.random()*.3+.1});
+  for(let i=0;i<40;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+0.5,sx:(Math.random()-.5)*0.5,sy:(Math.random()-.5)*0.5,a:Math.random()*.4+.1,type:Math.random()>.5?'circle':'square'});
   function animateParticles(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p=>{
-      p.x+=p.sx;p.y+=p.sy;p.a+=.02;
+      p.x+=p.sx;p.y+=p.sy;p.a+=.015;
       if(p.x<0||p.x>canvas.width)p.sx*=-1;if(p.y<0||p.y>canvas.height)p.sy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(0,240,255,${Math.abs(Math.sin(p.a))*0.6})`;ctx.fill();
+      ctx.beginPath();
+      const alpha=Math.abs(Math.sin(p.a))*0.7;
+      ctx.fillStyle=`rgba(0,240,255,${alpha})`;
+      if(p.type==='circle'){ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
+      else{ctx.fillRect(p.x,p.y,p.r*2,p.r*2);}
     });
     requestAnimationFrame(animateParticles);
   }
   animateParticles();
 
-  // Cadenas ofensivas premium con tiempos variables
+  // Métricas de sistema en tiempo real usando Performance API
+  let cpuHistory=[],ramBase=performance.memory?performance.memory.usedJSHeapSize/1024/1024/1024:2.1;
+  const ports=['80▲','443▲','22▲','3389▲','1433▲','5432▲','8080▲','6379▲','27017▲','9200▲'];
+  let netIdx=0,frameCount=0,lastFpsTime=performance.now(),currentFps=60;
+
+  // Calcular FPS reales
+  function updateFps(){
+    frameCount++;
+    const now=performance.now();
+    if(now-lastFpsTime>=1000){
+      currentFps=Math.round(frameCount*1000/(now-lastFpsTime));
+      termFps.textContent=`${currentFps} FPS`;
+      frameCount=0;lastFpsTime=now;
+    }
+    requestAnimationFrame(updateFps);
+  }
+  updateFps();
+
+  async function updateSystemMetrics(){
+    try{
+      // CPU: Simulación basada en activity del navegador
+      const perfData=performance.now();
+      // Crear carga artificial para medir
+      let load=0;
+      for(let i=0;i<1000;i++)load+=Math.sqrt(i)*Math.random();
+      const cpuLoad=Math.min(95,Math.max(2,(performance.now()-perfData)/5+Math.random()*15));
+      cpuHistory.push(cpuLoad);
+      if(cpuHistory.length>10)cpuHistory.shift();
+      const cpuAvg=cpuHistory.reduce((a,b)=>a+b,0)/cpuHistory.length;
+      mCpu.textContent=`${Math.round(cpuAvg).toString().padStart(2,'0')}%`;
+      barCpu.style.width=`${cpuAvg}%`;
+      barCpu.style.background=cpuAvg>70?'linear-gradient(90deg,#ff003c,#ff6b6b)':cpuAvg>40?'linear-gradient(90deg,#f59e0b,#fbbf24)':'linear-gradient(90deg,#00f0ff,#00b4d8)';
+
+      // RAM: Usar Performance Memory API si está disponible
+      if(performance.memory){
+        const usedGB=(performance.memory.usedJSHeapSize/1024/1024/1024).toFixed(2);
+        const totalGB=(performance.memory.jsHeapSizeLimit/1024/1024/1024).toFixed(1);
+        mRam.textContent=`${usedGB}GB`;
+        const percent=(usedGB/totalGB)*100;
+        barRam.style.width=`${Math.min(100,percent)}%`;
+      }else{
+        // Fallback: simulación realista
+        ramBase+=(Math.random()-.5)*0.2;
+        if(Math.random()<0.1)ramBase+=Math.random()*0.5;
+        ramBase=Math.max(1.2,Math.min(6.8,ramBase));
+        mRam.textContent=`${ramBase.toFixed(2)}GB`;
+        barRam.style.width=`${Math.min(100,(ramBase/8)*100)}%`;
+      }
+      barRam.style.background='linear-gradient(90deg,#00f0ff,#bfff00)';
+
+      // NET: Rotación de puertos con tráfico variable
+      if(Math.random()<0.3)netIdx=(netIdx+1)%ports.length;
+      mNet.textContent=ports[netIdx];
+
+      // IOC: Basado en actividad simulada
+      if(Math.random()<0.15)mIoc.textContent=`${Math.floor(Math.random()*3)}`;
+
+    }catch(e){console.error('Metrics error:',e);}
+    setTimeout(updateSystemMetrics,Math.random()*2000+2000);
+  }
+  updateSystemMetrics();
+
+  // Cadenas ofensivas con datos reales del CV
   const chains=[
     {name:"AD_PENTEST",phases:[
-      {t:"RECON",cmd:"nmap -sS -sV -sC -p 53,88,389,445,636 --min-rate 1200 10.12.0.0/24",out:"✅ DC01.corp.local [SMB 3.1.1] // 14 hosts // OS: Windows Server 2022",dur:[180,320]},
-      {t:"ENUM",cmd:"bloodhound-python -c All -d corp.local -ns 10.12.0.10 --zip --collect-all",out:"✅ 1.8k nodes // Shortest path to DA: 2 hops // ACL abuse vector found",dur:[220,380]},
-      {t:"EXPLOIT",cmd:"python3 kerberoast.py -d corp.local -u svc_backup --output hashes.txt --request-timeout 30",out:"✅ TGS-REQ granted // NTLMv2 hash: $NETNTLMv2$... [cracking...]",dur:[280,450]},
-      {t:"POST",cmd:"mimikatz # sekurlsa::logonpasswords & pth.sh --hash 'aad3b435b51404...'",out:"✅ DA session opened // Lateral move to WSUS01 // RDP tunnel established",dur:[240,400]},
-      {t:"REPORT",cmd:"cat ad_audit.md | jq '.attck[] | select(.id==\"T1558.003\")' | tee report.json",out:"✅ Executive draft ready // IOCs exported to MISP // Jira: SEC-2847",dur:[150,280]}
+      {t:"RECON",cmd:"nmap -sS -sV -sC -p 53,88,389,445,636 --min-rate 1500 10.12.0.0/24",out:"✅ DC01.corp.local [SMB 3.1.1] // 14 hosts // OS: Windows Server 2022",dur:[200,350]},
+      {t:"ENUM",cmd:"bloodhound-python -c All -d corp.local -ns 10.12.0.10 --zip --collect-all",out:"✅ 1.8k nodes // Shortest path to DA: 2 hops // ACL abuse vector",dur:[250,420]},
+      {t:"EXPLOIT",cmd:"python3 kerberoast.py -d corp.local -u svc_backup --output hashes.txt",out:"✅ TGS-REQ granted // NTLMv2 hash: $NETNTLMv2$... [cracking...]",dur:[300,500]},
+      {t:"POST",cmd:"mimikatz # sekurlsa::logonpasswords & pth.sh --hash 'aad3b435b51404...'",out:"✅ DA session opened // Lateral move to WSUS01 // RDP tunnel",dur:[260,440]},
+      {t:"REPORT",cmd:"cat ad_audit.md | jq '.attck[] | select(.id==\"T1558.003\")'",out:"✅ Executive draft ready // IOCs to MISP // Jira: SEC-2847",dur:[160,300]}
     ]},
     {name:"WEB_OFFENSIVE",phases:[
-      {t:"RECON",cmd:"subfinder -d target.io -silent | httpx -silent -mc 200,403 -title -tech-detect",out:"✅ 5 subs alive // WAF: Cloudflare // Tech: React + Node.js + PostgreSQL",dur:[160,300]},
-      {t:"ENUM",cmd:"nuclei -l alive.txt -t cves,exposures,vulnerabilities -severity critical,high -rate-limit 150",out:"✅ CVE-2024-XXXX flagged // CORS misconfigured // JWT alg:none possible",dur:[240,420]},
-      {t:"EXPLOIT",cmd:"ffuf -w api_endpoints.txt -u https://api.target.io/FUZZ -mc 200,401,403 -H 'Authorization: Bearer test'",out:"✅ /v1/users IDOR confirmed // Privilege escalation: user_id enumeration",dur:[300,480]},
-      {t:"POST",cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5 --batch --threads 5",out:"✅ Blind SQLi confirmed // DB: postgres 14.2 // 42 tables // admin creds dumped",dur:[350,550]},
-      {t:"REPORT",cmd:"zap report export --format html --cvss-threshold 7.0 --output findings_$(date +%Y%m%d).html",out:"✅ OWASP Top 10 mapped // CVSS 9.1 // Jira tickets: SEC-2848~2853",dur:[140,260]}
+      {t:"RECON",cmd:"subfinder -d target.io -silent | httpx -silent -mc 200,403 -title",out:"✅ 5 subs alive // WAF: Cloudflare // Tech: React + Node.js",dur:[180,320]},
+      {t:"ENUM",cmd:"nuclei -l alive.txt -t cves,exposures -severity critical,high",out:"✅ CVE-2024-XXXX // CORS misconfigured // JWT alg:none",dur:[260,440]},
+      {t:"EXPLOIT",cmd:"ffuf -w api_endpoints.txt -u https://api.target.io/FUZZ -mc 200,403",out:"✅ /v1/users IDOR confirmed // Privilege escalation vector",dur:[320,520]},
+      {t:"POST",cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5",out:"✅ Blind SQLi // DB: postgres 14.2 // 42 tables dumped",dur:[380,600]},
+      {t:"REPORT",cmd:"zap report export --format html --cvss-threshold 7.0",out:"✅ OWASP Top 10 mapped // CVSS 9.1 // Jira: SEC-2848~2853",dur:[150,280]}
     ]},
     {name:"CLOUD_RED",phases:[
-      {t:"RECON",cmd:"cloud_enum -k target-tenant --azure --brute --subdomain-list subdomains.txt --threads 20",out:"✅ Blob storage exposed // SAS token leaked in bundle.js // Storage: prod-backups",dur:[190,340]},
-      {t:"ENUM",cmd:"az ad sp list --all | jq '.[] | select(.appDisplayName | contains(\"Prod\")) | {id,appId,displayName}'",out:"✅ 3 Enterprise Apps // Managed Identity: overprivileged (Storage Blob Data Contributor)",dur:[210,370]},
-      {t:"EXPLOIT",cmd:"python3 azure_abuse.py --scope storage.write --token $ACCESS_TOKEN --endpoint https://prod-backups.blob.core.windows.net",out:"✅ Token refreshed via refresh_token // Blob overwrite: config.bak → config.bak.compromised",dur:[290,470]},
-      {t:"POST",cmd:"chisel client 10.0.8.50:4443 R:socks --auth zya_redteam --keepalive 25s",out:"✅ SOCKS5 proxy up // VNet access: 10.0.0.0/16 // Pivoting to DC via SMB",dur:[260,420]},
-      {t:"REPORT",cmd:"terraform plan -target=module.remediation -out=fix.tfplan && terraform show -json fix.tfplan | jq '.resource_changes[]'",out:"✅ PIM policy drafted // Audit trail to Sentinel // Compliance report: ISO27001-A.9.2.3",dur:[130,250]}
+      {t:"RECON",cmd:"cloud_enum -k target-tenant --azure --brute --threads 20",out:"✅ Blob storage exposed // SAS token leaked in bundle.js",dur:[200,360]},
+      {t:"ENUM",cmd:"az ad sp list --all | jq '.[] | select(.appDisplayName)',out:"✅ 3 Enterprise Apps // Managed Identity overprivileged",dur:[230,390]},
+      {t:"EXPLOIT",cmd:"python3 azure_abuse.py --scope storage.write --token $TOKEN",out:"✅ Token refreshed // Blob overwrite: config.bak compromised",dur:[310,490]},
+      {t:"POST",cmd:"chisel client 10.0.8.50:4443 R:socks --auth zya_redteam",out:"✅ SOCKS5 proxy up // VNet access: 10.0.0.0/16",dur:[280,450]},
+      {t:"REPORT",cmd:"terraform plan -target=module.remediation -out=fix.tfplan",out:"✅ PIM policy drafted // Sentinel audit // ISO27001-A.9.2.3",dur:[140,270]}
     ]}
   ];
 
@@ -1650,139 +1720,110 @@
   const rand=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
   const tagColors={RECON:'#0ea5e9',ENUM:'#3b82f6',EXPLOIT:'#ef4444',POST:'#f59e0b',REPORT:'#10b981',IDLE:'#94a3b8',ALERT:'#ff003c'};
 
-  // Eye tracking con easing ultra-suave
+  // Eye tracking ultra-suave
   let tx=0,ty=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
   (function track(){
     const r=svg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;
-    cx+=(tx-cx)*0.048; cy+=(ty-cy)*0.048;
-    const dx=Math.min(3.2,Math.max(-3.2,(cx-sx)/48)),dy=Math.min(3.2,Math.max(-3.2,(cy-sy)/48));
+    cx+=(tx-cx)*0.045;cy+=(ty-cy)*0.045;
+    const dx=Math.min(3.5,Math.max(-3.5,(cx-sx)/52)),dy=Math.min(3.5,Math.max(-3.5,(cy-sy)/52));
     pL.setAttribute('transform',`translate(${dx},${dy})`);
     pR.setAttribute('transform',`translate(${dx},${dy})`);
     requestAnimationFrame(track);
   })();
 
-  // Blink aleatorio de ojos
+  // Blink aleatorio
   function blinkEyes(){
-    if(!running && Math.random()<0.15){
-      [pL,pR].forEach(p=>{p.setAttribute('r','0.5');setTimeout(()=>p.setAttribute('r','4'),120);});
+    if(!running&&Math.random()<0.18){
+      [pL,pR].forEach(p=>{p.setAttribute('r','0.6');setTimeout(()=>p.setAttribute('r','3.8'),140);});
     }
-    blinkTimer=setTimeout(blinkEyes,rand(2000,6000));
+    blinkTimer=setTimeout(blinkEyes,rand(2500,6500));
   }
   blinkEyes();
 
-  // Toast system con auto-dismiss
+  // Toast system
   function toast(msg,type='ok'){
     const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=msg;
     toastC.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
-    clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),320);},3200);
+    clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350);},3500);
   }
 
-  // Terminal logging con tipos de mensaje
+  // Terminal logging
   function logLine(text,type='normal'){
     const d=document.createElement('div');
     const ts=new Date().toLocaleTimeString('en-GB');
-    let cls=type==='cmd'?'cmd':type==='out'?'out':type==='alert'?'alert':'';
+    let cls=type==='cmd'?'cmd':type==='out'?'out':type==='alert'?'alert':type==='success'?'success':'';
     d.innerHTML=`<span style="color:#475569">[${ts}]</span> <span class="${cls}">${text}</span>`;
     body.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));
-    if(body.children.length>4) body.removeChild(body.firstChild);
+    if(body.children.length>5)body.removeChild(body.firstChild);
   }
 
-  // Recursos dinámicos con fluctuación realista
-  let cpuBase=4,ramBase=1.2,netIdx=0,ports=['80▲','443▲','22▲','3389▲','1433▲','5432▲','8080▲','6379▲'];
-  function updateResources(){
-    if(!running){
-      // CPU: fluctuación suave con picos aleatorios
-      cpuBase+= (Math.random()-.5)*2.5; cpuBase=Math.max(2,Math.min(28,cpuBase));
-      mCpu.textContent=`${Math.round(cpuBase).toString().padStart(2,'0')}%`;
-      // RAM: deriva lenta con saltos ocasionales
-      ramBase+= (Math.random()-.5)*0.15; if(Math.random()<0.08)ramBase+=rand(0,3)/10;
-      ramBase=Math.max(0.8,Math.min(4.2,ramBase));
-      mRam.textContent=`${ramBase.toFixed(1)}GB`;
-      // NET: rotación de puertos con probabilidad de cambio
-      if(Math.random()<0.25)netIdx=(netIdx+1)%ports.length;
-      mNet.textContent=ports[netIdx];
-      // IOC: 0-2 con probabilidad baja de cambio
-      if(Math.random()<0.12)mIoc.textContent=`${rand(0,2)}`;
-    }
-    setTimeout(updateResources,rand(2800,4500));
-  }
-  updateResources();
-
-  // Motor de simulación con tiempos variables por fase
+  // Motor de simulación
   async function runOp(){
     if(running)return;running=true;
     core.classList.add('scanning');core.classList.remove('alert');
     hudSt.textContent='ACTIVE';hudSt.style.color='var(--cyber)';
     badge.textContent='INIT';badge.style.background='#334155';pct.textContent='0%';fill.style.width='0%';
-    logLine(`kali@zyanetralys:~$ source /etc/profile.d/redteam.sh`,'cmd');await delay(rand(180,320));
+    logLine(`kali@zyanetralys:~$ source /etc/profile.d/redteam.sh`,'cmd');await delay(rand(200,350));
 
     const chain=chains[chainIdx%chains.length];chainIdx++;
-    logLine(`[+] Chain loaded: <span style="color:var(--cyber)">${chain.name}</span>`,'out');await delay(rand(150,280));
+    logLine(`[+] Chain loaded: <span style="color:var(--cyber)">${chain.name}</span>`,'success');await delay(rand(160,300));
 
     for(const p of chain.phases){
       badge.textContent=p.t;badge.style.background=tagColors[p.t]||tagColors.IDLE;
       let prog=0;pct.textContent='0%';fill.style.width='0%';
-      logLine(`<span class="cmd">$</span> ${p.cmd}`,'cmd');await delay(rand(120,240));
+      logLine(`<span class="cmd">$</span> ${p.cmd}`,'cmd');await delay(rand(140,260));
 
-      // Progreso con velocidad variable y pausas estratégicas
       const [minD,maxD]=p.dur;
       while(prog<100){
-        // Velocidad variable: más lento al inicio/final, más rápido en medio
-        const speedFactor=prog<20||prog>85?0.6:prog<50?1:0.8;
-        const delta=Math.floor(rand(3,8)*speedFactor);
+        const speedFactor=prog<25||prog>85?0.55:prog<55?1.1:0.85;
+        const delta=Math.floor(rand(3,9)*speedFactor);
         prog=Math.min(100,prog+delta);
         pct.textContent=`${prog}%`;fill.style.width=`${prog}%`;
-        // Pausa más larga en 95-99% para efecto "procesando"
-        const baseDelay=prog>=95&&prog<100?rand(180,320):rand(minD,maxD)/12;
+        const baseDelay=prog>=95&&prog<100?rand(200,380):rand(minD,maxD)/14;
         await delay(Math.floor(baseDelay*speedFactor));
       }
-      logLine(`<span class="out">${p.out}</span>`,'out');await delay(rand(200,380));
+      logLine(`<span class="out">${p.out}</span>`,'out');await delay(rand(220,420));
     }
 
-    // 28% probabilidad de alerta IOC con efectos visuales
-    const alert=Math.random()<0.28;
+    const alert=Math.random()<0.3;
     if(alert){
       badge.textContent='ALERT';badge.style.background=tagColors.ALERT;
       core.classList.add('alert');core.classList.remove('scanning');
-      logLine(`<span class="alert">⚠️ IOC DETECTED: Lateral movement pattern // Source: WSUS01 → DC01</span>`,'alert');
-      toast('⚠️ <strong>IOC DETECTADO</strong><br><span style="opacity:.8">Revisar SIEM // Regla: SIGMA-2847</span>','warn');
-      // Efecto de parpadeo en alerta
+      logLine(`<span class="alert">⚠️ IOC DETECTED: Lateral movement WSUS01→DC01 // Sigma: T1021.002</span>`,'alert');
+      toast('⚠️ <strong>IOC DETECTADO</strong><br><span style="opacity:.85">Revisar SIEM // Regla: SIGMA-2847 // Severity: HIGH</span>','warn');
       let blinks=0;const alertBlink=setInterval(()=>{
-        svg.style.filter=blinks%2?'drop-shadow(0 0 10px var(--warn))':'drop-shadow(0 0 12px var(--cyber))';
+        svg.style.filter=blinks%2?'drop-shadow(0 0 10px var(--warn))':'drop-shadow(0 0 14px var(--cyber))';
         if(++blinks>=6){clearInterval(alertBlink);svg.style.filter='';}
-      },400);
+      },450);
     }else{
       badge.textContent='COMPLETE';badge.style.background=tagColors.REPORT;
-      logLine(`✅ <span class="out">Chain finished // Artifacts exported // Next cycle in standby</span>`,'out');
-      toast('✅ <strong>Operación completada</strong><br><span style="opacity:.8">Reporte generado // Logs archivados</span>','ok');
+      logLine(`✅ <span class="success">Chain finished // Artifacts exported // Logs archived</span>`,'success');
+      toast('✅ <strong>Operación completada</strong><br><span style="opacity:.85">Reporte generado // ISO 27001 compliance</span>','ok');
     }
     hudSt.textContent=alert?'ALERT':'IDLE';hudSt.style.color=alert?'var(--warn)':'var(--text2)';
     if(!alert)core.classList.remove('scanning');
     running=false;
   }
 
-  // Click handler con feedback visual
+  // Click handler
   core.addEventListener('click',()=>{
     if(!running){
-      // Efecto de pulso en click
-      svg.style.transform='scale(1.08)';setTimeout(()=>svg.style.transform='',180);
-      runOp();toast('🔄 <strong>Nueva cadena iniciada</strong><br><span style="opacity:.8">Target: auto-selected // Mode: stealth</span>');
+      svg.style.transform='scale(1.1)';setTimeout(()=>svg.style.transform='',200);
+      runOp();toast('🔄 <strong>Nueva cadena iniciada</strong><br><span style="opacity:.85">Target: auto-selected // Mode: stealth // ISO 27001</span>');
     }
   });
 
-  // Ciclo automático con pausa realista y aleatoriedad
+  // Ciclo automático
   (async function loop(){
     while(true){
-      if(!running){await delay(rand(7000,12000));runOp();}
-      await delay(350);
+      if(!running){await delay(rand(8000,14000));runOp();}
+      await delay(400);
     }
   })();
 
-  // Inicialización con fade-in suave
-  setTimeout(()=>{core.style.opacity='1';core.style.transform='translateY(0)';},80);
-
-  // Cleanup en unload
+  // Init
+  setTimeout(()=>{core.style.opacity='1';core.style.transform='translateY(0)';},100);
   window.addEventListener('beforeunload',()=>{clearTimeout(toastTimer);clearTimeout(blinkTimer);});
 })();
 </script>
