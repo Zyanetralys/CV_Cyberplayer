@@ -1417,98 +1417,88 @@
 <div id="cyber-wolf-ops">
   <div class="ops-header">
     <div class="header-left">
-      <span class="ops-badge">●</span>
+      <span class="ops-badge"></span>
       <span class="ops-title">KALI-OPS // ACTIVE</span>
     </div>
     <div class="header-controls">
-      <button class="ctrl-btn min" id="min-btn" title="Minimizar">−</button>
-      <button class="ctrl-btn close" id="close-btn" title="Ocultar">×</button>
+      <button class="ctrl-btn" id="min-btn" title="Minimizar">−</button>
+      <button class="ctrl-btn" id="close-btn" title="Ocultar">×</button>
     </div>
   </div>
 
   <div class="ops-body" id="ops-body">
     <div class="terminal-panel">
       <div class="term-header">
-        <span class="term-prompt">┌──(kali㉿kali)-[~/pentest]</span>
-        <span class="term-status">●</span>
+        <span class="term-path">┌──(kali㉿kali)-[~/tools/pentest]</span>
+        <span class="term-status"></span>
       </div>
       <div class="term-content" id="term-content"></div>
       <div class="term-footer">
-        <span class="prompt">└─$</span><span class="cursor" id="term-cursor">█</span>
+        <span class="prompt">└─$</span><span id="cmd-preview"></span><span class="cursor" id="term-cursor">█</span>
       </div>
     </div>
 
-    <div class="wolf-panel">
-      <svg id="wolf-svg" viewBox="0 0 300 300" width="155" height="155">
+    <div class="wolf-panel" id="wolf-panel">
+      <svg id="wolf-svg" viewBox="0 0 300 300" width="145" height="145">
         <defs>
           <linearGradient id="wolfFur" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0a0f1a"/><stop offset="35%" stop-color="#1a2332"/><stop offset="70%" stop-color="#2a354b"/><stop offset="100%" stop-color="#050810"/>
+            <stop offset="0%" stop-color="#0a0f1a"/><stop offset="40%" stop-color="#1a2332"/><stop offset="75%" stop-color="#2a354b"/><stop offset="100%" stop-color="#050810"/>
           </linearGradient>
-          <radialGradient id="eyeGlow" cx="50%" cy="50%" r="70%">
+          <radialGradient id="eyeCyan" cx="50%" cy="50%" r="70%">
             <stop offset="0%" stop-color="#00f0ff"/><stop offset="50%" stop-color="#0088aa"/><stop offset="100%" stop-color="#003f5c"/>
+          </radialGradient>
+          <radialGradient id="eyeRed" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#ff3333"/><stop offset="50%" stop-color="#b30000"/><stop offset="100%" stop-color="#4d0000"/>
           </radialGradient>
           <filter id="glow"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.7"/></filter>
-          <clipPath id="eyeClip"><ellipse rx="9" ry="5.5"/></clipPath>
+          <clipPath id="eyeClip"><ellipse rx="8.5" ry="5.2"/></clipPath>
         </defs>
 
-        <circle cx="150" cy="150" r="135" fill="none" stroke="#00f0ff" stroke-width="0.7" stroke-dasharray="3 8" opacity="0.2">
-          <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="22s" repeatCount="indefinite"/>
+        <circle cx="150" cy="150" r="132" fill="none" stroke="#00f0ff" stroke-width="0.7" stroke-dasharray="3 8" opacity="0.2">
+          <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="20s" repeatCount="indefinite"/>
         </circle>
 
-        <!-- Orejas puntiagudas y erguidas -->
-        <path d="M95,105 L75,38 L108,82 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
-        <path d="M205,105 L225,38 L192,82 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
-        <path d="M84,58 L92,48 L102,64" stroke="#4b5a75" fill="none" stroke-width="0.8" opacity="0.5"/>
-        <path d="M216,58 L208,48 L198,64" stroke="#4b5a75" fill="none" stroke-width="0.8" opacity="0.5"/>
+        <!-- Orejas -->
+        <path d="M98,102 L78,35 L112,82 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
+        <path d="M202,102 L222,35 L188,82 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
+        <path d="M86,54 L94,44 L104,60" stroke="#4b5a75" fill="none" stroke-width="0.8" opacity="0.5"/>
+        <path d="M214,54 L206,44 L196,60" stroke="#4b5a75" fill="none" stroke-width="0.8" opacity="0.5"/>
 
-        <!-- Cráneo con forma realista de lobo -->
-        <path d="M105,95 C125,78 175,78 195,95 C215,112 210,148 185,172 C160,196 140,196 115,172 C90,148 85,112 105,95 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
-        
-        <!-- Marcas de pelaje -->
-        <path d="M128,108 Q150,122 172,108" stroke="#334155" fill="none" stroke-width="1.4" opacity="0.55"/>
-        <path d="M118,124 Q150,140 182,124" stroke="#334155" fill="none" stroke-width="1" opacity="0.45"/>
+        <!-- Cráneo & Hocico -->
+        <path d="M108,92 C128,76 172,76 192,92 C212,108 208,146 184,170 C160,194 140,194 116,170 C92,146 88,108 108,92 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
+        <path d="M132,105 Q150,118 168,105" stroke="#334155" fill="none" stroke-width="1.3" opacity="0.55"/>
+        <path d="M122,122 Q150,136 178,122" stroke="#334155" fill="none" stroke-width="1" opacity="0.45"/>
+        <ellipse cx="150" cy="148" rx="36" ry="24" fill="#2a354b"/>
+        <path d="M122,132 Q150,120 178,132 L174,164 Q150,176 126,164 Z" fill="url(#wolfFur)" opacity="0.85"/>
 
-        <!-- Hocico alargado -->
-        <ellipse cx="150" cy="148" rx="38" ry="26" fill="#2a354b"/>
-        <path d="M120,134 Q150,122 180,134 L176,166 Q150,178 124,166 Z" fill="url(#wolfFur)" opacity="0.85"/>
-        <path d="M128,144 Q150,134 172,144" stroke="#4b5a75" fill="none" stroke-width="0.8" opacity="0.35"/>
-
-        <!-- Ojos almendrados -->
-        <g id="eyeL" style="transform-origin: 118px 135px;">
-          <ellipse cx="118" cy="135" rx="9" ry="5.5" fill="url(#eyeGlow)" filter="url(#glow)"/>
-          <circle id="pupilL" cx="118" cy="135" r="3.2" fill="#050810" clip-path="url(#eyeClip)"/>
-          <circle cx="119.8" cy="133.5" r="1.1" fill="#fff" opacity="0.9"/>
-        </g>
-        <g id="eyeR" style="transform-origin: 182px 135px;">
-          <ellipse cx="182" cy="135" rx="9" ry="5.5" fill="url(#eyeGlow)" filter="url(#glow)"/>
-          <circle id="pupilR" cx="182" cy="135" r="3.2" fill="#050810" clip-path="url(#eyeClip)"/>
-          <circle cx="183.8" cy="133.5" r="1.1" fill="#fff" opacity="0.9"/>
-        </g>
+        <!-- Ojos -->
+        <g id="eyeL" style="transform-origin: 120px 132px;"><ellipse cx="120" cy="132" rx="8.5" ry="5.2" fill="url(#eyeCyan)" class="eye-fill" filter="url(#glow)"/><circle id="pupilL" cx="120" cy="132" r="3" fill="#050810" clip-path="url(#eyeClip)"/><circle cx="121.6" cy="130.8" r="1" fill="#fff" opacity="0.9"/></g>
+        <g id="eyeR" style="transform-origin: 180px 132px;"><ellipse cx="180" cy="132" rx="8.5" ry="5.2" fill="url(#eyeCyan)" class="eye-fill" filter="url(#glow)"/><circle id="pupilR" cx="180" cy="132" r="3" fill="#050810" clip-path="url(#eyeClip)"/><circle cx="181.6" cy="130.8" r="1" fill="#fff" opacity="0.9"/></g>
 
         <!-- Párpados -->
-        <rect id="lidL" x="109" y="129" width="18" height="11" fill="#0a0f1a" opacity="0" rx="4"/>
-        <rect id="lidR" x="173" y="129" width="18" height="11" fill="#0a0f1a" opacity="0" rx="4"/>
+        <rect id="lidL" x="111" y="126" width="18" height="11" fill="#0a0f1a" opacity="0" rx="4"/>
+        <rect id="lidR" x="171" y="126" width="18" height="11" fill="#0a0f1a" opacity="0" rx="4"/>
 
-        <!-- Nariz y boca -->
-        <path d="M136,148 L164,148 L150,162 Z" fill="#050810"/>
-        <ellipse cx="150" cy="152" rx="1.8" ry="1.1" fill="#fff" opacity="0.3"/>
-        <path d="M124,162 Q150,174 176,162" stroke="#151e2b" fill="none" stroke-width="1" opacity="0.6"/>
-        <path d="M114,152 L110,164" stroke="#4b5a75" fill="none" stroke-width="0.7" opacity="0.4"/>
-        <path d="M186,152 L190,164" stroke="#4b5a75" fill="none" stroke-width="0.7" opacity="0.4"/>
+        <!-- Nariz & Boca -->
+        <path d="M138,146 L162,146 L150,158 Z" fill="#050810"/>
+        <ellipse cx="150" cy="150" rx="1.6" ry="0.9" fill="#fff" opacity="0.3"/>
+        <path d="M126,160 Q150,172 174,160" stroke="#151e2b" fill="none" stroke-width="0.9" opacity="0.6"/>
+        <path d="M116,150 L112,162" stroke="#4b5a75" fill="none" stroke-width="0.7" opacity="0.4"/>
+        <path d="M184,150 L188,162" stroke="#4b5a75" fill="none" stroke-width="0.7" opacity="0.4"/>
 
         <!-- Pelaje cuello -->
-        <path d="M102,158 Q112,174 106,192" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.45"/>
-        <path d="M198,158 Q188,174 194,192" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.45"/>
+        <path d="M104,156 Q114,172 108,190" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.45"/>
+        <path d="M196,156 Q186,172 192,190" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.45"/>
 
-        <!-- Líneas cyber -->
-        <g stroke="#00f0ff" stroke-width="1" fill="none" opacity="0.55" stroke-dasharray="2 4">
-          <path d="M150,88 L150,52"><animate attributeName="opacity" values="0.55;0.9;0.55" dur="2s" repeatCount="indefinite"/></path>
-          <path d="M132,114 L92,88"/>
-          <path d="M168,114 L208,88"/>
+        <!-- Cyber lines -->
+        <g stroke="#00f0ff" stroke-width="0.9" fill="none" opacity="0.5" stroke-dasharray="2 4" class="cyber-lines">
+          <path d="M150,86 L150,50"><animate attributeName="opacity" values="0.5;0.85;0.5" dur="2s" repeatCount="indefinite"/></path>
+          <path d="M134,112 L94,86"/>
+          <path d="M166,112 L206,86"/>
         </g>
-        <circle cx="150" cy="50" r="2.8" fill="#00f0ff" filter="url(#glow)">
-          <animate attributeName="r" values="2.8;4.5;2.8" dur="1.6s" repeatCount="indefinite"/>
+        <circle cx="150" cy="48" r="2.6" fill="#00f0ff" filter="url(#glow)" class="cyber-node">
+          <animate attributeName="r" values="2.6;4.2;2.6" dur="1.5s" repeatCount="indefinite"/>
         </circle>
       </svg>
 
@@ -1520,7 +1510,7 @@
     </div>
 
     <div class="log-panel">
-      <div class="log-header"><span class="log-title">FEED</span><span class="log-dot">●</span></div>
+      <div class="log-header"><span class="log-title">FEED</span><span class="log-dot"></span></div>
       <div class="log-content" id="log-content"></div>
     </div>
   </div>
@@ -1530,133 +1520,129 @@
 <canvas id="bg-particles" style="position:fixed;inset:0;pointer-events:none;z-index:-1;"></canvas>
 
 <style>
-:root{
-  --bg:#050810;--panel:rgba(6,10,18,.95);--border:#151d2d;
-  --cyan:#00f0ff;--cyan2:#00b4d8;--green:#00ff41;--warn:#ff3333;--ok:#bfff00;
-  --text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono',Consolas,monospace
-}
-#cyber-wolf-ops{
-  position:fixed;bottom:65px;right:16px;z-index:99999;
-  font-family:var(--mono);background:var(--panel);border:1px solid var(--border);
-  border-radius:9px;overflow:hidden;backdrop-filter:blur(14px);
-  box-shadow:0 8px 26px rgba(0,0,0,.55);width:300px;
-  transition:all .3s cubic-bezier(.4,0,.2,1);opacity:0;transform:translateY(12px)
-}
+:root{--bg:#050810;--panel:rgba(6,10,18,.95);--border:#151d2d;--cyan:#00f0ff;--cyan2:#00b4d8;--green:#00ff41;--warn:#ff3333;--ok:#bfff00;--text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono',Consolas,monospace}
+#cyber-wolf-ops{position:fixed;bottom:45px;right:14px;z-index:99999;font-family:var(--mono);background:var(--panel);border:1px solid var(--border);border-radius:9px;overflow:hidden;backdrop-filter:blur(14px);box-shadow:0 8px 26px rgba(0,0,0,.55);width:290px;transition:all .3s cubic-bezier(.4,0,.2,1);opacity:0;transform:translateY(10px)}
 #cyber-wolf-ops.visible{opacity:1;transform:translateY(0)}
-#cyber-wolf-ops.minimized{width:46px;height:46px;border-radius:23px;bottom:65px}
-#cyber-wolf-ops.minimized .ops-body{display:none}
-#cyber-wolf-ops.hidden{opacity:0;pointer-events:none;transform:translateY(80px)}
-.ops-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:5px 9px;background:linear-gradient(90deg,rgba(0,240,255,.1),rgba(0,180,216,.06));
-  border-bottom:1px solid var(--border)
-}
+#cyber-wolf-ops.minimized{width:44px;height:44px;border-radius:22px;bottom:45px;pointer-events:auto}
+#cyber-wolf-ops.minimized .ops-body{display:none;opacity:0}
+#cyber-wolf-ops.minimized .ops-header{padding:0;justify-content:center}
+#cyber-wolf-ops.minimized .ops-badge{margin:0;animation:pulse 1s infinite}
+#cyber-wolf-ops.hidden{opacity:0;pointer-events:none;transform:translateY(60px)}
+.ops-header{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:linear-gradient(90deg,rgba(0,240,255,.1),rgba(0,180,216,.06));border-bottom:1px solid var(--border)}
 .header-left{display:flex;align-items:center;gap:5px}
 .ops-badge{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;box-shadow:0 0 5px var(--green)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.ops-title{font-size:7.5px;color:var(--cyan);font-weight:700;letter-spacing:.7px}
+.ops-title{font-size:7px;color:var(--cyan);font-weight:700;letter-spacing:.7px}
 .header-controls{display:flex;gap:3px}
-.ctrl-btn{
-  width:16px;height:16px;display:flex;align-items:center;justify-content:center;
-  background:transparent;border:1px solid var(--border);color:var(--text2);
-  cursor:pointer;border-radius:3px;font-size:10px;transition:all .2s;line-height:1
-}
+.ctrl-btn{width:15px;height:15px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border);color:var(--text2);cursor:pointer;border-radius:3px;font-size:10px;transition:all .2s;line-height:1}
 .ctrl-btn:hover{background:var(--border);color:var(--cyan)}
-.ctrl-btn.close:hover{color:var(--warn);border-color:var(--warn)}
-.ops-body{display:flex;flex-direction:column;gap:7px;padding:7px}
-.terminal-panel{background:rgba(3,6,12,.9);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.term-header{display:flex;justify-content:space-between;align-items:center;padding:4px 7px;background:rgba(10,16,28,.9);font-size:6.5px}
-.term-prompt{color:var(--green);font-weight:600}
+.ctrl-btn:last-child:hover{color:var(--warn);border-color:var(--warn)}
+.ops-body{display:flex;flex-direction:column;gap:6px;padding:6px}
+.terminal-panel{background:rgba(3,6,12,.92);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:relative}
+.terminal-panel::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);pointer-events:none;opacity:.6}
+.term-header{display:flex;justify-content:space-between;align-items:center;padding:3px 6px;background:rgba(8,14,26,.9);font-size:6px}
+.term-path{color:var(--green);font-weight:600}
 .term-status{width:3px;height:3px;background:var(--cyan);border-radius:50%;animation:pulse 1.4s infinite}
-.term-content{height:100px;padding:5px 7px;overflow:hidden;display:flex;flex-direction:column;gap:2px;font-size:7.2px;line-height:1.3;color:var(--text2)}
-.term-line{opacity:0;transform:translateX(-2px);transition:all .09s;white-space:pre-wrap;word-break:break-all}
+.term-content{height:95px;padding:4px 6px;overflow:hidden;display:flex;flex-direction:column;gap:1.5px;font-size:7px;line-height:1.25;color:var(--text2)}
+.term-line{opacity:0;transform:translateX(-2px);transition:all .08s;white-space:pre-wrap;word-break:break-all}
 .term-line.show{opacity:1;transform:translateX(0)}
 .term-line.cmd{color:var(--cyan2);font-weight:500}
-.term-line.out{color:var(--text2);padding-left:7px}
+.term-line.out{color:var(--text2);padding-left:6px}
 .term-line.warn{color:var(--warn);font-weight:600}
 .term-line.ok{color:var(--ok);font-weight:600}
-.term-footer{display:flex;align-items:center;gap:3px;padding:3px 7px;border-top:1px solid var(--border);background:rgba(0,240,255,.03);font-size:6.5px}
+.term-line.info{color:#60a5fa}
+.term-footer{display:flex;align-items:center;gap:3px;padding:2px 6px;border-top:1px solid var(--border);background:rgba(0,240,255,.03);font-size:6.5px;min-height:16px}
 .prompt{color:var(--green);font-weight:600}
 .cursor{animation:blink 1s step-end infinite;color:var(--cyan)}
 @keyframes blink{50%{opacity:0}}
-.wolf-panel{display:flex;flex-direction:column;align-items:center;gap:5px;background:rgba(8,12,20,.85);border:1px solid var(--border);border-radius:6px;padding:7px}
+.wolf-panel{display:flex;flex-direction:column;align-items:center;gap:4px;background:rgba(8,12,20,.88);border:1px solid var(--border);border-radius:6px;padding:6px}
 #wolf-svg{transition:filter .25s,transform .25s;display:block}
 #cyber-wolf-ops:hover #wolf-svg{transform:scale(1.04)}
-#cyber-wolf-ops.active #wolf-svg{filter:drop-shadow(0 0 9px var(--cyan))}
-#cyber-wolf-ops.alert #wolf-svg{filter:drop-shadow(0 0 9px var(--warn))}
+#cyber-wolf-ops.active #wolf-svg{filter:drop-shadow(0 0 8px var(--cyan))}
+#cyber-wolf-ops.alert #wolf-svg{filter:drop-shadow(0 0 8px var(--warn))}
+#cyber-wolf-ops.alert .eye-fill{fill:url(#eyeRed)!important}
+#cyber-wolf-ops.alert .cyber-lines{stroke:var(--warn)!important}
+#cyber-wolf-ops.alert .cyber-node{fill:var(--warn)!important}
 #wolf-lidL,#wolf-lidR{transition:opacity .1s}
-.wolf-status{display:flex;align-items:center;gap:4px;font-size:6.5px;color:var(--text2)}
+.wolf-status{display:flex;align-items:center;gap:4px;font-size:6px;color:var(--text2)}
 .status-dot{width:3px;height:3px;background:var(--cyan);border-radius:50%;animation:pulse 1.5s infinite}
 .status-text{font-weight:600}
 .op-counter{color:var(--cyan2);font-weight:700;margin-left:auto}
 .log-panel{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.log-header{display:flex;align-items:center;gap:3px;padding:3px 6px;font-size:6.5px;color:var(--text2);border-bottom:1px solid var(--border)}
+.log-header{display:flex;align-items:center;gap:3px;padding:3px 5px;font-size:6px;color:var(--text2);border-bottom:1px solid var(--border)}
 .log-title{flex:1;text-transform:uppercase;letter-spacing:.5px}
 .log-dot{width:2.5px;height:2.5px;background:var(--cyan);border-radius:50%;animation:pulse 1.6s infinite}
-.log-content{height:45px;padding:4px 6px;color:var(--text);font-size:7px;line-height:1.3;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-.log-line{opacity:0;transform:translateY(2px);transition:all .1s}
+.log-content{height:42px;padding:3px 5px;color:var(--text);font-size:6.8px;line-height:1.2;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.log-line{opacity:0;transform:translateY(1px);transition:all .09s}
 .log-line.show{opacity:1;transform:translateY(0)}
 .log-line.cmd{color:var(--cyan2);font-weight:500}
 .log-line.out{color:var(--text2)}
 .log-line.warn{color:var(--warn);font-weight:600}
 .log-line.ok{color:var(--ok);font-weight:600}
-#toast-layer{position:fixed;top:85px;right:16px;z-index:100000;display:flex;flex-direction:column;gap:3px;pointer-events:none;max-width:240px}
-.toast{
-  background:var(--panel);border-left:2px solid var(--cyan);color:var(--text);
-  padding:5px 8px;border-radius:5px;box-shadow:0 4px 15px rgba(0,0,0,.45);
-  transform:translateX(130%);transition:transform .22s cubic-bezier(.4,0,.2,1);
-  font-size:7.5px;line-height:1.25;border:1px solid var(--border);backdrop-filter:blur(8px)
-}
+#toast-layer{position:fixed;top:80px;right:14px;z-index:100000;display:flex;flex-direction:column;gap:3px;pointer-events:none;max-width:230px}
+.toast{background:var(--panel);border-left:2px solid var(--cyan);color:var(--text);padding:4px 7px;border-radius:5px;box-shadow:0 4px 14px rgba(0,0,0,.45);transform:translateX(130%);transition:transform .2s cubic-bezier(.4,0,.2,1);font-size:7.5px;line-height:1.2;border:1px solid var(--border);backdrop-filter:blur(8px)}
 .toast.show{transform:translateX(0)}
 .toast.warn{border-color:var(--warn)}.toast.ok{border-color:var(--ok)}
 .toast .t-title{font-weight:700;display:block;margin-bottom:1px}
 .toast .t-desc{color:var(--text2);font-size:7px;opacity:.9}
-@media(max-width:1024px){#cyber-wolf-ops{width:275px;bottom:60px;right:14px}}
+@media(max-width:1024px){#cyber-wolf-ops{width:260px;bottom:40px;right:12px}}
 @media(max-width:768px){#cyber-wolf-ops{display:none}}
 </style>
 
 <script>
 (()=>{
   if(!document.getElementById('cyber-wolf-ops')) return;
-  
-  const core=document.getElementById('cyber-wolf-ops'),
-        termContent=document.getElementById('term-content'),
-        logContent=document.getElementById('log-content'),
-        svg=document.getElementById('wolf-svg'),
+  const core=document.getElementById('cyber-wolf-ops'),body=document.getElementById('ops-body'),
+        termContent=document.getElementById('term-content'),cmdPreview=document.getElementById('cmd-preview'),
+        logContent=document.getElementById('log-content'),svg=document.getElementById('wolf-svg'),
         pL=document.getElementById('pupilL'),pR=document.getElementById('pupilR'),
         lidL=document.getElementById('lidL'),lidR=document.getElementById('lidR'),
-        statusDot=document.getElementById('status-dot'),
-        statusText=document.getElementById('status-text'),
-        opCounter=document.getElementById('op-counter'),
-        toastC=document.getElementById('toast-layer'),
+        statusDot=document.getElementById('status-dot'),statusText=document.getElementById('status-text'),
+        opCounter=document.getElementById('op-counter'),toastC=document.getElementById('toast-layer'),
         canvas=document.getElementById('bg-particles'),ctx=canvas.getContext('2d');
 
   function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
   resize();window.addEventListener('resize',resize);
+  const pts=Array.from({length:25},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()+.3,sx:(Math.random()-.5)*.2,sy:(Math.random()-.5)*.2,a:Math.random()*.35}));
+  (function drawPts(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.sx;p.y+=p.sy;if(p.x<0||p.x>canvas.width)p.sx*=-1;if(p.y<0||p.y>canvas.height)p.sy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,240,255,${Math.sin(p.a*2)*.2+.12})`;ctx.fill()});requestAnimationFrame(drawPts)})();
 
-  const pts=Array.from({length:28},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()+.3,sx:(Math.random()-.5)*.2,sy:(Math.random()-.5)*.2,a:Math.random()*.35}));
-  (function drawPts(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.sx;p.y+=p.sy;if(p.x<0||p.x>canvas.width)p.sx*=-1;if(p.y<0||p.y>canvas.height)p.sy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,240,255,${Math.sin(p.a*2)*.25+.12})`;ctx.fill()});requestAnimationFrame(drawPts)})();
-
-  // Controles
-  document.getElementById('min-btn').onclick=e=>{e.stopPropagation();core.classList.toggle('minimized');};
-  document.getElementById('close-btn').onclick=e=>{e.stopPropagation();core.classList.add('hidden');};
-  core.addEventListener('click',e=>{if(e.target.closest('.ctrl-btn'))return;if(core.classList.contains('hidden')){core.classList.remove('hidden');core.classList.remove('minimized');}});
+  // Minimize / Restore / Close
+  document.getElementById('min-btn').onclick=e=>{e.stopPropagation();core.classList.toggle('minimized')};
+  document.getElementById('close-btn').onclick=e=>{e.stopPropagation();core.classList.add('hidden')};
+  core.addEventListener('click',e=>{
+    if(e.target.closest('.ctrl-btn'))return;
+    if(core.classList.contains('hidden')){core.classList.remove('hidden');core.classList.remove('minimized');}
+    else if(core.classList.contains('minimized'))core.classList.remove('minimized');
+  });
 
   // Eye tracking
   let tx=0,ty=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
-  (function track(){const r=svg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;cx+=(tx-cx)*.045;cy+=(ty-cy)*.045;const dx=Math.min(3.5,Math.max(-3.5,(cx-sx)/40)),dy=Math.min(3.5,Math.max(-3.5,(cy-sy)/40));pL.setAttribute('transform',`translate(${dx},${dy})`);pR.setAttribute('transform',`translate(${dx},${dy})`);requestAnimationFrame(track)})();
+  (function track(){const r=svg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;cx+=(tx-cx)*.045;cy+=(ty-cy)*.045;const dx=Math.min(3.5,Math.max(-3.5,(cx-sx)/38)),dy=Math.min(3.5,Math.max(-3.5,(cy-sy)/38));pL.setAttribute('transform',`translate(${dx},${dy})`);pR.setAttribute('transform',`translate(${dx},${dy})`);requestAnimationFrame(track)})();
 
-  // Motores de texto
-  function typeLine(container,text,cls='',speed=26){
-    return new Promise(resolve=>{
-      const d=document.createElement('div');d.className=`term-line ${cls}`;container.appendChild(d);
-      let i=0;const iv=setInterval(()=>{d.textContent+=text[i]||'';d.classList.add('show');i++;if(i>=text.length){clearInterval(iv);resolve()}},speed);
-      if(container.children.length>12)container.removeChild(container.firstChild);
-    });
+  // Typing engines
+  const delay=ms=>new Promise(r=>setTimeout(r,ms));
+  const rnd=(a,b)=>Math.floor(Math.random()*(b-a)+a);
+  let isTyping=false;
+
+  async function typeCommand(text, turbo){
+    cmdPreview.textContent='';
+    const spd=turbo?rnd(10,22):rnd(18,42);
+    for(const c of text){cmdPreview.textContent+=c;await delay(spd);}
+    await delay(rnd(150,300)/(turbo?2:1));
   }
 
-  function typeLog(html,cls='out'){
+  async function printOutput(lines, container, turbo, type='out'){
+    for(const line of lines){
+      const el=document.createElement('div');el.className=`term-line ${type}`;container.appendChild(el);
+      const spd=turbo?rnd(5,14):rnd(8,18);
+      for(const c of line){el.textContent+=c;await delay(spd);}
+      el.classList.add('show');await delay(rnd(30,90)/(turbo?2:1));
+      if(container.children.length>9)container.removeChild(container.firstChild);
+    }
+  }
+
+  function logLine(html, cls='out'){
     const d=document.createElement('div');d.className=`log-line ${cls}`;d.innerHTML=html;
     logContent.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));
     if(logContent.children.length>3)logContent.removeChild(logContent.firstChild);
@@ -1666,84 +1652,79 @@
     const t=document.createElement('div');t.className=`toast ${type}`;
     t.innerHTML=`<span class="t-title">${title}</span><span class="t-desc">${desc}</span>`;
     toastC.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
-    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},3200);
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},3000);
   }
 
-  // Operaciones reales de ciberseguridad
+  // Realistic Ops Data
   const ops=[
-    {cmd:"nmap -sS -sV -p- --min-rate 5000 10.12.0.0/24",term:["[+] Nmap 7.94 initialized","[*] Scanning 254 hosts [65535 ports]","[+] Open: 53,88,389,445,636,3389/tcp","[*] OS: Windows Server 2022 (98%)"],log:"[+] DC01.corp.local identified | 6 ports open",toast:["HOST DISCOVERY","14 hosts alive"],type:"info"},
-    {cmd:"bloodhound-python -c All -d corp.local --zip",term:["[+] LDAP connected: 10.12.0.10:389","[*] Users: 1,842 | Groups: 312 | Computers: 89","[+] Shortest path to DA: 3 hops","[*] ACL abuse: GenericWrite on svc_backup"],log:"[+] BloodHound graph ingested",toast:["AD ENUM","3 paths to DA mapped"],type:"ok"},
-    {cmd:"impacket-GetUserSPNs -request svc_backup",term:["[+] TGS requested for svc_backup","[*] Hash captured: $krb5tgs$23$...","[+] Cracked via hashcat -m 13100","[*] Password: Summer2024!"],log:"[+] svc_backup credentials valid",toast:["KERBEROASTING","TGS cracked"],type:"warn"},
-    {cmd:"proxychains psexec.py @10.12.0.14 -codec UTF-8",term:["[!] SMB session to 10.12.0.14:445","[*] Authenticated as svc_backup","[+] Remote shell: NT AUTHORITY\\SYSTEM","[*] Host: WSUS01 | Uptime: 42d"],log:"[+] Lateral movement successful",toast:["LATERAL MOVE","WSUS01 | SYSTEM"],type:"warn"},
-    {cmd:"sqlmap -u 'search?q=1' --risk=3 --level=5",term:["[*] Testing boolean-based blind SQLi","[+] DBMS: PostgreSQL 14.2 (Debian)","[*] Table: public.users (4,281 rows)","[+] Exported: /tmp/sqlmap/users.csv"],log:"[+] SQLi confirmed | 4.2k rows dumped",toast:["SQL INJECTION","PostgreSQL 14.2"],type:"warn"},
-    {cmd:"az ad sp list --query '[?contains(appDisplayName,\"Prod\")]'",term:["[+] Graph API query executed","[*] Service principals: 47 found","[!] Overprivileged Managed Identity","[*] Role: Storage Blob Data Contributor"],log:"[+] Azure MI overprivileged",toast:["CLOUD ENUM","Azure alert"],type:"info"},
-    {cmd:"sudo ./c2_server --port 443 --aes256-gcm --jitter 20",term:["[*] Listener: 0.0.0.0:443 (HTTPS)","[+] Beacon: WIN-SRV01 (10.12.0.18)","[*] Sleep: 60s | Jitter: 20%","[+] Staging: reflective DLL injection"],log:"[+] C2 established | encrypted",toast:["C2 ONLINE","Beacon active"],type:"ok"},
-    {cmd:"pandoc findings.md -o report_$(date +%Y%m%d).pdf",term:["[+] Compiling markdown to PDF","[*] Sections: Exec, Tech, IOCs, ATT&CK","[+] ATT&CK mapping: 12 techniques","[✓] SHA256: a3f2b8c1...9c1b"],log:"[+] Report exported | 2.4MB",toast:["REPORT","PDF compiled"],type:"ok"}
+    {cmd:"nmap -sS -sV -p- --min-rate 5000 -oA recon/dc01 10.12.0.0/24",out:["[+] Nmap 7.94SVN ( https://nmap.org )","[*] Scanning 254 hosts [65535 ports/host]","[+] Discovered open port 445/tcp on 10.12.0.10","[*] OS: Windows Server 2022 (98% match)","[+] XML/Normal saved to recon/dc01.nmap"],log:"[+] DC01.corp.local | 6 open ports",type:"info"},
+    {cmd:"bloodhound-python -c All -d corp.local -ns 10.12.0.10 --zip",out:["[+] Connecting to LDAP: 10.12.0.10:389","[*] Users: 1,842 | Groups: 312 | Computers: 89","[+] Shortest path to DA: 3 hops","[*] ACL Abuse: GenericWrite on svc_backup","[+] Saved: 20250115142303_bloodhound.zip"],log:"[+] Graph ingested | 3 DA paths",type:"ok"},
+    {cmd:"impacket-GetUserSPNs -request corp.local/svc_backup -dc-ip 10.12.0.10",out:["[+] Requesting TGS for svc_backup","[*] Hash: $krb5tgs$23$*svc_backup$CORP.LOCAL$...","[+] Cracked via hashcat -m 13100","[*] Password: Summer2024!","[*] Valid credentials confirmed"],log:"[+] svc_backup hash cracked",type:"warn"},
+    {cmd:"proxychains -q psexec.py corp.local/svc_backup@10.12.0.14",out:["[!] SMB session established: 10.12.0.14:445","[*] Authenticating as svc_backup:Summer2024!","[+] Remote shell obtained: NT AUTHORITY\\SYSTEM","[*] Host: WSUS01 | Uptime: 42d 8h 12m","[+] Uploading payload to C:\\Windows\\Temp\\"],log:"[+] Lateral movement success | SYSTEM",type:"warn"},
+    {cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5",out:["[*] Testing boolean-based blind SQLi","[+] DBMS: PostgreSQL 14.2 (Debian)","[*] Table: public.users (4,281 rows)","[+] Exported to: /tmp/sqlmap/corp.local/users.csv","[*] Columns: id, username, email, password_hash"],log:"[+] SQLi confirmed | 4.2k rows",type:"warn"},
+    {cmd:"gobuster dir -u https://api.target.io -w /usr/share/seclists/Discovery/Web-Content/common.txt",out:["[+] Gobuster v3.10","[*] Wordlist: common.txt","[*] Status: 200 | Size: 1842 | Url: /v1/admin","[!] Status: 403 | Bypassed via X-Forwarded-For: 127.0.0.1","[+] IDOR vulnerability detected at /v1/users/{id}"],log:"[+] Web vulns found | IDOR/403",type:"warn"},
+    {cmd:"hashcat -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt --force",out:["[+] Loading hashcat v6.2.6...","[*] Mode: NTLM (1000)","[+] Speed: 42.1 GH/s | Est: 14m 22s","[!] admin123         (svc_backup)","[!] Password1!       (da_admin)"],log:"[+] 2/3 NTLM cracked | rockyou",type:"ok"},
+    {cmd:"msfconsole -q -x 'use exploit/multi/handler; set LHOST 0.0.0.0; set LPORT 4444; exploit -j'",out:["[*] Started reverse TCP handler on 0.0.0.0:4444","[*] Sending stage (2.47MB) to 10.12.0.18","[+] Meterpreter session 1 opened (0.0.0.0:4444)","[*] sysinfo: Windows 10 (19045) x64","[+] Privilege: NT AUTHORITY\\SYSTEM"],log:"[+] C2 established | Meterpreter",type:"ok"},
+    {cmd:"john --wordlist=/usr/share/wordlists/rockyou.txt --format=Raw-SHA256 hashes.txt",out:["Using default input encoding: UTF-8","Loaded 3 password hashes with 3 different salts","[!] admin123         (svc_backup)","[!] Summer2024!      (app_svc)","1 of 3 completed | 00:00:08 ETA"],log:"[+] 2 hashes cracked | SHA256",type:"ok"},
+    {cmd:"pandoc findings.md -o report_$(date +%Y%m%d).pdf --template=cybersec -V geometry:margin=1in",out:["[+] Compiling markdown to PDF...","[*] Sections: Exec, Tech, IOCs, ATT&CK","[+] ATT&CK mapping: 12 techniques","[*] SHA256: a3f2b8c1d4e5f6789abc...9c1b","[✓] Exported: report_20250115.pdf (2.4MB)"],log:"[+] Report compiled | SHA256 ok",type:"ok"}
   ];
 
   let opIdx=0,opCount=0,turbo=false,turboT=null,running=false;
 
   async function runOp(){
-    if(!running)return;running=true;
-    core.classList.add('active');
-    statusText.textContent='SCANNING';statusDot.style.background='var(--cyan)';
+    if(isTyping||!running)return;isTyping=true;running=true;
+    core.classList.add('active');statusText.textContent='SCANNING';statusDot.style.background='var(--cyan)';
     
-    const op=ops[opIdx%ops.length];opIdx++;opCount++;
-    opCounter.textContent=`OPS: ${opCount}`;
+    const op=ops[opIdx%ops.length];opIdx++;opCount++;opCounter.textContent=`OPS: ${opCount}`;
     
     if(Math.random()<0.3){core.classList.add('alert');setTimeout(()=>core.classList.remove('alert'),2000);}
     
-    await typeLine(termContent,`┌──(kali㉿kali)-[~/pentest]`,'cmd',18);
-    await new Promise(r=>setTimeout(r,100));
-    await typeLine(termContent,`└─$ ${op.cmd}`,'cmd',32);
+    await typeCommand(op.cmd,turbo);
+    cmdPreview.textContent='';
+    await printOutput(op.out,termContent,turbo);
     
-    for(const line of op.term){
-      const cls=line.includes('[+]')?'ok':line.includes('[!]')?'warn':'out';
-      await typeLine(termContent,line,cls,20);
-    }
+    logLine(`<span class="cmd">${op.cmd}</span>`);
+    await delay(100);
+    logLine(`<span class="${op.type==='warn'?'warn':'ok'}">${op.log}</span>`);
     
-    typeLog(`<span class="cmd">${op.cmd}</span>`);
-    await new Promise(r=>setTimeout(r,140));
-    typeLog(`<span class="${op.type==='warn'?'warn':'ok'}">${op.log}</span>`);
-    
-    if(Math.random()<0.65)toast(op.toast[0],op.toast[1],op.type);
+    if(Math.random()<0.65)toast(op.type==='ok'?'EXECUTED':'ALERT',op.type==='warn'?'Threshold exceeded':'Task complete',op.type==='warn'?'warn':'ok');
     
     if(opCount%Math.floor(4+Math.random()*2)===0){
       setTimeout(()=>{
         toast('[!] IOC DETECTED','Lateral movement | Sigma: T1021.002','warn');
-        core.classList.add('alert');setTimeout(()=>core.classList.remove('alert'),1600);
-      },350);
+        core.classList.add('alert');setTimeout(()=>core.classList.remove('alert'),1500);
+      },300);
     }
     
-    running=false;setTimeout(runOp,550+Math.random()*800);
+    running=false;isTyping=false;
+    setTimeout(runOp,rnd(400,800)/(turbo?2:1));
   }
 
-  // Click en lobo = Alerta roja + turbo
-  document.querySelector('.wolf-panel').addEventListener('click',e=>{
+  // Wolf click interaction
+  document.getElementById('wolf-panel').addEventListener('click',e=>{
     e.stopPropagation();if(turbo)return;turbo=true;
     lidL.style.opacity='1';lidR.style.opacity='1';
     pL.setAttribute('r','1');pR.setAttribute('r','1');
-    setTimeout(()=>{lidL.style.opacity='0';lidR.style.opacity='0';pL.setAttribute('r','3.2');pR.setAttribute('r','3.2');},200);
+    setTimeout(()=>{lidL.style.opacity='0';lidR.style.opacity='0';pL.setAttribute('r','3');pR.setAttribute('r','3');},180);
     core.classList.add('alert');statusText.textContent='ALERT';statusDot.style.background='var(--warn)';
-    typeLine(termContent,`[!] FOCUS MODE ACTIVATED`,'warn',16);
-    typeLog(`<span class="warn">[!] Manual scan triggered</span>`);
+    typeCommand(`[!] FOCUS MODE ACTIVATED`,turbo);
+    logLine(`<span class="warn">[!] Manual scan triggered</span>`);
     toast('FOCUS MODE','Turbo scan x2 | Priority targets','warn');
     clearTimeout(turboT);turboT=setTimeout(()=>{
       turbo=false;core.classList.remove('alert');statusText.textContent='MONITORING';statusDot.style.background='var(--cyan)';
-      typeLine(termContent,`[~] Normal speed resumed`,'info',16);
-    },2400);
+      typeCommand(`[~] Normal speed resumed`,false);
+    },2200);
   });
 
   // Init
   setTimeout(()=>{
     core.classList.add('visible');
-    typeLine(termContent,`[+] Kali Linux 2024.4 initialized`,'ok',22);
-    typeLog(`<span class="ok">[+] System online</span>`);
-    setTimeout(()=>toast('SYSTEM READY','Pentest framework loaded','ok'),350);
-    runOp();
-  },120);
+    statusText.textContent='INIT';
+    setTimeout(()=>{statusText.textContent='MONITORING';statusDot.style.background='var(--cyan)';},800);
+    running=true;runOp();
+  },100);
 
-  window.addEventListener('beforeunload',()=>clearTimeout(turboT));
+  window.addEventListener('beforeunload',()=>{clearTimeout(turboT);});
 })();
 </script>
   
