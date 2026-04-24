@@ -1414,165 +1414,137 @@
 
 
   
-<div id="cyber-wolf-ops">
-  <div class="ops-header">
+<div id="cyber-terminal-widget">
+  <div class="widget-header">
     <div class="header-left">
-      <span class="ops-badge"></span>
-      <span class="ops-title">KALI-OPS // THREAT-INTEL</span>
+      <span class="status-dot" id="sys-dot"></span>
+      <span class="sys-title">kali@zyanetralys:~/pentest</span>
     </div>
-    <div class="header-controls">
-      <span class="meta-info">OPS: <b id="op-count">0</b> | ATKS: <b id="atk-count" style="color:var(--warn)">0</b></span>
-      <button class="ctrl-btn" id="min-btn" title="Minimizar">−</button>
-      <button class="ctrl-btn" id="close-btn" title="Ocultar">×</button>
+    <div class="header-meta">
+      <span class="meta-tag">PID: <b id="pid-val">8842</b></span>
+      <span class="meta-tag">MEM: <b id="mem-val">142MB</b></span>
+      <button class="ctrl-btn min-btn" id="min-btn" title="Minimizar">_</button>
+      <button class="ctrl-btn close-btn" id="close-btn" title="Ocultar">×</button>
     </div>
   </div>
 
-  <div class="ops-body" id="ops-body">
-    <div class="terminal-panel">
-      <div class="term-header">
-        <span class="term-path">┌──(kali㉿kali)-[~/pentest/ops]</span>
-        <span class="term-status"></span>
-      </div>
-      <div class="term-content" id="term-content"></div>
-      <div class="term-footer">
-        <span class="prompt">└─$</span><span id="cmd-preview"></span><span class="cursor">█</span>
+  <div class="widget-body" id="widget-body">
+    <div class="terminal-container">
+      <div class="term-output" id="term-output"></div>
+      <div class="term-input">
+        <span class="prompt">└─$</span>
+        <span id="cmd-preview"></span>
+        <span class="cursor">█</span>
       </div>
     </div>
 
-    <div class="wolf-panel" id="wolf-panel">
-      <svg id="wolf-svg" viewBox="0 0 280 280" width="130" height="130">
+    <div class="alert-feed" id="alert-feed"></div>
+
+    <div class="wolf-container" id="wolf-trigger">
+      <svg id="wolf-svg" viewBox="0 0 260 260" width="110" height="110">
         <defs>
           <linearGradient id="wolfFur" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0a0f1a"/><stop offset="40%" stop-color="#1a2332"/><stop offset="80%" stop-color="#2a354b"/><stop offset="100%" stop-color="#050810"/>
+            <stop offset="0%" stop-color="#080c14"/><stop offset="40%" stop-color="#151d2c"/><stop offset="100%" stop-color="#04060a"/>
           </linearGradient>
-          <radialGradient id="eyeGlow" cx="50%" cy="50%" r="70%">
-            <stop offset="0%" stop-color="#00f0ff"/><stop offset="50%" stop-color="#0088aa"/><stop offset="100%" stop-color="#003f5c"/>
+          <radialGradient id="eyeNormal" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#00f0ff"/><stop offset="60%" stop-color="#007788"/><stop offset="100%" stop-color="#002f38"/>
           </radialGradient>
-          <radialGradient id="eyeRed" cx="50%" cy="50%" r="70%">
-            <stop offset="0%" stop-color="#ff3333"/><stop offset="50%" stop-color="#b30000"/><stop offset="100%" stop-color="#4d0000"/>
+          <radialGradient id="eyeAlert" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#ff3333"/><stop offset="60%" stop-color="#aa0000"/><stop offset="100%" stop-color="#3d0000"/>
           </radialGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.7"/></filter>
+          <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
-        <circle cx="140" cy="140" r="120" fill="none" stroke="#00f0ff" stroke-width="0.6" stroke-dasharray="2 7" opacity="0.2">
-          <animateTransform attributeName="transform" type="rotate" from="0 140 140" to="360 140 140" dur="18s" repeatCount="indefinite"/>
+        <circle cx="130" cy="130" r="115" fill="none" stroke="#00f0ff" stroke-width="0.5" stroke-dasharray="2 6" opacity="0.2">
+          <animateTransform attributeName="transform" type="rotate" from="0 130 130" to="360 130 130" dur="22s" repeatCount="indefinite"/>
         </circle>
-        <path d="M90,98 L72,34 L104,78 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
-        <path d="M190,98 L208,34 L176,78 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
-        <path d="M100,88 C118,74 162,74 180,88 C198,102 194,136 172,158 C150,180 130,180 108,158 C86,136 82,102 100,88 Z" fill="url(#wolfFur)" filter="url(#shadow)"/>
-        <g id="eyeL"><ellipse cx="116" cy="124" rx="7.5" ry="4.8" fill="url(#eyeGlow)" class="eye-fill" filter="url(#glow)"/><circle id="pupilL" cx="116" cy="124" r="2.8" fill="#050810"/><circle cx="117.5" cy="123" r="0.9" fill="#fff" opacity="0.9"/></g>
-        <g id="eyeR"><ellipse cx="164" cy="124" rx="7.5" ry="4.8" fill="url(#eyeGlow)" class="eye-fill" filter="url(#glow)"/><circle id="pupilR" cx="164" cy="124" r="2.8" fill="#050810"/><circle cx="165.5" cy="123" r="0.9" fill="#fff" opacity="0.9"/></g>
-        <path d="M128,142 L152,142 L140,154 Z" fill="#050810"/>
-        <path d="M116,158 Q140,170 164,158" stroke="#151e2b" fill="none" stroke-width="0.8" opacity="0.6"/>
-        <g stroke="#00f0ff" stroke-width="0.8" fill="none" opacity="0.45" stroke-dasharray="2 3">
-          <path d="M140,80 L140,46"><animate attributeName="opacity" values="0.45;0.8;0.45" dur="1.8s" repeatCount="indefinite"/></path>
-          <path d="M126,104 L90,80"/>
-          <path d="M154,104 L190,80"/>
+        <path d="M88,96 L72,34 L102,78 Z" fill="url(#wolfFur)"/>
+        <path d="M172,96 L188,34 L158,78 Z" fill="url(#wolfFur)"/>
+        <path d="M100,84 C116,72 144,72 160,84 C176,96 172,128 152,148 C132,168 128,168 108,148 C88,128 84,96 100,84 Z" fill="url(#wolfFur)"/>
+        <g id="eyeL" style="transform-origin: 114px 120px;"><ellipse cx="114" cy="120" rx="7" ry="4.5" fill="url(#eyeNormal)" class="eye-glow" filter="url(#glow)"/><circle id="pupilL" cx="114" cy="120" r="2.6" fill="#04060a"/><circle cx="115.4" cy="119" r="0.8" fill="#fff" opacity="0.85"/></g>
+        <g id="eyeR" style="transform-origin: 146px 120px;"><ellipse cx="146" cy="120" rx="7" ry="4.5" fill="url(#eyeNormal)" class="eye-glow" filter="url(#glow)"/><circle id="pupilR" cx="146" cy="120" r="2.6" fill="#04060a"/><circle cx="147.4" cy="119" r="0.8" fill="#fff" opacity="0.85"/></g>
+        <path d="M126,138 L134,138 L130,148 Z" fill="#04060a"/>
+        <path d="M118,152 Q130,162 142,152" stroke="#151d2c" fill="none" stroke-width="0.7" opacity="0.6"/>
+        <g stroke="#00f0ff" stroke-width="0.6" fill="none" opacity="0.4" stroke-dasharray="2 3">
+          <path d="M130,78 L130,46"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.8s" repeatCount="indefinite"/></path>
+          <path d="M118,98 L88,76"/>
+          <path d="M142,98 L172,76"/>
         </g>
-        <circle cx="140" cy="44" r="2.4" fill="#00f0ff" filter="url(#glow)"/>
+        <circle cx="130" cy="44" r="2.2" fill="#00f0ff" filter="url(#glow)"/>
       </svg>
       <div class="wolf-status">
-        <div class="status-dot" id="status-dot"></div>
-        <span class="status-text" id="status-text">MONITOR</span>
-        <span class="op-counter" id="op-counter">OPS: 0</span>
+        <span class="status-indicator" id="wolf-ind"></span>
+        <span id="wolf-text">IDLE</span>
       </div>
-    </div>
-
-    <div class="log-panel">
-      <div class="log-header"><span class="log-title">ALERTS</span><span class="log-dot"></span></div>
-      <div class="log-content" id="log-content"></div>
     </div>
   </div>
 </div>
 
 <div id="toast-layer"></div>
-<canvas id="bg-particles" style="position:fixed;inset:0;pointer-events:none;z-index:-1;"></canvas>
 
 <style>
-:root{--bg:#050810;--panel:rgba(6,10,18,.96);--border:#151d2d;--cyan:#00f0ff;--green:#00ff41;--warn:#ff3333;--ok:#bfff00;--text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono',Consolas,monospace}
-#cyber-wolf-ops{position:fixed;bottom:40px;right:14px;z-index:99999;font-family:var(--mono);background:var(--panel);border:1px solid var(--border);border-radius:9px;overflow:hidden;backdrop-filter:blur(14px);box-shadow:0 8px 26px rgba(0,0,0,.6);width:280px;transition:all .3s cubic-bezier(.4,0,.2,1);opacity:0;transform:translateY(10px)}
-#cyber-wolf-ops.visible{opacity:1;transform:translateY(0)}
-#cyber-wolf-ops.minimized{width:42px;height:42px;border-radius:21px;bottom:40px}
-#cyber-wolf-ops.minimized .ops-body{display:none}
-#cyber-wolf-ops.minimized .ops-header{padding:0;justify-content:center}
-#cyber-wolf-ops.hidden{opacity:0;pointer-events:none;transform:translateY(60px)}
-.ops-header{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;background:linear-gradient(90deg,rgba(0,240,255,.1),rgba(0,180,216,.05));border-bottom:1px solid var(--border);font-size:6.5px}
-.header-left{display:flex;align-items:center;gap:5px}
-.ops-badge{width:4px;height:4px;background:var(--green);border-radius:50%;animation:pulse 1.4s infinite;box-shadow:0 0 4px var(--green)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.ops-title{color:var(--cyan);font-weight:700;letter-spacing:.6px}
-.header-controls{display:flex;align-items:center;gap:6px}
-.meta-info{color:var(--text2);opacity:.8}
-.meta-info b{color:var(--cyan)}
-.ctrl-btn{width:14px;height:14px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border);color:var(--text2);cursor:pointer;border-radius:3px;font-size:9px;transition:all .15s;line-height:1}
-.ctrl-btn:hover{background:var(--border);color:var(--cyan)}
-.ctrl-btn:last-child:hover{color:var(--warn);border-color:var(--warn)}
-.ops-body{display:flex;flex-direction:column;gap:6px;padding:6px}
-.terminal-panel{background:rgba(2,5,10,.92);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:relative}
-.terminal-panel::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);pointer-events:none;opacity:.5}
-.term-header{display:flex;justify-content:space-between;align-items:center;padding:3px 6px;background:rgba(6,12,24,.9);font-size:6px}
-.term-path{color:var(--green);font-weight:600}
-.term-status{width:3px;height:3px;background:var(--cyan);border-radius:50%;animation:pulse 1.3s infinite}
-.term-content{height:88px;padding:4px 5px;overflow:hidden;display:flex;flex-direction:column;gap:1.5px;font-size:6.8px;line-height:1.2;color:var(--text2)}
-.term-line{opacity:0;transform:translateX(-2px);transition:all .07s;white-space:pre-wrap;word-break:break-all}
-.term-line.show{opacity:1;transform:translateX(0)}
-.term-line.cmd{color:var(--cyan);font-weight:500}
-.term-line.out{color:var(--text2);padding-left:6px}
-.term-line.warn{color:var(--warn);font-weight:600}
-.term-line.ok{color:var(--ok);font-weight:600}
-.term-line.info{color:#60a5fa}
-.term-line.sys{color:#94a3b8;font-style:italic}
-.term-footer{display:flex;align-items:center;gap:3px;padding:2px 5px;border-top:1px solid var(--border);background:rgba(0,240,255,.03);font-size:6.5px;min-height:15px}
+:root{--bg:#03050a;--term:#050a12;--border:#0f1724;--cyan:#00f0ff;--cyan2:#00b4d8;--green:#00ff41;--warn:#ff3333;--ok:#bfff00;--text:#c9d1d9;--text2:#64748b;--mono:'JetBrains Mono','Fira Code','Consolas',monospace}
+#cyber-terminal-widget{position:fixed;bottom:55px;right:18px;z-index:99999;font-family:var(--mono);background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.6);width:310px;transition:all .25s cubic-bezier(.4,0,.2,1);opacity:0;transform:translateY(8px)}
+#cyber-terminal-widget.visible{opacity:1;transform:translateY(0)}
+#cyber-terminal-widget.minimized{width:40px;height:40px;border-radius:20px;bottom:55px}
+#cyber-terminal-widget.minimized .widget-body{display:none}
+#cyber-terminal-widget.hidden{opacity:0;pointer-events:none;transform:translateY(50px)}
+.widget-header{display:flex;justify-content:space-between;align-items:center;padding:4px 6px;background:var(--term);border-bottom:1px solid var(--border);font-size:6.5px}
+.header-left{display:flex;align-items:center;gap:4px}
+.status-dot{width:4px;height:4px;background:var(--green);border-radius:50%;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.4}}
+.sys-title{color:var(--cyan);font-weight:700;letter-spacing:.4px}
+.header-meta{display:flex;align-items:center;gap:4px}
+.meta-tag{color:var(--text2);opacity:.7}
+.meta-tag b{color:var(--text)}
+.ctrl-btn{width:12px;height:12px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--text2);cursor:pointer;font-size:10px;transition:color .15s;line-height:1}
+.ctrl-btn:hover{color:var(--cyan)}
+.close-btn:hover{color:var(--warn)}
+.widget-body{display:flex;flex-direction:column;gap:5px;padding:5px;background:var(--bg)}
+.terminal-container{background:var(--term);border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative}
+.terminal-container::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 2px,rgba(0,0,0,.12) 4px);pointer-events:none;opacity:.5}
+.term-output{height:85px;padding:4px 5px;overflow-y:auto;font-size:6.8px;line-height:1.3;color:var(--text2);scrollbar-width:none}
+.term-output::-webkit-scrollbar{display:none}
+.out-line{opacity:0;transform:translateX(-2px);transition:opacity .06s,transform .06s;white-space:pre-wrap;word-break:break-all}
+.out-line.show{opacity:1;transform:translateX(0)}
+.out-line.ok{color:var(--ok)}
+.out-line.warn{color:var(--warn)}
+.out-line.info{color:var(--cyan2)}
+.term-input{display:flex;align-items:center;gap:3px;padding:2px 5px;border-top:1px solid var(--border);background:rgba(0,240,255,.02);font-size:6.5px;min-height:14px}
 .prompt{color:var(--green);font-weight:600}
-.cursor{animation:blink .9s step-end infinite;color:var(--cyan)}
-@keyframes blink{50%{opacity:0}}
-.wolf-panel{display:flex;flex-direction:column;align-items:center;gap:4px;background:rgba(8,12,20,.88);border:1px solid var(--border);border-radius:6px;padding:5px}
-#wolf-svg{transition:filter .2s,transform .2s;display:block}
-#cyber-wolf-ops:hover #wolf-svg{transform:scale(1.04)}
-#cyber-wolf-ops.active #wolf-svg{filter:drop-shadow(0 0 7px var(--cyan))}
-#cyber-wolf-ops.alert #wolf-svg{filter:drop-shadow(0 0 7px var(--warn))}
-#cyber-wolf-ops.alert .eye-fill{fill:url(#eyeRed)!important}
+.cursor{animation:blink 1s step-end infinite;color:var(--cyan)}
+.alert-feed{background:rgba(3,6,12,.9);border:1px solid var(--border);border-radius:4px;padding:3px 4px;height:32px;overflow:hidden;font-size:6.2px;line-height:1.2;color:var(--text2);display:flex;flex-direction:column;justify-content:flex-end}
+.alert-line{opacity:0;transform:translateY(2px);transition:all .08s}
+.alert-line.show{opacity:1;transform:translateY(0)}
+.alert-line.crit{color:var(--warn)}
+.alert-line.high{color:var(--ok)}
+.wolf-container{display:flex;align-items:center;justify-content:center;gap:4px;background:var(--term);border:1px solid var(--border);border-radius:4px;padding:4px}
+#wolf-svg{transition:filter .2s,transform .2s}
+#cyber-terminal-widget:hover #wolf-svg{transform:scale(1.03)}
+#cyber-terminal-widget.alert #wolf-svg{filter:drop-shadow(0 0 6px var(--warn))}
+#cyber-terminal-widget.alert .eye-glow{fill:url(#eyeAlert)!important}
 .wolf-status{display:flex;align-items:center;gap:3px;font-size:5.5px;color:var(--text2)}
-.status-dot{width:2.5px;height:2.5px;background:var(--cyan);border-radius:50%;animation:pulse 1.4s infinite}
-.status-text{font-weight:600}
-.op-counter{color:var(--cyan);font-weight:700;margin-left:auto}
-.log-panel{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.log-header{display:flex;align-items:center;gap:3px;padding:2px 5px;font-size:5.5px;color:var(--text2);border-bottom:1px solid var(--border)}
-.log-title{flex:1;text-transform:uppercase;letter-spacing:.4px}
-.log-dot{width:2px;height:2px;background:var(--cyan);border-radius:50%;animation:pulse 1.5s infinite}
-.log-content{height:38px;padding:3px 4px;color:var(--text);font-size:6.5px;line-height:1.15;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-.log-line{opacity:0;transform:translateY(1px);transition:all .08s}
-.log-line.show{opacity:1;transform:translateY(0)}
-.log-line.cmd{color:var(--cyan);font-weight:500}
-.log-line.warn{color:var(--warn);font-weight:600}
-.log-line.ok{color:var(--ok);font-weight:600}
-.log-line.info{color:#60a5fa}
-#toast-layer{position:fixed;top:75px;right:14px;z-index:100000;display:flex;flex-direction:column;gap:2px;pointer-events:none;max-width:220px}
-.toast{background:var(--panel);border-left:2px solid var(--cyan);color:var(--text);padding:4px 6px;border-radius:4px;box-shadow:0 3px 12px rgba(0,0,0,.5);transform:translateX(120%);transition:transform .18s cubic-bezier(.4,0,.2,1);font-size:7px;line-height:1.15;border:1px solid var(--border)}
+.status-indicator{width:3px;height:3px;background:var(--cyan);border-radius:50%;animation:blink 1.3s infinite}
+#toast-layer{position:fixed;top:75px;right:18px;z-index:100000;display:flex;flex-direction:column;gap:3px;pointer-events:none;max-width:220px}
+.toast{background:var(--term);border-left:2px solid var(--cyan);color:var(--text);padding:4px 6px;border-radius:3px;box-shadow:0 3px 10px rgba(0,0,0,.5);transform:translateX(120%);transition:transform .18s cubic-bezier(.4,0,.2,1);font-size:7px;line-height:1.15;border:1px solid var(--border)}
 .toast.show{transform:translateX(0)}
-.toast.warn{border-color:var(--warn)}.toast.ok{border-color:var(--ok)}
+.toast.warn{border-color:var(--warn)}
+.toast.ok{border-color:var(--ok)}
 .toast .t-title{font-weight:700;display:block;margin-bottom:1px}
 .toast .t-desc{color:var(--text2);font-size:6.5px;opacity:.9}
-@media(max-width:1024px){#cyber-wolf-ops{width:250px;bottom:35px;right:12px}}
-@media(max-width:768px){#cyber-wolf-ops{display:none}}
+@media(max-width:1024px){#cyber-terminal-widget{width:280px;bottom:50px;right:14px}}
+@media(max-width:768px){#cyber-terminal-widget{display:none}}
 </style>
 
 <script>
 (()=>{
-  if(!document.getElementById('cyber-wolf-ops')) return;
-  const core=document.getElementById('cyber-wolf-ops'),body=document.getElementById('ops-body'),
-        termContent=document.getElementById('term-content'),cmdPreview=document.getElementById('cmd-preview'),
-        logContent=document.getElementById('log-content'),svg=document.getElementById('wolf-svg'),
+  if(!document.getElementById('cyber-terminal-widget')) return;
+  const core=document.getElementById('cyber-terminal-widget'),body=document.getElementById('widget-body'),
+        termOut=document.getElementById('term-output'),cmdPrev=document.getElementById('cmd-preview'),
+        alertFeed=document.getElementById('alert-feed'),wolfTrig=document.getElementById('wolf-trigger'),
         pL=document.getElementById('pupilL'),pR=document.getElementById('pupilR'),
-        statusDot=document.getElementById('status-dot'),statusText=document.getElementById('status-text'),
-        opCounter=document.getElementById('op-counter'),opCountEl=document.getElementById('op-count'),
-        atkCountEl=document.getElementById('atk-count'),toastC=document.getElementById('toast-layer'),
-        canvas=document.getElementById('bg-particles'),ctx=canvas.getContext('2d');
-
-  function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
-  resize();window.addEventListener('resize',resize);
-  const pts=Array.from({length:20},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()+.2,sx:(Math.random()-.5)*.15,sy:(Math.random()-.5)*.15,a:Math.random()*.3}));
-  (function drawPts(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.sx;p.y+=p.sy;if(p.x<0||p.x>canvas.width)p.sx*=-1;if(p.y<0||p.y>canvas.height)p.sy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,240,255,${Math.sin(p.a*2)*.2+.1})`;ctx.fill()});requestAnimationFrame(drawPts)})();
+        wolfInd=document.getElementById('wolf-ind'),wolfTxt=document.getElementById('wolf-text'),
+        toastC=document.getElementById('toast-layer'),sysDot=document.getElementById('sys-dot'),
+        pidVal=document.getElementById('pid-val'),memVal=document.getElementById('mem-val');
 
   // Controls
   document.getElementById('min-btn').onclick=e=>{e.stopPropagation();core.classList.toggle('minimized')};
@@ -1586,123 +1558,178 @@
   // Eye tracking
   let tx=0,ty=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
-  (function track(){const r=svg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;cx+=(tx-cx)*.05;cy+=(ty-cy)*.05;const dx=Math.min(3,Math.max(-3,(cx-sx)/36)),dy=Math.min(3,Math.max(-3,(cy-sy)/36));pL.setAttribute('transform',`translate(${dx},${dy})`);pR.setAttribute('transform',`translate(${dx},${dy})`);requestAnimationFrame(track)})();
+  (function track(){const r=document.getElementById('wolf-svg').getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;cx+=(tx-cx)*.05;cy+=(ty-cy)*.05;const dx=Math.min(2.8,Math.max(-2.8,(cx-sx)/35)),dy=Math.min(2.8,Math.max(-2.8,(cy-sy)/35));pL.setAttribute('transform',`translate(${dx},${dy})`);pR.setAttribute('transform',`translate(${dx},${dy})`);requestAnimationFrame(track)})();
 
-  // Simulation Engine
+  // Utils
   const delay=ms=>new Promise(r=>setTimeout(r,ms));
   const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1)+a);
-  let isTyping=false, opCount=0, atkCount=0, turbo=false, turboT=null;
+  let running=true, turbo=false, turboT=null, busy=false, pid=8842, mem=142;
+
+  // Realistic Tool Outputs
+  const ops=[
+    {cmd:"nmap -sS -sV -O --min-rate 4000 -oN scan.dc01 10.12.0.10",out:[
+      "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-04-25 14:32 CEST",
+      "Nmap scan report for dc01.corp.local (10.12.0.10)",
+      "Host is up (0.0018s latency).",
+      "Not shown: 994 closed tcp ports (reset)",
+      "PORT      STATE SERVICE       VERSION",
+      "53/tcp    open  domain        Microsoft DNS 10.0.20348",
+      "88/tcp    open  kerberos-sec  Microsoft Windows Kerberos",
+      "135/tcp   open  msrpc         Microsoft Windows RPC",
+      "389/tcp   open  ldap          Microsoft Windows Active Directory LDAP",
+      "445/tcp   open  microsoft-ds  Windows Server 2022 Standard 20348",
+      "636/tcp   open  tcpwrapped",
+      "Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows_server_2022",
+      "OS detection performed. Please report any incorrect results at https://nmap.org/submit/",
+      "Nmap done: 1 IP address (1 host up) scanned in 12.43 seconds"
+    ]},
+    {cmd:"bloodhound-python -c All -d corp.local -ns 10.12.0.10 --zip",out:[
+      "INFO: Connecting to LDAP server: 10.12.0.10",
+      "INFO: Found 1 Domain Controller: DC01.corp.local",
+      "INFO: Found 1842 users",
+      "INFO: Found 312 groups",
+      "INFO: Found 89 computers",
+      "INFO: Found 4174 edges",
+      "INFO: Finished enumeration in 0:02:14.321000",
+      "INFO: Compressing output into bloodhound.zip",
+      "INFO: Output saved to /home/kali/tools/pentest/bloodhound_20250425143300.zip"
+    ]},
+    {cmd:"impacket-GetUserSPNs -request corp.local/svc_backup -dc-ip 10.12.0.10",out:[
+      "Impacket v0.11.0 - Copyright Fortra, LLC and its affiliated companies",
+      "Password:",
+      "[-] Kerberos SessionError: KRB_AP_ERR_BAD_INTEGRITY (Ticket integrity check failed)",
+      "[+] Getting TGT for user svc_backup",
+      "$krb5tgs$23$*svc_backup$CORP.LOCAL$CORP.LOCAL/svc_backup*$d7a3...8f2c",
+      "INFO: 1 hashes written. Use hashcat -m 13100 hashes.txt rockyou.txt"
+    ]},
+    {cmd:"proxychains -q psexec.py corp.local/svc_backup@10.12.0.14",out:[
+      "ProxyChains-3.1 (http://proxychains.sf.net)",
+      "|DNS-request| dc01.corp.local",
+      "|S-chain|-<>-127.0.0.1:9050-<><>-10.12.0.14:445-<><>-OK",
+      "[*] Requesting shares on 10.12.0.14.....",
+      "[+] Found writable share ADMIN$",
+      "[*] Uploading payload... [done]",
+      "[*] Creating service UpdateSvc on 10.12.0.14.....",
+      "[*] Starting service UpdateSvc.....",
+      "[!] Command: whoami & net user /domain",
+      "nt authority\\system",
+      "User accounts for \\\\DC01.corp.local",
+      "----------------------------------------------------------",
+      "svc_backup               Administrator            krbtgt",
+      "The command completed with one or more errors."
+    ]},
+    {cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5 --batch",out:[
+      "sqlmap/1.8.2#stable (https://sqlmap.org)",
+      "custom injection marker '*': using default",
+      "custom POST parameter '#1*': using default",
+      "[*] starting @ 14:33:05 /2025-04-25/",
+      "[14:33:05] [INFO] testing connection to the target URL",
+      "[14:33:06] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause'",
+      "[14:33:07] [INFO] testing 'Generic UNION query (NULL) - 1 to 20 columns'",
+      "[14:33:08] [INFO] target URL appears to be injectable",
+      "back-end DBMS: PostgreSQL >= 10.0",
+      "[14:33:09] [INFO] fetching tables for database: 'public'",
+      "[14:33:10] [INFO] retrieved: users",
+      "[14:33:11] [INFO] retrieved: transactions",
+      "[14:33:12] [INFO] fetched data logged to /home/kali/.local/share/sqlmap/output/api.target.io"
+    ]},
+    {cmd:"hashcat -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt --force",out:[
+      "hashcat (v6.2.6) starting",
+      "OpenCL API (OpenCL 3.0 CUDA 12.4.131) - Platform #1 [NVIDIA Corporation]",
+      "* Device #1: NVIDIA GeForce RTX 4060, 7680/8192 MB, 24MCU",
+      "Hashes: 3 digests; 3 unique digests, 3 unique salts",
+      "Minimum password length supported by kernel: 0",
+      "Rule-based attack: 1 rule",
+      "Session..........: hashcat",
+      "Status...........: Running",
+      "Hash.Mode........: 1000 (NTLM)",
+      "Time.Started.....: Fri Apr 25 14:33:02 2025",
+      "Speed.#1.........:  41.2 GH/s (7.25ms)",
+      "Recovered........: 2/3 (66.67%) Digests",
+      "Candidates.#1....: summer2024! -> Password1!",
+      "Started: Fri Apr 25 14:33:02 2025",
+      "Stopped: Fri Apr 25 14:33:47 2025"
+    ]}
+  ];
+
+  const alerts=[
+    {msg:"[2025-04-25 14:33:02] suricata[1422]: [1:2024218:1] ET SCAN Nmap SYN Scan [Classification: Attempted Information Leak] {TCP} 10.12.0.50:53214 -> 10.12.0.10:445",sev:"high"},
+    {msg:"[2025-04-25 14:33:15] kernel: [UFW BLOCK] IN=eth0 OUT= MAC=00:50:56:c0:00:08 SRC=185.220.101.42 DST=192.168.1.10 PROTO=TCP SPT=443 DPT=22 WINDOW=65535",sev:"high"},
+    {msg:"[2025-04-25 14:34:01] wazuh[892]: Alert Level: 10; Rule: 5712 - Windows login failure. src_ip: 10.12.0.14 -> dst_ip: 10.12.0.10",sev:"high"},
+    {msg:"[2025-04-25 14:34:22] suricata[1422]: [1:2009588:3] ET TROJAN Possible C2 Beacon (HTTP POST) {TCP} 10.12.0.18:49152 -> 198.51.100.22:443",sev:"crit"},
+    {msg:"[2025-04-25 14:34:45] fail2ban[401]: [sshd] Found 185.220.101.42 - Ban triggered. Duration: 3600s",sev:"high"},
+    {msg:"[2025-04-25 14:35:10] osquery: process_events: pid=8842 path=/usr/bin/python3 cmdline=sqlmap -u ...",sev:"low"},
+    {msg:"[2025-04-25 14:35:33] systemd[1]: Started session 42 of user kali. (pts/1)",sev:"low"}
+  ];
 
   async function typeCmd(text){
-    cmdPreview.textContent='';
-    const spd=turbo?rnd(8,18):rnd(14,35);
-    for(const c of text){cmdPreview.textContent+=c;await delay(spd);}
-    await delay(rnd(100,250)/(turbo?2:1));
+    cmdPrev.textContent='';
+    const spd=turbo?rnd(8,16):rnd(12,28);
+    for(const c of text){cmdPrev.textContent+=c;await delay(spd);}
+    await delay(rnd(80,200)/(turbo?2:1));
   }
 
-  async function printLines(lines, turbo){
+  async function streamLines(lines){
     for(const line of lines){
-      const el=document.createElement('div');el.className=`term-line ${line.type||'out'}`;termContent.appendChild(el);
-      const spd=turbo?rnd(4,10):rnd(7,15);
-      for(const c of line.text){el.textContent+=c;await delay(spd);}
-      el.classList.add('show');await delay(rnd(20,70)/(turbo?2:1));
-      if(termContent.children.length>8)termContent.removeChild(termContent.firstChild);
+      const el=document.createElement('div');
+      let cls='out-line';
+      if(/open|success|Cracked|Completed|Finished|INFO|Done/.test(line)) cls+=' ok';
+      if(/Error|failed|BLOCK|ALERT|CRIT|TROJAN|Scan/.test(line)) cls+=' warn';
+      if(/Starting|Nmap|Hashcat|Impacket|Bloodhound|Sqlmap/.test(line)) cls+=' info';
+      el.className=cls;termOut.appendChild(el);
+      
+      const spd=turbo?rnd(3,9):rnd(6,12);
+      for(const c of line){el.textContent+=c;await delay(spd);}
+      el.classList.add('show');await delay(rnd(15,60)/(turbo?2:1));
+      if(termOut.children.length>11)termOut.removeChild(termOut.firstChild);
     }
   }
 
-  function logLine(html,cls='info'){
-    const d=document.createElement('div');d.className=`log-line ${cls}`;d.innerHTML=html;
-    logContent.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));
-    if(logContent.children.length>3)logContent.removeChild(logContent.firstChild);
+  function pushAlert(){
+    const a=alerts[rnd(0,alerts.length-1)];
+    const el=document.createElement('div');
+    el.className=`alert-line ${a.sev==='crit'?'crit':'high'}`;el.textContent=a.msg;
+    alertFeed.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));
+    if(alertFeed.children.length>2)alertFeed.removeChild(alertFeed.firstChild);
   }
 
-  function toast(title,desc,type='info'){
+  function toast(title,desc,type='ok'){
     const t=document.createElement('div');t.className=`toast ${type}`;
     t.innerHTML=`<span class="t-title">${title}</span><span class="t-desc">${desc}</span>`;
     toastC.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
-    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},2800);
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},2600);
   }
 
-  // Realistic Operations & Attacks
-  const ops=[
-    {role:"RED",cmd:"nmap -sS -sV -p- --min-rate 5000 -oA recon/dc01 10.12.0.0/24",out:[{text:"[+] Nmap 7.94SVN | Scanning 254 hosts [65535 ports]"},{text:"[+] Open: 53,88,389,445,636,3389/tcp on 10.12.0.10"},{text:"[*] OS: Windows Server 2022 (98%) | Host: DC01.corp.local"},{text:"[+] Saved: recon/dc01.nmap | XML output generated"}],log:"[+] Recon complete | DC01 identified",type:"info"},
-    {role:"RED",cmd:"bloodhound-python -c All -d corp.local -ns 10.12.0.10 --zip",out:[{text:"[+] LDAP connected: 10.12.0.10:389 | Users: 1,842"},{text:"[*] Computing shortest paths to Domain Admin..."},{text:"[+] Path found: 3 hops via WSUS01 | ACL Abuse detected"},{text:"[+] Saved: bloodhound_20250115.zip | Graph ready"}],log:"[+] AD enumerated | 3 DA paths mapped",type:"ok"},
-    {role:"RED",cmd:"impacket-GetUserSPNs -request corp.local/svc_backup",out:[{text:"[+] TGS requested for svc_backup | DC: 10.12.0.10"},{text:"[*] Hash captured: $krb5tgs$23$*svc_backup$CORP.LOCAL$..."},{text:"[!] Cracked: Summer2024! | Testing credentials..."},{text:"[+] Auth successful | Valid svc_backup access"}],log:"[+] Kerberoasted | svc_backup cracked",type:"warn"},
-    {role:"RED",cmd:"proxychains -q psexec.py corp.local/svc_backup@10.12.0.14",out:[{text:"[!] SMB session: 10.12.0.14:445 | Auth: svc_backup"},{text:"[+] Remote shell: NT AUTHORITY\\SYSTEM"},{text:"[*] Host: WSUS01 | Uptime: 42d | Payload uploaded"},{text:"[+] Persistence: Scheduled task created"}],log:"[+] Lateral move success | WSUS01 SYSTEM",type:"warn"},
-    {role:"RED",cmd:"sqlmap -u 'https://api.target.io/search?q=1' --risk=3 --level=5",out:[{text:"[*] Testing boolean-based blind SQLi..."},{text:"[+] DBMS: PostgreSQL 14.2 | Table: public.users"},{text:"[*] Rows dumped: 4,281 | Exported: users.csv"},{text:"[+] Columns: id,username,email,password_hash,role"}],log:"[+] SQLi confirmed | 4.2k rows exfiltrated",type:"warn"},
-    {role:"BLUE",cmd:"suricata -c /etc/suricata/suricata.yaml -i eth0",out:[{text:"[+] Suricata 6.0.11 starting | Rules: 32,402 loaded"},{text:"[*] Monitoring eth0 | Detecting C2, scan, exploit"},{text:"[!] Alert: ET SCAN Nmap SYN (192.168.1.50)"}, {text:"[+] Blocked: 412 attempts | Logging to eve.json"}],log:"[+] Nmap scan detected | 412 blocked",type:"info"},
-    {role:"BLUE",cmd:"fail2ban-client status sshd",out:[{text:"[+] Fail2Ban v1.0.2 | Jail sshd active"},{text:"[*] Currently banned: 14 IPs | Total failed: 2,847"},{text:"[!] Ban triggered: 185.220.101.42 | Duration: 600s"},{text:"[+] Unban queue: 3 IPs | Log rotated"}],log:"[+] Brute force blocked | 14 IPs banned",type:"ok"},
-    {role:"RED",cmd:"hashcat -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt",out:[{text:"[+] Hashcat v6.2.6 | Mode: NTLM (1000)"},{text:"[*] Speed: 42.1 GH/s | Est: 14m | Temp: 72°C"},{text:"[!] admin123         -> svc_backup"},{text:"[!] Password1!       -> da_admin | 2/3 cracked"}],log:"[+] 2 NTLM hashes cracked | rockyou",type:"ok"},
-    {role:"RED",cmd:"msfconsole -q -x 'use exploit/multi/handler; set LHOST 0.0.0.0; exploit -j'",out:[{text:"[*] Reverse TCP handler on 0.0.0.0:4444"},{text:"[+] Meterpreter session 1 opened | 10.12.0.18"},{text:"[*] sysinfo: Windows 10 x64 | Priv: SYSTEM"},{text:"[+] Staging: reflective DLL injection complete"}],log:"[+] C2 established | Meterpreter active",type:"ok"},
-    {role:"BLUE",cmd:"volatility3 -f memdump.raw windows.pslist | grep -i mimikatz",out:[{text:"[+] Volatility3 v2.4 | Image: memdump.raw (8.2GB)"},{text:"[*] PID 4822: mimikatz.exe | User: CORP\\admin"},{text:"[!] PID 1104: Procdump64.exe -ma lsass.exe"},{text:"[+] Alert: Credential dumping detected | IR triggered"}],log:"[!] Forensics alert | Credential dump",type:"warn"}
-  ];
-
-  const attacks=[
-    {src:"CN",tgt:"ES",type:"DDoS",sev:"high",msg:"[!] Volumetric attack: 14Gbps | Source: CN"},
-    {src:"RU",tgt:"US",type:"BruteForce",sev:"med",msg:"[!] SSH brute force: 10.12.0.14:22 | Source: RU"},
-    {src:"IR",tgt:"GB",type:"SQLi",sev:"high",msg:"[!] SQLi attempt: /api/login | Source: IR"},
-    {src:"KP",tgt:"DE",type:"C2",sev:"crit",msg:"[!] C2 beacon detected: 443/TCP | Source: KP"},
-    {src:"BR",tgt:"FR",type:"Phishing",sev:"med",msg:"[!] Phishing campaign: corp.local | Source: BR"}
-  ];
-
-  let opIdx=0, atkIdx=0, running=true;
-
-  async function runSimulation(){
-    if(!running||isTyping)return;isTyping=true;
-    core.classList.add('active');statusText.textContent='SCANNING';statusDot.style.background='var(--cyan)';
+  async function run(){
+    if(!running||busy)return;busy=true;
+    wolfTxt.textContent='ACTIVE';wolfInd.style.background='var(--cyan)';
+    sysDot.style.background='var(--green)';
+    pidVal.textContent=rnd(1000,9999);memVal.textContent=`${rnd(130,180)}MB`;
     
-    const op=ops[opIdx%ops.length];opIdx++;opCount++;
-    opCounter.textContent=`OPS: ${opCount}`;opCountEl.textContent=opCount;
+    const op=ops[rnd(0,ops.length-1)];
+    await typeCmd(op.cmd);cmdPrev.textContent='';
+    await streamLines(op.out);
     
-    if(Math.random()<0.25){core.classList.add('alert');setTimeout(()=>core.classList.remove('alert'),1500);}
+    if(Math.random()<0.6)pushAlert();
+    if(Math.random()<0.5)toast(op.cmd.split(' ')[0].split('/')[0],'Operation complete',op.out.some(l=>l.includes('Error')||l.includes('failed'))?'warn':'ok');
     
-    await typeCmd(op.cmd);cmdPreview.textContent='';
-    await printLines(op.out,turbo);
-    
-    logLine(`<span class="cmd">${op.cmd.split(' ')[0]}</span>`);
-    await delay(60);
-    logLine(`<span class="${op.type}">${op.log}</span>`);
-    
-    if(Math.random()<0.5)toast(op.role==='RED'?'EXEC':'DEFEND',op.log.split(' | ')[0],op.type==='warn'?'warn':'ok');
-    
-    // Random attack simulation
-    if(Math.random()<0.3){
-      const atk=attacks[atkIdx%attacks.length];atkIdx++;atkCount++;atkCountEl.textContent=atkCount;
-      statusText.textContent='ALERT';statusDot.style.background='var(--warn)';
-      core.classList.add('alert');
-      logLine(`<span class="warn">${atk.msg}</span>`);
-      toast('THREAT',`Source: ${atk.src} | ${atk.type}`, 'warn');
-      await delay(rnd(300,600));
-      core.classList.remove('alert');
-    }
-    
-    isTyping=false;running=true;
-    setTimeout(runSimulation,rnd(350,700)/(turbo?2:1));
+    busy=false;running=true;
+    await delay(rnd(200,500)/(turbo?2:1));run();
   }
 
-  // Wolf interaction
-  document.getElementById('wolf-panel').addEventListener('click',e=>{
+  wolfTrig.addEventListener('click',e=>{
     e.stopPropagation();if(turbo)return;turbo=true;
-    statusText.textContent='FOCUS';statusDot.style.background='var(--warn)';
-    core.classList.add('alert');
-    typeCmd('[!] FOCUS MODE ACTIVATED');
-    logLine('<span class="warn">[!] Turbo scan engaged</span>');
-    toast('FOCUS MODE','Speed x2 | Priority targets','warn');
+    core.classList.add('alert');wolfTxt.textContent='THREAT';wolfInd.style.background='var(--warn)';sysDot.style.background='var(--warn)';
+    typeCmd('[!] MANUAL OVERRIDE: FOCUS MODE ENGAGED');
+    toast('MANUAL SCAN','Priority targeting | Latency: 12ms','warn');
     clearTimeout(turboT);turboT=setTimeout(()=>{
-      turbo=false;statusText.textContent='MONITOR';statusDot.style.background='var(--cyan)';
-      core.classList.remove('alert');
-      typeCmd('[~] Normal speed resumed');
+      turbo=false;core.classList.remove('alert');wolfTxt.textContent='ACTIVE';wolfInd.style.background='var(--cyan)';sysDot.style.background='var(--green)';
+      typeCmd('[~] Reverting to standard profile');
     },2000);
   });
 
-  // Init
-  setTimeout(()=>{
-    core.classList.add('visible');
-    statusText.textContent='INIT';statusDot.style.background='var(--cyan)';
-    setTimeout(()=>{statusText.textContent='MONITOR';running=true;runSimulation();},600);
-  },80);
-
-  window.addEventListener('beforeunload',()=>{clearTimeout(turboT);});
+  setTimeout(()=>{core.classList.add('visible');run();},100);
+  window.addEventListener('beforeunload',()=>clearTimeout(turboT));
 })();
 </script>
   
