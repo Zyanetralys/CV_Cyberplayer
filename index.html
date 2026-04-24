@@ -1413,14 +1413,12 @@
 </script>
 
 <div id="cyber-wolf-widget">
-  <button id="wolf-toggle" class="toggle-btn" title="Abrir terminal">🐺</button>
-  
-  <div id="wolf-panel" class="panel hidden">
+  <div id="wolf-panel" class="panel">
     <div class="panel-header">
       <span class="panel-title">kali@zyanetralys:~/ops</span>
       <div class="panel-controls">
-        <button class="ctrl-btn" id="panel-min">_</button>
-        <button class="ctrl-btn" id="panel-close">×</button>
+        <button class="ctrl-btn" id="panel-min" title="Minimizar">−</button>
+        <button class="ctrl-btn" id="panel-close" title="Ocultar">×</button>
       </div>
     </div>
     
@@ -1528,9 +1526,9 @@
   --text:#e2e8f0;--text2:#64748b;--mono:'JetBrains Mono',monospace
 }
 #cyber-wolf-widget{position:fixed;bottom:55px;right:18px;z-index:9999;font-family:var(--mono)}
-.toggle-btn{width:42px;height:42px;border-radius:50%;background:rgba(10,15,26,.95);border:1px solid var(--cyan);color:var(--cyan);font-size:20px;cursor:pointer;box-shadow:0 0 12px rgba(0,240,255,.3);transition:all .2s;display:flex;align-items:center;justify-content:center}
-.toggle-btn:hover{transform:scale(1.08);box-shadow:0 0 18px rgba(0,240,255,.5)}
-.panel{position:absolute;bottom:52px;right:0;width:290px;background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.6);backdrop-filter:blur(10px);transition:all .25s}
+.panel{width:290px;background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.6);backdrop-filter:blur(10px);transition:all .25s}
+.panel.minimized{width:42px;height:42px;border-radius:21px}
+.panel.minimized .panel-body{display:none}
 .panel.hidden{display:none}
 .panel-header{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:linear-gradient(90deg,rgba(0,240,255,.08),transparent);border-bottom:1px solid var(--border);font-size:10px;color:var(--text2)}
 .panel-title{color:var(--cyan);font-weight:700;letter-spacing:.4px}
@@ -1551,7 +1549,7 @@
 @keyframes blink{50%{opacity:0}}
 .wolf-wrap{display:flex;align-items:center;gap:5px;padding:4px 6px;background:rgba(8,12,20,.8);border:1px solid var(--border);border-radius:5px;cursor:pointer}
 #wolf{transition:filter .2s,transform .2s}
-#wolf-wrap:hover #wolf{transform:scale(1.04)}
+.wolf-wrap:hover #wolf{transform:scale(1.04)}
 .panel.alert #wolf{filter:drop-shadow(0 0 5px var(--warn))}
 .panel.alert .eye-fill{fill:url(#eyeRed)!important}
 .wolf-info{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--text2)}
@@ -1577,23 +1575,27 @@
 
 <script>
 (()=>{
-  const widget=document.getElementById('cyber-wolf-widget'),toggle=document.getElementById('wolf-toggle'),
-        panel=document.getElementById('wolf-panel'),pMin=document.getElementById('panel-min'),pClose=document.getElementById('panel-close'),
+  const widget=document.getElementById('cyber-wolf-widget'),panel=document.getElementById('wolf-panel'),
+        pMin=document.getElementById('panel-min'),pClose=document.getElementById('panel-close'),
         termOut=document.getElementById('term-out'),cmdTyped=document.getElementById('cmd-typed'),
         alerts=document.getElementById('alerts'),popups=document.getElementById('popups'),
         wolf=document.getElementById('wolf'),pL=document.getElementById('pupilL'),pR=document.getElementById('pupilR'),
         lidL=document.getElementById('lidL'),lidR=document.getElementById('lidR'),
         wStatus=document.getElementById('wolf-status'),wText=document.getElementById('wolf-text');
   
-  // Toggle panel
-  toggle.onclick=()=>panel.classList.toggle('hidden');
-  pMin.onclick=()=>panel.classList.toggle('hidden');
+  // Controls - panel always visible by default
+  pMin.onclick=()=>panel.classList.toggle('minimized');
   pClose.onclick=()=>panel.classList.add('hidden');
+  // Restore panel if hidden by clicking anywhere on widget
+  widget.addEventListener('click',e=>{
+    if(e.target.closest('.ctrl-btn'))return;
+    if(panel.classList.contains('hidden'))panel.classList.remove('hidden');
+  });
   
   // Eye tracking
   let tx=0,ty=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
-  function track(){if(panel.classList.contains('hidden'))return;
+  function track(){if(panel.classList.contains('hidden')||panel.classList.contains('minimized'))return;
     const r=wolf.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;
     cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;
     const dx=Math.min(1.8,Math.max(-1.8,(cx-sx)/35)),dy=Math.min(1.8,Math.max(-1.8,(cy-sy)/35));
@@ -1673,14 +1675,14 @@
   
   function popup(title,desc,type='ok'){const p=document.createElement('div');p.className='popup '+type;p.innerHTML=`<span class="p-t">${title}</span><span class="p-d">${desc}</span>`;popups.appendChild(p);requestAnimationFrame(()=>p.classList.add('show'));setTimeout(()=>{p.classList.remove('show');setTimeout(()=>p.remove(),230);},2700)}
   
-  async function run(){if(busy||panel.classList.contains('hidden'))return;busy=true;
+  async function run(){if(busy||panel.classList.contains('hidden')||panel.classList.contains('minimized'))return;busy=true;
     wText.textContent='ACTIVE';wStatus.style.background='var(--cyan)';ops++;
     const op=cmds[rnd(0,cmds.length-1)];
     await typeCmd(op.c);cmdTyped.textContent='';await stream(op.o);
     if(Math.random()<.55)pushAlert();
     if(Math.random()<.65){const tool=op.c.split(' ')[0].split('/').pop();popup(tool.toUpperCase(),'Task complete',op.o.some(l=>/Error|failed/.test(l))?'warn':'ok')}
     if(Math.random()<.3){const atks=["C2 Beacon","Brute Force","SQLi","Phishing"],srcs=["CN","RU","IR","KP"];popup('⚠ THREAT',`${atks[rnd(0,atks.length-1)]} | ${srcs[rnd(0,srcs.length-1)]}`,'warn');panel.classList.add('alert');wText.textContent='THREAT';wStatus.style.background='var(--warn)';setTimeout(()=>{panel.classList.remove('alert');wText.textContent='ACTIVE';wStatus.style.background='var(--cyan);'},1700)}
-    busy=false;await delay(rnd(450,850)/(turbo?2:1));if(!panel.classList.contains('hidden'))run()}
+    busy=false;await delay(rnd(450,850)/(turbo?2:1));if(!panel.classList.contains('hidden')&&!panel.classList.contains('minimized'))run()}
   
   // Wolf click = focus mode
   document.getElementById('wolf-click').onclick=e=>{e.stopPropagation();if(turbo)return;turbo=true;
@@ -1688,8 +1690,8 @@
     typeCmd('[!] FOCUS MODE ENGAGED');popup('FOCUS','Priority scan active','warn');
     clearTimeout(turboT);turboT=setTimeout(()=>{turbo=false;panel.classList.remove('alert');wText.textContent='ACTIVE';wStatus.style.background='var(--cyan);typeCmd('[~] Standard profile');},2100)};
   
-  // Init
-  setTimeout(()=>{if(!panel.classList.contains('hidden'))run();},120);
+  // Init - panel visible by default, start simulation
+  setTimeout(()=>{run();},120);
   window.addEventListener('beforeunload',()=>clearTimeout(turboT));
 })();
 </script>
