@@ -1412,1232 +1412,872 @@
   }
 </script>
 
-<!-- CYBER TERMINAL WIDGET - ENHANCED PENTESTING EDITION -->
-<div id="cyber-terminal-widget">
-  <div class="widget-header">
-    <div class="header-left">
-      <span class="status-dot" id="sys-dot"></span>
-      <span class="sys-title">kali@zyanetralys:~/ops/pentest</span>
-      <span class="threat-level" id="threat-level">THREAT: <b>LOW</b></span>
+
+<!-- === CYBER TERMINAL WIDGET - RIGHT-SIDE DOCKED EDITION === -->
+<!-- Fixed right-side container with wolf on top, terminal below -->
+
+<div id="cyber-dock" class="cyber-dock minimized">
+  
+  <!-- Dock Header (Always Visible) -->
+  <div class="dock-header" id="dock-header">
+    <div class="dock-left">
+      <span class="dock-icon">⬡</span>
+      <span class="dock-title">ZYANETRALYS OPS</span>
+      <span class="dock-status" id="dock-status">● IDLE</span>
     </div>
-    <div class="header-meta">
-      <span class="meta-tag">PID: <b id="pid-val">8842</b></span>
-      <span class="meta-tag">MEM: <b id="mem-val">142MB</b></span>
-      <span class="meta-tag">CPU: <b id="cpu-val">12%</b></span>
-      <button class="ctrl-btn min-btn" id="min-btn" title="Minimizar">_</button>
-      <button class="ctrl-btn close-btn" id="close-btn" title="Ocultar">×</button>
+    <div class="dock-right">
+      <span class="alert-counter" id="dock-alerts">0</span>
+      <button class="dock-btn" id="btn-toggle" title="Expandir/Contraer [Ctrl+`]">⤢</button>
+      <button class="dock-btn" id="btn-maximize" title="Maximizar">□</button>
+      <button class="dock-btn close" id="btn-close" title="Ocultar">×</button>
     </div>
   </div>
 
-  <div class="widget-body" id="widget-body">
-    <div class="terminal-container">
-      <div class="scanline-overlay"></div>
-      <div class="term-output" id="term-output"></div>
-      <div class="term-input">
-        <span class="prompt">└─$</span>
-        <span id="cmd-preview"></span>
-        <span class="cursor">█</span>
+  <!-- Expandable Panel -->
+  <div class="dock-panel" id="dock-panel">
+    
+    <!-- Wolf Panel (TOP) -->
+    <div class="wolf-section" id="wolf-section">
+      <div class="wolf-viewport">
+        <svg id="wolf-svg" viewBox="0 0 340 340" width="100%" height="100%">
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="furGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0a1120"/><stop offset="30%" stop-color="#141e32"/>
+              <stop offset="60%" stop-color="#1e2a45"/><stop offset="100%" stop-color="#080d1a"/>
+            </linearGradient>
+            <linearGradient id="snoutGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2a3a55"/><stop offset="60%" stop-color="#1a2840"/>
+              <stop offset="100%" stop-color="#0f1828"/>
+            </linearGradient>
+            <!-- Eye gradients -->
+            <radialGradient id="eyeNormal" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="#00f7ff"/><stop offset="45%" stop-color="#00b8d9"/>
+              <stop offset="85%" stop-color="#005577"/><stop offset="100%" stop-color="#002233"/>
+            </radialGradient>
+            <radialGradient id="eyeAlert" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="#ff4466"/><stop offset="45%" stop-color="#cc0033"/>
+              <stop offset="85%" stop-color="#660019"/><stop offset="100%" stop-color="#22000a"/>
+            </radialGradient>
+            <radialGradient id="eyeThreat" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="#ff00dd"/><stop offset="45%" stop-color="#bb0099"/>
+              <stop offset="85%" stop-color="#550044"/><stop offset="100%" stop-color="#220019"/>
+            </radialGradient>
+            <!-- Filters -->
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <!-- Circuit pattern -->
+            <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M0,10 L6,10 M14,10 L20,10 M10,0 L10,6 M10,14 L10,20" stroke="#00f7ff" stroke-width="0.4" opacity="0.15"/>
+              <circle cx="10" cy="10" r="1" fill="#00f7ff" opacity="0.2"/>
+            </pattern>
+            <!-- Data stream -->
+            <linearGradient id="dataStream" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00f7ff" stop-opacity="0"/><stop offset="50%" stop-color="#00f7ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#00f7ff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          
+          <!-- Background rings -->
+          <circle cx="170" cy="170" r="155" fill="none" stroke="url(#circuit)" stroke-width="1" opacity="0.2"/>
+          <circle cx="170" cy="170" r="148" fill="none" stroke="#00f7ff" stroke-width="0.6" stroke-dasharray="5 9" opacity="0.2">
+            <animateTransform attributeName="transform" type="rotate" from="0 170 170" to="360 170 170" dur="28s" repeatCount="indefinite"/>
+          </circle>
+          
+          <!-- EARS -->
+          <g id="ears">
+            <path d="M95,112 L74,42 L110,94 Z" fill="url(#furGrad)" stroke="#2a3a55" stroke-width="0.5"/>
+            <path d="M245,112 L266,42 L230,94 Z" fill="url(#furGrad)" stroke="#2a3a55" stroke-width="0.5"/>
+            <!-- Implants -->
+            <circle cx="82" cy="64" r="2.8" fill="#00f7ff" filter="url(#glow)">
+              <animate attributeName="opacity" values="1;0.4;1" dur="2.1s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="258" cy="64" r="2.8" fill="#00f7ff" filter="url(#glow)">
+              <animate attributeName="opacity" values="0.4;1;0.4" dur="2.1s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+          
+          <!-- HEAD -->
+          <path d="M110,102 C132,80 208,80 230,102 C252,124 248,164 216,194 C184,224 156,224 124,194 C92,164 88,124 110,102 Z" fill="url(#furGrad)"/>
+          
+          <!-- Forehead cyber marks -->
+          <g stroke="#2a3a55" fill="none" stroke-width="0.9" opacity="0.5">
+            <path d="M134,116 Q170,134 206,116"/>
+            <path d="M124,132 Q170,154 216,132"/>
+          </g>
+          <!-- Central core -->
+          <circle cx="170" cy="96" r="4.5" fill="#00f7ff" filter="url(#glow)">
+            <animate attributeName="r" values="4.5;5.8;4.5" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          
+          <!-- EYES -->
+          <g id="eyeL" style="transform-origin:132px 134px;">
+            <ellipse cx="132" cy="134" rx="7.5" ry="5" fill="url(#eyeNormal)" class="eye-glow" filter="url(#glow)"/>
+            <circle id="pupilL" cx="132" cy="134" r="2.9" fill="#040812"/>
+            <circle cx="133.4" cy="132.8" r="0.9" fill="#fff" opacity="0.9"/>
+            <path d="M122,127 Q132,122 142,127" stroke="#2a3a55" fill="none" stroke-width="0.9" opacity="0.6"/>
+            <!-- Data stream on eye -->
+            <rect x="126" y="131" width="12" height="6" fill="url(#dataStream)" opacity="0.2" rx="0.5">
+              <animate attributeName="x" values="126;140;126" dur="2.8s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+          <g id="eyeR" style="transform-origin:208px 134px;">
+            <ellipse cx="208" cy="134" rx="7.5" ry="5" fill="url(#eyeNormal)" class="eye-glow" filter="url(#glow)"/>
+            <circle id="pupilR" cx="208" cy="134" r="2.9" fill="#040812"/>
+            <circle cx="209.4" cy="132.8" r="0.9" fill="#fff" opacity="0.9"/>
+            <path d="M198,127 Q208,122 218,127" stroke="#2a3a55" fill="none" stroke-width="0.9" opacity="0.6"/>
+            <rect x="202" y="131" width="12" height="6" fill="url(#dataStream)" opacity="0.2" rx="0.5">
+              <animate attributeName="x" values="202;216;202" dur="3.1s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+          
+          <!-- Eyelids -->
+          <path id="lidL" d="M125,131 Q132,128 139,131 Q132,133 125,131" fill="#0a1120" opacity="0" style="transition:opacity .1s"/>
+          <path id="lidR" d="M201,131 Q208,128 215,131 Q208,133 201,131" fill="#0a1120" opacity="0" style="transition:opacity .1s"/>
+          
+          <!-- NOSE -->
+          <path d="M150,148 L190,148 L170,164 Z" fill="#040812"/>
+          <ellipse cx="170" cy="154" rx="2" ry="1.2" fill="#fff" opacity="0.35"/>
+          
+          <!-- SNOUT -->
+          <ellipse cx="170" cy="166" rx="40" ry="24" fill="url(#snoutGrad)"/>
+          <path d="M136,152 Q170,138 204,152 L200,186 Q170,200 140,186 Z" fill="url(#furGrad)" opacity="0.93"/>
+          
+          <!-- Muzzle details -->
+          <g stroke="#2a3a55" fill="none" stroke-width="0.7" opacity="0.4">
+            <path d="M142,160 Q170,148 198,160"/>
+            <path d="M134,172 L126,182"/>
+            <path d="M206,172 L214,182"/>
+          </g>
+          
+          <!-- MOUTH + subtle fangs -->
+          <path d="M144,178 Q170,192 196,178" stroke="#0f1828" fill="none" stroke-width="1" opacity="0.75"/>
+          <path d="M154,176 L158,182 L154,182 Z" fill="#e8eef8" opacity="0.5"/>
+          <path d="M186,176 L182,182 L186,182 Z" fill="#e8eef8" opacity="0.5"/>
+          
+          <!-- Neck fur -->
+          <path d="M124,190 Q170,210 216,190" stroke="#1e2a45" fill="none" stroke-width="1.3" opacity="0.4"/>
+          
+          <!-- Side implants -->
+          <circle cx="104" cy="150" r="3" fill="#00b8d9" filter="url(#glow)">
+            <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="236" cy="150" r="3" fill="#00b8d9" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          
+          <!-- Floating particles -->
+          <g id="particles" opacity="0.65">
+            <circle cx="170" cy="48" r="1.6" fill="#00f7ff">
+              <animate attributeName="cy" values="48;43;48" dur="3.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="86" cy="112" r="1.3" fill="#00b8d9">
+              <animate attributeName="cx" values="86;83;86" dur="2.6s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="254" cy="112" r="1.3" fill="#00b8d9">
+              <animate attributeName="cx" values="254;257;254" dur="2.9s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+          
+          <!-- Status halo -->
+          <circle cx="170" cy="170" r="162" fill="none" stroke="#00f7ff" stroke-width="1" stroke-dasharray="22 44" opacity="0.15">
+            <animateTransform attributeName="transform" type="rotate" from="0 170 170" to="-360 170 170" dur="42s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        
+        <!-- Wolf status overlay -->
+        <div class="wolf-overlay">
+          <div class="wolf-row"><span>MODE</span><span id="wolf-mode">PASSIVE</span></div>
+          <div class="wolf-row"><span>THREAT</span><span class="threat-low" id="wolf-threat">LOW</span></div>
+          <div class="wolf-row"><span>TARGETS</span><span id="wolf-targets">0</span></div>
+          <div class="wolf-bar"><div class="wolf-fill" id="wolf-fill"></div></div>
+        </div>
+      </div>
+      
+      <!-- Quick actions below wolf -->
+      <div class="wolf-actions">
+        <button class="wact" data-cmd="nmap" title="Quick Scan">⚡</button>
+        <button class="wact" data-cmd="bloodhound" title="BloodHound">🕸</button>
+        <button class="wact" data-cmd="exploit" title="Exploit">☠</button>
+        <button class="wact" data-cmd="stealth" title="Stealth">👁</button>
+        <button class="wact" data-cmd="exfil" title="Exfil Test">📤</button>
       </div>
     </div>
 
-<!-- === CYBER TERMINAL POPUP - ULTRA ENHANCED PENTESTING EDITION === -->
-<!-- Trigger Button (fixed bottom-right) -->
-<button id="cyber-trigger" class="cyber-trigger" title="Abrir Terminal de Operaciones [Ctrl+`]">
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
-    <path d="M4 17l6-6-6-6M12 19h8" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <span class="trigger-pulse"></span>
-  <span class="trigger-count" id="trigger-alerts">0</span>
-</button>
-
-<!-- Main Modal Popup -->
-<div id="cyber-modal" class="cyber-modal hidden">
-  <div class="modal-backdrop" id="modal-backdrop"></div>
-  
-  <div class="modal-window" id="modal-window">
-    <!-- Window Header (Draggable) -->
-    <div class="modal-header" id="modal-header">
-      <div class="header-left">
-        <span class="window-icon">⬡</span>
-        <span class="window-title">ZYANETRALYS // PENTEST OPS CONSOLE</span>
-        <span class="window-subtitle">kali@zyanetralys:~/ops/redteam</span>
+    <!-- Terminal Section (BOTTOM) -->
+    <div class="term-section" id="term-section">
+      <div class="term-header">
+        <span class="term-path">kali@zyanetralys:~/ops</span>
+        <span class="term-indicator" id="term-indicator">● READY</span>
       </div>
-      <div class="header-right">
-        <span class="threat-badge" id="modal-threat">THREAT: <b>LOW</b></span>
-        <span class="session-id">SID: <b id="session-val">ZT-8842</b></span>
-        <button class="win-btn minimize" id="win-min" title="Minimizar">−</button>
-        <button class="win-btn maximize" id="win-max" title="Pantalla completa">□</button>
-        <button class="win-btn close" id="win-close" title="Cerrar [Esc]">×</button>
-      </div>
-    </div>
-
-    <!-- Window Body -->
-    <div class="modal-body">
-      <!-- Left Panel: Terminal + Wolf -->
-      <div class="panel-left">
-        <!-- Enhanced Terminal -->
-        <div class="terminal-wrapper">
-          <div class="terminal-header">
-            <div class="term-tabs">
-              <span class="tab active" data-tab="main">main.sh</span>
-              <span class="tab" data-tab="logs">syslog</span>
-              <span class="tab" data-tab="exfil">exfil.log</span>
-            </div>
-            <div class="term-controls">
-              <span class="rec-dot" id="rec-dot"></span>
-              <span class="term-status" id="term-status">READY</span>
-            </div>
-          </div>
-          
-          <div class="terminal-screen" id="terminal-screen">
-            <div class="scanlines"></div>
-            <div class="noise-overlay"></div>
-            <div class="term-output" id="term-output"></div>
-            <div class="term-input-line">
-              <span class="prompt"><span class="prompt-user">kali</span>@<span class="prompt-host">zyanetralys</span>:<span class="prompt-path">~/ops</span>$</span>
-              <span id="cmd-input" contenteditable="true" spellcheck="false"></span>
-              <span class="cursor-blink">█</span>
-            </div>
-            <!-- Auto-complete suggestions -->
-            <div class="autocomplete" id="autocomplete"></div>
-          </div>
-          
-          <!-- Quick Command Palette -->
-          <div class="cmd-palette" id="cmd-palette">
-            <span class="palette-hint">[Tab] auto-complete • [↑↓] history • [Ctrl+K] commands</span>
-            <div class="palette-items">
-              <button data-cmd="nmap -sV -sC" class="palette-btn">⚡ Nmap Scan</button>
-              <button data-cmd="bloodhound-python -c All" class="palette-btn">🕸 BloodHound</button>
-              <button data-cmd="impacket-GetUserSPNs" class="palette-btn">🔑 Kerberoasting</button>
-              <button data-cmd="sqlmap --batch" class="palette-btn">💉 SQLi Audit</button>
-              <button data-cmd="hashcat -m 1000" class="palette-btn">🔓 Hash Crack</button>
-              <button data-cmd="msfconsole -x" class="palette-btn">☠ Metasploit</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Wolf Panel -->
-        <div class="wolf-panel" id="wolf-panel">
-          <div class="wolf-viewport">
-            <svg id="wolf-svg" viewBox="0 0 360 360" width="100%" height="100%">
-              <defs>
-                <!-- Advanced gradients -->
-                <linearGradient id="furGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0a1120"/><stop offset="20%" stop-color="#141e32"/>
-                  <stop offset="45%" stop-color="#1e2a45"/><stop offset="70%" stop-color="#152238"/>
-                  <stop offset="100%" stop-color="#080d1a"/>
-                </linearGradient>
-                <linearGradient id="snoutGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#2a3a55"/><stop offset="50%" stop-color="#1a2840"/>
-                  <stop offset="100%" stop-color="#0f1828"/>
-                </linearGradient>
-                
-                <!-- Eye gradients: Normal/Alert/Threat/Hunted -->
-                <radialGradient id="eyeNormal" cx="50%" cy="50%" r="75%">
-                  <stop offset="0%" stop-color="#00f7ff"/><stop offset="35%" stop-color="#00b8d9"/>
-                  <stop offset="70%" stop-color="#006688"/><stop offset="100%" stop-color="#002233"/>
-                </radialGradient>
-                <radialGradient id="eyeAlert" cx="50%" cy="50%" r="75%">
-                  <stop offset="0%" stop-color="#ff4466"/><stop offset="35%" stop-color="#cc0033"/>
-                  <stop offset="70%" stop-color="#660019"/><stop offset="100%" stop-color="#22000a"/>
-                </radialGradient>
-                <radialGradient id="eyeThreat" cx="50%" cy="50%" r="75%">
-                  <stop offset="0%" stop-color="#ff00dd"/><stop offset="35%" stop-color="#bb0099"/>
-                  <stop offset="70%" stop-color="#550044"/><stop offset="100%" stop-color="#220019"/>
-                </radialGradient>
-                <radialGradient id="eyeHunted" cx="50%" cy="50%" r="75%">
-                  <stop offset="0%" stop-color="#ffaa00"/><stop offset="35%" stop-color="#cc7700"/>
-                  <stop offset="70%" stop-color="#663300"/><stop offset="100%" stop-color="#221100"/>
-                </radialGradient>
-                
-                <!-- Glow filters -->
-                <filter id="glowSoft"><feGaussianBlur stdDeviation="2.5" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <filter id="glowHard"><feGaussianBlur stdDeviation="4" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                
-                <!-- Circuit pattern -->
-                <pattern id="circuitPattern" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-                  <path d="M0,12 L8,12 M16,12 L24,12 M12,0 L12,8 M12,16 L12,24" stroke="#00f7ff" stroke-width="0.4" opacity="0.12"/>
-                  <circle cx="12" cy="12" r="1.2" fill="#00f7ff" opacity="0.18"/>
-                  <path d="M4,4 L8,8 M20,4 L16,8 M4,20 L8,16 M20,20 L16,16" stroke="#00f7ff" stroke-width="0.3" opacity="0.08"/>
-                </pattern>
-                
-                <!-- Data stream -->
-                <linearGradient id="dataStream" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#00f7ff" stop-opacity="0"/><stop offset="45%" stop-color="#00f7ff" stop-opacity="0.9"/>
-                  <stop offset="55%" stop-color="#00f7ff" stop-opacity="0.9"/><stop offset="100%" stop-color="#00f7ff" stop-opacity="0"/>
-                </linearGradient>
-                
-                <!-- Holographic overlay -->
-                <radialGradient id="holoGrad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#00f7ff" stop-opacity="0.15"/><stop offset="100%" stop-color="#00f7ff" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-              
-              <!-- Background hologram field -->
-              <circle cx="180" cy="180" r="165" fill="url(#holoGrad)" opacity="0.4"/>
-              
-              <!-- Outer rings with multiple animations -->
-              <g class="ring-group">
-                <circle cx="180" cy="180" r="160" fill="none" stroke="url(#circuitPattern)" stroke-width="1" opacity="0.25"/>
-                <circle cx="180" cy="180" r="154" fill="none" stroke="#00f7ff" stroke-width="0.7" stroke-dasharray="6 10" opacity="0.18">
-                  <animateTransform attributeName="transform" type="rotate" from="0 180 180" to="360 180 180" dur="32s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="180" cy="180" r="147" fill="none" stroke="#00b8d9" stroke-width="0.5" stroke-dasharray="3 14" opacity="0.12">
-                  <animate attributeName="r" values="147;150;147" dur="4s" repeatCount="indefinite"/>
-                  <animateTransform attributeName="transform" type="rotate" from="360 180 180" to="0 180 180" dur="45s" repeatCount="indefinite"/>
-                </circle>
-              </g>
-              
-              <!-- EARS - Cybernetic wolf ears with implants -->
-              <g id="ears" class="wolf-part">
-                <!-- Left ear -->
-                <path d="M102,118 L78,38 L118,98 Z" fill="url(#furGrad)" stroke="#2a3a55" stroke-width="0.6"/>
-                <path d="M88,68 L96,56 L108,78" stroke="#3a4a65" fill="none" stroke-width="0.7" opacity="0.5"/>
-                <!-- Cyber implant left -->
-                <g class="implant">
-                  <circle cx="86" cy="62" r="3.2" fill="#00f7ff" filter="url(#glowHard)"/>
-                  <circle cx="86" cy="62" r="1.8" fill="#002233"/>
-                  <path d="M86,58 L86,48 M82,62 L74,62 M90,62 L98,62" stroke="#00f7ff" stroke-width="0.5" opacity="0.6"/>
-                  <animate attributeName="opacity" values="1;0.7;1" dur="2.2s" repeatCount="indefinite"/>
-                </g>
-                
-                <!-- Right ear -->
-                <path d="M258,118 L282,38 L242,98 Z" fill="url(#furGrad)" stroke="#2a3a55" stroke-width="0.6"/>
-                <path d="M272,68 L264,56 L252,78" stroke="#3a4a65" fill="none" stroke-width="0.7" opacity="0.5"/>
-                <!-- Cyber implant right -->
-                <g class="implant">
-                  <circle cx="274" cy="62" r="3.2" fill="#00f7ff" filter="url(#glowHard)"/>
-                  <circle cx="274" cy="62" r="1.8" fill="#002233"/>
-                  <path d="M274,58 L274,48 M270,62 L262,62 M278,62 L286,62" stroke="#00f7ff" stroke-width="0.5" opacity="0.6"/>
-                  <animate attributeName="opacity" values="0.7;1;0.7" dur="2.2s" repeatCount="indefinite"/>
-                </g>
-              </g>
-              
-              <!-- HEAD - Angular cyber-wolf silhouette -->
-              <path d="M118,108 C142,84 218,84 242,108 C266,132 262,176 226,210 C190,244 170,244 134,210 C98,176 94,132 118,108 Z" fill="url(#furGrad)" stroke="#1e2a45" stroke-width="0.8" opacity="0.95"/>
-              
-              <!-- Forehead cyber markings -->
-              <g stroke="#2a3a55" fill="none" stroke-width="1.1" opacity="0.55">
-                <path d="M142,122 Q180,140 218,122"/>
-                <path d="M132,140 Q180,162 228,140"/>
-                <path d="M150,110 L180,128 L210,110"/>
-              </g>
-              
-              <!-- Central cyber core on forehead -->
-              <g id="forehead-core">
-                <circle cx="180" cy="102" r="5" fill="#00f7ff" filter="url(#glowHard)"/>
-                <circle cx="180" cy="102" r="2.5" fill="#002233"/>
-                <path d="M180,96 L180,84 M172,102 L160,102 M188,102 L200,102" stroke="#00f7ff" stroke-width="0.6" opacity="0.7"/>
-                <animateTransform attributeName="transform" type="rotate" from="0 180 102" to="360 180 102" dur="8s" repeatCount="indefinite"/>
-              </g>
-              
-              <!-- EYES - Advanced with multiple layers -->
-              <g id="eyeL" class="eye-group" style="transform-origin: 138px 142px;">
-                <!-- Eye base -->
-                <ellipse cx="138" cy="142" rx="8.5" ry="5.8" fill="url(#eyeNormal)" class="eye-glow" filter="url(#glowHard)"/>
-                <!-- Inner iris detail -->
-                <ellipse cx="138" cy="142" rx="5" ry="3.5" fill="none" stroke="#006688" stroke-width="0.6" opacity="0.5"/>
-                <!-- Pupil -->
-                <circle id="pupilL" cx="138" cy="142" r="3.2" fill="#040812"/>
-                <!-- Eye shine -->
-                <circle cx="139.6" cy="140.8" r="1.1" fill="#fff" opacity="0.95"/>
-                <circle cx="136.8" cy="143.2" r="0.5" fill="#fff" opacity="0.6"/>
-                <!-- Eyebrow -->
-                <path d="M126,134 Q138,128 150,134" stroke="#2a3a55" fill="none" stroke-width="1.1" opacity="0.65"/>
-                <!-- Data stream overlay -->
-                <rect x="132" y="138" width="12" height="8" fill="url(#dataStream)" opacity="0.18" rx="1">
-                  <animate attributeName="x" values="132;146;132" dur="3s" repeatCount="indefinite"/>
-                </rect>
-                <!-- Scan line on eye -->
-                <rect x="130" y="136" width="16" height="12" fill="none" stroke="#00f7ff" stroke-width="0.4" opacity="0.2" rx="1">
-                  <animate attributeName="height" values="12;2;12" dur="2.5s" repeatCount="indefinite"/>
-                  <animate attributeName="y" values="136;144;136" dur="2.5s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-              
-              <g id="eyeR" class="eye-group" style="transform-origin: 222px 142px;">
-                <ellipse cx="222" cy="142" rx="8.5" ry="5.8" fill="url(#eyeNormal)" class="eye-glow" filter="url(#glowHard)"/>
-                <ellipse cx="222" cy="142" rx="5" ry="3.5" fill="none" stroke="#006688" stroke-width="0.6" opacity="0.5"/>
-                <circle id="pupilR" cx="222" cy="142" r="3.2" fill="#040812"/>
-                <circle cx="223.6" cy="140.8" r="1.1" fill="#fff" opacity="0.95"/>
-                <circle cx="220.8" cy="143.2" r="0.5" fill="#fff" opacity="0.6"/>
-                <path d="M210,134 Q222,128 234,134" stroke="#2a3a55" fill="none" stroke-width="1.1" opacity="0.65"/>
-                <rect x="216" y="138" width="12" height="8" fill="url(#dataStream)" opacity="0.18" rx="1">
-                  <animate attributeName="x" values="216;230;216" dur="3.2s" repeatCount="indefinite"/>
-                </rect>
-                <rect x="214" y="136" width="16" height="12" fill="none" stroke="#00f7ff" stroke-width="0.4" opacity="0.2" rx="1">
-                  <animate attributeName="height" values="12;2;12" dur="2.7s" repeatCount="indefinite"/>
-                  <animate attributeName="y" values="136;144;136" dur="2.7s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-              
-              <!-- Eyelids for blinking -->
-              <path id="lidL" d="M129,139 Q138,135 147,139 Q138,141 129,139" fill="#0a1120" opacity="0" style="transition:opacity .1s"/>
-              <path id="lidR" d="M213,139 Q222,135 231,139 Q222,141 213,139" fill="#0a1120" opacity="0" style="transition:opacity .1s"/>
-              
-              <!-- NOSE - Sharp cyber-wolf nose -->
-              <path d="M156,158 L204,158 L180,176 Z" fill="#040812" stroke="#1a2438" stroke-width="0.5"/>
-              <ellipse cx="180" cy="164" rx="2.4" ry="1.4" fill="#fff" opacity="0.4"/>
-              <!-- Nose sensor -->
-              <circle cx="180" cy="166" r="1" fill="#00f7ff" opacity="0.7">
-                <animate attributeName="r" values="1;1.4;1" dur="1.8s" repeatCount="indefinite"/>
-              </circle>
-              
-              <!-- SNOUT - Elongated wolf muzzle with detail -->
-              <ellipse cx="180" cy="176" rx="44" ry="28" fill="url(#snoutGrad)"/>
-              <path d="M142,156 Q180,140 218,156 L214,196 Q180,214 146,196 Z" fill="url(#furGrad)" opacity="0.94"/>
-              
-              <!-- Muzzle details -->
-              <g stroke="#2a3a55" fill="none" stroke-width="0.8" opacity="0.45">
-                <path d="M148,166 Q180,154 212,166"/>
-                <path d="M142,178 L132,190"/>
-                <path d="M218,178 L228,190"/>
-              </g>
-              
-              <!-- MOUTH / Jaw with subtle fangs -->
-              <path d="M146,186 Q180,202 214,186" stroke="#0f1828" fill="none" stroke-width="1.2" opacity="0.8"/>
-              <path d="M158,184 L163,191 L158,191 Z" fill="#e8eef8" opacity="0.55"/>
-              <path d="M202,184 L197,191 L202,191 Z" fill="#e8eef8" opacity="0.55"/>
-              
-              <!-- CHEEK fur flow + cyber accents -->
-              <g stroke="#2a3a55" fill="none" stroke-width="0.9" opacity="0.5">
-                <path d="M124,162 Q116,184 120,208"/>
-                <path d="M236,162 Q244,184 240,208"/>
-              </g>
-              
-              <!-- NECK / shoulder fur with circuit accents -->
-              <path d="M134,202 Q180,226 226,202" stroke="#1e2a45" fill="none" stroke-width="1.5" opacity="0.45"/>
-              <path d="M148,210 Q180,222 212,210" stroke="#00f7ff" fill="none" stroke-width="0.5" opacity="0.25" stroke-dasharray="3 5"/>
-              
-              <!-- Side cyber implants -->
-              <g id="side-implants">
-                <circle cx="110" cy="158" r="3.5" fill="#00b8d9" filter="url(#glowSoft)">
-                  <animate attributeName="opacity" values="1;0.5;1" dur="1.9s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="250" cy="158" r="3.5" fill="#00b8d9" filter="url(#glowSoft)">
-                  <animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite"/>
-                </circle>
-                <!-- Connection lines to eyes -->
-                <path d="M110,158 Q124,148 138,142" stroke="#00f7ff" stroke-width="0.4" fill="none" opacity="0.25" stroke-dasharray="2 4"/>
-                <path d="M250,158 Q236,148 222,142" stroke="#00f7ff" stroke-width="0.4" fill="none" opacity="0.25" stroke-dasharray="2 4"/>
-              </g>
-              
-              <!-- Floating data particles -->
-              <g id="particles" opacity="0.7">
-                <circle cx="180" cy="52" r="1.8" fill="#00f7ff">
-                  <animate attributeName="cy" values="52;46;52" dur="3.5s" repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="0.7;1;0.7" dur="3.5s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="92" cy="118" r="1.4" fill="#00b8d9">
-                  <animate attributeName="cx" values="92;88;92" dur="2.8s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="268" cy="118" r="1.4" fill="#00b8d9">
-                  <animate attributeName="cx" values="268;272;268" dur="3.1s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="145" cy="220" r="1.2" fill="#00f7ff">
-                  <animate attributeName="cy" values="220;226;220" dur="4s" repeatCount="indefinite"/>
-                </circle>
-              </g>
-              
-              <!-- Status halo ring -->
-              <circle cx="180" cy="180" r="172" fill="none" stroke="#00f7ff" stroke-width="1.2" stroke-dasharray="24 48" opacity="0.18">
-                <animateTransform attributeName="transform" type="rotate" from="0 180 180" to="-360 180 180" dur="48s" repeatCount="indefinite"/>
-              </circle>
-              
-              <!-- Kill chain visualization arcs -->
-              <g id="killchain-arcs" opacity="0.35" stroke="#00f7ff" stroke-width="0.8" fill="none" stroke-dasharray="4 6">
-                <path d="M180,28 A152,152 0 0,1 320,140"><animate attributeName="stroke-dashoffset" values="0;100;0" dur="12s" repeatCount="indefinite"/></path>
-                <path d="M320,140 A152,152 0 0,1 240,310"><animate attributeName="stroke-dashoffset" values="0;100;0" dur="14s" repeatCount="indefinite"/></path>
-                <path d="M240,310 A152,152 0 0,1 120,310"><animate attributeName="stroke-dashoffset" values="0;100;0" dur="16s" repeatCount="indefinite"/></path>
-                <path d="M120,310 A152,152 0 0,1 40,140"><animate attributeName="stroke-dashoffset" values="0;100;0" dur="18s" repeatCount="indefinite"/></path>
-                <path d="M40,140 A152,152 0 0,1 180,28"><animate attributeName="stroke-dashoffset" values="0;100;0" dur="20s" repeatCount="indefinite"/></path>
-              </g>
-              
-              <!-- MITRE ATT&CK tags floating -->
-              <g id="mitre-tags" font-size="4" fill="#00f7ff" opacity="0.6">
-                <text x="65" y="95" class="float-tag">T1059</text>
-                <text x="285" y="95" class="float-tag">T1071</text>
-                <text x="55" y="245" class="float-tag">T1573</text>
-                <text x="295" y="245" class="float-tag">T1027</text>
-                <animateTransform attributeName="transform" type="translate" values="0,0; 0,-3; 0,0" dur="3s" repeatCount="indefinite"/>
-              </g>
-            </svg>
-            
-            <!-- Wolf status overlay -->
-            <div class="wolf-status-overlay">
-              <div class="status-row">
-                <span class="status-label">MODE</span>
-                <span class="status-value" id="wolf-mode">PASSIVE</span>
-              </div>
-              <div class="status-row">
-                <span class="status-label">THREAT</span>
-                <span class="status-value threat-low" id="wolf-threat">LOW</span>
-              </div>
-              <div class="status-row">
-                <span class="status-label">TARGETS</span>
-                <span class="status-value" id="wolf-targets">0</span>
-              </div>
-              <div class="status-bar">
-                <div class="bar-fill" id="wolf-progress"></div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Wolf interaction hints -->
-          <div class="wolf-hints">
-            <span class="hint">[Click] Focus Mode • [Hover] Scan • [Drag] Reposition</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Panel: Threat Feed + Metrics -->
-      <div class="panel-right">
-        <!-- Live Threat Feed -->
-        <div class="threat-feed">
-          <div class="feed-header">
-            <span>▸ LIVE THREAT INTELLIGENCE</span>
-            <span class="feed-filters">
-              <button class="filter-btn active" data-filter="all">ALL</button>
-              <button class="filter-btn" data-filter="crit">CRIT</button>
-              <button class="filter-btn" data-filter="high">HIGH</button>
-            </span>
-          </div>
-          <div class="feed-list" id="feed-list"></div>
-          <div class="feed-footer">
-            <span id="feed-stats">0 alerts • Last: --:--</span>
-            <button class="feed-clear" id="feed-clear">✕ Clear</button>
-          </div>
-        </div>
+      
+      <div class="term-screen" id="term-screen">
+        <div class="scanlines"></div>
+        <div class="term-output" id="term-output"></div>
         
-        <!-- System Metrics -->
-        <div class="metrics-panel">
-          <div class="metric-row">
-            <span class="metric-label">CPU</span>
-            <div class="metric-bar"><div class="metric-fill" id="cpu-fill"></div></div>
-            <span class="metric-value" id="cpu-val">12%</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">MEM</span>
-            <div class="metric-bar"><div class="metric-fill" id="mem-fill"></div></div>
-            <span class="metric-value" id="mem-val">142MB</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">NET</span>
-            <div class="metric-bar"><div class="metric-fill" id="net-fill"></div></div>
-            <span class="metric-value" id="net-val">2.4KB/s</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">PKTS</span>
-            <div class="metric-bar"><div class="metric-fill" id="pkt-fill"></div></div>
-            <span class="metric-value" id="pkt-val">847/s</span>
-          </div>
-        </div>
-        
-        <!-- Kill Chain Progress -->
-        <div class="killchain-panel">
-          <div class="kc-title">KILL CHAIN PROGRESS</div>
-          <div class="kc-steps">
-            <div class="kc-step" data-stage="recon">⦿ Recon</div>
-            <div class="kc-step" data-stage="weapon">⦿ Weaponize</div>
-            <div class="kc-step" data-stage="deliver">⦿ Deliver</div>
-            <div class="kc-step" data-stage="exploit">⦿ Exploit</div>
-            <div class="kc-step" data-stage="install">⦿ Install</div>
-            <div class="kc-step" data-stage="c2">⦿ C2</div>
-            <div class="kc-step" data-stage="actions">⦿ Actions</div>
-          </div>
-          <div class="kc-current" id="kc-current">STAGE: IDLE</div>
-        </div>
-        
-        <!-- Quick Actions -->
-        <div class="quick-actions-panel">
-          <div class="qa-title">QUICK OPERATIONS</div>
-          <div class="qa-grid">
-            <button class="qa-btn" data-action="scan">⚡ Quick Scan</button>
-            <button class="qa-btn" data-action="exfil">📤 Exfil Test</button>
-            <button class="qa-btn" data-action="stealth">👁 Stealth</button>
-            <button class="qa-btn" data-action="pivot">🔗 Pivot</button>
-            <button class="qa-btn" data-action="dump">🗄 Dump Creds</button>
-            <button class="qa-btn" data-action="cover">🧹 Cover Tracks</button>
-          </div>
+        <!-- User input line -->
+        <div class="term-input">
+          <span class="prompt">$</span>
+          <span id="user-input" contenteditable="true" spellcheck="false"></span>
+          <span class="cursor" id="user-cursor">█</span>
         </div>
       </div>
-    </div>
-
-    <!-- Window Footer -->
-    <div class="modal-footer">
-      <div class="footer-left">
-        <span class="footer-item">Session: <b id="footer-session">ZT-8842</b></span>
-        <span class="footer-item">Uptime: <b id="footer-uptime">00:00:00</b></span>
-        <span class="footer-item">Ops: <b id="footer-ops">0</b></span>
-      </div>
-      <div class="footer-right">
-        <button class="footer-btn" id="export-log">📥 Export Log</button>
-        <button class="footer-btn" id="capture-screen">📸 Capture</button>
-        <span class="footer-status" id="footer-status">● ONLINE</span>
+      
+      <!-- Alert feed mini -->
+      <div class="alert-mini" id="alert-mini">
+        <span class="alert-label">▸ LIVE</span>
+        <div class="alert-items" id="alert-items"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Toast Notification Container -->
+<!-- Toast Container (outside dock) -->
 <div id="toast-container"></div>
 
+<!-- Custom Cursor for widget area only -->
 <style>
-/* === CYBERPOPUP ULTRA THEME === */
+/* === CYBER DOCK THEME === */
 :root{
   --bg:#010308;--bg-soft:#02050f;--bg-panel:#030714;--bg-term:#02040a;
-  --border:#0f1a2e;--border-glow:#1e3a5f;--border-light:#1a2840;
+  --border:#0f1a2e;--border-glow:#1e3a5f;
   --cyan:#00f7ff;--cyan-dim:#00b8d9;--cyan-dark:#005577;
   --green:#00ff47;--green-dim:#00cc39;
   --warn:#ff4466;--warn-dim:#cc0033;
   --alert:#ff00dd;--alert-dim:#bb0099;
-  --hunt:#ffaa00;--hunt-dim:#cc7700;
   --ok:#bfff00;--text:#d9e3f0;--text-dim:#64748b;--text-muted:#475569;
   --mono:'JetBrains Mono','Fira Code','Consolas',monospace;
   --glow-cyan:0 0 8px rgba(0,247,255,0.7),0 0 20px rgba(0,247,255,0.35);
   --glow-warn:0 0 8px rgba(255,68,102,0.7),0 0 20px rgba(255,68,102,0.35);
   --glow-alert:0 0 8px rgba(255,0,221,0.7),0 0 20px rgba(255,0,221,0.35);
-  --shadow-deep:0 12px 40px rgba(0,0,0,0.85);
 }
 
-/* Trigger Button */
-.cyber-trigger{
-  position:fixed;bottom:24px;right:24px;z-index:99998;
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(135deg,var(--bg-panel),var(--bg-soft));
-  border:2px solid var(--cyan);color:var(--cyan);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .25s;box-shadow:var(--glow-cyan);
-  font-size:18px;position:relative;overflow:hidden;
+/* Custom cursor for widget area ONLY */
+#cyber-dock, #cyber-dock *{cursor:none!important}
+.cyber-cursor{
+  position:fixed;pointer-events:none;z-index:100001;
+  width:8px;height:32px;transform:translate(-50%,-10%) rotate(-42deg);
+  transform-origin:70% 90%;transition:transform .08s ease-out,filter .1s;
+  filter:drop-shadow(0 0 6px rgba(0,247,255,0.8)) drop-shadow(0 0 14px rgba(0,247,255,0.5));
 }
-.cyber-trigger:hover{
-  transform:scale(1.08);box-shadow:0 0 12px var(--cyan),0 0 28px rgba(0,247,255,0.5);
-  border-color:#fff;color:#fff;
+.cyber-cursor .blade{
+  width:100%;height:75%;background:linear-gradient(to bottom,
+    #fff 0%, #dfffff 10%, #00f7ff 22%, #00f7ff 68%, #005577 100%);
+  border-radius:2px 2px 1px 1px;position:relative;
+  box-shadow:0 0 12px rgba(0,247,255,0.9),0 0 24px rgba(0,247,255,0.6),
+    inset 0 0 10px rgba(255,255,255,0.4);
 }
-.cyber-trigger:active{transform:scale(.96)}
-.trigger-pulse{
-  position:absolute;inset:-2px;border-radius:50%;
-  border:2px solid var(--cyan);animation:pulseRing 2s infinite;opacity:.4;
+.cyber-cursor .blade::before{
+  content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);
+  width:8px;height:8px;background:radial-gradient(circle,#fff 0%,#00f7ff 40%,transparent 100%);
+  border-radius:50%;box-shadow:0 0 16px rgba(0,247,255,0.9),0 0 32px rgba(0,247,255,0.7);
+  animation:tipPulse .8s ease-in-out infinite;
 }
-@keyframes pulseRing{0%{transform:scale(.8);opacity:.6}100%{transform:scale(2);opacity:0}}
-.trigger-count{
-  position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;
-  background:var(--warn);color:#fff;font-size:9px;font-weight:800;
-  border-radius:9px;display:flex;align-items:center;justify-content:center;
-  border:2px solid var(--bg);box-shadow:0 0 8px var(--warn);
-  opacity:0;transform:scale(.5);transition:all .2s;
+.cyber-cursor .blade::after{
+  content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.7) 30%,
+    rgba(255,255,255,0.7) 70%,transparent 100%);border-radius:2px;
+  animation:energyFlow 1.6s ease-in-out infinite;
 }
-.trigger-count.show{opacity:1;transform:scale(1)}
+.cyber-cursor .handle{
+  position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+  width:6px;height:20px;background:linear-gradient(180deg,#888,#555,#333,#111);
+  border:1px solid #005577;border-radius:1px;
+  box-shadow:0 0 8px rgba(0,0,0,0.8),inset 0 0 4px rgba(255,255,255,0.2);
+}
+.cyber-cursor.link-mode{
+  filter:drop-shadow(0 0 8px rgba(255,68,102,0.9)) drop-shadow(0 0 18px rgba(255,68,102,0.6));
+}
+.cyber-cursor.link-mode .blade{
+  background:linear-gradient(to bottom,#fff 0%,#ffddff 10%,#ff4466 22%,#ff4466 68%,#660019 100%);
+  box-shadow:0 0 12px rgba(255,68,102,0.9),0 0 24px rgba(255,68,102,0.6),
+    inset 0 0 10px rgba(255,255,255,0.4);
+}
+.cyber-cursor.link-mode .blade::before{
+  background:radial-gradient(circle,#fff 0%,#ff4466 40%,transparent 100%);
+  box-shadow:0 0 16px rgba(255,68,102,0.9),0 0 32px rgba(255,68,102,0.7);
+}
+.cyber-cursor.link-mode .handle{border-color:#660019}
+@keyframes tipPulse{0%,100%{opacity:1;transform:translateX(-50%) scale(1)}50%{opacity:.85;transform:translateX(-50%) scale(1.15)}}
+@keyframes energyFlow{0%,100%{opacity:.5}50%{opacity:.8}}
 
-/* Modal Popup */
-.cyber-modal{
-  position:fixed;inset:0;z-index:100000;display:flex;
-  align-items:center;justify-content:center;padding:20px;
-  font-family:var(--mono);pointer-events:none;
+/* Dock Container - FIXED RIGHT SIDE */
+.cyber-dock{
+  position:fixed;top:20px;right:20px;z-index:99999;
+  width:360px;font-family:var(--mono);background:var(--bg-panel);
+  border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.8),var(--glow-cyan);
+  transition:all .25s cubic-bezier(.4,0,.2,1);border-left:3px solid var(--cyan);
 }
-.cyber-modal.hidden{display:none}
-.modal-backdrop{
-  position:absolute;inset:0;background:rgba(1,3,8,.92);
-  backdrop-filter:blur(12px);animation:fadeIn .25s;
-}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cyber-dock.minimized{width:220px;height:48px}
+.cyber-dock.minimized .dock-panel{display:none}
+.cyber-dock.maximized{width:96vw!important;height:94vh!important;top:3vh!important;right:2vw!important}
+.cyber-dock.threat-high{border-left-color:var(--warn);box-shadow:0 8px 32px rgba(0,0,0,0.85),var(--glow-warn)}
+.cyber-dock.threat-critical{border-left-color:var(--alert);animation:pulseDock .9s infinite}
+@keyframes pulseDock{0%,100%{box-shadow:0 8px 32px rgba(0,0,0,0.85),var(--glow-warn)}50%{box-shadow:0 8px 40px rgba(255,68,102,0.9),0 0 36px var(--alert)}}
 
-.modal-window{
-  position:relative;width:min(1200px,98vw);height:min(720px,92vh);
-  background:var(--bg-panel);border:1px solid var(--border);
-  border-radius:10px;overflow:hidden;box-shadow:var(--shadow-deep),var(--glow-cyan);
-  display:flex;flex-direction:column;pointer-events:auto;
-  transform:translateY(20px);opacity:0;animation:slideIn .3s forwards;
-  border-left:3px solid var(--cyan);
-}
-@keyframes slideIn{to{transform:translateY(0);opacity:1}}
-.modal-window.threat-high{border-left-color:var(--warn);box-shadow:var(--shadow-deep),var(--glow-warn)}
-.modal-window.threat-critical{border-left-color:var(--alert);animation:pulseBorder .8s infinite}
-@keyframes pulseBorder{0%,100%{box-shadow:var(--shadow-deep),var(--glow-warn)}50%{box-shadow:var(--shadow-deep),0 0 32px var(--alert),0 0 48px var(--alert-dim)}}
-
-/* Window Header */
-.modal-header{
+/* Dock Header */
+.dock-header{
   display:flex;justify-content:space-between;align-items:center;
-  padding:8px 12px;background:linear-gradient(90deg,rgba(0,247,255,.15),rgba(0,184,217,.08),transparent);
-  border-bottom:1px solid var(--border);cursor:move;user-select:none;
-  position:relative;font-size:8px;
+  padding:6px 10px;background:linear-gradient(90deg,rgba(0,247,255,.12),rgba(0,184,217,.06),transparent);
+  border-bottom:1px solid var(--border);font-size:7.5px;cursor:grab;user-select:none;
 }
-.modal-header::after{
-  content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5;
+.dock-header:active{cursor:grabbing}
+.dock-left{display:flex;align-items:center;gap:6px}
+.dock-icon{
+  width:14px;height:14px;display:flex;align-items:center;justify-content:center;
+  background:var(--cyan);color:#000;border-radius:2px;font-weight:800;font-size:9px;
 }
-.header-left{display:flex;align-items:center;gap:8px}
-.window-icon{
-  width:16px;height:16px;display:flex;align-items:center;justify-content:center;
-  background:var(--cyan);color:#000;border-radius:3px;font-weight:800;font-size:10px;
+.dock-title{color:var(--cyan);font-weight:800;letter-spacing:.8px;text-shadow:var(--glow-cyan)}
+.dock-status{color:var(--text-dim);opacity:.9}
+.dock-status.active{color:var(--green);animation:blinkStatus 1.4s infinite}
+@keyframes blinkStatus{0%,100%{opacity:1}50%{opacity:.5}}
+.dock-right{display:flex;align-items:center;gap:4px}
+.alert-counter{
+  min-width:18px;height:18px;background:var(--warn);color:#fff;font-size:9px;
+  font-weight:800;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--bg);box-shadow:0 0 6px var(--warn);opacity:0;transform:scale(.5);
+  transition:all .2s;
 }
-.window-title{color:var(--cyan);font-weight:800;letter-spacing:1px;text-shadow:var(--glow-cyan)}
-.window-subtitle{color:var(--text-dim);opacity:.8;margin-left:4px}
-.header-right{display:flex;align-items:center;gap:8px}
-.threat-badge{color:var(--text-dim);font-size:7.5px}
-.threat-badge b{color:var(--green)}
-.session-id{color:var(--text-dim);font-size:7px}
-.win-btn{
+.alert-counter.show{opacity:1;transform:scale(1)}
+.dock-btn{
   width:18px;height:18px;display:flex;align-items:center;justify-content:center;
   background:transparent;border:none;color:var(--text-dim);cursor:pointer;
-  font-size:14px;transition:all .15s;border-radius:3px;
+  font-size:14px;transition:all .15s;border-radius:3px;line-height:1;
 }
-.win-btn:hover{color:var(--cyan);background:rgba(0,247,255,.12);box-shadow:var(--glow-cyan)}
-.win-btn.close:hover{color:var(--warn);background:rgba(255,68,102,.18);box-shadow:var(--glow-warn)}
+.dock-btn:hover{color:var(--cyan);background:rgba(0,247,255,.12);box-shadow:var(--glow-cyan)}
+.dock-btn.close:hover{color:var(--warn);background:rgba(255,68,102,.18);box-shadow:var(--glow-warn)}
 
-/* Window Body Layout */
-.modal-body{
-  display:grid;grid-template-columns:1fr 340px;flex:1;overflow:hidden;
+/* Dock Panel (expandable) */
+.dock-panel{
+  display:flex;flex-direction:column;max-height:600px;overflow:hidden;
+  animation:slideExpand .2s ease-out;
+}
+@keyframes slideExpand{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Wolf Section (TOP) */
+.wolf-section{
+  height:200px;background:var(--bg-term);border-bottom:1px solid var(--border);
+  position:relative;display:flex;flex-direction:column;
+}
+.wolf-viewport{flex:1;position:relative;overflow:hidden}
+#wolf-svg{display:block;width:100%;height:100%;cursor:crosshair}
+.cyber-dock.threat-high .eye-glow{fill:url(#eyeAlert)!important}
+.cyber-dock.threat-critical .eye-glow{fill:url(#eyeThreat)!important;animation:pulseEye .7s infinite}
+@keyframes pulseEye{0%,100%{filter:drop-shadow(0 0 7px var(--alert))}50%{filter:drop-shadow(0 0 16px var(--alert),0 0 24px var(--alert-dim))}}
+
+.wolf-overlay{
+  position:absolute;bottom:6px;left:8px;right:8px;background:rgba(2,4,10,.88);
+  border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-size:5.8px;
+}
+.wolf-row{display:flex;justify-content:space-between;margin-bottom:1px}
+.wolf-row span:first-child{color:var(--text-muted)}
+.wolf-row span:last-child{color:var(--cyan);font-weight:700}
+.wolf-row .threat-low{color:var(--green)}
+.wolf-row .threat-high{color:var(--warn)}
+.wolf-row .threat-crit{color:var(--alert)}
+.wolf-bar{height:2.5px;background:var(--border);border-radius:1px;overflow:hidden;margin-top:3px}
+.wolf-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--cyan-dim));width:38%;transition:width .35s}
+
+.wolf-actions{
+  position:absolute;bottom:6px;right:8px;display:flex;gap:3px;
+}
+.wact{
+  width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+  background:var(--bg-soft);border:1px solid var(--border-light);border-radius:4px;
+  color:var(--cyan-dim);cursor:pointer;font-size:11px;transition:all .15s;
+}
+.wact:hover{background:rgba(0,247,255,.18);border-color:var(--cyan);color:var(--cyan);box-shadow:var(--glow-cyan);transform:translateY(-1px)}
+
+/* Terminal Section (BOTTOM) */
+.term-section{
+  display:flex;flex-direction:column;min-height:180px;max-height:400px;
   background:var(--bg);
 }
-
-/* Left Panel */
-.panel-left{
-  display:flex;flex-direction:column;gap:6px;padding:8px;overflow:hidden;
-}
-
-/* Terminal Wrapper */
-.terminal-wrapper{
-  flex:1;display:flex;flex-direction:column;min-height:0;
-  background:var(--bg-term);border:1px solid var(--border);border-radius:6px;
-  overflow:hidden;position:relative;
-}
-.terminal-header{
+.term-header{
   display:flex;justify-content:space-between;align-items:center;
-  padding:5px 8px;background:rgba(0,247,255,.04);border-bottom:1px solid var(--border);
-  font-size:7px;
+  padding:4px 8px;background:rgba(0,247,255,.04);border-bottom:1px solid var(--border);
+  font-size:6.8px;color:var(--text-dim);
 }
-.term-tabs{display:flex;gap:2px}
-.tab{
-  padding:3px 8px;background:transparent;border:none;color:var(--text-dim);
-  cursor:pointer;border-radius:3px 3px 0 0;transition:all .15s;font-size:7px;
-}
-.tab:hover{color:var(--cyan)}
-.tab.active{background:var(--cyan);color:#000;font-weight:700}
-.term-controls{display:flex;align-items:center;gap:6px}
-.rec-dot{
-  width:6px;height:6px;background:var(--warn);border-radius:50%;
-  animation:blinkFast .8s infinite;opacity:0;
-}
-.rec-dot.active{opacity:1}
-@keyframes blinkFast{0%,100%{opacity:1}50%{opacity:.3}}
-.term-status{color:var(--cyan);font-weight:700}
+.term-path{color:var(--cyan);font-weight:700}
+.term-indicator{color:var(--green);font-weight:700}
+.term-indicator.busy{color:var(--warn);animation:blinkFast .6s infinite}
+@keyframes blinkFast{0%,100%{opacity:1}50%{opacity:.4}}
 
-.terminal-screen{
+.term-screen{
   flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;
+  min-height:120px;
 }
 .scanlines{
   position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,247,255,.04) 2px,rgba(0,247,255,.04) 4px);
-  pointer-events:none;z-index:1;opacity:.6;
-}
-.noise-overlay{
-  position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events:none;z-index:1;opacity:.5;
 }
 .term-output{
-  flex:1;padding:6px 8px;overflow-y:auto;font-size:7.2px;line-height:1.35;
+  flex:1;padding:5px 7px;overflow-y:auto;font-size:7px;line-height:1.3;
   color:var(--text-dim);scrollbar-width:none;position:relative;z-index:2;
 }
 .term-output::-webkit-scrollbar{display:none}
-.out-line{opacity:0;transform:translateX(-4px);transition:opacity .12s,transform .12s;white-space:pre-wrap;word-break:break-all}
+.out-line{opacity:0;transform:translateX(-3px);transition:opacity .1s,transform .1s;white-space:pre-wrap;word-break:break-all}
 .out-line.show{opacity:1;transform:translateX(0)}
-.out-line.ok{color:var(--ok);text-shadow:0 0 4px rgba(191,255,0,.35)}
-.out-line.warn{color:var(--warn);text-shadow:0 0 4px rgba(255,68,102,.35)}
-.out-line.info{color:var(--cyan-dim);text-shadow:0 0 4px rgba(0,184,217,.35)}
-.out-line.crit{color:var(--alert);font-weight:700;text-shadow:0 0 6px rgba(255,0,221,.6);animation:flicker .08s infinite}
-@keyframes flicker{0%,100%{opacity:1}50%{opacity:.75}}
+.out-line.ok{color:var(--ok);text-shadow:0 0 3px rgba(191,255,0,.3)}
+.out-line.warn{color:var(--warn);text-shadow:0 0 3px rgba(255,68,102,.3)}
+.out-line.info{color:var(--cyan-dim);text-shadow:0 0 3px rgba(0,184,217,.3)}
+.out-line.crit{color:var(--alert);font-weight:700;text-shadow:0 0 5px rgba(255,0,221,.5);animation:flicker .09s infinite}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:.7}}
 
-.term-input-line{
-  display:flex;align-items:center;gap:4px;padding:4px 8px;
+.term-input{
+  display:flex;align-items:center;gap:4px;padding:4px 7px;
   border-top:1px solid var(--border);background:rgba(0,247,255,.03);
-  font-size:7.2px;min-height:18px;position:relative;z-index:3;
+  font-size:7px;min-height:17px;position:relative;z-index:3;
 }
-.prompt{color:var(--green);font-weight:700;text-shadow:0 0 5px var(--green-dim)}
-.prompt-user{color:var(--cyan)}
-.prompt-host{color:var(--cyan-dim)}
-.prompt-path{color:var(--ok)}
-#cmd-input{
+.prompt{color:var(--green);font-weight:700;text-shadow:0 0 4px var(--green-dim)}
+#user-input{
   flex:1;outline:none;color:var(--text);background:transparent;border:none;
-  font-family:inherit;font-size:inherit;caret-color:var(--cyan);
+  font-family:inherit;font-size:inherit;caret-color:transparent;
 }
-.cursor-blink{animation:blinkCursor 1s step-end infinite;color:var(--cyan);text-shadow:var(--glow-cyan)}
-@keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:.2}}
+.cursor{animation:blinkCursor .9s step-end infinite;color:var(--cyan);text-shadow:var(--glow-cyan)}
+@keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:.25}}
 
-.autocomplete{
-  position:absolute;bottom:100%;left:8px;right:8px;background:var(--bg-panel);
-  border:1px solid var(--border);border-radius:4px 4px 0 0;overflow:hidden;
-  max-height:120px;overflow-y:auto;font-size:6.8px;display:none;z-index:10;
+/* Alert Mini Feed */
+.alert-mini{
+  height:36px;background:rgba(2,4,10,.92);border-top:1px solid var(--border);
+  padding:3px 6px;font-size:5.8px;line-height:1.2;display:flex;flex-direction:column;
+  overflow:hidden;
 }
-.autocomplete.show{display:block}
-.ac-item{
-  padding:4px 8px;color:var(--text-dim);cursor:pointer;display:flex;justify-content:space-between;
+.alert-label{color:var(--cyan);font-weight:700;font-size:6px;margin-bottom:1px}
+.alert-items{overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:1px}
+.alert-item{
+  padding:1px 3px;border-left:2px solid var(--border);border-radius:0 2px 2px 0;
+  opacity:0;transform:translateX(-4px);transition:all .1s;font-size:5.5px;
 }
-.ac-item:hover,.ac-item.active{background:rgba(0,247,255,.12);color:var(--cyan)}
-.ac-hint{color:var(--text-muted);font-size:6px}
-
-.cmd-palette{
-  padding:5px 8px;background:rgba(0,247,255,.03);border-top:1px solid var(--border);
-  font-size:6.5px;
-}
-.palette-hint{color:var(--text-muted);display:block;margin-bottom:4px}
-.palette-items{display:flex;gap:3px;flex-wrap:wrap}
-.palette-btn{
-  padding:3px 6px;background:var(--bg-soft);border:1px solid var(--border-light);
-  border-radius:3px;color:var(--cyan-dim);cursor:pointer;font-size:6.5px;
-  transition:all .15s;
-}
-.palette-btn:hover{background:rgba(0,247,255,.15);border-color:var(--cyan);color:var(--cyan);box-shadow:var(--glow-cyan)}
-
-/* Wolf Panel */
-.wolf-panel{
-  height:240px;background:var(--bg-panel);border:1px solid var(--border);
-  border-radius:6px;overflow:hidden;position:relative;display:flex;flex-direction:column;
-}
-.wolf-viewport{flex:1;position:relative;overflow:hidden;background:var(--bg-term)}
-#wolf-svg{display:block;width:100%;height:100%;cursor:crosshair;transition:filter .25s}
-.wolf-panel:hover #wolf-svg{filter:drop-shadow(0 0 6px rgba(0,247,255,.4))}
-.modal-window.threat-high .eye-glow{fill:url(#eyeAlert)!important}
-.modal-window.threat-critical .eye-glow{fill:url(#eyeThreat)!important;animation:pulseEye .7s infinite}
-.modal-window.threat-hunted .eye-glow{fill:url(#eyeHunted)!important}
-@keyframes pulseEye{0%,100%{filter:drop-shadow(0 0 8px var(--alert))}50%{filter:drop-shadow(0 0 18px var(--alert),0 0 28px var(--alert-dim))}}
-
-.wolf-status-overlay{
-  position:absolute;bottom:8px;left:8px;right:8px;background:rgba(2,4,10,.85);
-  border:1px solid var(--border);border-radius:4px;padding:5px 6px;font-size:6px;
-}
-.status-row{display:flex;justify-content:space-between;margin-bottom:2px}
-.status-label{color:var(--text-muted)}
-.status-value{color:var(--cyan);font-weight:700}
-.status-value.threat-low{color:var(--green)}
-.status-value.threat-high{color:var(--warn)}
-.status-value.threat-crit{color:var(--alert)}
-.status-bar{
-  height:3px;background:var(--border-light);border-radius:2px;overflow:hidden;margin-top:3px;
-}
-.bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--cyan-dim));width:35%;transition:width .3s}
-
-.wolf-hints{
-  position:absolute;top:8px;left:8px;right:8px;text-align:center;
-  font-size:5.5px;color:var(--text-muted);opacity:.8;
-}
-
-/* Right Panel */
-.panel-right{
-  display:flex;flex-direction:column;gap:6px;padding:8px;border-left:1px solid var(--border);
-  background:var(--bg-soft);overflow-y:auto;
-}
-
-/* Threat Feed */
-.threat-feed{
-  background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;
-  overflow:hidden;display:flex;flex-direction:column;min-height:0;
-}
-.feed-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:5px 8px;background:rgba(255,68,102,.08);border-bottom:1px solid var(--border);
-  font-size:6.5px;font-weight:700;color:var(--warn);
-}
-.feed-filters{display:flex;gap:2px}
-.filter-btn{
-  padding:2px 5px;background:transparent;border:none;color:var(--text-dim);
-  cursor:pointer;font-size:5.5px;border-radius:2px;transition:all .15s;
-}
-.filter-btn:hover,.filter-btn.active{background:var(--warn);color:#fff}
-.feed-list{
-  flex:1;overflow-y:auto;padding:4px 6px;font-size:6px;line-height:1.25;
-  color:var(--text-dim);scrollbar-width:none;display:flex;flex-direction:column;gap:3px;
-}
-.feed-list::-webkit-scrollbar{display:none}
-.feed-item{
-  padding:3px 4px;border-left:2px solid var(--border-light);border-radius:0 3px 3px 0;
-  background:rgba(0,0,0,.2);transition:all .15s;opacity:0;transform:translateX(-5px);
-}
-.feed-item.show{opacity:1;transform:translateX(0)}
-.feed-item.high{border-left-color:var(--warn);color:var(--warn)}
-.feed-item.crit{border-left-color:var(--alert);color:var(--alert);font-weight:700;animation:pulseBorder .8s infinite}
-.feed-item.info{border-left-color:var(--cyan)}
-.feed-footer{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:4px 6px;border-top:1px solid var(--border);font-size:5.5px;color:var(--text-muted);
-}
-.feed-clear{
-  background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:10px;
-  transition:color .15s;
-}
-.feed-clear:hover{color:var(--warn)}
-
-/* Metrics Panel */
-.metrics-panel{
-  background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;
-  padding:6px 8px;font-size:6.5px;
-}
-.metric-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
-.metric-label{color:var(--text-muted);width:28px}
-.metric-bar{flex:1;height:4px;background:var(--border-light);border-radius:2px;overflow:hidden}
-.metric-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));width:35%;transition:width .4s}
-.metric-value{width:38px;text-align:right;color:var(--cyan);font-weight:700}
-
-/* Kill Chain Panel */
-.killchain-panel{
-  background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;
-  padding:6px 8px;font-size:6px;
-}
-.kc-title{color:var(--cyan);font-weight:700;margin-bottom:4px;font-size:6.5px}
-.kc-steps{display:flex;flex-direction:column;gap:2px}
-.kc-step{
-  padding:2px 4px;color:var(--text-dim);border-left:2px solid var(--border-light);
-  transition:all .15s;cursor:pointer;
-}
-.kc-step:hover{color:var(--cyan);border-left-color:var(--cyan)}
-.kc-step.active{color:var(--ok);border-left-color:var(--ok);font-weight:700;background:rgba(0,255,71,.08)}
-.kc-current{
-  margin-top:4px;padding:3px 5px;background:rgba(0,247,255,.08);
-  border-radius:3px;color:var(--cyan);font-weight:700;text-align:center;
-}
-
-/* Quick Actions Panel */
-.quick-actions-panel{
-  background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;
-  padding:6px 8px;font-size:6px;
-}
-.qa-title{color:var(--cyan);font-weight:700;margin-bottom:4px;font-size:6.5px}
-.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.qa-btn{
-  padding:4px 6px;background:var(--bg-soft);border:1px solid var(--border-light);
-  border-radius:4px;color:var(--cyan-dim);cursor:pointer;font-size:6px;
-  transition:all .15s;text-align:left;
-}
-.qa-btn:hover{background:rgba(0,247,255,.15);border-color:var(--cyan);color:var(--cyan);box-shadow:var(--glow-cyan)}
-
-/* Modal Footer */
-.modal-footer{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:6px 12px;background:rgba(0,247,255,.04);border-top:1px solid var(--border);
-  font-size:6.5px;
-}
-.footer-left,.footer-right{display:flex;align-items:center;gap:10px}
-.footer-item{color:var(--text-dim)}
-.footer-item b{color:var(--cyan)}
-.footer-btn{
-  padding:3px 8px;background:var(--bg-soft);border:1px solid var(--border-light);
-  border-radius:3px;color:var(--cyan-dim);cursor:pointer;font-size:6px;
-  transition:all .15s;
-}
-.footer-btn:hover{background:rgba(0,247,255,.15);border-color:var(--cyan);color:var(--cyan)}
-.footer-status{color:var(--green);font-weight:700}
+.alert-item.show{opacity:1;transform:translateX(0)}
+.alert-item.high{border-left-color:var(--warn);color:var(--warn)}
+.alert-item.crit{border-left-color:var(--alert);color:var(--alert);font-weight:700}
 
 /* Toast Notifications */
 #toast-container{
-  position:fixed;top:20px;right:20px;z-index:100001;
-  display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:280px;
+  position:fixed;top:20px;right:400px;z-index:100000;
+  display:flex;flex-direction:column;gap:5px;pointer-events:none;max-width:260px;
 }
 .toast{
-  background:rgba(3,7,18,.98);border:1px solid var(--border);border-left:4px solid var(--cyan);
-  color:var(--text);padding:8px 10px;border-radius:6px;
-  box-shadow:0 6px 24px rgba(0,0,0,.7),var(--glow-cyan);
-  transform:translateX(160%);transition:transform .25s cubic-bezier(.4,0,.2,1);
-  font-size:7.5px;line-height:1.3;backdrop-filter:blur(12px);position:relative;overflow:hidden;
-  pointer-events:auto;
+  background:rgba(3,7,18,.96);border:1px solid var(--border);border-left:4px solid var(--cyan);
+  color:var(--text);padding:7px 9px;border-radius:5px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.7),var(--glow-cyan);
+  transform:translateX(140%);transition:transform .22s cubic-bezier(.4,0,.2,1);
+  font-size:7.2px;line-height:1.25;backdrop-filter:blur(10px);position:relative;
 }
 .toast.show{transform:translateX(0)}
-.toast.warn{border-left-color:var(--warn);box-shadow:0 6px 24px rgba(0,0,0,.7),var(--glow-warn)}
-.toast.crit{border-left-color:var(--alert);animation:pulseToast 1s infinite}
-@keyframes pulseToast{0%,100%{box-shadow:0 6px 24px rgba(0,0,0,.7),var(--glow-warn)}50%{box-shadow:0 6px 32px rgba(255,68,102,.9),0 0 40px rgba(255,0,221,.6)}}
-.toast .t-title{font-weight:800;display:block;margin-bottom:3px;color:var(--cyan)}
+.toast.warn{border-left-color:var(--warn);box-shadow:0 5px 20px rgba(0,0,0,0.7),var(--glow-warn)}
+.toast.crit{border-left-color:var(--alert);animation:pulseToast .9s infinite}
+@keyframes pulseToast{0%,100%{box-shadow:0 5px 20px rgba(0,0,0,0.7),var(--glow-warn)}50%{box-shadow:0 5px 28px rgba(255,68,102,.9),0 0 36px rgba(255,0,221,.6)}}
+.toast .t-title{font-weight:800;display:block;margin-bottom:2px;color:var(--cyan)}
 .toast.warn .t-title{color:var(--warn)}
 .toast.crit .t-title{color:var(--alert)}
-.toast .t-desc{color:var(--text-dim);font-size:7px;opacity:.95;display:block}
-.toast .t-meta{color:var(--text-muted);font-size:6px;margin-top:3px;font-style:italic;display:block}
+.toast .t-desc{color:var(--text-dim);font-size:6.8px;opacity:.95}
 .toast::before{
-  content:'';position:absolute;top:0;right:0;width:5px;height:100%;
-  background:linear-gradient(180deg,var(--cyan),transparent);
-  animation:flashBar 1.4s infinite;opacity:.85;
+  content:'';position:absolute;top:0;right:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--cyan),transparent);animation:flashBar 1.3s infinite;opacity:.85;
 }
 .toast.warn::before{background:linear-gradient(180deg,var(--warn),transparent)}
 .toast.crit::before{background:linear-gradient(180deg,var(--alert),var(--cyan))}
 @keyframes flashBar{0%,100%{opacity:.85}50%{opacity:1}}
 
 /* Responsive */
-@media(max-width:1100px){.modal-body{grid-template-columns:1fr 300px}}
-@media(max-width:900px){.modal-body{grid-template-columns:1fr;grid-template-rows:1fr 280px}.panel-right{border-left:none;border-top:1px solid var(--border)}}
-@media(max-width:768px){.cyber-trigger{bottom:16px;right:16px;width:46px;height:46px}.modal-window{width:98vw;height:96vh}}
+@media(max-width:1200px){#toast-container{right:380px}}
+@media(max-width:900px){.cyber-dock{width:320px;right:12px;top:12px}#toast-container{right:340px;top:12px}}
+@media(max-width:600px){.cyber-dock{width:96vw!important;right:2vw!important;top:2vh!important}#toast-container{right:4vw;top:8vh;max-width:85vw}}
 
-/* Glitch effect for critical */
-.glitch{animation:glitch .25s ease-in-out}
-@keyframes glitch{
+/* Glitch effect */
+.glitch{animation:glitchAnim .2s ease-in-out}
+@keyframes glitchAnim{
   0%{transform:translate(0);filter:hue-rotate(0)}
   25%{transform:translate(-1px,1px);filter:hue-rotate(90deg)}
   50%{transform:translate(1px,-1px);filter:hue-rotate(180deg)}
   75%{transform:translate(-1px,-1px);filter:hue-rotate(270deg)}
   100%{transform:translate(0);filter:hue-rotate(0)}
 }
-
-/* Floating tags animation */
-.float-tag{animation:floatTag 4s ease-in-out infinite}
-@keyframes floatTag{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 </style>
 
 <script>
 (()=>{
-  // === ELEMENT REFERENCES ===
+  // === UTILS ===
   const $=id=>document.getElementById(id);
-  const $$=sel=>document.querySelectorAll(sel);
+  const delay=ms=>new Promise(r=>setTimeout(r,ms));
+  const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1)+a);
+  const pick=arr=>arr[rnd(0,arr.length-1)];
   
-  // Modal elements
-  const trigger=$('cyber-trigger'),modal=$('cyber-modal'),backdrop=$('modal-backdrop'),
-        window=$('modal-window'),header=$('modal-header'),
-        termOut=$('term-output'),cmdInput=$('cmd-input'),autocomplete=$('autocomplete'),
-        wolfSvg=$('wolf-svg'),wolfPanel=$('wolf-panel'),wolfMode=$('wolf-mode'),
-        wolfThreat=$('wolf-threat'),wolfTargets=$('wolf-targets'),wolfProgress=$('wolf-progress'),
-        feedList=$('feed-list'),feedStats=$('feed-stats'),feedClear=$('feed-clear'),
-        cpuFill=$('cpu-fill'),memFill=$('mem-fill'),netFill=$('net-fill'),pktFill=$('pkt-fill'),
-        cpuVal=$('cpu-val'),memVal=$('mem-val'),netVal=$('net-val'),pktVal=$('pkt-val'),
-        kcSteps=$$('.kc-step'),kcCurrent=$('kc-current'),
-        toastC=$('toast-container'),triggerAlerts=$('trigger-alerts');
+  // === ELEMENTS ===
+  const dock=$('cyber-dock'),header=$('dock-header'),panel=$('dock-panel'),
+        wolfSvg=$('wolf-svg'),wolfMode=$('wolf-mode'),wolfThreat=$('wolf-threat'),
+        wolfTargets=$('wolf-targets'),wolfFill=$('wolf-fill'),
+        termOutput=$('term-output'),termInput=$('user-input'),termCursor=$('user-cursor'),
+        termIndicator=$('term-indicator'),alertItems=$('alert-items'),alertCounter=$('dock-alerts'),
+        dockStatus=$('dock-status'),toastC=$('toast-container');
   
-  // State
-  let isOpen=false,isMinimized=false,isDragging=false,dragOffset={x:0,y:0},
-      threat='low',alertCount=0,sessionStart=Date.now(),opsCount=0,
-      cmdHistory=[],cmdIndex=-1,autoCompleteItems=[],typing=false;
+  // === STATE ===
+  let expanded=false,maximized=false,autoRunning=true,userTyping=false,
+      threat='low',alertCount=0,typingSpeed=22,autoOutputQueue=[],
+      cursorX=0,cursorY=0,cursorEl=null;
   
-  // === MODAL CONTROLS ===
-  function openModal(){
-    if(isOpen)return;
-    isOpen=true;isMinimized=false;
-    modal.classList.remove('hidden');
-    window.classList.remove('hidden');
-    setTimeout(()=>cmdInput.focus(),100);
-    trigger.classList.add('active');
-    toast('◈ TERMINAL ONLINE','Secure session established','ok');
-    startLoops();
+  // === CUSTOM CURSOR (widget area only) ===
+  function initCursor(){
+    cursorEl=document.createElement('div');
+    cursorEl.className='cyber-cursor';
+    cursorEl.innerHTML='<div class="blade"></div><div class="handle"></div>';
+    document.body.appendChild(cursorEl);
+    
+    // Track mouse only when over dock
+    dock.addEventListener('mouseenter',e=>{
+      cursorEl.style.display='block';
+      updateCursor(e);
+    });
+    dock.addEventListener('mousemove',e=>updateCursor(e));
+    dock.addEventListener('mouseleave',()=>cursorEl.style.display='none');
+    
+    // Click effect
+    dock.addEventListener('mousedown',()=>{
+      cursorEl.style.transform='translate(-50%,-10%) rotate(-50deg) scale(0.95)';
+      cursorEl.querySelector('.blade').style.opacity='0.9';
+    });
+    dock.addEventListener('mouseup',()=>{
+      cursorEl.style.transform='translate(-50%,-10%) rotate(-42deg) scale(1)';
+      cursorEl.querySelector('.blade').style.opacity='1';
+    });
+    
+    // Link mode on interactive elements
+    dock.querySelectorAll('button, .wact, #user-input').forEach(el=>{
+      el.addEventListener('mouseenter',()=>cursorEl.classList.add('link-mode'));
+      el.addEventListener('mouseleave',()=>cursorEl.classList.remove('link-mode'));
+    });
   }
   
-  function closeModal(){
-    isOpen=false;
-    modal.classList.add('hidden');
-    trigger.classList.remove('active');
-    stopLoops();
+  function updateCursor(e){
+    cursorX=e.clientX;cursorY=e.clientY;
+    cursorEl.style.left=cursorX+'px';
+    cursorEl.style.top=cursorY+'px';
   }
   
-  function toggleMinimize(){
-    isMinimized=!isMinimized;
-    window.style.display=isMinimized?'none':'flex';
-    if(!isMinimized)setTimeout(()=>cmdInput.focus(),50);
+  // === DOCK CONTROLS ===
+  function toggleExpand(){
+    expanded=!expanded;
+    dock.classList.toggle('minimized',!expanded);
+    $('btn-toggle').textContent=expanded?'⤡':'⤢';
+    if(expanded){
+      setTimeout(()=>termInput.focus(),100);
+      if(!autoRunning)startAutoLoop();
+      toast('◈ TERMINAL ACTIVE','Secure session established','ok');
+    }
   }
+  
+  function toggleMaximize(){
+    maximized=!maximized;
+    dock.classList.toggle('maximized',maximized);
+    $('btn-maximize').textContent=maximized?'❐':'□';
+  }
+  
+  function hideDock(){
+    expanded=false;maximized=false;
+    dock.classList.add('minimized');
+    dock.classList.remove('maximized');
+    autoRunning=false;
+    dockStatus.textContent='● IDLE';
+    dockStatus.classList.remove('active');
+  }
+  
+  // Event listeners
+  $('btn-toggle').onclick=toggleExpand;
+  $('btn-maximize').onclick=toggleMaximize;
+  $('btn-close').onclick=hideDock;
   
   // Drag functionality
+  let isDragging=false,dragOffset={x:0,y:0};
   header.addEventListener('mousedown',e=>{
-    if(e.target.closest('.win-btn'))return;
+    if(e.target.closest('.dock-btn'))return;
     isDragging=true;
-    const rect=window.getBoundingClientRect();
+    const rect=dock.getBoundingClientRect();
     dragOffset.x=e.clientX-rect.left;
     dragOffset.y=e.clientY-rect.top;
-    window.style.transition='none';
+    dock.style.transition='none';
     e.preventDefault();
   });
   
   document.addEventListener('mousemove',e=>{
     if(!isDragging)return;
     const x=e.clientX-dragOffset.x,y=e.clientY-dragOffset.y;
-    const maxX=window.innerWidth-window.offsetWidth+20,minX=20,
-          maxY=window.innerHeight-window.offsetHeight+20,minY=20;
-    window.style.left=`${Math.max(minX,Math.min(x,maxX))}px`;
-    window.style.top=`${Math.max(minY,Math.min(y,maxY))}px`;
+    const maxX=window.innerWidth-dock.offsetWidth+10,minX=10,
+          maxY=window.innerHeight-dock.offsetHeight+10,minY=10;
+    dock.style.right='auto';dock.style.top='auto';
+    dock.style.left=`${Math.max(minX,Math.min(x,maxX))}px`;
+    dock.style.top=`${Math.max(minY,Math.min(y,maxY))}px`;
   });
   
   document.addEventListener('mouseup',()=>{
-    if(isDragging){isDragging=false;window.style.transition='';}
+    if(isDragging){isDragging=false;dock.style.transition='';}
   });
-  
-  // Event listeners
-  trigger.onclick=openModal;
-  backdrop.onclick=closeModal;
-  $('win-close').onclick=closeModal;
-  $('win-min').onclick=toggleMinimize;
-  $('win-max').onclick=()=>{
-    window.style.width=window.style.width==='100%'?'':'100vw';
-    window.style.height=window.style.height==='100%'?'':'100vh';
-    window.style.left=window.style.width==='100vw'?'0':'';
-    window.style.top=window.style.height==='100vh'?'0':'';
-  };
   
   // Keyboard shortcuts
   document.addEventListener('keydown',e=>{
-    if(e.ctrlKey&&e.key==='`'){e.preventDefault();isOpen?closeModal():openModal();}
-    if(!isOpen)return;
-    if(e.key==='Escape'){e.preventDefault();closeModal();}
-    if(e.key==='Enter'&&cmdInput.textContent.trim()){
-      e.preventDefault();executeCommand(cmdInput.textContent.trim());
-      cmdInput.textContent='';cmdHistory.push(cmdInput.textContent);cmdIndex=cmdHistory.length;
+    if(e.ctrlKey&&e.key==='`'){e.preventDefault();toggleExpand();}
+    if(!expanded)return;
+    if(e.key==='Escape'){e.preventDefault();if(maximized)toggleMaximize();else hideDock();}
+    if(e.key==='Enter'&&termInput.textContent.trim()&&!userTyping){
+      e.preventDefault();handleUserCommand(termInput.textContent.trim());
+      termInput.textContent='';
     }
-    if(e.key==='ArrowUp'){e.preventDefault();cmdIndex=Math.max(0,cmdIndex-1);if(cmdHistory[cmdIndex])cmdInput.textContent=cmdHistory[cmdIndex];}
-    if(e.key==='ArrowDown'){e.preventDefault();cmdIndex=Math.min(cmdHistory.length,cmdIndex+1);cmdInput.textContent=cmdHistory[cmdIndex]||'';}
-    if(e.ctrlKey&&e.key==='k'){e.preventDefault();showCommandPalette();}
-    if(e.key==='Tab'){e.preventDefault();showAutocomplete();}
   });
   
-  // === TERMINAL FUNCTIONS ===
-  function typeLine(text,cls='',speed=18){
+  // === TERMINAL OUTPUT ===
+  function typeLine(text,cls='',speed=typingSpeed){
     return new Promise(resolve=>{
+      if(!expanded){resolve();return;}
       const line=document.createElement('div');
-      line.className=`out-line ${cls}`;termOut.appendChild(line);
+      line.className=`out-line ${cls}`;termOutput.appendChild(line);
       let i=0;const interval=setInterval(()=>{
-        if(i<text.length){line.textContent+=text[i++];termOut.scrollTop=termOut.scrollHeight;}
-        else{clearInterval(interval);line.classList.add('show');if(termOut.children.length>25)termOut.removeChild(termOut.firstChild);resolve();}
-      },speed);
+        if(userTyping){clearInterval(interval);resolve();return;}
+        if(i<text.length){line.textContent+=text[i++];termOutput.scrollTop=termOutput.scrollHeight;}
+        else{clearInterval(interval);line.classList.add('show');
+          if(termOutput.children.length>30)termOutput.removeChild(termOutput.firstChild);
+          resolve();}
+      },speed+rnd(-4,8));
     });
   }
   
-  async function executeCommand(cmd){
-    opsCount++;$('footer-ops').textContent=opsCount;
-    await typeLine(`└─$ ${cmd}`,'info',12);
+  async function runAutoCommand(cmd,outputs){
+    if(!autoRunning||userTyping)return;
+    termIndicator.textContent='● RUNNING';termIndicator.classList.add('busy');
     
-    // Command routing
-    if(cmd.startsWith('nmap'))await simulateNmap();
-    else if(cmd.startsWith('bloodhound'))await simulateBloodhound();
-    else if(cmd.startsWith('impacket'))await simulateImpacket();
-    else if(cmd.startsWith('sqlmap'))await simulateSQLMap();
-    else if(cmd.startsWith('hashcat'))await simulateHashcat();
-    else if(cmd.startsWith('msfconsole'))await simulateMetasploit();
-    else if(cmd.startsWith('help'))await typeLine('Available: nmap, bloodhound, impacket, sqlmap, hashcat, msfconsole, clear, help','info');
-    else if(cmd==='clear'){termOut.innerHTML='';return;}
-    else await typeLine(`[!] Unknown command: ${cmd}\n[?] Type 'help' for available commands`,'warn');
+    // Type command
+    await typeLine(`$ ${cmd}`,'info',14);
+    await delay(rnd(150,350));
+    
+    // Stream outputs
+    for(const out of outputs){
+      if(userTyping)break;
+      let cls='';
+      if(/open|success|done|retrieved|Cracked|\+/.test(out))cls='ok';
+      if(/Error|failed|BLOCK|VULNERABLE|injection|bypass/.test(out))cls='warn';
+      if(/Starting|Nmap|Hashcat|Impacket|Meterpreter/.test(out))cls='info';
+      if(/CRIT|SYSTEM|exfil|C2|injection/.test(out))cls='crit';
+      await typeLine(out,cls);
+      await delay(rnd(20,60));
+    }
+    
+    termIndicator.textContent='● READY';termIndicator.classList.remove('busy');
     
     // Random threat generation
-    if(Math.random()<0.4)generateThreatAlert();
-    if(Math.random()<0.25)generateToastNotification();
+    if(Math.random()<0.35)generateAlert();
+    if(Math.random()<0.2)generateToast();
   }
   
-  // === PENTEST SIMULATIONS (Authentic outputs) ===
-  async function simulateNmap(){
-    const lines=[
-      "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-04-25 16:18 CET",
-      "Nmap scan report for dc01.corp.local (10.12.0.10)",
-      "Host is up (0.0016s latency).",
-      "Not shown: 989 filtered tcp ports (no-response)",
-      "PORT     STATE SERVICE       VERSION",
-      "53/tcp   open  domain        Microsoft DNS 10.0.20348",
-      "88/tcp   open  kerberos-sec  Microsoft Windows Kerberos",
-      "135/tcp  open  msrpc         Microsoft Windows RPC",
-      "389/tcp  open  ldap          Microsoft Windows Active Directory LDAP",
-      "445/tcp  open  microsoft-ds  Windows Server 2022 Standard 20348",
-      "636/tcp  open  ldapssl       Microsoft Windows Active Directory LDAP",
-      "3268/tcp open  globalcatLDAP Microsoft Windows Active Directory LDAP",
-      "3269/tcp open  globalcatLdapS Microsoft Windows Active Directory LDAP",
-      "5985/tcp open  http          Microsoft HTTPAPI httpd 2.0",
-      "Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows_server_2022",
-      "OS detection performed. Please report incorrect results.",
-      "Nmap done: 1 IP address (1 host up) scanned in 38.42 seconds"
-    ];
-    for(const l of lines)await typeLine(l,l.match(/open|VERSION|Info|done/i)?'ok':'',14);
+  // === PENTEST COMMANDS (Realistic outputs) ===
+  const pentestCmds={
+    nmap:{
+      cmd:"nmap -sV -sC --min-rate 3000 10.12.0.10",
+      out:[
+        "Starting Nmap 7.94SVN ( https://nmap.org )",
+        "Nmap scan report for dc01.corp.local (10.12.0.10)",
+        "Host is up (0.0014s latency).",
+        "PORT     STATE SERVICE       VERSION",
+        "53/tcp   open  domain        Microsoft DNS 10.0.20348",
+        "88/tcp   open  kerberos-sec  Microsoft Windows Kerberos",
+        "135/tcp  open  msrpc         Microsoft Windows RPC",
+        "389/tcp  open  ldap          Microsoft Windows Active Directory LDAP",
+        "445/tcp  open  microsoft-ds  Windows Server 2022 Standard",
+        "Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows_server_2022",
+        "Nmap done: 1 IP address (1 host up) scanned in 28.42 seconds"
+      ]
+    },
+    bloodhound:{
+      cmd:"bloodhound-python -c All -d corp.local --zip",
+      out:[
+        "INFO: BloodHound CE Collector v1.3.0",
+        "INFO: Connected to LDAP: dc01.corp.local",
+        "INFO: Users: 2,914 | Groups: 441 | Computers: 168",
+        "INFO: GPOs: 37 | Attack paths: 1,347 edges",
+        "INFO: Shortest path to DA: svc_backup → AdminSDHolder → Domain Admins",
+        "INFO: Output: bloodhound_20250425_162245.zip"
+      ]
+    },
+    exploit:{
+      cmd:"msf6 > use exploit/windows/smb/ms17_010_eternalblue; run",
+      out:[
+        "[*] Started reverse TCP handler on 10.12.0.50:4444",
+        "[*] 10.12.0.14:445 - Using auxiliary/scanner/smb/smb_ms17_010",
+        "[+] 10.12.0.14:445 - Host is likely VULNERABLE to MS17-010!",
+        "[*] Sending stage (200776 bytes) to 10.12.0.14",
+        "[*] Meterpreter session 1 opened (10.12.0.50:4444 -> 10.12.0.14:49821)",
+        "meterpreter > getuid",
+        "Server username: NT AUTHORITY\\SYSTEM",
+        "[*] Session 1 opened - consider: hashdump, mimikatz"
+      ],
+      escalate:true
+    },
+    stealth:{
+      cmd:"iptables -A OUTPUT -p tcp --dport 443 -j LOG --log-prefix 'STEALTH: '",
+      out:[
+        "[*] Rule added to OUTPUT chain",
+        "[*] Logging enabled for HTTPS traffic",
+        "[*] Monitor: tail -f /var/log/kern.log | grep STEALTH",
+        "[✓] Stealth mode active - outbound traffic tagged"
+      ]
+    },
+    exfil:{
+      cmd:"python3 exfil_sim.py --target dc01 --method dns --payload dummy",
+      out:[
+        "[*] Loading exfiltration module...",
+        "[*] Target: dc01.corp.local | Method: DNS tunneling",
+        "[*] Encoding payload with base64+XOR...",
+        "[*] Sending 247 queries to suspicious.tk...",
+        "[+] Simulated exfil complete - 2.4MB transferred",
+        "[!] NOTE: This is a simulation. Real exfil requires C2 infrastructure."
+      ]
+    }
+  };
+  
+  // === USER INPUT HANDLING ===
+  function handleUserCommand(cmd){
+    userTyping=true;
+    autoRunning=false; // Pause auto-output while user types
+    
+    // Echo user command
+    typeLine(`$ ${cmd}`,'info',8).then(()=>{
+      // Process command
+      if(pentestCmds[cmd]){
+        runAutoCommand(pentestCmds[cmd].cmd,pentestCmds[cmd].out);
+        if(pentestCmds[cmd].escalate&&Math.random()<0.7)setThreat('high');
+      }else if(cmd==='clear'){
+        termOutput.innerHTML='';
+      }else if(cmd==='help'){
+        typeLine('Available: nmap, bloodhound, exploit, stealth, exfil, clear, help','info');
+      }else{
+        typeLine(`[!] Unknown: ${cmd} • Type 'help' for commands`,'warn');
+      }
+    }).then(()=>{
+      userTyping=false;
+      if(expanded)autoRunning=true; // Resume auto after user command
+    });
   }
   
-  async function simulateBloodhound(){
-    const lines=[
-      "INFO: BloodHound CE Collector v1.3.0",
-      "INFO: Connecting to LDAP: dc01.corp.local:389",
-      "INFO: Auth successful: svc_enum@corp.local",
-      "INFO: Domain: CORP.LOCAL | DCs: DC01, DC02",
-      "INFO: Users: 2,914 | Groups: 441 | Computers: 168",
-      "INFO: GPOs: 37 | OUs: 24 | Trusts: 0",
-      "INFO: Edge count: 1,347 | Attack paths mapped",
-      "INFO: Shortest path to DA: svc_backup → AdminSDHolder → Domain Admins",
-      "INFO: High-value targets: 12 (DA, EA, Backup Operators)",
-      "INFO: Output: bloodhound_20250425_161942.zip",
-      "INFO: Upload to BloodHound CE for graph visualization"
-    ];
-    for(const l of lines)await typeLine(l,l.match(/INFO:|path|targets|Output/i)?'info':'',16);
-  }
-  
-  async function simulateImpacket(){
-    const lines=[
-      "Impacket v0.12.1 - Copyright Fortra, LLC",
-      "Authenticating as svc_sql@corp.local",
-      "[*] Getting TGT for svc_sql",
-      "[*] Target SPN: MSSQLSvc/dc01.corp.local:1433",
-      "$krb5tgs$23$*svc_sql$CORP.LOCAL$MSSQLSvc/dc01.corp.local:1433*$a8f3c2e1d9b7a6f5...",
-      "[+] Hash exported: hashes.txt",
-      "[*] Crack with: hashcat -m 13100 hashes.txt /usr/share/wordlists/rockyou.txt --force",
-      "[*] Alternative: john --format=krb5tgs hashes.txt --wordlist=rockyou.txt"
-    ];
-    for(const l of lines)await typeLine(l,l.match(/\$krb5tgs|\+|Crack/i)?'warn':'',15);
-  }
-  
-  async function simulateSQLMap(){
-    const lines=[
-      "sqlmap/1.8.3#stable (https://sqlmap.org)",
-      "[*] starting @ 2025-04-25 16:20:15",
-      "[*] testing connection to target URL",
-      "[*] testing if parameter 'q' is injectable",
-      "[*] confirming UNION injectability with 7 columns",
-      "[*] target URL appears to be injectable",
-      "back-end DBMS: PostgreSQL >= 12.0",
-      "[*] fetching database names: 'public', 'analytics', 'users_db'",
-      "[*] fetching tables for 'users_db': users, sessions, transactions, audit_log",
-      "[*] dumping table 'users_db.users' (partial): 147 entries",
-      "[*] data saved to /home/kali/.local/share/sqlmap/output/api.target.io"
-    ];
-    for(const l of lines)await typeLine(l,l.match(/injectable|DBMS|dumping|saved/i)?'warn':'',13);
-  }
-  
-  async function simulateHashcat(){
-    const lines=[
-      "hashcat (v6.2.7) starting in optimized mode",
-      "OpenCL API: NVIDIA GeForce RTX 4070 Ti (12GB)",
-      "Hashes: 5 digests; 5 unique salts",
-      "Rules: 1 applied from best64.rule",
-      "Attack Mode: Dictionary + Rules | Session: pentest_20250425",
-      "Status: Running | Speed: 41.2 GH/s | ETA: 00:03:48",
-      "Recovered: 3/5 (60.00%) Digests",
-      "[+] Cracked: svc_admin:Welcome123!",
-      "[+] Cracked: backup_svc:Backup$2024",
-      "[+] Cracked: dev_user:DevP@ss2025!",
-      "Session stopped - 3 new passwords recovered"
-    ];
-    for(const l of lines)await typeLine(l,l.match(/\+Cracked|Recovered|GH\/s/i)?'ok':'',12);
-  }
-  
-  async function simulateMetasploit(){
-    const lines=[
-      "msf6 > use exploit/windows/smb/ms17_010_eternalblue",
-      "msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 10.12.0.14",
-      "msf6 exploit(windows/smb/ms17_010_eternalblue) > set LHOST 10.12.0.50",
-      "msf6 exploit(windows/smb/ms17_010_eternalblue) > run",
-      "[*] Started reverse TCP handler on 10.12.0.50:4444",
-      "[*] 10.12.0.14:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check",
-      "[+] 10.12.0.14:445 - Host is likely VULNERABLE to MS17-010!",
-      "[*] 10.12.0.14:445 - Connecting to target for exploitation",
-      "[*] Sending stage (200776 bytes) to 10.12.0.14",
-      "[*] Meterpreter session 1 opened (10.12.0.50:4444 -> 10.12.0.14:49821)",
-      "meterpreter > getuid",
-      "Server username: NT AUTHORITY\\SYSTEM",
-      "meterpreter > sysinfo",
-      "Computer: DC01.corp.local | OS: Windows Server 2022 Standard",
-      "[*] Session 1 opened - consider: hashdump, mimikatz, lateral movement"
-    ];
-    for(const l of lines)await typeLine(l,l.match(/\+|VULNERABLE|SYSTEM|opened/i)?'crit':'',11);
-    // Escalate threat on successful exploit
-    if(Math.random()<0.7)setThreat('high');
-  }
+  // User input events
+  termInput.addEventListener('focus',()=>{
+    termCursor.style.animation='none';setTimeout(()=>termCursor.style.animation='',100);
+  });
+  termInput.addEventListener('blur',()=>termCursor.style.animation='');
+  termInput.addEventListener('input',()=>{
+    // Auto-scroll while typing
+    termOutput.scrollTop=termOutput.scrollHeight;
+  });
   
   // === THREAT SYSTEM ===
-  const threatAlerts=[
-    {msg:"[2025-04-25 16:18:22] suricata[2841]: [1:2024218:1] ET SCAN Nmap SYN Scan [Classification: Attempted Information Leak] {TCP} 10.12.0.50:53214 → 10.12.0.10:445",sev:"high",tool:"suricata"},
-    {msg:"[2025-04-25 16:18:45] wazuh[1922]: Rule 5712 - Windows auth failure (4625). src:10.12.0.14 user:Administrator attempts:19",sev:"high",tool:"wazuh"},
-    {msg:"[2025-04-25 16:19:12] suricata[2841]: [1:2009588:3] ET TROJAN Possible C2 Beacon (HTTP POST to known malicious IP) {TCP} 10.12.0.18:49152 → 198.51.100.22:443",sev:"crit",tool:"suricata"},
-    {msg:"[2025-04-25 16:19:38] defender[ATP]: Suspicious PowerShell execution - encoded command, AMSI bypass attempt blocked",sev:"crit",tool:"defender"},
-    {msg:"[2025-04-25 16:20:05] crowdstrike[EDR]: Process injection detected: svchost.exe → mimikatz.dll (PID: 1942)",sev:"crit",tool:"crowdstrike"},
-    {msg:"[2025-04-25 16:20:31] splunk[SIEM]: Correlation rule TR-2025-041: Lateral movement pattern (SMB+WMI+PsExec) across 3 hosts",sev:"high",tool:"splunk"},
-    {msg:"[2025-04-25 16:20:58] zeek[IDS]: DNS tunneling suspected: high-entropy subdomains to suspicious TLD (.tk)",sev:"high",tool:"zeek"},
-    {msg:"[2025-04-25 16:21:24] sysmon[EventID-1]: Process creation: C:\\Windows\\Temp\\update.exe (SHA256: a3f8c2e1...)",sev:"info",tool:"sysmon"}
+  const alerts=[
+    {msg:"suricata: ET SCAN Nmap SYN Scan from 10.12.0.50",sev:"high"},
+    {msg:"wazuh: Windows auth failure (4625) - 19 attempts",sev:"high"},
+    {msg:"suricata: ET TROJAN C2 Beacon to 198.51.100.22:443",sev:"crit"},
+    {msg:"defender: AMSI bypass attempt blocked",sev:"crit"},
+    {msg:"crowdstrike: Process injection svchost→mimikatz.dll",sev:"crit"},
+    {msg:"splunk: Lateral movement pattern detected",sev:"high"},
+    {msg:"zeek: DNS tunneling to suspicious.tk",sev:"high"}
   ];
   
-  function generateThreatAlert(){
-    const alert=threatAlerts[Math.floor(Math.random()*threatAlerts.length)];
+  function generateAlert(){
+    if(!expanded)return;
+    const a=pick(alerts);
     const item=document.createElement('div');
-    item.className=`feed-item ${alert.sev}${alert.sev==='crit'?' crit':''}`;
-    const short=alert.msg.length>72?alert.msg.substring(0,69)+'...':alert.msg;
-    item.textContent=`[${alert.tool}] ${short}`;
-    feedList.appendChild(item);
+    item.className=`alert-item ${a.sev==='crit'?'crit':'high'}`;
+    item.textContent=a.msg;
+    alertItems.appendChild(item);
     requestAnimationFrame(()=>item.classList.add('show'));
     
     alertCount++;
-    triggerAlerts.textContent=alertCount;
-    triggerAlerts.classList.add('show');
-    feedStats.textContent=`${alertCount} alerts • Last: ${new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}`;
+    alertCounter.textContent=alertCount;
+    alertCounter.classList.add('show');
     
-    if(feedList.children.length>5)feedList.removeChild(feedList.firstChild);
+    if(alertItems.children.length>3)alertItems.removeChild(alertItems.firstChild);
     
-    // Auto escalate on crit
-    if(alert.sev==='crit'&&Math.random()<0.6)setThreat('critical');
+    if(a.sev==='crit'&&Math.random()<0.6)setThreat('critical');
   }
   
   function setThreat(level){
     threat=level;
-    const levels={low:{txt:'LOW',col:'var(--green)',cls:''},
-                  medium:{txt:'MED',col:'var(--ok)',cls:''},
-                  high:{txt:'HIGH',col:'var(--warn)',cls:'threat-high'},
-                  critical:{txt:'CRIT',col:'var(--alert)',cls:'threat-critical'},
-                  hunted:{txt:'HUNTED',col:'var(--hunt)',cls:'threat-hunted'}};
-    const cfg=levels[level]||levels.low;
+    const cfg={low:{txt:'LOW',col:'var(--green)',cls:''},
+               medium:{txt:'MED',col:'var(--ok)',cls:''},
+               high:{txt:'HIGH',col:'var(--warn)',cls:'threat-high'},
+               critical:{txt:'CRIT',col:'var(--alert)',cls:'threat-critical'}};
+    const c=cfg[level]||cfg.low;
     
-    // Update UI elements
-    $('modal-threat').querySelector('b').textContent=cfg.txt;
-    $('modal-threat').querySelector('b').style.color=cfg.col;
-    wolfThreat.textContent=cfg.txt;
-    wolfThreat.className=`status-value threat-${level}`;
-    wolfMode.textContent=level==='critical'||level==='hunted'?'EVASIVE':'ACTIVE';
+    wolfThreat.textContent=c.txt;wolfThreat.className=`threat-${level}`;
+    wolfMode.textContent=level==='critical'?'EVASIVE':'ACTIVE';
+    dockStatus.textContent=`● ${c.txt}`;
+    dockStatus.classList.toggle('active',level!=='low');
     
-    // Apply class to modal
-    modal.classList.remove('threat-high','threat-critical','threat-hunted');
-    if(cfg.cls)modal.classList.add(cfg.cls);
+    dock.classList.remove('threat-high','threat-critical');
+    if(c.cls)dock.classList.add(c.cls);
     
-    // Wolf eye color change handled by CSS
-    
-    // Toast notification for escalation
-    if(level==='critical'||level==='hunted'){
-      toast('⚠ THREAT ESCALATION',`Level raised to ${cfg.txt} - Evasive protocols engaged`,level==='critical'?'crit':'warn');
-    }
+    if(level==='critical')toast('⚠ CRITICAL THREAT','Evasive protocols engaged','crit');
   }
   
   // === TOAST NOTIFICATIONS ===
-  const toastMsgs=[
-    {t:"NMAP SCAN",d:"Host discovery complete. 18 live hosts in 10.12.0.0/24",type:"ok"},
-    {t:"BLOODHOUND",d:"Attack path mapped: svc_backup → AdminSDHolder → DA",type:"ok"},
-    {t:"HASHCAT",d:"3/5 NTLM hashes cracked. Review recovered.txt",type:"ok"},
-    {t:"SQLMAP",d:"PostgreSQL injection confirmed. 147 user records extracted",type:"warn"},
-    {t:"METERPRETER",d:"Session established: NT AUTHORITY\\SYSTEM on DC01",type:"crit"},
-    {t:"C2 BEACON",d:"Outbound connection to 198.51.100.22:443 flagged",type:"crit"},
-    {t:"BRUTE FORCE",d:"SSH auth failures from 185.220.101.42 - banned via fail2ban",type:"high"},
-    {t:"PROCESS INJECTION",d:"svchost.exe → mimikatz.dll detected by EDR",type:"crit"},
-    {t:"LATERAL MOVE",d:"SMB+WMI+PsExec pattern detected across 3 hosts",type:"crit"},
-    {t:"DATA EXFIL",d:"Unusual outbound traffic: 247MB to external IP",type:"crit"}
+  const toasts=[
+    {t:"NMAP",d:"18 hosts discovered in 10.12.0.0/24",type:"ok"},
+    {t:"BLOODHOUND",d:"Attack path: svc_backup → DA",type:"ok"},
+    {t:"HASHCAT",d:"3/5 NTLM hashes cracked",type:"ok"},
+    {t:"SQLMAP",d:"PostgreSQL injection confirmed",type:"warn"},
+    {t:"METERPRETER",d:"SYSTEM session on DC01",type:"crit"},
+    {t:"C2 BEACON",d:"Outbound to 198.51.100.22 flagged",type:"crit"},
+    {t:"LATERAL",d:"SMB+WMI+PsExec across 3 hosts",type:"crit"}
   ];
   
-  function toast(title,desc,type='ok',meta=''){
+  function toast(title,desc,type='ok'){
     const t=document.createElement('div');
     t.className=`toast ${type==='warn'?'warn':type==='crit'?'crit':''}`;
-    t.innerHTML=`<span class="t-title">${title}</span><span class="t-desc">${desc}</span>${meta?`<span class="t-meta">${meta}</span>`:''}`;
+    t.innerHTML=`<span class="t-title">${title}</span><span class="t-desc">${desc}</span>`;
     toastC.appendChild(t);
     requestAnimationFrame(()=>t.classList.add('show'));
-    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},3400);
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),200);},3000);
   }
   
-  function generateToastNotification(){
-    const msg=toastMsgs[Math.floor(Math.random()*toastMsgs.length)];
-    toast(msg.t,msg.d,msg.type,`[${new Date().toLocaleTimeString('es-ES',{hour12:false})}]`);
+  function generateToast(){
+    const msg=pick(toasts);
+    toast(msg.t,msg.d,msg.type);
+  }
+  
+  // === AUTO LOOP (continuous background activity) ===
+  async function autoLoop(){
+    while(autoRunning&&expanded){
+      if(userTyping){await delay(500);continue;}
+      
+      // Pick random command
+      const keys=Object.keys(pentestCmds);
+      const cmdKey=pick(keys);
+      const cmd=pentestCmds[cmdKey];
+      
+      await runAutoCommand(cmd.cmd,cmd.out);
+      
+      // Random delay between commands
+      await delay(rnd(2000,5000));
+      
+      // Update wolf progress
+      wolfFill.style.width=`${rnd(25,95)}%`;
+      wolfTargets.textContent=rnd(0,24);
+    }
+  }
+  
+  function startAutoLoop(){
+    if(autoRunning)return;
+    autoRunning=true;
+    autoLoop();
   }
   
   // === WOLF INTERACTIONS ===
-  let wolfClicks=0;
-  wolfPanel.addEventListener('click',e=>{
-    wolfClicks++;
-    if(wolfClicks>=3){
-      wolfClicks=0;
-      // Focus mode activation
-      wolfMode.textContent='FOCUS';
-      wolfProgress.style.width='100%';
-      toast('🎯 FOCUS MODE','Accelerated scan + aggressive enumeration','warn','Duration: ~2.5s');
-      
-      // Brief turbo typing
-      const origSpeed=18;
-      setTimeout(()=>{
-        wolfMode.textContent='PASSIVE';
-        wolfProgress.style.width='35%';
-      },2500);
-    }
-  });
-  
   // Eye tracking
   let tx=0,ty=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
   (function track(){
-    if(!isOpen){requestAnimationFrame(track);return;}
-    const r=wolfSvg.getBoundingClientRect(),sx=r.left+r.width/2,sy=r.top+r.height/2;
-    cx+=(tx-cx)*.07;cy+=(ty-cy)*.07;
-    const dx=Math.min(3.5,Math.max(-3.5,(cx-sx)/45)),dy=Math.min(3.5,Math.max(-3.5,(cy-sy)/45));
+    if(!expanded){requestAnimationFrame(track);return;}
+    const r=wolfSvg.getBoundingClientRect();
+    const sx=r.left+r.width/2,sy=r.top+r.height/2;
+    cx+=(tx-cx)*.08;cy+=(ty-cy)*.08;
+    const dx=Math.min(3,Math.max(-3,(cx-sx)/42)),dy=Math.min(3,Math.max(-3,(cy-sy)/42));
     $('pupilL').setAttribute('transform',`translate(${dx},${dy})`);
     $('pupilR').setAttribute('transform',`translate(${dx},${dy})`);
     requestAnimationFrame(track);
@@ -2645,169 +2285,71 @@
   
   // Random blink
   setInterval(()=>{
-    if(!isOpen||Math.random()>.2)return;
+    if(!expanded||Math.random()>.18)return;
     const lidL=$('lidL'),lidR=$('lidR');
     lidL.style.opacity='1';lidR.style.opacity='1';
-    setTimeout(()=>{lidL.style.opacity='0';lidR.style.opacity='0';},120);
-    // Occasional double blink
-    if(Math.random()<.25)setTimeout(()=>{
+    setTimeout(()=>{lidL.style.opacity='0';lidR.style.opacity='0';},110);
+    if(Math.random()<.22)setTimeout(()=>{
       lidL.style.opacity='1';lidR.style.opacity='1';
-      setTimeout(()=>{lidL.style.opacity='0';lidR.style.opacity='0';},90);
-    },160);
-  },2400);
+      setTimeout(()=>{lidL.style.opacity='0';lidR.style.opacity='0';},80);
+    },140);
+  },2300);
   
-  // === METRICS & LOOPS ===
-  let loopsActive=false;
-  function startLoops(){
-    if(loopsActive)return;loopsActive=true;
-    
-    // Metrics update
-    setInterval(()=>{
-      if(!isOpen)return;
-      const cpu=Math.floor(8+Math.random()*42),mem=Math.floor(120+Math.random()*140),
-            net=(Math.random()*4.8).toFixed(1),pkt=Math.floor(600+Math.random()*500);
-      cpuFill.style.width=`${cpu}%`;memFill.style.width=`${Math.min(100,mem/3)}%`;
-      netFill.style.width=`${Math.min(100,net*20)}%`;pktFill.style.width=`${Math.min(100,pkt/12)}%`;
-      cpuVal.textContent=`${cpu}%`;memVal.textContent=`${mem}MB`;
-      netVal.textContent=`${net}KB/s`;pktVal.textContent=`${pkt}/s`;
-    },1800);
-    
-    // Uptime counter
-    setInterval(()=>{
-      if(!isOpen)return;
-      const sec=Math.floor((Date.now()-sessionStart)/1000),
-            h=Math.floor(sec/3600).toString().padStart(2,'0'),
-            m=Math.floor((sec%3600)/60).toString().padStart(2,'0'),
-            s=(sec%60).toString().padStart(2,'0');
-      $('footer-uptime').textContent=`${h}:${m}:${s}`;
-    },1000);
-    
-    // Random threat fluctuation
-    setInterval(()=>{
-      if(!isOpen||threat==='critical')return;
-      if(Math.random()<.12){
-        const levels=['low','low','low','medium','medium','high'];
-        setThreat(levels[Math.floor(Math.random()*levels.length)]);
-      }
-    },4500);
-    
-    // Kill chain progression simulation
-    const stages=['recon','weapon','deliver','exploit','install','c2','actions'];
-    let currentStage=0;
-    setInterval(()=>{
-      if(!isOpen)return;
-      kcSteps.forEach((s,i)=>s.classList.toggle('active',i===currentStage));
-      kcCurrent.textContent=`STAGE: ${stages[currentStage].toUpperCase()}`;
-      wolfTargets.textContent=Math.floor(Math.random()*24);
-      if(Math.random()<.3&&currentStage<stages.length-1)currentStage++;
-      else if(Math.random()<.15&&currentStage>0)currentStage--;
-    },6000);
-  }
-  
-  function stopLoops(){loopsActive=false;}
-  
-  // === AUTOCOMPLETE & COMMAND PALETTE ===
-  const commands=['nmap -sV -sC','bloodhound-python -c All','impacket-GetUserSPNs','sqlmap --batch',
-                  'hashcat -m 1000','msfconsole -x','clear','help','whoami','ip a','netstat -tulpn'];
-  
-  function showAutocomplete(){
-    const input=cmdInput.textContent.toLowerCase();
-    const matches=commands.filter(c=>c.startsWith(input));
-    if(matches.length>0){
-      autocomplete.innerHTML=matches.map((m,i)=>`<div class="ac-item${i===0?' active':''}" data-cmd="${m}">${m}<span class="ac-hint">[Enter]</span></div>`).join('');
-      autocomplete.classList.add('show');
-      // Click handler
-      autocomplete.querySelectorAll('.ac-item').forEach(item=>{
-        item.onclick=()=>{cmdInput.textContent=item.dataset.cmd;autocomplete.classList.remove('show');cmdInput.focus();};
-      });
-    }else autocomplete.classList.remove('show');
-  }
-  
-  function showCommandPalette(){
-    const palette=$('cmd-palette');
-    palette.style.display=palette.style.display==='none'?'block':'none';
-  }
-  
-  // Palette button handlers
-  $$('.palette-btn').forEach(btn=>{
-    btn.onclick=()=>{
-      cmdInput.textContent=btn.dataset.cmd;
-      autocomplete.classList.remove('show');
-      cmdInput.focus();
-    };
+  // Wolf click = focus mode
+  $('wolf-section').addEventListener('click',e=>{
+    if(e.target.closest('.wact'))return;
+    wolfMode.textContent='FOCUS';wolfFill.style.width='100%';
+    toast('🎯 FOCUS MODE','Priority targeting active','warn');
+    typingSpeed=12; // Faster typing
+    setTimeout(()=>{
+      wolfMode.textContent='PASSIVE';wolfFill.style.width='38%';
+      typingSpeed=22;
+    },2200);
   });
   
-  // Quick actions panel
-  $$('.qa-btn').forEach(btn=>{
+  // Quick action buttons
+  document.querySelectorAll('.wact').forEach(btn=>{
     btn.onclick=()=>{
-      const actions={
-        scan:'nmap -sV -sC --min-rate 3000 10.12.0.0/24',
-        exfil:'python3 exfil_sim.py --target dc01 --method dns',
-        stealth:'iptables -A OUTPUT -p tcp --dport 443 -j LOG',
-        pivot:'proxychains -q crackmapexec smb 10.12.0.0/24',
-        dump:'impacket-secretsdump corp.local/svc@10.12.0.10',
-        cover:'shred -u /var/log/auth.log; echo "[*] Logs cleared"'
-      };
-      if(actions[btn.dataset.action]){
-        cmdInput.textContent=actions[btn.dataset.action];
-        toast('⚡ QUEUED',`${btn.textContent.trim()} scheduled`,'ok');
-        setTimeout(()=>executeCommand(cmdInput.textContent),300);
-        cmdInput.textContent='';
+      const cmd=btn.dataset.cmd;
+      if(pentestCmds[cmd]){
+        userTyping=false; // Allow auto to run
+        runAutoCommand(pentestCmds[cmd].cmd,pentestCmds[cmd].out);
+        if(pentestCmds[cmd].escalate&&Math.random()<0.7)setThreat('high');
       }
     };
   });
   
-  // Feed filters
-  $$('.filter-btn').forEach(btn=>{
-    btn.onclick=()=>{
-      $$('.filter-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter=btn.dataset.filter;
-      $$('.feed-item').forEach(item=>{
-        if(filter==='all')item.style.display='';
-        else item.style.display=item.classList.contains(filter)?'':'none';
-      });
-    };
-  });
+  // === INIT ===
+  function init(){
+    initCursor();
+    
+    // Start with some initial output
+    setTimeout(async()=>{
+      if(!expanded)return;
+      await typeLine('[*] ZYANETRALYS OPS TERMINAL v2.4.1','info',10);
+      await typeLine('[*] Secure channel established • AES-256-GCM','info',10);
+      await typeLine('[*] Loading pentest modules...','info',10);
+      await delay(400);
+      await typeLine('[✓] nmap, bloodhound, impacket, sqlmap, hashcat loaded','ok',10);
+      await typeLine('[?] Type a command or use quick actions ⚡🕸☠👁📤','info',10);
+      await delay(800);
+      startAutoLoop();
+    },300);
+    
+    // Wolf progress animation
+    setInterval(()=>{
+      if(!expanded)return;
+      const w=38+Math.sin(Date.now()/900)*18;
+      wolfFill.style.width=`${Math.max(25,Math.min(95,w))}%`;
+    },120);
+    
+    // Hide alert counter after viewing
+    dock.addEventListener('click',()=>{
+      if(alertCount>0){alertCounter.classList.remove('show');alertCount=0;}
+    });
+  }
   
-  // Clear feed
-  feedClear.onclick=()=>{
-    feedList.innerHTML='';alertCount=0;triggerAlerts.textContent='0';triggerAlerts.classList.remove('show');
-    feedStats.textContent='0 alerts • Last: --:--';
-    toast('✓ FEED CLEARED','Threat log reset','ok');
-  };
-  
-  // Footer actions
-  $('export-log').onclick=()=>{
-    const log=Array.from(termOut.children).map(l=>l.textContent).join('\n');
-    const blob=new Blob([`# ZYANETRALYS PENTEST LOG\n# ${new Date().toISOString()}\n\n${log}`],{type:'text/plain'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-    a.download=`zyanetralys_ops_${Date.now()}.log`;a.click();
-    toast('📥 EXPORTED',`Log saved: ${a.download}`,'ok');
-  };
-  
-  $('capture-screen').onclick=()=>{
-    toast('📸 CAPTURED','Screenshot queued for export','ok');
-    // In production: use html2canvas or similar
-  };
-  
-  // Initialize
-  trigger.addEventListener('mouseenter',()=>{
-    if(alertCount>0)triggerAlerts.classList.add('show');
-  });
-  
-  // Auto-hide trigger alerts after view
-  trigger.addEventListener('click',()=>{
-    if(alertCount>0){triggerAlerts.classList.remove('show');alertCount=0;}
-  });
-  
-  // Initial wolf progress animation
-  setInterval(()=>{
-    if(!isOpen)return;
-    const w=35+Math.sin(Date.now()/800)*15;
-    wolfProgress.style.width=`${Math.max(20,Math.min(95,w))}%`;
-  },100);
-  
+  init();
 })();
 </script>
 
