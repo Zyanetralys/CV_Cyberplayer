@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARÍA JESÚS MARTÍNEZ LEO | CIBERSEGURIDAD & SISTEMAS</title>
+  <title>MARÍA JESÚS MARTÍNEZ LEO | CIBERSEGURIDAD & GRC</title>
   <style>
     /* --- LIGHTSABER CURSOR --- */
     @media (hover: hover) and (pointer: fine) {
@@ -515,6 +515,24 @@
       margin-left: 4px;
       text-shadow: 0 0 10px var(--primary-glow);
     }
+
+    .positioning {
+      color: var(--primary-dim);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 5px var(--primary-glow);
+    }
+
+    .summary {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      border-left: 2px solid var(--primary-dark);
+      padding-left: 1rem;
+    }
     
     .contact {
       display: flex;
@@ -669,6 +687,12 @@
     
     .exp-date::before { content: "[ "; color: var(--primary-dark); }
     .exp-date::after { content: " ]"; color: var(--primary-dark); }
+
+    .exp-date.current {
+      color: var(--primary);
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--primary-glow);
+    }
     
     .exp-details {
       list-style: none;
@@ -696,6 +720,29 @@
     .exp-details li:hover {
       color: var(--text);
       padding-left: 1.4rem;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin: 0.4rem 0;
+    }
+
+    .exp-tag {
+      display: inline-block;
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
+      border: 1px solid var(--primary-dark);
+      color: var(--primary-dim);
+      padding: 0.1rem 0.4rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 3px var(--primary-glow);
+    }
+
+    .exp-tag.neutral {
+      border-color: var(--border-light);
+      color: var(--text-dim);
     }
     
     .skills-grid {
@@ -1023,72 +1070,124 @@
 
 <header>
   <h1>MARÍA JESÚS MARTÍNEZ LEO</h1>
+  <div class="positioning">Ciberseguridad · GRC · Análisis de Riesgos · Sistemas y Redes</div>
+  <div class="summary">
+    Profesional polivalente en IT y ciberseguridad, con trayectoria en consultoría tecnológica, Administración Pública, Telecomunicaciones, Defensa y Aeronáutica. Gobierno, riesgo y cumplimiento normativo (ENS, ISO 27001, RGPD, NIS2) con análisis de riesgos bajo MAGERIT y PILAR, análisis de GAP, informes técnicos, validación de evidencias para auditorías, sistemas, soporte técnico avanzado, scripting y práctica en laboratorios de seguridad ofensiva y defensiva. Capacidad de conexión entre equipos técnicos y de negocio.
+  </div>
   <div class="contact">
-    <span>Madrid / Cádiz, España</span>
+    <span>Madrid / Cádiz / Remoto</span>
+    <span>•</span>
+    <a href="mailto:mj.martinez.leo@gmail.com">mj.martinez.leo@gmail.com</a>
+    <span>•</span>
+    <span>+34 628 077 018</span>
     <span>•</span>
     <a href="https://www.linkedin.com/in/mjmal/" target="_blank">linkedin.com/in/mjmal</a>
     <span>•</span>
     <a href="https://github.com/Zyanetralys" target="_blank">github.com/Zyanetralys</a>
     <span>•</span>
-    <span>Inglés: Nivel C1 (Avanzado)</span>
+    <span>Inglés: C1 Avanzado</span>
     <span>•</span>
-    <span>Carnet de conducir: B y A2</span>
+    <span>Movilidad nacional e internacional</span>
+    <span>•</span>
+    <span>Permiso B y A2</span>
+    <span>•</span>
+    <span>UE/EEE/Suiza</span>
   </div>
 </header>
 
 <section>
-  <h2>EXPERIENCIA TÉCNICA</h2>
+  <h2>EXPERIENCIA PROFESIONAL</h2>
   
   <div class="exp-item">
     <div class="exp-header">
       <div>
-        <div class="exp-title">Consultora Especialista IT (Software, Backend & Cybersecurity) </div>
-        <div class="exp-company"><a href="https://www.alvatross.io/" target="_blank">Alvatross</a> | Telecomunicaciones</div>
+        <div class="exp-title">Consultora de Ciberseguridad especialista en GRC</div>
+        <div class="exp-company"><a href="https://www.airbus.com/" target="_blank">Airbus</a> · Defensa, Administración Pública, Infraestructura Crítica y Aeronáutica</div>
       </div>
-      <div class="exp-date">FEB 2026–ACT</div>
+      <div class="exp-date current">JUN 2026–ACT</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag">GRC</span>
+      <span class="exp-tag">Análisis de Riesgos y GAP</span>
+      <span class="exp-tag">Evidencias</span>
+      <span class="exp-tag">ENS Alto</span>
+      <span class="exp-tag">MAGERIT/PILAR</span>
+      <span class="exp-tag neutral">Entorno regulado</span>
     </div>
     <ul class="exp-details">
-      <li>Evaluación técnica de perfiles IT (desarrollo, sistemas, DevOps y ciberseguridad).</li>
-      <li>Colaboración con equipos técnicos internacionales en entornos OSS/BSS.</li>
-      <li>Análisis de requisitos técnicos y validación de competencias en tecnologías backend y sistemas.</li>
-      <li>Interacción directa con arquitecturas de software, stacks tecnológicos y entornos de producción.</li>
-      <li>Apoyo en onboarding técnico, documentación y coordinación de proyectos IT.</li>
-      <li>Participación en entrevistas técnicas estructuradas con foco en capacidades reales de desarrollo y sistemas.</li>
+      <li>Gobierno, cumplimiento y auditoría de marcos regulatorios (ENS Nivel Alto, ISO/IEC 27001, RGPD, NIS2) en entornos de alta presión: Defensa, Aeronáutica, Administración Pública e Infraestructura Crítica.</li>
+      <li>Análisis y gestión de riesgos con metodología MAGERIT y herramienta PILAR: identificación de activos, categorización, valoración de amenazas/vulnerabilidades, cálculo de riesgo residual y priorización de salvaguardas.</li>
+      <li>Ejecución de auditorías internas y de segunda parte, elaboración de checklists de control, mapeo de evidencias frente al SGSI/Declaración de Aplicabilidad y detección de brechas con planes de remediación.</li>
+      <li>Validación de controles mediante entrevistas técnicas con responsables de departamento, contrastando la postura de seguridad declarada frente a la real (segregación de funciones, accesos, continuidad, respuesta a incidentes).</li>
+      <li>Redacción y hardening de políticas internas, procedimientos operativos, matrices RACI y marcos de gobernanza alineados con ciclo PDCA.</li>
+      <li>Elaboración de cuadros de mando de cumplimiento (KPI/KRI) y briefings a alta dirección sobre panorama de amenazas y hoja de ruta de mejora continua.</li>
     </ul>
   </div>
 
   <div class="exp-item">
     <div class="exp-header">
       <div>
-        <div class="exp-title">Consultora Especialista IT (Software & Cybersecurity)</div>
-        <div class="exp-company"><a href="https://www.atm-maggioli.es/" target="_blank">ATM Grupo Maggioli</a> | Admin. Pública</div>
+        <div class="exp-title">Consultora IT</div>
+        <div class="exp-company"><a href="https://www.alvatross.io/" target="_blank">Alvatross</a> · Telecomunicaciones · OSS/BSS</div>
       </div>
-      <div class="exp-date">FEB 2023– FEB 2026</div>
+      <div class="exp-date">MAR 2026–JUN 2026</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag">Análisis técnico</span>
+      <span class="exp-tag">Documentación</span>
+      <span class="exp-tag">Arquitectura</span>
+      <span class="exp-tag neutral">OSS/BSS</span>
     </div>
     <ul class="exp-details">
-      <li>Evaluación de perfiles IT en entornos de desarrollo, sistemas y ciberseguridad.</li>
-      <li>Análisis funcional y técnico en proyectos bajo normativas ENS e ISO 27001.</li>
-      <li>Validación de competencias técnicas mediante entrevistas estructuradas.</li>
-      <li>Colaboración con equipos de desarrollo, sistemas, datos y seguridad.</li>
-      <li>Apoyo en definición de requisitos técnicos en procesos de selección y proyectos IT.</li>
-      <li>Participación en procesos de implantación de controles de seguridad y cumplimiento normativo.</li>
+      <li>Coordinación con equipos de sistemas, desarrollo, DevOps y arquitectura para definición de requisitos técnicos, dependencias entre sistemas y criterios de aceptación.</li>
+      <li>Análisis funcional y técnico en entorno OSS/BSS (provisioning, facturación, inventario de red), identificando integraciones, flujos de datos y puntos de fallo.</li>
+      <li>Documentación técnica y funcional en Confluence (diagramas, especificaciones, matrices de trazabilidad) y apoyo en onboarding técnico.</li>
+      <li>Entrevistas técnicas y validación de competencias para perfiles de sistemas, desarrollo y datos.</li>
     </ul>
   </div>
 
   <div class="exp-item">
     <div class="exp-header">
       <div>
-        <div class="exp-title">Soporte Backend (Prácticas)</div>
-        <div class="exp-company"><a href="https://www.atm-maggioli.es/" target="_blank">ATM Grupo Maggioli</a></div>
+        <div class="exp-title">Consultora IT</div>
+        <div class="exp-company"><a href="https://www.atm-maggioli.es/" target="_blank">ATM Grupo Maggioli</a> · Consultoría tecnológica y Administración Pública</div>
       </div>
-      <div class="exp-date">ENE–JUN 2025</div>
+      <div class="exp-date">FEB 2023–MAR 2026</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag">Administración pública</span>
+      <span class="exp-tag">ENS Alto</span>
+      <span class="exp-tag">ISO 27001</span>
+      <span class="exp-tag">OSINT</span>
+      <span class="exp-tag neutral">Jira/Confluence/Redmine</span>
     </div>
     <ul class="exp-details">
-      <li>Análisis de vulnerabilidades en aplicaciones web en entorno fintech.</li>
-      <li>Uso de herramientas como OWASP ZAP para testing de seguridad.</li>
-      <li>Aplicación de buenas prácticas de seguridad en autenticación y cifrado.</li>
-      <li>Automatización de tareas de análisis con Python y Bash.</li>
-      <li>Documentación de hallazgos técnicos y recomendaciones de seguridad.</li>
+      <li>Colaboración con equipos de sistemas, desarrollo, datos, ciberseguridad e implantaciones IT en proyectos de Administración Pública de larga duración, actuando como enlace entre negocio y capacidad técnica.</li>
+      <li>Apoyo en análisis funcional, redacción de pliegos y anexos técnicos para licitaciones, y procesos de transformación digital en organismos públicos.</li>
+      <li>Soporte a auditorías bajo ENS Nivel Alto, ISO/IEC 27001 y RGPD/LOPDGDD: documentación, manuales, políticas internas y seguimiento de controles.</li>
+      <li>Técnicas OSINT, búsqueda booleana avanzada, dorking y análisis de huella digital para validar trayectorias y evaluar riesgos reputacionales.</li>
+      <li>Coordinación con áreas técnicas bajo metodología agile/scrum y gestión documental con Jira, Confluence y Redmine.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Soporte Técnico Backend</div>
+        <div class="exp-company"><a href="https://www.atm-maggioli.es/" target="_blank">ATM Grupo Maggioli</a> · Prácticas en paralelo · Python, SQL y Sistemas</div>
+      </div>
+      <div class="exp-date">ENE 2025–JUN 2025</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag">Python</span>
+      <span class="exp-tag">PostgreSQL</span>
+      <span class="exp-tag neutral">Soporte N2</span>
+    </div>
+    <ul class="exp-details">
+      <li>Desarrollo de scripts y automatizaciones en Python (procesado de ficheros, validación de datos, generación de reportes, interfaz gráfica) para reducir tareas manuales repetitivas.</li>
+      <li>Gestión, consulta y optimización de bases de datos SQL (PostgreSQL): queries, joins, vistas para depuración de incidencias.</li>
+      <li>Soporte técnico N2 sobre sistemas y aplicaciones internas, diagnóstico de errores en logs, escalado de incidencias críticas y documentación de causa raíz.</li>
+      <li>Colaboración con compañeros senior en revisión de código, buenas prácticas de scripting y control de versiones con Git.</li>
     </ul>
   </div>
 
@@ -1096,67 +1195,63 @@
     <div class="exp-header">
       <div>
         <div class="exp-title">Analista de Ciberseguridad</div>
-        <div class="exp-company"><a href="" target="_blank">NoCountry</a> | Proyecto Fintech</div>
+        <div class="exp-company"><a href="" target="_blank">No Country</a> · Proyecto fintech · Equipo internacional</div>
       </div>
-      <div class="exp-date">SEP–DIC 2025</div>
+      <div class="exp-date">SEP 2025–DIC 2025</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag">OWASP ZAP</span>
+      <span class="exp-tag">CodeQL</span>
+      <span class="exp-tag">Azure Entra ID</span>
+      <span class="exp-tag">Python</span>
+      <span class="exp-tag neutral">DAST/SAST</span>
     </div>
     <ul class="exp-details">
-      <li>Análisis de vulnerabilidades en aplicaciones web en entorno fintech.</li>
-      <li>Uso de herramientas como OWASP ZAP para testing de seguridad.</li>
-      <li>Aplicación de buenas prácticas de seguridad en autenticación y cifrado.</li>
-      <li>Automatización de tareas de análisis con Python y Bash.</li>
-      <li>Documentación de hallazgos técnicos y recomendaciones de seguridad.</li>
+      <li>Evaluación de vulnerabilidades mediante escaneo dinámico con OWASP ZAP, análisis estático con SonarQube y revisión de código con GitHub CodeQL sobre aplicación fintech (OWASP Top 10).</li>
+      <li>Documentación de seguridad sobre autenticación (MFA, OAuth), cifrado en tránsito/reposo, checklists OWASP ASVS y políticas internas.</li>
+      <li>Análisis de dispositivos gestionados por Microsoft Intune (compliance policies) y revisión de usuarios, grupos, sign-in/audit logs y condicionales de acceso en Azure Entra ID.</li>
+      <li>Automatización en Python de comprobaciones de seguridad recurrentes y materiales de concienciación frente a phishing e ingeniería social.</li>
     </ul>
   </div>
 
   <div class="exp-item">
     <div class="exp-header">
       <div>
-        <div class="exp-title">Técnico de Sistemas (fines de semana)s</div>
-        <div class="exp-company"><a href="https://gruposermicro.com/" target="_blank">Sermicro</a></div>
+        <div class="exp-title">Técnico de Sistemas y Redes</div>
+        <div class="exp-company"><a href="https://gruposermicro.com/" target="_blank">Sermicro</a> · IT outsourcing · Soporte N1/N2 (fines de semana)</div>
       </div>
-      <div class="exp-date">NOV–DIC 2023</div>
+      <div class="exp-date">NOV 2023–DIC 2023</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag neutral">Windows</span>
+      <span class="exp-tag neutral">Active Directory</span>
+      <span class="exp-tag neutral">Ticketing</span>
     </div>
     <ul class="exp-details">
-      <li>Soporte técnico a usuarios en entornos Windows y redes corporativas.</li>
-      <li>Administración básica de Active Directory y gestión de usuarios.</li>
-      <li>Instalación y configuración de sistemas y software corporativo.</li>
-      <li>Resolución de incidencias técnicas y gestión de tickets.</li>
+      <li>Soporte técnico N1/N2 en entornos Windows, Active Directory (usuarios, equipos, permisos), GPOs, análisis de logs y ticketing.</li>
+      <li>Instalación, configuración e imaging de sistemas operativos y software corporativo con soporte presencial y remoto.</li>
+      <li>Documentación técnica de incidencias, configuraciones de red y procedimientos para la base de conocimiento.</li>
     </ul>
   </div>
 
   <div class="exp-item">
     <div class="exp-header">
       <div>
-        <div class="exp-title">Técnico de Sistemas</div>
-        <div class="exp-company"><a href="https://www.juntadeandalucia.es/" target="_blank">Red Guadalinfo</a> | Junta de Andalucía</div>
+        <div class="exp-title">Técnico de Sistemas y Redes</div>
+        <div class="exp-company"><a href="https://www.juntadeandalucia.es/" target="_blank">Red Guadalinfo</a> · Junta de Andalucía · Centros públicos de competencias digitales</div>
       </div>
-      <div class="exp-date">ENE–MAY 2021</div>
+      <div class="exp-date">ENE 2021–MAY 2021</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag neutral">Windows/Linux</span>
+      <span class="exp-tag neutral">Redes</span>
+      <span class="exp-tag neutral">Hardening</span>
     </div>
     <ul class="exp-details">
-      <li>Administración de sistemas Windows y Linux en entornos públicos.</li>
-      <li>Configuración de redes locales, DNS, DHCP y políticas de grupo.</li>
-      <li>Soporte técnico a usuarios y resolución de incidencias.</li>
-      <li>Mantenimiento de infraestructura de red en centros digitales.</li>
-    </ul>
-  </div>
-
-    <div class="exp-item">
-    <div class="exp-header">
-      <div>
-        <div class="exp-title">Proyectos Técnicos Personales</div>
-        <div class="exp-company"><a href="https://github.com/Zyanetralys" target="_blank">Portfolio</a></div>
-      </div>
-      <div class="exp-date">ENE–MAY 2021</div>
-    </div>
-    <ul class="exp-details">
-    <ul>
-      <li>Laboratorios en HackTheBox, TryHackMe, VulnHub y Blue Team Labs.</li>
-      <li>Resolución de CTFs en PicoCTF, OverTheWire y plataformas de seguridad.</li>
-      <li>Desarrollo de scripts y herramientas en Python, Java y Bash.</li>
-      <li>Automatización de procesos de análisis y pentesting.</li>
-      <li>Documentación técnica y proyectos publicados en GitHub.</li>
-    </ul>
+      <li>Administración de sistemas Windows y Linux Guadalinex (Ubuntu based) en entorno público: actualizaciones, gestión de paquetes, resolución de incidencias.</li>
+      <li>Configuración de DNS, DHCP, GPO, redes LAN/WiFi, dispositivos y VPN con soporte técnico presencial.</li>
+      <li>Aplicación de hardening, políticas de contraseñas robustas, MFA, parches, principio de mínimo privilegio, Zero Trust y revisión de logs.</li>
+      <li>Gestión de incidencias, inventario de equipos y documentación técnica de configuraciones.</li>
     </ul>
   </div>
   
@@ -1169,26 +1264,32 @@
   <div class="edu-item">
     <div class="edu-title">Máster en Ciberseguridad</div>
     <div class="edu-school"><a href="https://www.ucam.edu/" target="_blank">Universidad Católica San Antonio de Murcia</a></div>
-    <div class="edu-date">2025 | 1.500h • 60 ECTS</div>
+    <div class="edu-date">2025 | 1.500h · 60 ECTS</div>
   </div>
   <div class="edu-item">
     <div class="edu-title">Máster en Big Data & Business Intelligence</div>
-    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Isabel I</a></div>
-    <div class="edu-date">2025 | 1.800h • 72 ECTS</div>
+    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Internacional Isabel I de Burgos</a></div>
+    <div class="edu-date">2025 | 1.800h · 72 ECTS</div>
   </div>
   <div class="edu-item">
     <div class="edu-title">Máster en Dirección de Proyectos</div>
-    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Isabel I</a></div>
-    <div class="edu-date">2025 | 1.500h • 60 ECTS</div>
+    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Internacional Isabel I de Burgos</a></div>
+    <div class="edu-date">2025 | 1.500h · 60 ECTS</div>
   </div>
   <div class="edu-item">
-    <div class="edu-title">Grado Superior en ASIR</div>
+    <div class="edu-title">GS Administración de Sistemas Informáticos en Red (ASIR)</div>
     <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
-    <div class="edu-date">2025 | 2.000h • 120 ECTS</div>
+    <div class="edu-date">2026 | 2.000h · 120 ECTS</div>
   </div>
   <div class="edu-item">
-    <div class="edu-title">Grado Superior en DAM (Cursando)</div>
+    <div class="edu-title">GS Desarrollo de Aplicaciones Multiplataforma (DAM) — Cursando</div>
     <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+    <div class="edu-date">2.000h · 120 ECTS</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Grado en Sistemas Microinformáticos y Redes</div>
+    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
+    <div class="edu-date">2021 | 2.000h</div>
   </div>
   <div class="edu-item">
     <div class="edu-title">Técnico en Ciberseguridad</div>
@@ -1196,9 +1297,14 @@
     <div class="edu-date">2024 | 250h</div>
   </div>
   <div class="edu-item">
-    <div class="edu-title">Grado en Sistemas Microinformáticos y Redes</div>
-    <div class="edu-school"><a href="https://www.ilerna.es/" target="_blank">Ilerna</a></div>
-    <div class="edu-date">2021 | 2.000h</div>
+    <div class="edu-title">Grado en Psicología</div>
+    <div class="edu-school">UCJC + KU Leuven (Erasmus)</div>
+    <div class="edu-date">2017 | 6.000h · 240 ECTS · TFG: Terrorismo Yihadista</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-title">Certificado Business English</div>
+    <div class="edu-school"><a href="https://www.ui1.es/" target="_blank">Universidad Internacional Isabel I de Burgos</a></div>
+    <div class="edu-date">2018 | 60h · 2.40 ECTS</div>
   </div>
 </section>
 
@@ -1208,44 +1314,54 @@
   <h2>STACK TÉCNICO</h2>
   <div class="skills-grid">
     <div class="skill-cat">
-      <h3>SISTEMAS</h3>
+      <h3>GRC & COMPLIANCE</h3>
       <ul class="skill-list">
-        <li>Windows Server, AD, GPO, IIS</li>
-        <li>Linux: Kali, Ubuntu, Arch</li>
-        <li>VMware, VirtualBox</li>
+        <li>ENS, ISO 27001, ISO 27701</li>
+        <li>RGPD/LOPDGDD, NIS2</li>
+        <li>MAGERIT, PILAR</li>
+        <li>Auditoría, Análisis de Riesgos</li>
+        <li>Análisis GAP, Evidencias</li>
       </ul>
     </div>
     <div class="skill-cat">
-      <h3>REDES</h3>
+      <h3>SEGURIDAD TÉCNICA</h3>
       <ul class="skill-list">
-        <li>TCP/IP, DNS, DHCP, VLANs</li>
-        <li>VPN, pfSense, OPNsense, IPFire</li>
-        <li>Firewalls, DMZ</li>
+        <li>Nmap, Burp Suite, OWASP ZAP, OpenVAS</li>
+        <li>Metasploit, Wireshark, Hashcat, JTR</li>
+        <li>Hydra, Medusa, CyberChef, Ghidra</li>
+        <li>OSINT, Hardening, Forensics</li>
+        <li>FTK Imager, Autopsy, Volatility</li>
+        <li>Flipper Zero, Wifi Pineapple</li>
       </ul>
     </div>
     <div class="skill-cat">
-      <h3>DESARROLLO</h3>
+      <h3>SISTEMAS, CLOUD & REDES</h3>
       <ul class="skill-list">
-        <li>Python, Bash, PowerShell</li>
-        <li>Git, HTML/CSS, JS/TS, Java</li>
-        <li>SQL: PostgreSQL, MySQL</li>
+        <li>Windows Server, Linux (Kali, Ubuntu, Arch)</li>
+        <li>Active Directory, EntraID, Azure, AWS</li>
+        <li>GPO, DNS/DHCP, TCP/IP, VLAN, VPN</li>
+        <li>Docker, pfSense, OPNsense, IPFire</li>
+        <li>Palo Alto NGFW, Fortinet, OT/ICS</li>
       </ul>
     </div>
     <div class="skill-cat">
-      <h3>SEGURIDAD</h3>
+      <h3>PROGRAMACIÓN</h3>
       <ul class="skill-list">
-        <li>Nmap, Wireshark, OWASP ZAP, Metasploit</li>
-        <li>Hydra, JTR, Medusa, Ghidra, CyberChef</li>
-        <li>OSINT, Forensics, Hardening</li>
-        <li>ISO 27001, ENS, RGPD</li>
+        <li>Python, Bash, PowerShell, SQL</li>
+        <li>PostgreSQL, MySQL, SQLite</li>
+        <li>Java, JavaScript, TypeScript</li>
+        <li>Django, Flask, APIs REST</li>
+        <li>Git, HTML/CSS</li>
       </ul>
     </div>
     <div class="skill-cat">
-      <h3>HERRAMIENTAS</h3>
+      <h3>GESTIÓN & HERRAMIENTAS</h3>
       <ul class="skill-list">
-        <li>Jira, Confluence, NinjaOne RMM</li>
-        <li>HTB, TryHackMe, VulnHub</li>
-        <li>Docker, Azure (AZ-204)</li>
+        <li>Jira, Confluence, Redmine, Trello</li>
+        <li>Notion, Obsidian, NinjaOne RMM</li>
+        <li>Okta, Veeam Backup</li>
+        <li>Microsoft 365, Google Workspace</li>
+        <li>HTB, TryHackMe, VulnHub, Let'sDefend</li>
       </ul>
     </div>
   </div>
@@ -1259,86 +1375,152 @@
 <section>
   <h2>CERTIFICACIONES — CIBERSEGURIDAD</h2>
   <div class="cert-grid">
-    <div class="cert-item"><strong>ISO 27001:2022</strong> Lead Auditor</div>
-    <div class="cert-item"><strong>ISO 27001:2022</strong> Security Associate</div>
-    <div class="cert-item"><strong>CTIGA</strong> Threat Intelligence</div>
-    <div class="cert-item"><strong>C-OSIA</strong> OSINT Analyst</div>
-    <div class="cert-item"><strong>CRPO</strong> Ransomware Protection</div>
-    <div class="cert-item"><strong>CSCSO</strong> SME Cyber Security Officer</div>
+    <div class="cert-item"><strong>COFPS</strong> Online Fraud Prevention — Hack & Fix</div>
+    <div class="cert-item"><strong>OpSec</strong> — Just Hacking</div>
+    <div class="cert-item"><strong>Fortinet</strong> Certified Fundamentals</div>
+    <div class="cert-item"><strong>Fortinet</strong> Certified Associate</div>
+    <div class="cert-item"><strong>Palo Alto</strong> Cybersecurity Practitioner</div>
+    <div class="cert-item"><strong>Palo Alto</strong> Cybersecurity Professional Networks</div>
+    <div class="cert-item"><strong>Cybersecurity Fundamentals</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>Cybersecurity Essentials</strong> LFC108 — Linux Foundation</div>
+    <div class="cert-item"><strong>Técnico Ciberseguridad</strong> — INCIBE</div>
+    <div class="cert-item"><strong>Técnico Ciberseguridad</strong> — Academia Ciberseguridad</div>
+    <div class="cert-item"><strong>MOOC Ciberseguridad</strong> — Univ. Málaga</div>
     <div class="cert-item"><strong>CCSC</strong> Cybersecurity Career Starter</div>
-    <div class="cert-item"><strong>OSForensics</strong> Triage</div>
-    <div class="cert-item"><strong>CyberSOC N1</strong> Resility</div>
-    <div class="cert-item"><strong>Threat Hunting</strong> Resility</div>
-    <div class="cert-item"><strong>SOC 101</strong> Operaciones Seguridad</div>
-    <div class="cert-item"><strong>ICS300</strong> Industrial Control Systems</div>
-    <div class="cert-item"><strong>PMJ</strong> Ethical Hacking</div>
-    <div class="cert-item"><strong>Pentesting Pro</strong> HackerMentor</div>
-    <div class="cert-item"><strong>Pentesting 101</strong> 8dot8</div>
-    <div class="cert-item"><strong>Bug Bounty</strong> LionxSecurity</div>
-    <div class="cert-item"><strong>Ethical Hacker</strong> Cisco</div>
-    <div class="cert-item"><strong>NDE</strong> EC-Council</div>
-    <div class="cert-item"><strong>SQL Injection</strong> EC-Council</div>
-    <div class="cert-item"><strong>XSS Defenses</strong> Linux Foundation</div>
-    <div class="cert-item"><strong>Cybersecurity Essentials</strong> Linux Foundation</div>
-    <div class="cert-item"><strong>Auditoría Ciberseguridad</strong> 8dot8</div>
-    <div class="cert-item"><strong>Fundamentos CISO</strong> 8dot8</div>
-    <div class="cert-item"><strong>Linux 101</strong> 8dot8</div>
-    <div class="cert-item"><strong>Kali Linux 101</strong> Academia Ciberseguridad</div>
-    <div class="cert-item"><strong>Linux Unhatched</strong> Cisco</div>
-    <div class="cert-item"><strong>Bash Pentesting</strong> LinkedIn Learning</div>
-    <div class="cert-item"><strong>Bash Scripting</strong> DevOps Bootcamp</div>
-    <div class="cert-item"><strong>Deep Web & Darknet</strong> Enhacke/ExorciseThat</div>
-    <div class="cert-item"><strong>C1b3rwall CNP</strong> 2023, 2025</div>
-    <div class="cert-item"><strong>Cisco Switching CCNP</strong> Min. Interior</div>
-    <div class="cert-item"><strong>Protección Dispositivos Red</strong> Adams</div>
-    <div class="cert-item"><strong>Soporte IT Profesional</strong> Fundae</div>
-    <div class="cert-item"><strong>Protección de Datos</strong> Resility/IBM/Hermes</div>
+    <div class="cert-item"><strong>Cybersecurity Awareness</strong> — CertJoin</div>
+    <div class="cert-item"><strong>C-OSIA</strong> OSINT Analyst — Compuweb</div>
+    <div class="cert-item"><strong>CAISR</strong> AI Security & Risk — Red Team</div>
+    <div class="cert-item"><strong>CTIGA</strong> Threat Intelligence — Red Team</div>
+    <div class="cert-item"><strong>C1b3rwall</strong> III, V, VI — CNP (2023, 2025, 2026)</div>
+    <div class="cert-item"><strong>Pentesting 101</strong> — 8.8 Academy</div>
+    <div class="cert-item"><strong>PMJ</strong> Ethical Hacking — HackerMentor</div>
+    <div class="cert-item"><strong>Ethical Hacker CEH</strong> — Cisco</div>
+    <div class="cert-item"><strong>Pentesting Pro</strong> — HackerMentor</div>
+    <div class="cert-item"><strong>Bash Pentesting</strong> — LinkedIn</div>
+    <div class="cert-item"><strong>XSS Exploits</strong> LFEL1010 — Linux Foundation</div>
+    <div class="cert-item"><strong>Bug Bounty</strong> — LionxSecurity</div>
+    <div class="cert-item"><strong>Kali Linux 101</strong> — Academia Ciberseguridad</div>
+    <div class="cert-item"><strong>Deepweb & Darknet</strong> — EnHacke</div>
+    <div class="cert-item"><strong>Security Ops Fundamentals</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>SOC 101</strong> — Academia Ciberseguridad</div>
+    <div class="cert-item"><strong>Analista CyberSOC</strong> — Resility</div>
+    <div class="cert-item"><strong>Threat Hunting</strong> — Resility</div>
+    <div class="cert-item"><strong>ICS300</strong> Industrial Control Systems — CISA</div>
+    <div class="cert-item"><strong>OSForensics Triage</strong> — PassMark</div>
+    <div class="cert-item"><strong>Protocolo Ibero</strong> Seguridad e Incidentes — UE</div>
   </div>
 </section>
 
 <section>
-  <h2>CERTIFICACIONES — DESARROLLO & CLOUD</h2>
+  <h2>CERTIFICACIONES — COMPLIANCE & GRC</h2>
   <div class="cert-grid">
-    <div class="cert-item"><strong>AZ-204</strong> Azure Bootcamp</div>
-    <div class="cert-item"><strong>Python Backend</strong> IBM (Flask, Django)</div>
-    <div class="cert-item"><strong>Python Profesional</strong> Código Facilito/IBM</div>
-    <div class="cert-item"><strong>Django Masterclass</strong> Código Facilito</div>
-    <div class="cert-item"><strong>Flask</strong> IBM</div>
-    <div class="cert-item"><strong>PHP & MySQL</strong> Euroformac</div>
-    <div class="cert-item"><strong>Docker</strong> Código Facilito</div>
-    <div class="cert-item"><strong>Git</strong> Código Facilito</div>
-    <div class="cert-item"><strong>Front-End Web</strong> Smartmind</div>
-    <div class="cert-item"><strong>Apps Móviles</strong> UCM</div>
-    <div class="cert-item"><strong>Full Stack Data Science</strong> TPoint</div>
-    <div class="cert-item"><strong>Ciencia de Datos</strong> Código Facilito</div>
-    <div class="cert-item"><strong>Administración Sistemas IT</strong> Fundae</div>
+    <div class="cert-item"><strong>ISO 27001</strong> Information Security Associate — SkillFront</div>
+    <div class="cert-item"><strong>ISO 27001</strong> Lead Auditor — CertiProf</div>
+    <div class="cert-item"><strong>ISO 27701:2025</strong> Lead Auditor — Mastermind</div>
+    <div class="cert-item"><strong>GRCF</strong> GRC Fundamentals — CyberExam</div>
+    <div class="cert-item"><strong>Gestión Protección de Datos</strong> — Resility</div>
+    <div class="cert-item"><strong>Data Privacy Fundamentals</strong> DS0301EN — IBM</div>
+    <div class="cert-item"><strong>Protección de Datos</strong> — COP Madrid</div>
+    <div class="cert-item"><strong>Protección Datos AA.PP.</strong> — Hermes</div>
+    <div class="cert-item"><strong>Planificación Seguridad</strong> — PUE</div>
+    <div class="cert-item"><strong>Auditoría Ciberseguridad</strong> — 8.8 Academy</div>
+    <div class="cert-item"><strong>Fundamentos CISO</strong> — 8.8 Academy</div>
+    <div class="cert-item"><strong>CRPO</strong> Ransomware Protection — EU Cyber</div>
+    <div class="cert-item"><strong>CSCSO</strong> SME Cyber Security Officer — EU Cyber</div>
   </div>
 </section>
 
 <section>
-  <h2>CERTIFICACIONES — GESTIÓN & OTROS</h2>
+  <h2>CERTIFICACIONES — REDES & INFRAESTRUCTURA</h2>
   <div class="cert-grid">
-    <div class="cert-item"><strong>PMI</strong> Gestión Proyectos/Programas</div>
-    <div class="cert-item"><strong>Six Sigma</strong> Green Belt</div>
-    <div class="cert-item"><strong>SLA IT</strong> LinkedIn Learning</div>
-    <div class="cert-item"><strong>IT Recruitment TOP Scorer 2025</strong> Editx</div>
-    <div class="cert-item"><strong>Piloto Dron UAS A1/A3</strong> AESA</div>
-    <div class="cert-item"><strong>Técnico Protección Civil</strong> UCJC (425h)</div>
-    <div class="cert-item"><strong>Psicología del Deporte</strong> COI</div>
-    <div class="cert-item"><strong>Psicólogo Crisis y Emergencias</strong> UCJC</div>
-    <div class="cert-item"><strong>Coaching Ejecutivo</strong> Udemy/EBS</div>
-    <div class="cert-item"><strong>PNL Master Practitioner</strong> iGNLP</div>
+    <div class="cert-item"><strong>Next Generation Firewall</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>Network Security Fundamentals</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>NetSec Professional</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>SASE</strong> Secure Access Service Edge — Palo Alto</div>
+    <div class="cert-item"><strong>Endpoint Security</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>Enterprise DLP</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>Cloud Delivery Security</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>Cloud Security Fundamentals</strong> — Palo Alto</div>
+    <div class="cert-item"><strong>Linux Unhatched</strong> — Cisco</div>
+    <div class="cert-item"><strong>Linux 101</strong> — 8.8 Academy</div>
+    <div class="cert-item"><strong>Protección Equipos Red</strong> IFCT106PO — Adams</div>
+    <div class="cert-item"><strong>Admin. Sistemas IT</strong> — Google</div>
+    <div class="cert-item"><strong>Soporte TI</strong> — Google</div>
+    <div class="cert-item"><strong>SLA IT</strong> — LinkedIn</div>
+  </div>
+</section>
+
+<section>
+  <h2>CERTIFICACIONES — CLOUD & PROGRAMACIÓN</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>AZ-204</strong> Developing Solutions — Microsoft</div>
+    <div class="cert-item"><strong>What The Hack</strong> — Microsoft</div>
+    <div class="cert-item"><strong>Azure Functions Bootcamp</strong> AZ-204 — CF</div>
+    <div class="cert-item"><strong>Bash Scripting DevOps</strong> — CF</div>
+    <div class="cert-item"><strong>Docker Profesional</strong> — CF</div>
+    <div class="cert-item"><strong>Git Profesional</strong> — CF</div>
+    <div class="cert-item"><strong>Python</strong> — Santander</div>
+    <div class="cert-item"><strong>Python Conceptos Básicos</strong> — IBM</div>
+    <div class="cert-item"><strong>POO Python</strong> — IBM</div>
+    <div class="cert-item"><strong>Python Intermedio</strong> — DataCamp</div>
+    <div class="cert-item"><strong>Python Profesional</strong> — CF</div>
+    <div class="cert-item"><strong>Universidad Python</strong> — Udemy</div>
+    <div class="cert-item"><strong>Backend Python</strong> — Udemy</div>
+    <div class="cert-item"><strong>Python y Django</strong> IFCT095PO — Dignitae</div>
+    <div class="cert-item"><strong>Django Masterclass</strong> — CF</div>
+    <div class="cert-item"><strong>Django</strong> — IBM</div>
+    <div class="cert-item"><strong>Flask</strong> — IBM</div>
+    <div class="cert-item"><strong>Django Práctico</strong> — IBM</div>
+    <div class="cert-item"><strong>Backend Avanzado</strong> Python/Flask/Django — IBM</div>
+    <div class="cert-item"><strong>Gestión Inventarios BBDD</strong> — IBM</div>
+    <div class="cert-item"><strong>Gestión Contactos</strong> — IBM</div>
+    <div class="cert-item"><strong>Java Profesional</strong> — CF</div>
+    <div class="cert-item"><strong>PHP & MySQL</strong> — Euroformac</div>
+    <div class="cert-item"><strong>Front-End Web</strong> — Smartmind</div>
+    <div class="cert-item"><strong>Apps Móviles</strong> — UCM</div>
+  </div>
+</section>
+
+<section>
+  <h2>CERTIFICACIONES — IA, GESTIÓN, QA & OTROS</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><strong>Ciencia de Datos</strong> — CF</div>
+    <div class="cert-item"><strong>Mastering Data Science & ML</strong> — TutorialsPoint</div>
+    <div class="cert-item"><strong>PyTorch & Deep Learning</strong> — Linux Foundation</div>
+    <div class="cert-item"><strong>IA De 0 a Agentes</strong> — Big School</div>
+    <div class="cert-item"><strong>Fundamentos Gestión Proyectos</strong> — LinkedIn</div>
+    <div class="cert-item"><strong>Fundamentos Gestión Programas</strong> — LinkedIn</div>
+    <div class="cert-item"><strong>Six Sigma Green Belt</strong> — LinkedIn</div>
+    <div class="cert-item"><strong>Excelencia Operativa</strong> — LinkedIn</div>
+    <div class="cert-item"><strong>Innovación y Gestión</strong> — ENEB</div>
+    <div class="cert-item"><strong>TOP Scorer IT Recruitment 2025</strong> — Editx</div>
+    <div class="cert-item"><strong>Testing y Debugging</strong> — IBM</div>
+    <div class="cert-item"><strong>Debugging Software</strong> — Udemy</div>
+    <div class="cert-item"><strong>Piloto Dron A1/A3</strong> — AESA</div>
+    <div class="cert-item"><strong>Seguridad Privada</strong> — Academia Elcano</div>
   </div>
 </section>
 
 <div class="divider">════════════════════════════════════════════════</div>
 
 <section>
+  <h2>PROYECTOS & PRÁCTICA TÉCNICA</h2>
+  <ul class="projects-list">
+    <li><strong>Automatización y scripting:</strong> +40 scripts en GitHub para reconocimiento, escaneo y post-explotación (AutoNmap, Metasploit, PortScanner), extracción de KPIs, firma digital con hash, comparación de documentos, wrappers de Nmap con salida JSON y scraping.</li>
+    <li><strong>Laboratorios ofensivos:</strong> práctica continua en HackTheBox, TryHackMe, VulnHub, Root Me, PentesterLab, ImmersiveLabs, DockerLabs, OverTheWire, PicoCTF, CTFLearn, Google CTF, SANS Holiday Hack, Def Con CTF y CTFtime. OWASP Top 10, SQLi, XSS, WAF evasion, privesc, reverse shell, CVE, criptografía básica (OSI 3-7).</li>
+    <li><strong>Blue team y forense:</strong> Blue Team Labs, Let'sDefend, CyberDefenders. Análisis de logs e investigación con FTK Imager, Autopsy y Volatility. Dashboard CyberOps Monitor (Java/Spring Boot) de simulación de amenazas en tiempo real.</li>
+    <li><strong>Desarrollo aplicado:</strong> CyberOps-Monitor, HoneyRecruitingCyber (automatización de workflows de reclutamiento técnico en Python), CV-Cyberplayer (portfolio gamificado), Cipher Veil (narrativa interactiva), C4ISR Gotchi, ENS_Blackout (simulación auditoría ENS), RiskAlyst (motor de análisis de riesgos), web apps en Python/Java/JS, generadores interactivos, GameTracker, SimuladorCombate, LifeSimRPG, prompts RiskGPT MAGERIT OSINT.</li>
+    <li><strong>Infraestructura y redes:</strong> Windows/Linux (Ubuntu, Ubuntu Server, Kali, ArchLinux, Guadalinex), Active Directory, GPO, IIS, Docker, pfSense/OPNsense/IPFire, VMware/VirtualBox, fundamentos AWS, networking TCP/IP, DNS, VLANs, laboratorios Palo Alto y Fortinet (VLANs, VPNs, ACLs, hardening CIS).</li>
+    <li><strong>Programación:</strong> práctica en LeetCode, HackerRank, CodeWars, Exercism, Boot.dev y CodingKraft en Python, SQL (PostgreSQL, MySQL, MariaDB), Bash, Git, APIs REST, Django/Flask, Java (+50 ejercicios POO, estructuras de control, excepciones) y JavaScript/TypeScript.</li>
+  </ul>
+</section>
+
+<section>
   <h2>LABORATORIOS & COMUNIDADES</h2>
   <ul class="projects-list">
     <li><strong>GitHub:</strong> Zyanetralys — Python, automatización, pentesting, Java, SQL</li>
-    <li><strong>Blue Team:</strong> Let'sDefend, CyberDefenders, SOC 101</li>
-    <li><strong>CTF/Pentesting:</strong> HackTheBox, TryHackMe, VulnHub, PicoCTF, OverTheWire, Root-Me</li>
+    <li><strong>Blue Team:</strong> Let'sDefend, CyberDefenders, SOC 101, Blue Team Labs</li>
+    <li><strong>CTF/Pentesting:</strong> HackTheBox, TryHackMe, VulnHub, PicoCTF, OverTheWire, Root-Me, PentesterLab, ImmersiveLabs, DockerLabs</li>
     <li><strong>Comunidades:</strong> XSec, C1b3rwall, DragonJAR, UnderC0de, Women IT, CyberRangers</li>
   </ul>
 </section>
@@ -1347,12 +1529,14 @@
   <h2>DISPONIBILIDAD</h2>
   <div class="availability">
     <span>[+]</span> REMOTO / HÍBRIDO / PRESENCIAL &nbsp;&nbsp;
-    <span>[+]</span> MADRID / CÁDIZ / MOVILIDAD NACIONAL &nbsp;&nbsp;
-    <span>[+]</span> INCORPORACIÓN INMEDIATA
+    <span>[+]</span> MADRID / CÁDIZ / MOVILIDAD NACIONAL E INTERNACIONAL &nbsp;&nbsp;
+    <span>[+]</span> INCORPORACIÓN INMEDIATA &nbsp;&nbsp;
+    <span>[+]</span> UE/EEE/SUIZA
   </div>
 </section>
 
 <footer>
+  <p style="margin-top:0.5rem;font-size:0.7rem;color:var(--text-dim);">Referencias profesionales disponibles a petición.</p>
 </footer>
 
 <!-- BOTÓN DE AUDIO (Estilo Cyberpunk) -->
