@@ -10,7 +10,6 @@
       body { cursor: none !important; }
       a, button, .contact a, .exp-company a, .edu-school a, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item { cursor: none !important; }
       
-      /* Contenedor principal del sable */
       .lightsaber-cursor {
         position: fixed;
         top: 0;
@@ -20,34 +19,21 @@
         transition: all 0.12s ease-out;
       }
       
-      /* === SABLE VERDE (NORMAL) === */
       .lightsaber-cursor.green {
         width: 6px;
         height: 55px;
         transform: translate(-40%, -8%) rotate(-45deg);
         transform-origin: 70% 90%;
         filter: drop-shadow(0 0 8px rgba(0,255,65,0.8)) drop-shadow(0 0 16px rgba(0,255,65,0.6)) drop-shadow(0 0 24px rgba(0,255,65,0.4));
-      
+      }
       
       .lightsaber-cursor.green .lightsaber-blade {
         width: 100%;
         height: 78%;
-        background: linear-gradient(
-          to bottom,
-          #ffffff 0%,
-          #ddffdd 8%,
-          #00ff41 18%,
-          #00ff41 72%,
-          #008f11 100%
-        );
+        background: linear-gradient(to bottom, #ffffff 0%, #ddffdd 8%, #00ff41 18%, #00ff41 72%, #008f11 100%);
         border-radius: 3px 3px 1px 1px;
         position: relative;
-        box-shadow: 
-          0 0 15px rgba(0,255,65,0.9),
-          0 0 28px rgba(0,255,65,0.7),
-          0 0 42px rgba(0,255,65,0.5),
-          inset 0 0 12px rgba(255,255,255,0.5),
-          inset 0 0 20px rgba(255,255,255,0.3);
+        box-shadow: 0 0 15px rgba(0,255,65,0.9), 0 0 28px rgba(0,255,65,0.7), 0 0 42px rgba(0,255,65,0.5), inset 0 0 12px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,255,0.3);
       }
       
       .lightsaber-cursor.green .lightsaber-blade::before {
@@ -60,10 +46,7 @@
         height: 10px;
         background: radial-gradient(circle, #ffffff 0%, #00ff41 35%, transparent 100%);
         border-radius: 50%;
-        box-shadow: 
-          0 0 20px rgba(0,255,65,0.9),
-          0 0 40px rgba(0,255,65,0.8),
-          0 0 60px rgba(0,255,65,0.6);
+        box-shadow: 0 0 20px rgba(0,255,65,0.9), 0 0 40px rgba(0,255,65,0.8), 0 0 60px rgba(0,255,65,0.6);
         animation: bladeTipPulse 0.7s ease-in-out infinite;
       }
       
@@ -74,13 +57,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255,255,255,0.6) 25%,
-          rgba(255,255,255,0.6) 75%,
-          transparent 100%
-        );
+        background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 25%, rgba(255,255,255,0.6) 75%, transparent 100%);
         border-radius: 3px 3px 1px 1px;
         animation: bladeEnergyFlow 1.8s ease-in-out infinite;
       }
@@ -92,37 +69,16 @@
         transform: translateX(-50%);
         width: 8px;
         height: 26px;
-        background: linear-gradient(180deg, 
-          #999 0%, 
-          #666 25%, 
-          #444 50%, 
-          #222 75%, 
-          #111 100%);
+        background: linear-gradient(180deg, #999 0%, #666 25%, #444 50%, #222 75%, #111 100%);
         border: 1px solid #008f11;
         border-radius: 2px;
-        box-shadow: 
-          0 0 12px rgba(0,0,0,0.9),
-          inset 0 0 6px rgba(255,255,255,0.2);
+        box-shadow: 0 0 12px rgba(0,0,0,0.9), inset 0 0 6px rgba(255,255,255,0.2);
       }
       
-      .lightsaber-cursor.green .lightsaber-handle::before {
-        content: "";
-        position: absolute;
-        top: 4px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 12px;
-        height: 3px;
-        background: linear-gradient(90deg, #444, #777, #444);
-        border-radius: 1px;
-        border: 1px solid #222;
-        box-shadow: 0 0 4px rgba(0,0,0,0.6);
-      }
-      
+      .lightsaber-cursor.green .lightsaber-handle::before,
       .lightsaber-cursor.green .lightsaber-handle::after {
         content: "";
         position: absolute;
-        bottom: 4px;
         left: 50%;
         transform: translateX(-50%);
         width: 12px;
@@ -132,6 +88,8 @@
         border: 1px solid #222;
         box-shadow: 0 0 4px rgba(0,0,0,0.6);
       }
+      .lightsaber-cursor.green .lightsaber-handle::before { top: 4px; }
+      .lightsaber-cursor.green .lightsaber-handle::after { bottom: 4px; }
       
       .lightsaber-cursor.green .lightsaber-glow {
         position: absolute;
@@ -158,7 +116,6 @@
         animation: trailFlicker 0.25s ease-in-out infinite;
       }
       
-      /* === SABRE AZUL (LINKS) === */
       .lightsaber-cursor.blue {
         width: 6px;
         height: 55px;
@@ -170,22 +127,10 @@
       .lightsaber-cursor.blue .lightsaber-blade {
         width: 100%;
         height: 78%;
-        background: linear-gradient(
-          to bottom,
-          #ffffff 0%,
-          #ddeeff 8%,
-          #0096ff 18%,
-          #0096ff 72%,
-          #004d99 100%
-        );
+        background: linear-gradient(to bottom, #ffffff 0%, #ddeeff 8%, #0096ff 18%, #0096ff 72%, #004d99 100%);
         border-radius: 3px 3px 1px 1px;
         position: relative;
-        box-shadow: 
-          0 0 18px rgba(0,150,255,0.9),
-          0 0 32px rgba(0,150,255,0.7),
-          0 0 48px rgba(0,150,255,0.5),
-          inset 0 0 12px rgba(255,255,255,0.5),
-          inset 0 0 20px rgba(255,255,255,0.3);
+        box-shadow: 0 0 18px rgba(0,150,255,0.9), 0 0 32px rgba(0,150,255,0.7), 0 0 48px rgba(0,150,255,0.5), inset 0 0 12px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,255,0.3);
       }
       
       .lightsaber-cursor.blue .lightsaber-blade::before {
@@ -198,10 +143,7 @@
         height: 10px;
         background: radial-gradient(circle, #ffffff 0%, #0096ff 35%, transparent 100%);
         border-radius: 50%;
-        box-shadow: 
-          0 0 24px rgba(0,150,255,0.9),
-          0 0 48px rgba(0,150,255,0.8),
-          0 0 72px rgba(0,150,255,0.6);
+        box-shadow: 0 0 24px rgba(0,150,255,0.9), 0 0 48px rgba(0,150,255,0.8), 0 0 72px rgba(0,150,255,0.6);
         animation: bladeTipPulse 0.6s ease-in-out infinite;
       }
       
@@ -212,13 +154,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255,255,255,0.6) 25%,
-          rgba(255,255,255,0.6) 75%,
-          transparent 100%
-        );
+        background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 25%, rgba(255,255,255,0.6) 75%, transparent 100%);
         border-radius: 3px 3px 1px 1px;
         animation: bladeEnergyFlow 1.5s ease-in-out infinite;
       }
@@ -230,37 +166,16 @@
         transform: translateX(-50%);
         width: 8px;
         height: 26px;
-        background: linear-gradient(180deg, 
-          #111 0%, 
-          #222 25%, 
-          #444 50%, 
-          #666 75%, 
-          #888 100%);
+        background: linear-gradient(180deg, #111 0%, #222 25%, #444 50%, #666 75%, #888 100%);
         border: 1px solid #004d99;
         border-radius: 2px;
-        box-shadow: 
-          0 0 12px rgba(0,0,0,0.9),
-          inset 0 0 6px rgba(255,255,255,0.2);
+        box-shadow: 0 0 12px rgba(0,0,0,0.9), inset 0 0 6px rgba(255,255,255,0.2);
       }
       
-      .lightsaber-cursor.blue .lightsaber-handle::before {
-        content: "";
-        position: absolute;
-        top: 4px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 12px;
-        height: 3px;
-        background: linear-gradient(90deg, #444, #777, #444);
-        border-radius: 1px;
-        border: 1px solid #222;
-        box-shadow: 0 0 4px rgba(0,0,0,0.6);
-      }
-      
+      .lightsaber-cursor.blue .lightsaber-handle::before,
       .lightsaber-cursor.blue .lightsaber-handle::after {
         content: "";
         position: absolute;
-        bottom: 4px;
         left: 50%;
         transform: translateX(-50%);
         width: 12px;
@@ -270,6 +185,8 @@
         border: 1px solid #222;
         box-shadow: 0 0 4px rgba(0,0,0,0.6);
       }
+      .lightsaber-cursor.blue .lightsaber-handle::before { top: 4px; }
+      .lightsaber-cursor.blue .lightsaber-handle::after { bottom: 4px; }
       
       .lightsaber-cursor.blue .lightsaber-glow {
         position: absolute;
@@ -296,28 +213,18 @@
         animation: trailFlicker 0.2s ease-in-out infinite;
       }
       
-      /* Animaciones */
       @keyframes bladeTipPulse {
-        0%, 100% { 
-          opacity: 1; 
-          transform: translateX(-50%) scale(1);
-        }
-        50% { 
-          opacity: 0.88; 
-          transform: translateX(-50%) scale(1.12);
-        }
+        0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+        50% { opacity: 0.88; transform: translateX(-50%) scale(1.12); }
       }
-      
       @keyframes bladeEnergyFlow {
         0%, 100% { opacity: 0.5; }
         50% { opacity: 0.75; }
       }
-      
       @keyframes lightsaberPulse {
         0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
         50% { opacity: 1; transform: translate(-50%, -50%) scale(1.18); }
       }
-      
       @keyframes trailFlicker {
         0%, 100% { opacity: 0.65; }
         50% { opacity: 0.9; }
@@ -424,7 +331,6 @@
       0%, 50% { border-right-color: var(--primary); }
       51%, 100% { border-right-color: transparent; }
     }
-    
     @keyframes glitch {
       0% { transform: translate(0); }
       20% { transform: translate(-2px, 2px); }
@@ -433,28 +339,23 @@
       80% { transform: translate(2px, -2px); }
       100% { transform: translate(0); }
     }
-    
     @keyframes textGlow {
       0%, 100% { text-shadow: 0 0 8px var(--primary-glow), 0 0 15px var(--primary-glow); }
       50% { text-shadow: 0 0 15px var(--primary-glow), 0 0 30px var(--primary-glow), 0 0 45px var(--primary-glow); }
     }
-    
     @keyframes blink {
       0%, 49% { opacity: 1; }
       50%, 100% { opacity: 0.3; }
     }
-    
     @keyframes pulse {
       0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--primary-glow); }
       50% { opacity: 0.6; box-shadow: 0 0 15px var(--primary-glow); }
     }
-    
     @keyframes borderFlow {
       0% { border-color: var(--primary-dark); }
       50% { border-color: var(--primary); }
       100% { border-color: var(--primary-dark); }
     }
-    
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(-10px); }
       to { opacity: 1; transform: translateX(0); }
@@ -553,19 +454,8 @@
       position: relative;
     }
     
-    .contact a::before {
-      content: "[";
-      color: var(--primary);
-      margin-right: 2px;
-      opacity: 0.7;
-    }
-    
-    .contact a::after {
-      content: "]";
-      color: var(--primary);
-      margin-left: 2px;
-      opacity: 0.7;
-    }
+    .contact a::before { content: "["; color: var(--primary); margin-right: 2px; opacity: 0.7; }
+    .contact a::after { content: "]"; color: var(--primary); margin-left: 2px; opacity: 0.7; }
     
     .contact a:hover {
       color: var(--primary);
@@ -770,9 +660,7 @@
       transition: left 0.5s ease;
     }
     
-    .skill-cat:hover::before {
-      left: 100%;
-    }
+    .skill-cat:hover::before { left: 100%; }
     
     .skill-cat:hover {
       border-color: var(--primary);
@@ -896,18 +784,14 @@
       box-shadow: 0 0 15px rgba(0,255,65,0.2);
     }
     
-    .cert-item:hover::before {
-      left: 100%;
-    }
+    .cert-item:hover::before { left: 100%; }
     
     .cert-item strong {
       color: var(--primary);
       text-shadow: 0 0 8px var(--primary-glow);
     }
     
-    .cert-item:hover strong {
-      color: var(--text);
-    }
+    .cert-item:hover strong { color: var(--text); }
     
     .projects-list {
       list-style: none;
@@ -930,9 +814,7 @@
       text-shadow: 0 0 5px var(--primary-glow);
     }
     
-    .projects-list li:last-child::before {
-      content: "└─";
-    }
+    .projects-list li:last-child::before { content: "└─"; }
     
     .projects-list li:hover {
       color: var(--text);
@@ -1095,10 +977,39 @@
   <div class="exp-item">
     <div class="exp-header">
       <div>
-        <div class="exp-title">Consultora de Ciberseguridad especialista en GRC</div>
-        <div class="exp-company"><a href="https://www.izertis.com/" target="_blank">Izertis</a> · Diferentes clientes · Defensa, Administración Pública, Infraestructura Crítica, Aeronáutica, Banca<./div>
+        <div class="exp-title">Consultora de Ciberseguridad GRC</div>
+        <div class="exp-company"><a href="https://www.telefonica.com/" target="_blank">Telefónica</a> · Gobernanza Global de Seguridad Digital · Telecomunicaciones y Tecnología</div>
       </div>
-      <div class="exp-date current">JUN 2026–ACT</div>
+      <div class="exp-date current">SEPT 2026–ACT</div>
+    </div>
+    <div class="exp-tags">
+      <span class="exp-tag">GRC</span>
+      <span class="exp-tag">Gobernanza</span>
+      <span class="exp-tag">Compliance</span>
+      <span class="exp-tag">ISO 27001</span>
+      <span class="exp-tag">ENS</span>
+      <span class="exp-tag">NIS2</span>
+      <span class="exp-tag neutral">Multinacional / LATAM</span>
+    </div>
+    <ul class="exp-details">
+      <li>Gestión y seguimiento de la función global de GRC de Seguridad Digital, dando soporte a la revisión de requisitos, compliance y controles aplicables al Grupo y a clientes estratégicos del sector financiero en España, Argentina, Perú, Colombia, México, Chile, Ecuador y Brasil.</li>
+      <li>Revisión del grado de cumplimiento de políticas, estándares y controles de seguridad (ISO/IEC 27001, ENS, NIS2), identificando desviaciones y definiendo medidas correctoras para la adecuación del nivel de seguridad.</li>
+      <li><strong>Validación técnica y documental de evidencias:</strong> verificación directa de configuraciones y consultas en herramientas de monitorización y SIEM (ej. Splunk) para garantizar que los controles declarados operan efectivamente en la realidad.</li>
+      <li>Actualización y mantenimiento continuo de cuadros de mando, métricas de seguridad (KPIs/KRIs) y dashboards, asegurando la trazabilidad, precisión de los datos y una visión global del estado de madurez.</li>
+      <li>Mapeo de requisitos regulatorios frente a controles técnicos y organizativos (gestión de accesos, hardening, vulnerabilidades, parcheado, backup y continuidad), identificando gaps y siguiendo planes de remediación.</li>
+      <li>Supervisión de la evaluación de riesgos de terceros (TPRM) y proveedores críticos que operan en las distintas filiales, asegurando que sus cláusulas contractuales y controles de seguridad cumplan con los estándares de la matriz.</li>
+      <li>Elaboración de informes ejecutivos y reporting de estado para dirección, comités de seguridad y responsables locales, destacando riesgos principales, desviaciones detectadas y la evolución de las acciones de adecuación.</li>
+      <li>Interlocución y coordinación transversal con equipos de Seguridad, Tecnología, Compliance, Auditoría, Privacidad/DPO y Legal para la recopilación de información y el cierre de hallazgos.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Consultora de Ciberseguridad especialista en GRC</div>
+        <div class="exp-company"><a href="https://www.izertis.com/" target="_blank">Izertis</a> · Diferentes clientes · Defensa, Administración Pública, Infraestructura Crítica, Aeronáutica, Banca</div>
+      </div>
+      <div class="exp-date">JUN 2026–AGO 2026</div>
     </div>
     <div class="exp-tags">
       <span class="exp-tag">GRC</span>
@@ -1189,7 +1100,7 @@
     <div class="exp-header">
       <div>
         <div class="exp-title">Analista de Ciberseguridad</div>
-        <div class="exp-company"><a href="" target="_blank">No Country</a> · Proyecto fintech · Equipo internacional</div>
+        <div class="exp-company"><a href="#" target="_blank">No Country</a> · Proyecto fintech · Equipo internacional</div>
       </div>
       <div class="exp-date">SEP 2025–DIC 2025</div>
     </div>
@@ -1248,7 +1159,6 @@
       <li>Gestión de incidencias, inventario de equipos y documentación técnica de configuraciones.</li>
     </ul>
   </div>
-  
 </section>
 
 <div class="divider">════════════════════════════════════════════════</div>
@@ -1314,7 +1224,7 @@
         <li>RGPD/LOPDGDD, NIS2</li>
         <li>MAGERIT, PILAR</li>
         <li>Auditoría, Análisis de Riesgos</li>
-        <li>Análisis GAP, Evidencias</li>
+        <li>Análisis GAP, OSINT, Reporting</li>
       </ul>
     </div>
     <div class="skill-cat">
@@ -1323,9 +1233,13 @@
         <li>Nmap, Burp Suite, OWASP ZAP, OpenVAS</li>
         <li>Metasploit, Wireshark, Hashcat, JTR</li>
         <li>Hydra, Medusa, CyberChef, Ghidra</li>
-        <li>OSINT, Hardening, Forensics</li>
-        <li>FTK Imager, Autopsy, Volatility</li>
+        <li>Forensics: FTK Imager, Autopsy, Volatility</li>
         <li>Flipper Zero, Wifi Pineapple</li>
+        <li>Pentesting (Web, Redes, Infraestructura)</li>
+        <li>Análisis de Malware, Blue Team, Red Team</li>
+        <li>Threat Hunting, Inteligencia de Ciberamenazas</li>
+        <li>Zero Trust, Gestión de Vulnerabilidades</li>
+        <li>SIEM, EDR/EPP, Firewalls, Ciberdecepción</li>
       </ul>
     </div>
     <div class="skill-cat">
@@ -1336,6 +1250,7 @@
         <li>GPO, DNS/DHCP, TCP/IP, VLAN, VPN</li>
         <li>Docker, pfSense, OPNsense, IPFire</li>
         <li>Palo Alto NGFW, Fortinet, OT/ICS</li>
+        <li>Disaster Recovery</li>
       </ul>
     </div>
     <div class="skill-cat">
@@ -1345,7 +1260,7 @@
         <li>PostgreSQL, MySQL, SQLite</li>
         <li>Java, JavaScript, TypeScript</li>
         <li>Django, Flask, APIs REST</li>
-        <li>Git, HTML/CSS</li>
+        <li>Git, Desarrollo Backend</li>
       </ul>
     </div>
     <div class="skill-cat">
@@ -1356,6 +1271,17 @@
         <li>Okta, Veeam Backup</li>
         <li>Microsoft 365, Google Workspace</li>
         <li>HTB, TryHackMe, VulnHub, Let'sDefend</li>
+      </ul>
+    </div>
+    <div class="skill-cat">
+      <h3>DATOS, IA & HUMAN SKILLS</h3>
+      <ul class="skill-list">
+        <li>Big Data, Business Intelligence</li>
+        <li>Python para Data Science</li>
+        <li>Seguridad en IA, Auditoría de Modelos</li>
+        <li>Empatía, Gestión Info. Confidencial</li>
+        <li>Aprendizaje Continuo, Trabajo en Equipo</li>
+        <li>Versatilidad, Visión Geopolítica</li>
       </ul>
     </div>
   </div>
@@ -1572,7 +1498,6 @@
   const lightsaber = document.getElementById('lightsaber');
   let currentMode = 'green';
   
-  // Función para cambiar entre modo verde y azul
   function setLightsaberMode(mode) {
     if (mode !== currentMode) {
       lightsaber.classList.remove(currentMode);
@@ -1582,22 +1507,18 @@
   }
   
   if (lightsaber && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    // Detectar todos los elementos cliqueables
     const clickableElements = document.querySelectorAll('a, button, .audio-btn, .cert-item, .skill-cat, .exp-item, .edu-item');
     
-    // Añadir eventos a todos los elementos cliqueables
     clickableElements.forEach(el => {
       el.addEventListener('mouseenter', () => setLightsaberMode('blue'));
       el.addEventListener('mouseleave', () => setLightsaberMode('green'));
     });
 
-    // Movimiento del cursor - la punta sigue exactamente el ratón
     document.addEventListener('mousemove', (e) => {
       lightsaber.style.left = e.clientX + 'px';
       lightsaber.style.top = e.clientY + 'px';
     });
 
-    // Efecto al hacer click (la punta se intensifica)
     document.addEventListener('mousedown', () => {
       if (currentMode === 'green') {
         lightsaber.style.filter = 'drop-shadow(0 0 18px rgba(0,255,65,1)) drop-shadow(0 0 36px rgba(0,255,65,0.8)) drop-shadow(0 0 54px rgba(0,255,65,0.6))';
@@ -1620,10 +1541,7 @@
   }
 </script>
 
-
-  <!-- CYBER TERMINAL WIDGET - ENHANCED PRO EDITION v2.1 -->
 <!-- CYBER TERMINAL - KALI OPS CORE v4.0 -->
-<!-- Reemplaza SOLO el bloque terminal. CV intacto. -->
 <div id="kali-terminal" class="ops-core">
   <div class="term-header">
     <span class="prompt-id">kali@zyanetralys:~/ops/pentest</span>
@@ -1638,21 +1556,14 @@
   </div>
   
   <div class="term-body">
-    <!-- Scanline + noise overlays -->
     <div class="scanline"></div>
     <div class="noise"></div>
-    
-    <!-- Terminal output -->
     <div class="output" id="output"></div>
-    
-    <!-- Input line -->
     <div class="input-line">
       <span class="prompt">└─$</span>
       <span id="cmdBuffer"></span>
       <span class="cursor" id="cursor">█</span>
     </div>
-    
-    <!-- Tiny wolf in corner -->
     <div class="wolf-corner" id="wolfCorner" title="Ops Monitor">
       <svg viewBox="0 0 40 40" width="28" height="28">
         <defs>
@@ -1661,17 +1572,12 @@
           </linearGradient>
           <filter id="wGlow"><feGaussianBlur stdDeviation="1.2"/></filter>
         </defs>
-        <!-- Wolf head silhouette -->
         <path d="M8,28 C8,18 14,12 20,12 C26,12 32,18 32,28 C32,32 28,36 20,36 C12,36 8,32 8,28 Z" fill="none" stroke="url(#wGrad)" stroke-width="1.2" opacity="0.9"/>
-        <!-- Ears -->
         <path d="M10,20 L8,12 L14,18 Z" fill="url(#wGrad)" opacity="0.7"/>
         <path d="M30,20 L32,12 L26,18 Z" fill="url(#wGrad)" opacity="0.7"/>
-        <!-- Eyes -->
         <circle cx="16" cy="24" r="2" fill="#00f5ff" class="eye" filter="url(#wGlow)"/>
         <circle cx="24" cy="24" r="2" fill="#00f5ff" class="eye" filter="url(#wGlow)"/>
-        <!-- Nose -->
         <circle cx="20" cy="29" r="1.5" fill="#00f5ff" opacity="0.8"/>
-        <!-- Status pulse ring -->
         <circle cx="20" cy="24" r="14" fill="none" stroke="#00f5ff" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.3" class="pulse-ring">
           <animateTransform attributeName="transform" type="rotate" from="0 20 24" to="360 20 24" dur="12s" repeatCount="indefinite"/>
         </circle>
@@ -1680,10 +1586,8 @@
     </div>
   </div>
   
-  <!-- Alert ticker -->
   <div class="alert-ticker" id="alertTicker"></div>
   
-  <!-- Quick command palette -->
   <div class="cmd-palette" id="cmdPalette">
     <button data-cmd="scan">⚡</button>
     <button data-cmd="exploit">☠</button>
@@ -1693,7 +1597,6 @@
   </div>
 </div>
 
-<!-- Popup layer for notifications -->
 <div id="popup-layer"></div>
 
 <style>
@@ -1813,7 +1716,6 @@
   box-shadow:var(--cyan-glow);color:#fff;transform:translateY(-1px);
 }
 
-/* POPUP NOTIFICATIONS */
 #popup-layer{
   position:fixed;top:85px;right:20px;z-index:100000;
   display:flex;flex-direction:column;gap:4px;pointer-events:none;max-width:260px;
@@ -1843,7 +1745,6 @@
 .popup.crit::before{background:linear-gradient(180deg,var(--alert),var(--cyan))}
 @keyframes flashBar{0%,100%{opacity:.8}50%{opacity:1}}
 
-/* Responsive */
 @media(max-width:1024px){.ops-core{width:330px;bottom:50px;right:14px}#popup-layer{right:16px}}
 @media(max-width:768px){.ops-core{display:none}}
 </style>
@@ -1858,12 +1759,10 @@
         threat=$('threat').querySelector('b'),pid=$('pid'),mem=$('mem'),cpu=$('cpu'),
         popupLayer=$('popup-layer');
 
-  // Controls
   $('minBtn').onclick=e=>{e.stopPropagation();core.classList.toggle('min')};
   $('closeBtn').onclick=e=>{e.stopPropagation();core.classList.add('hidden')};
   core.onclick=e=>{if(e.target.closest('.ctrl'))return;core.classList.contains('hidden')&&core.classList.remove('hidden');core.classList.contains('min')&&core.classList.remove('min')};
 
-  // Utils
   const delay=ms=>new Promise(r=>setTimeout(r,ms));
   const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1)+a);
   const pick=arr=>arr[rnd(0,arr.length-1)];
@@ -1872,7 +1771,6 @@
   
   let running=true,busy=false,turbo=false,threatLvl='low',sess=0,alertCnt=0;
 
-  // === AUTHENTIC KALI/PENTEST COMMANDS + OUTPUT ===
   const ops=[
     {cmd:"nmap -sS -sV -sC -O -T4 -p- --min-rate 4000 10.12.0.10/24",lines:[
       `Starting Nmap 7.94SVN ( https://nmap.org ) at ${ts()} CET`,
@@ -1982,7 +1880,7 @@
       '[*] LDAP bind successful (svc_enum)','[*] Base DN: DC=corp,DC=local',
       '[*] Filter: (objectClass=person)','[*] Retrieved 2,847 user objects',
       '[*] Attributes: sAMAccountName, mail, memberOf, lastLogon',
-      '[*] High-value targets: 12 members of "Domain Admins"',
+      '[*] High-value targets: 12 members of \"Domain Admins\"',
       '[*] Exported to ldap_dump_'+ts().replace(/:/g,'')+'.json'
     ],sev:'ok',popup:{t:'[LDAP] 2,847 USERS DUMPED',d:'12 Domain Admins identified',meta:'Exported to JSON'}},
     
@@ -1995,7 +1893,6 @@
     ],sev:'ok',popup:{t:'[JOHN] 3 PASSWORDS CRACKED',d:'NTLM hashes recovered',meta:'~/.john/john.pot'}}
   ];
 
-  // === THREAT ALERTS (SOC/SIEM style) ===
   const alerts=[
     `[${ts()}] suricata[2241]: [1:2024218:1] ET SCAN Nmap SYN Scan {TCP} 10.12.0.50:53214→10.12.0.10:445`,
     `[${ts()}] wazuh[1882]: Rule 5712 - Auth failure (4625) src:10.12.0.14 user:Administrator x17`,
@@ -2007,7 +1904,6 @@
     `[${ts()}] elastic[SIEM]: Anomaly>0.92 - svc_backup accessing \\\\DC01\\\\confidential`
   ];
 
-  // === POPUP NOTIFICATIONS ===
   const popups=[
     {t:'[NMAP] SCAN COMPLETE',d:'18 hosts up, 11 services mapped',meta:'Target: 10.12.0.10/24',sev:'ok'},
     {t:'[SPN] HASH CAPTURED',d:'Kerberoastable account found',meta:'svc_enum@corp.local',sev:'ok'},
@@ -2024,12 +1920,10 @@
     {t:'🎯 APT DETECTED',d:'TTPs match APT29: T1059.001, T1071.001',meta:'Escalate to Tier-3',sev:'crit'}
   ];
 
-  // === TYPE SIMULATION: realistic keystroke rhythm ===
   async function type(text){
     cmdBuf.textContent='';
     const base=turbo?7:26;
     for(let i=0;i<text.length;i++){
-      // 4.5% typo + correction
       if(Math.random()<0.045 && i>4 && i<text.length-2){
         cmdBuf.textContent+=text[i]+text[i+1];
         await delay(base*0.75);
@@ -2039,13 +1933,11 @@
       }
       cmdBuf.textContent+=text[i];
       await delay(base+rnd(-9,13));
-      // Occasional pause mid-command
       if(i>0 && i%rnd(14,32)===0 && Math.random()<0.18)await delay(rnd(90,220));
     }
     await delay(rnd(160,380)/(turbo?2:1));
   }
 
-  // === STREAM OUTPUT: line-by-line with contextual coloring ===
   async function stream(lines,sev){
     for(const ln of lines){
       const el=document.createElement('div');
@@ -2063,13 +1955,11 @@
     }
   }
 
-  // === ALERT TICKER ===
   function tickAlert(msg,sev='info'){
     ticker.textContent=msg.length>78?msg.substring(0,75)+'...':msg;
     ticker.className=`alert-ticker ${sev==='crit'?'crit':sev==='warn'?'high':''}`;
   }
 
-  // === POPUP NOTIFICATION ===
   function popup(title,desc,sev='ok',meta=''){
     const el=document.createElement('div');
     el.className=`popup ${sev==='warn'?'warn':sev==='crit'?'crit':''}`;
@@ -2082,7 +1972,6 @@
     },3200);
   }
 
-  // === THREAT LEVEL ===
   function setThreat(lvl){
     threatLvl=lvl;
     const map={low:{t:'LOW',c:'var(--green)'},med:{t:'MED',c:'var(--ok)'},high:{t:'HIGH',c:'var(--warn)'},crit:{t:'CRIT',c:'var(--alert)'}};
@@ -2091,20 +1980,16 @@
     core.classList.remove('threat-high','threat-crit');
     if(lvl==='high')core.classList.add('threat-high');
     if(lvl==='crit')core.classList.add('threat-crit');
-    // Wolf dot color
     wolfDot.style.background=cfg.c;
   }
 
-  // === MAIN LOOP ===
   async function run(){
     if(!running||busy)return;busy=true;
     
-    // Metrics fluctuation
     pid.textContent=rnd(1000,9999);
     mem.textContent=`${rnd(110,280)}MB`;
     cpu.textContent=`${rnd(4,62)}%`;
     
-    // Threat drift
     if(Math.random()<0.19){
       const lvls=['low','low','low','med','med','high'];
       const nl=pick(lvls);
@@ -2117,28 +2002,23 @@
       }
     }
     
-    // Execute op
     const op=pick(ops);
     await type(op.cmd);
     cmdBuf.textContent='';
     await stream(op.lines,op.sev);
     
-    // Show popup for this op
     if(op.popup && Math.random()<0.85){
       popup(op.popup.t,op.popup.d,op.popup.sev,op.popup.meta);
     }
     
-    // Random critical event popup
     if(Math.random()<0.23){
       const crit=pick(popups.filter(p=>p.sev==='crit'));
       popup(crit.t,crit.d,'crit',crit.meta);
       setThreat('crit');
       tickAlert(crit.d.substring(0,65)+'...', 'crit');
-      // Auto-recover
       setTimeout(()=>{if(threatLvl!=='low')setThreat('med')},rnd(3400,6200));
     }
     
-    // Random info popup
     if(Math.random()<0.35 && threatLvl!=='crit'){
       const info=pick(popups.filter(p=>p.sev!=='crit'));
       popup(info.t,info.d,info.sev,info.meta);
@@ -2149,7 +2029,6 @@
     run();
   }
 
-  // === QUICK COMMANDS ===
   document.querySelectorAll('.cmd-palette button').forEach(btn=>{
     btn.onclick=e=>{
       e.stopPropagation();
@@ -2170,7 +2049,6 @@
     };
   });
 
-  // === WOLF CORNER INTERACTION ===
   wolf.onclick=e=>{
     e.stopPropagation();
     if(turbo)return;
@@ -2188,7 +2066,6 @@
     },2100);
   };
 
-  // === INIT ===
   setTimeout(()=>{
     core.classList.add('visible');
     setThreat('low');
@@ -2201,5 +2078,5 @@
 })();
 </script>
   
-  </body>
+</body>
 </html>
